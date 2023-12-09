@@ -1,0 +1,104 @@
+header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #c0653b;
+    color: #fff;
+}
+
+header .icon {
+    font-size: 2rem;
+    margin-right: 1rem;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #ddc4b2;
+}
+
+.campos-de-texto {
+    display: grid;
+    gap: 6px;
+    margin-bottom: 20px;
+}
+
+.card {
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 500px;
+}
+  
+.login-header {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.p-field {
+    position: relative;
+}
+
+.p-field .icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #aaa;
+    z-index: 1;
+}
+  
+button {
+    width: 100%;
+}
+  
+.register-link {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    color: #c0653b;
+    text-decoration: none;
+}
+
+.password-toggle-btn {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.password-toggle-btn i {
+    font-size: 18px;
+    color: #aaa;
+}
+
+:host ::ng-deep {
+    button {
+        padding: 7px 14px !important;
+    }
+    
+    .campos-de-texto .p-inputtext {
+        padding-left: 35px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .login-container {
+        height: fit-content - 50px
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex-wrap: nowrap;
+        height: 100vh;
+    }
+}
