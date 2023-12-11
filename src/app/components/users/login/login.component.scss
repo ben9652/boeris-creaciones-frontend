@@ -1,0 +1,146 @@
+@font-face {
+    font-family: 'Tomatoes';
+    src: url('../../../../assets/fonts/TOMATOES\ Personal\ Use.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Avoda';
+    src: url('../../../../assets/fonts/Avoda\ Free\ Trial.ttf') format('truetype');
+}
+
+header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #c0653b;
+    color: #fff;
+    position: fixed;
+    width: 100%;
+}
+
+.icono-empresa-login {
+    background-image: url('../../../../assets/images/Marca\ de\ agua.png');
+    background-size: 5em;
+    background-repeat: no-repeat;
+    width: 6em;
+    height: 5em;
+    margin-right: 1rem;
+}
+
+.header-text {
+    font-size: xx-large;
+    font-family: 'Tomatoes', sans-serif;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+header .icon {
+    font-size: 2rem;
+    margin-right: 1rem;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('../../../../assets/images/flowers-3.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat-y;
+    padding-top: 100px;
+}
+
+.campos-de-texto {
+    display: grid;
+    gap: 6px;
+    margin-bottom: 20px;
+}
+
+.card {
+    padding: 20px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    margin-bottom: 20px;
+}
+  
+.login-header {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    margin-top: 0;
+    font-family: 'Avoda';
+}
+
+.p-field {
+    position: relative;
+}
+
+.p-field .icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #aaa;
+    z-index: 1;
+}
+
+button {
+    width: 100%;
+    font-family: 'Avoda';
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+  
+.register-link {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    color: #c0653b;
+    text-decoration: none;
+    font-family: 'Avoda';
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.password-toggle-btn {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.password-toggle-btn i {
+    font-size: 18px;
+    color: #aaa;
+}
+
+:host ::ng-deep {
+    button {
+        padding: 7px 14px !important;
+    }
+    
+    .campos-de-texto .p-inputtext {
+        padding-left: 35px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex-wrap: nowrap;
+        // height: 100vh;
+    }
+
+    .header-text {
+        font-size: x-large;
+    }
+}
