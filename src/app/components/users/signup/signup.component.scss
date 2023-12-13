@@ -1,0 +1,71 @@
+@font-face {
+    font-family: 'Avoda';
+    src: url('../../../../assets/fonts/Avoda\ Free\ Trial.ttf') format('truetype');
+}
+
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('../../../../assets/images/flowers-3.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat-y;
+    padding-top: 100px;
+}
+
+.datos-a-cargar {
+    display: grid;
+    gap: 6px;
+    margin-bottom: 20px;
+}
+
+.register-header {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    margin-top: 0;
+    font-family: 'Avoda';
+}
+
+.p-field {
+    position: relative;
+}
+
+.p-field .icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #aaa;
+    z-index: 1;
+}
+
+button {
+    width: 100%;
+    font-family: 'Avoda';
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+  
+.login-link {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    color: #c0653b;
+    text-decoration: none;
+    font-family: 'Avoda';
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+:host ::ng-deep {
+    button {
+        padding: 7px 14px !important;
+    }
+    
+    .campos-de-texto .p-inputtext {
+        padding-left: 35px;
+    }
+}

@@ -1,0 +1,32 @@
+@font-face {
+    font-family: 'Tomatoes';
+    src: url('../../../../assets/fonts/TOMATOES\ Personal\ Use.ttf') format('truetype');
+}
+
+header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #c0653b;
+    color: #fff;
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+}
+
+.icono {
+    background-image: url('../../../../assets/images/Marca\ de\ agua.png');
+    background-size: 5em;
+    background-repeat: no-repeat;
+    width: 6em;
+    height: 5em;
+    margin-right: 1rem;
+}
+
+.header-text {
+    font-size: xx-large;
+    font-family: 'Tomatoes', sans-serif;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 100%;
+}

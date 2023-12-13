@@ -1,1 +1,54 @@
-<p>signup works!</p>
+<app-header
+[titulo]="'Boeri\'s Creaciones'"
+>
+</app-header>
+
+<div class="register-container">
+    <p-card>
+        <h1 class="register-header">Crear cuenta</h1>
+        <div class="p-fluid datos-a-cargar" (keypress)="register($event)">
+            <div class="p-field">
+                <i class="fa fa-user"></i>
+                <input
+                [(ngModel)]="firstName"
+                [ngClass]="!firstName && datos_no_llenados ? clases_error : clases_no_error"
+                pInputText
+                type="text"
+                placeholder="Nombre"
+                />
+            </div>
+            <div class="p-field">
+                <i class="fa fa-user"></i>
+                <input
+                [(ngModel)]="lastName"
+                [ngClass]="!lastName && datos_no_llenados ? clases_error : clases_no_error"
+                pInputText
+                type="text"
+                placeholder="Apellido"
+                />
+            </div>
+            <div class="p-field">
+                <i class="fa fa-user"></i>
+                <input
+                [(ngModel)]="username"
+                [ngClass]="!username && datos_no_llenados ? clases_error : clases_no_error"
+                pInputText
+                type="text"
+                placeholder="Usuario"
+                />
+            </div>
+            <div class="p-field">
+                <i class="fa fa-lock"></i>
+                <input
+                [(ngModel)]="password"
+                [ngClass]="!password && datos_no_llenados ? clases_error : clases_no_error"
+                pPassword
+                type="password"
+                placeholder="Contraseña"
+                />
+            </div>
+        </div>
+        <button pButton type="submit" [disabled]="cargandoRegistro" label="Registrarse" class="p-mt-2" (click)="register($event)"></button>
+        <a class="login-link" routerLink="/login">¿Ya tienes una cuenta? Inicia sesión aquí</a>
+    </p-card>
+</div>
