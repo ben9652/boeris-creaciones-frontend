@@ -69,3 +69,9 @@ button {
         padding-left: 35px;
     }
 }
+
+@media screen and (max-height: 500px) {
+    .register-container {
+        height: 140vh;
+    }
+}
