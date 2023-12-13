@@ -1,10 +1,10 @@
-<header>
-    <div class="icono-empresa-login"></div>
-    <span class="header-text">Boeri's Creaciones</span>
-</header>
+<app-header
+[titulo]="'Boeri\'s Creaciones'"
+>
+</app-header>
 
 <div class="login-container">
-    <div class="card">
+    <p-card>
         <h1 class="login-header">Iniciar sesión</h1>
         <div class="p-fluid campos-de-texto" (keypress)="login($event)">
             <div class="p-field">
@@ -29,6 +29,6 @@
             </div>
         </div>
         <button pButton type="submit" [disabled]="cargandoLogin" label="Entrar" class="p-mt-2" (click)="login($event)"></button>
-        <a class="register-link" routerLink="/register">Crear una cuenta</a>
-    </div>
+        <a class="register-link" routerLink="/signup">Crear una cuenta</a>
+    </p-card>
 </div>
