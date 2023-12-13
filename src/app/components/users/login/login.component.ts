@@ -15,6 +15,7 @@ export class LoginComponent {
   constructor(
     private router: Router
   ) {
+    
   }
   
   login(event: any) {

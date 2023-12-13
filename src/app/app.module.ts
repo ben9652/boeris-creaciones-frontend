@@ -8,6 +8,10 @@ import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontaweso
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 
+import { HttpClientModule } from '@angular/common/http';
+
+import { EnvServiceProvider } from './services/env.service.provider';
+
 /********** Componentes de PrimeNG *************/
 
 import { ButtonModule } from 'primeng/button';
@@ -35,6 +39,7 @@ import { ForgotComponent } from './components/users/forgot/forgot.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     FontAwesomeModule,
     ButtonModule,
     CardModule,
@@ -42,7 +47,9 @@ import { ForgotComponent } from './components/users/forgot/forgot.component';
     InputTextModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    EnvServiceProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
