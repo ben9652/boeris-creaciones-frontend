@@ -21,6 +21,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/users/login/login.component';
 import { SignupComponent } from './components/users/signup/signup.component';
 import { HeaderComponent } from './components/shared/header/header.component';
+import { ForgotComponent } from './components/users/forgot/forgot.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { HeaderComponent } from './components/shared/header/header.component';
     HomeComponent,
     LoginComponent,
     SignupComponent,
-    HeaderComponent
+    HeaderComponent,
+    ForgotComponent
   ],
   imports: [
     BrowserModule,
