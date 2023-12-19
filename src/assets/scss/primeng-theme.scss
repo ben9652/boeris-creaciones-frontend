@@ -293,7 +293,9 @@
 }
 
 .p-button.p-button-success, .p-buttonset.p-button-success > .p-button, .p-splitbutton.p-button-success > .p-button {
-  background: $filter-button;
+  background: $background-button-success;
+  color: $color-button-success;
+  border-color: $border-color-button-danger;
 }
 .p-button.p-button-success:enabled:hover, .p-buttonset.p-button-success > .p-button:enabled:hover, .p-splitbutton.p-button-success > .p-button:enabled:hover {
   background: $hover-filter-button;
@@ -411,9 +413,12 @@
 }
 
 .p-button.p-button-danger, .p-buttonset.p-button-danger > .p-button, .p-splitbutton.p-button-danger > .p-button {
-  color: #ffffff;
+  /* color: #ffffff;
   background: #D32F2F;
-  border: 0 none;
+  border: 0 none; */
+  background-color: $background-button-danger;
+  color: $color-button-danger;
+  border-color: $border-color-button-success;
 }
 .p-button.p-button-danger:enabled:hover, .p-buttonset.p-button-danger > .p-button:enabled:hover, .p-splitbutton.p-button-danger > .p-button:enabled:hover {
   background: rgba(211, 47, 47, 0.92);
