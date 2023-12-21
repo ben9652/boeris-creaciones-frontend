@@ -182,55 +182,70 @@
 .p-button {
   background: $main-button;
 }
+
 .p-button:enabled:hover {
   background: $hover-button;
 }
 
 .p-button:enabled:focus {
   background: $click-button;
+  box-shadow: none;
 }
-.p-button.p-button-outlined {
-  color: $main-button;
-}
-.p-button.p-button-outlined:enabled:hover {
-  color: $hover-button;
-}
-
-.p-button.p-button-outlined:enabled:focus {
+.p-button.p-button-text:enabled:focus, .p-button.p-button-outlined:enabled:focus {
   background: $click-button;
 }
 
+.p-button.p-button-outlined {
+  background: $main-button;
+}
+
+.p-button.p-button-outlined:enabled:hover {
+  background: $hover-button;
+}
+
 .p-button.p-button-text {
-  color: $main-button;
+  color: $text-color-button;
 }
 
 .p-button.p-button-text:enabled:hover {
   color: $hover-button;
 }
 
+.p-button.p-button-text:enabled:active, .p-button.p-button-outlined:enabled:active {
+  background: $click-button;
+  color: $text-color-button;
+}
+.p-button.p-button-text .p-ink, .p-button.p-button-outlined .p-ink {
+  background-color: rgba(0, 58, 183, 0.16);
+}
+
+.p-button.p-button-text:enabled:active, .p-button.p-button-outlined:enabled:active {
+  background: $click-button;
+  outline-width: initial;
+  outline-style: solid;
+  outline-color: $main-button;
+}
 
 .p-button.p-button-secondary, .p-buttonset.p-button-secondary > .p-button, .p-splitbutton.p-button-secondary > .p-button {
-  color: $text-grey;
-  background: $light-grey;
+  color: $text-color-button-secondary;
+  background: $background-button-secondary;
+  border: none;
 }
 .p-button.p-button-secondary:enabled:hover, .p-buttonset.p-button-secondary > .p-button:enabled:hover, .p-splitbutton.p-button-secondary > .p-button:enabled:hover {
-  background: $semi-light-grey;
-  color: $text-grey;
+  background: $background-hover-button-secondary;
 }
 
 .p-button.p-button-secondary:enabled:active, .p-buttonset.p-button-secondary > .p-button:enabled:active, .p-splitbutton.p-button-secondary > .p-button:enabled:active {
-  background: $semi-dark-grey;
-  color: $text-white;
+  background: $background-click-button-secondary;
 }
 .p-button.p-button-secondary.p-button-outlined, .p-buttonset.p-button-secondary > .p-button.p-button-outlined, .p-splitbutton.p-button-secondary > .p-button.p-button-outlined {
-  color: $light-grey;
+  color: $text-color-button-secondary;
 }
 .p-button.p-button-secondary.p-button-outlined:enabled:hover, .p-buttonset.p-button-secondary > .p-button.p-button-outlined:enabled:hover, .p-splitbutton.p-button-secondary > .p-button.p-button-outlined:enabled:hover {
-  color: $semi-light-grey;
+  background: $background-hover-button-secondary;
 }
 .p-button.p-button-secondary.p-button-outlined:enabled:active, .p-buttonset.p-button-secondary > .p-button.p-button-outlined:enabled:active, .p-splitbutton.p-button-secondary > .p-button.p-button-outlined:enabled:active {
-  background: $semi-dark-grey;
-  color: $text-white;
+  background: $background-click-button-secondary;
 }
 .p-button.p-button-secondary.p-button-text, .p-buttonset.p-button-secondary > .p-button.p-button-text, .p-splitbutton.p-button-secondary > .p-button.p-button-text {
   color: $semi-light-grey;
@@ -239,8 +254,20 @@
   color: $semi-light-grey;
 }
 .p-button.p-button-secondary.p-button-text:enabled:active, .p-buttonset.p-button-secondary > .p-button.p-button-text:enabled:active, .p-splitbutton.p-button-secondary > .p-button.p-button-text:enabled:active {
+  background: $background-click-button-secondary;
+}
+.p-button.p-button-secondary:enabled:focus, .p-buttonset.p-button-secondary > .p-button:enabled:focus, .p-splitbutton.p-button-secondary > .p-button:enabled:focus {
   background: $semi-dark-grey;
-  color: $text-white;
+}
+.p-button.p-button-secondary:enabled:active, .p-buttonset.p-button-secondary > .p-button:enabled:active, .p-splitbutton.p-button-secondary > .p-button:enabled:active {
+  background: $background-click-button-secondary;
+}
+.p-button.p-button-secondary.p-button-text:enabled:focus, .p-button.p-button-secondary.p-button-outlined:enabled:focus, .p-buttonset.p-button-secondary > .p-button.p-button-text:enabled:focus, .p-buttonset.p-button-secondary > .p-button.p-button-outlined:enabled:focus, .p-splitbutton.p-button-secondary > .p-button.p-button-text:enabled:focus, .p-splitbutton.p-button-secondary > .p-button.p-button-outlined:enabled:focus {
+  background: $background-hover-button-secondary;
+}
+.p-button.p-button-secondary.p-button-text:enabled:active, .p-button.p-button-secondary.p-button-outlined:enabled:active, .p-buttonset.p-button-secondary > .p-button.p-button-text:enabled:active, .p-buttonset.p-button-secondary > .p-button.p-button-outlined:enabled:active, .p-splitbutton.p-button-secondary > .p-button.p-button-text:enabled:active, .p-splitbutton.p-button-secondary > .p-button.p-button-outlined:enabled:active {
+  background: $background-click-button-secondary;
+  color: $text-color-button-secondary;
 }
 
 .p-button.p-button-info, .p-buttonset.p-button-info > .p-button, .p-splitbutton.p-button-info > .p-button {
@@ -294,11 +321,15 @@
 
 .p-button.p-button-success, .p-buttonset.p-button-success > .p-button, .p-splitbutton.p-button-success > .p-button {
   background: $background-button-success;
-  color: $color-button-success;
+  color: $text-color-button-success;
   border-color: $border-color-button-danger;
 }
 .p-button.p-button-success:enabled:hover, .p-buttonset.p-button-success > .p-button:enabled:hover, .p-splitbutton.p-button-success > .p-button:enabled:hover {
-  background: $hover-filter-button;
+  background: #c26e47;
+}
+
+.p-button.p-button-success:enabled:focus, .p-buttonset.p-button-success > .p-button:enabled:focus, .p-splitbutton.p-button-success > .p-button:enabled:focus {
+  box-shadow: none;
 }
 
 .p-button.p-button-success:enabled:focus, .p-buttonset.p-button-success > .p-button:enabled:focus, .p-splitbutton.p-button-success > .p-button:enabled:focus {
@@ -307,10 +338,11 @@
 .p-button.p-button-success.p-button-outlined, .p-buttonset.p-button-success > .p-button.p-button-outlined, .p-splitbutton.p-button-success > .p-button.p-button-outlined {
   color: $filter-button;
 }
+
 .p-button.p-button-success.p-button-outlined:enabled:hover, .p-buttonset.p-button-success > .p-button.p-button-outlined:enabled:hover, .p-splitbutton.p-button-success > .p-button.p-button-outlined:enabled:hover {
-  color:$hover-filter-button;
+  color: $hover-filter-button;
 }
-.p-button.p-button-success.p-button-outlined:enabled:focus, .p-buttonset.p-button-success > .p-button.p-button-outlined:enabled:focus, .p-splitbutton.p-button-success > .p-button.p-button-outlined:enabled:focus {
+.p-button.p-button-success.p-button-outlined:focus, .p-buttonset.p-button-success > .p-button.p-button-outlined:focus, .p-splitbutton.p-button-success > .p-button.p-button-outlined:focus {
   color: $click-filter-button;
 }
 
@@ -413,11 +445,8 @@
 }
 
 .p-button.p-button-danger, .p-buttonset.p-button-danger > .p-button, .p-splitbutton.p-button-danger > .p-button {
-  /* color: #ffffff;
-  background: #D32F2F;
-  border: 0 none; */
   background-color: $background-button-danger;
-  color: $color-button-danger;
+  color: $text-color-button-danger;
   border-color: $border-color-button-success;
 }
 .p-button.p-button-danger:enabled:hover, .p-buttonset.p-button-danger > .p-button:enabled:hover, .p-splitbutton.p-button-danger > .p-button:enabled:hover {
@@ -841,30 +870,6 @@ p-autocomplete.ng-dirty.ng-invalid .p-autocomplete .p-autocomplete-multiple-cont
   box-shadow: 0 0 0 1px rgba(0, 58, 183, 0.12);
 }
 
-.p-button.p-button-text:enabled:active, .p-button.p-button-outlined:enabled:active {
-  background: rgba(0, 58, 183, 0.16);
-  color: $text-white;
-}
-.p-button.p-button-text .p-ink, .p-button.p-button-outlined .p-ink {
-  background-color: rgba(0, 58, 183, 0.16);
-}
-
-.p-button.p-button-secondary:enabled:focus, .p-buttonset.p-button-secondary > .p-button:enabled:focus, .p-splitbutton.p-button-secondary > .p-button:enabled:focus {
-  background: $semi-dark-grey;
-}
-.p-button.p-button-secondary:enabled:active, .p-buttonset.p-button-secondary > .p-button:enabled:active, .p-splitbutton.p-button-secondary > .p-button:enabled:active {
-  background: $semi-dark-grey;
-}
-.p-button.p-button-secondary.p-button-text:enabled:focus, .p-button.p-button-secondary.p-button-outlined:enabled:focus, .p-buttonset.p-button-secondary > .p-button.p-button-text:enabled:focus, .p-buttonset.p-button-secondary > .p-button.p-button-outlined:enabled:focus, .p-splitbutton.p-button-secondary > .p-button.p-button-text:enabled:focus, .p-splitbutton.p-button-secondary > .p-button.p-button-outlined:enabled:focus {
-  background: $semi-dark-grey;
-}
-.p-button.p-button-secondary.p-button-text:enabled:active, .p-button.p-button-secondary.p-button-outlined:enabled:active, .p-buttonset.p-button-secondary > .p-button.p-button-text:enabled:active, .p-buttonset.p-button-secondary > .p-button.p-button-outlined:enabled:active, .p-splitbutton.p-button-secondary > .p-button.p-button-text:enabled:active, .p-splitbutton.p-button-secondary > .p-button.p-button-outlined:enabled:active {
-  background: $semi-dark-grey;
-}
-.p-button.p-button-secondary.p-button-text .p-ink, .p-button.p-button-secondary.p-button-outlined .p-ink, .p-buttonset.p-button-secondary > .p-button.p-button-text .p-ink, .p-buttonset.p-button-secondary > .p-button.p-button-outlined .p-ink, .p-splitbutton.p-button-secondary > .p-button.p-button-text .p-ink, .p-splitbutton.p-button-secondary > .p-button.p-button-outlined .p-ink {
-  background-color: $semi-dark-grey;
-}
-
 .p-button.p-button-info:enabled:focus, .p-buttonset.p-button-info > .p-button:enabled:focus, .p-splitbutton.p-button-info > .p-button:enabled:focus {
   background: rgba(33, 150, 243, 0.76);
 }
@@ -1182,10 +1187,6 @@ p-inputnumber.ng-dirty.ng-invalid .p-inputtext:enabled:focus {
 
 .p-datatable .p-sortable-column.p-highlight:active .p-sortable-column-icon {
     color: $click-button;
-}
-
-.p-button.p-button-text:enabled:focus, .p-button.p-button-outlined:enabled:focus {
-  background: rgba(0, 58, 183, 0.12);
 }
 
 .p-checkbox.p-checkbox-checked:not(.p-checkbox-disabled).p-checkbox-focused {

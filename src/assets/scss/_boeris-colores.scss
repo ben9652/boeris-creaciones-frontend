@@ -16,21 +16,27 @@ $text-grey: #080707;
 $text-white: #FFFFFF;
 
 // BOTONES
-$main-button: #01688A;
-$hover-button: #00437E;
-$click-button: #003366;
-$color-button-white: #FFFFFF;
+$main-button: #c0653b;
+$hover-button: #c26e47;
+$click-button: #b95020;
+$text-color-button: #f0ccbbf3;
 
 $filter-button: #FF9900;
 $hover-filter-button: #F38200;
 $click-filter-button: #E17800;
 
 $background-button-success: #c0653b;
-$color-button-success: #f0ccbbf3;
+$text-color-button-success: #f0ccbbf3;
 $border-color-button-success: #c0653b;
 
+$background-button-secondary: #f8e5dd;
+$text-color-button-secondary: #c0653b;
+$border-color-button-secondary: #f0ccbbf3;
+$background-hover-button-secondary: #f5ece8;
+$background-click-button-secondary: #f0ccbbf3;
+
 $background-button-danger: #ffffff;
-$color-button-danger: #c0653b;
+$text-color-button-danger: #c0653b;
 $border-color-button-danger: #f0ccbbf3;
 
 /* SEMAFORO
