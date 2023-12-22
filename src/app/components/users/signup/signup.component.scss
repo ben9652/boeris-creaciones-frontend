@@ -61,8 +61,10 @@ button {
 }
 
 :host ::ng-deep {
-    button {
-        padding: 7px 14px !important;
+    button.p-ripple.p-element.p-button.p-component {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
     }
     
     .campos-de-texto .p-inputtext {

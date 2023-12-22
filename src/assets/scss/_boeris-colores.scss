@@ -1,0 +1,121 @@
+$black: #000000;
+$white: #FFFFFF;
+
+$main-color: #01688a;
+$secondary-color: #FF9900;
+$light-grey: #F2F2F2;
+$semi-light-grey: #D3D3D3;
+$semi-dark-grey: #999999;
+$dark-grey: #666666;
+$light-grey10: #cdcdcd;
+$light-grey3: #a5a5a5;
+$light-grey2: #f5f5f5;
+
+// TEXTO
+$text-grey: #080707;
+$text-white: #FFFFFF;
+
+// BOTONES
+$main-button: #c0653b;
+$hover-button: #c26e47;
+$click-button: #b95020;
+$text-color-button: #f0ccbbf3;
+
+$filter-button: #FF9900;
+$hover-filter-button: #F38200;
+$click-filter-button: #E17800;
+
+$background-button-success: #c0653b;
+$text-color-button-success: #f0ccbbf3;
+$border-color-button-success: #c0653b;
+
+$background-button-secondary: #f8e5dd;
+$text-color-button-secondary: #c0653b;
+$border-color-button-secondary: #f0ccbbf3;
+$background-hover-button-secondary: #f5ece8;
+$background-click-button-secondary: #f0ccbbf3;
+
+$background-button-danger: #ffffff;
+$text-color-button-danger: #c0653b;
+$border-color-button-danger: #f0ccbbf3;
+
+/* SEMAFORO
+$green: #00B351;
+$red: #FF3300;
+$yellow: #FFF130;
+
+$red-sem: rgb(192, 57, 43);
+$yellow-sem: #f0ad4e;
+$green-sem: #5cb85c;*/
+
+// SEMAFORO
+$green: #0FC96F;
+$red: #FF0000;
+$yellow: #FFF130;
+$orange: #FF9900;
+
+// TABLAS
+$header-background: #EAEAEA;
+$header-font-weight: 600;
+$subheader-background: #F2F2F2;
+$subheader-font-weight: 500;
+$treetable-background: #F8F8F8;
+
+// CARDS
+$paragraph-color: #5F6368;
+$text-info-card-commited: #003366;
+$text-info-card-certify: #FF3300;
+$background-white: #FFFFFF;
+$background-white-sem: #F5F5F5;
+$border-white: #E0E0E0;
+$card-background-grey: #F9F9F9;
+
+// Cards GestionCM
+$progressBar-tiempo: #FF0000;
+$progressBar-consumo: #0FC96F;
+
+// Cards Solicitudes
+$progressBar-entregado: #0FC96F;
+$progressBar-faltante: #FF0000;
+
+// DATA STATE
+$blocked: #FF3300;
+$opened: #00B351;
+$deflected: #FF9900;
+$finished: #FF9900;
+$pending: #003366;
+$certify: #003366;
+$approved: #003366;
+$draft: #01688A;
+$all: #999999;
+$projectionAlert: #731191;
+
+$background-blocked: rgba(138, 1, 1, 0.3);
+$background-opened: rgba(0, 179, 81, 0.3);
+$background-finished: rgba(255, 153, 0, 0.3);
+$background-approved: rgba(0, 51, 102, 0.3);
+$background-certify: rgba(0, 51, 102, 0.3);
+$background-draft: rgba(102, 102, 102, 0.3);
+$background-pending: rgba(0, 51, 102, 0.3);
+
+// CARDS HEADER BUTTONS
+$background-button-blocked: rgba(255, 51, 0, 0.05);
+$background-button-draft: rgba(1, 104, 138, 0.05);
+$background-button-opened: rgba(0, 179, 81, 0.05);
+$background-button-finished: rgba(255, 153, 0, 0.05);
+$background-button-approved: rgba(0, 51, 102, 0.05);
+$background-button-certify: rgba(0, 51, 102, 0.05);
+$background-button-pending: rgba(0, 51, 102, 0.05);
+$background-button-all: rgba(255, 153, 0, 0.05);
+
+// ATTACHMENTS
+$pdf: #FF9900;
+$img: #9B51E0;
+$xls: #00B351;
+$doc: #2F80ED;
+$ppt: #FF3300;
+$cad: #999999;
+$gen: #000000;
+$genf: #ffffff;
+$delete-icon: #FF3300;
+$hover-delete: rgba(255, 51, 0, 0.1);

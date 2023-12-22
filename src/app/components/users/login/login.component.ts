@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,10 +13,20 @@ export class LoginComponent {
   cargandoLogin: boolean = false;
 
   constructor(
+    private router: Router
   ) {
+    
   }
   
   login(event: any) {
     console.log("Se apretó botón de iniciar sesión")
+  }
+
+  register(event: any) {
+    this.router.navigate(['/signup']);
+  }
+
+  forgotPassword(event: any) {
+
   }
 }

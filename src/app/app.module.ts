@@ -8,6 +8,10 @@ import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontaweso
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 
+import { HttpClientModule } from '@angular/common/http';
+
+import { EnvServiceProvider } from './services/env.service.provider';
+
 /********** Componentes de PrimeNG *************/
 
 import { ButtonModule } from 'primeng/button';
@@ -21,6 +25,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/users/login/login.component';
 import { SignupComponent } from './components/users/signup/signup.component';
 import { HeaderComponent } from './components/shared/header/header.component';
+import { ForgotComponent } from './components/users/forgot/forgot.component';
 
 @NgModule({
   declarations: [
@@ -28,11 +33,13 @@ import { HeaderComponent } from './components/shared/header/header.component';
     HomeComponent,
     LoginComponent,
     SignupComponent,
-    HeaderComponent
+    HeaderComponent,
+    ForgotComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     FontAwesomeModule,
     ButtonModule,
     CardModule,
@@ -40,7 +47,9 @@ import { HeaderComponent } from './components/shared/header/header.component';
     InputTextModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    EnvServiceProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

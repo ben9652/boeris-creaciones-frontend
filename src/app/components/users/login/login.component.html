@@ -28,7 +28,12 @@
                 ></p-password>
             </div>
         </div>
-        <button pButton type="submit" [disabled]="cargandoLogin" label="Entrar" class="p-mt-2" (click)="login($event)"></button>
-        <a class="register-link" routerLink="/signup">Crear una cuenta</a>
+        <div class="botones">
+            <p-button [disabled]="cargandoLogin" [outlined]="true" (click)="login($event)">Entrar</p-button>
+            <p-button [disabled]="cargandoLogin" [outlined]="true" severity="secondary" (click)="register($event)">Crear una cuenta</p-button>
+        </div>
+        <div>
+            <a class="forgot-password" routerLink="/forgot">¿Olvidó la contraseña?</a>
+        </div>
     </p-card>
 </div>

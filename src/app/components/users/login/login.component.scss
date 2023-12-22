@@ -42,27 +42,28 @@
     z-index: 1;
 }
 
-button {
-    width: 100%;
-    font-family: 'Avoda';
-    font-weight: bold;
-    font-size: 1.2rem;
-}
-
-.register-link {
-    display: block;
-    text-align: center;
-    margin-top: 10px;
-    color: #c0653b;
-    text-decoration: none;
-    font-family: 'Avoda';
-    font-size: 1.2rem;
-    font-weight: bold;
+.botones {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 :host ::ng-deep {
-    button {
-        padding: 7px 14px !important;
+    .p-button {
+        margin: 4px;
+    }
+    
+    button.p-ripple.p-element.p-button.p-component {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    p-button.p-element {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
     }
     
     .campos-de-texto .p-inputtext {
