@@ -181,6 +181,7 @@
 
 .p-button {
   background: $main-button;
+  border: none;
 }
 
 .p-button:enabled:hover {
@@ -224,6 +225,7 @@
   outline-width: initial;
   outline-style: solid;
   outline-color: $main-button;
+  outline-offset: 2px;
 }
 
 .p-button.p-button-secondary, .p-buttonset.p-button-secondary > .p-button, .p-splitbutton.p-button-secondary > .p-button {

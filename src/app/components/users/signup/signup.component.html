@@ -48,7 +48,7 @@
                 />
             </div>
         </div>
-        <button pButton type="submit" [disabled]="cargandoRegistro" label="Registrarse" class="p-mt-2" (click)="register($event)"></button>
+        <p-button [disabled]="cargandoRegistro" [outlined]="true" label="Registrarse" (click)="register($event)"></p-button>
         <a class="login-link" routerLink="/login">¿Ya tienes una cuenta? Inicia sesión aquí</a>
     </p-card>
 </div>
