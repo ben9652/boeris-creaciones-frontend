@@ -19,7 +19,9 @@ export class LoginComponent {
   }
   
   login(event: any) {
-    console.log("Se apretó botón de iniciar sesión")
+    if((event.key === 'Enter' || event.pointerId) && !this.cargandoLogin) {
+      console.log("Se apretó botón de iniciar sesión")
+    }
   }
 
   register(event: any) {

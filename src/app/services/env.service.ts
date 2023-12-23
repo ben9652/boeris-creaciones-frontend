@@ -5,8 +5,7 @@ export class EnvService {
   public enableDebug = false;
   public enableAuth = false;
 
-  public apiUrlBase = 'http://3.137.189.33:8080/api/';
-  // public apiUrlBase = 'http://localhost:5000/api/';
+  public apiUrlBase = 'http://localhost:5141/api/';
   public indexPath = '/';
 
   public langDefault = 'es';

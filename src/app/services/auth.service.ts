@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EnvService } from './env.service';
 import { Observable, map } from 'rxjs';
-import { Usuario } from '../models/usuarios.entities';
+import { Usuario } from '../components/users/usuarios.entities';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -15,13 +15,7 @@ export class AuthService {
   private isAuthenticated = false;
   private timeoutId: number | null | NodeJS.Timeout = null;
 
-  public userData: Usuario = {
-    id_usuario: 0,
-    nombres: '',
-    apellidos: '',
-    username: '',
-    rol: ''
-  };
+  public userData: Usuario = new Usuario();
 
   constructor(
     private http: HttpClient,
@@ -49,13 +43,14 @@ export class AuthService {
           return false;
         }
         else {
-          this.userData = {
-            id_usuario: res.mensaje.id_usuario,
-            nombres: res.mensaje.nombres,
-            apellidos: res.mensaje.apellidos,
-            username: res.mensaje.username,
-            rol: res.mensaje.rol
-          };
+          this.userData = new Usuario(
+            res.id_usuario,
+            res.username,
+            res.apellidos,
+            res.nombres,
+            res.email,
+            res.rol
+          );
           this.isAuthenticated = true;
           this.resetTimeout();
           return true;
@@ -67,13 +62,7 @@ export class AuthService {
   logout(): void {
     // Lógica para cerrar la sesión y establecer isAuthenticated en false
     this.isAuthenticated = false;
-    this.userData = {
-      id_usuario: 0,
-      nombres: '',
-      apellidos: '',
-      username: '',
-      rol: ''
-    };
+    this.userData = new Usuario();
     this.router.navigate(['/login']);
     this.clearTimeout();
   }

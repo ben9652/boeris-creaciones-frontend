@@ -10,6 +10,16 @@
             <div class="p-field">
                 <i class="fa fa-user"></i>
                 <input
+                [(ngModel)]="username"
+                [ngClass]="!username && datos_no_llenados ? clases_error : clases_no_error"
+                pInputText
+                type="text"
+                placeholder="Usuario"
+                />
+            </div>
+            <div class="p-field">
+                <i class="fa fa-user"></i>
+                <input
                 [(ngModel)]="firstName"
                 [ngClass]="!firstName && datos_no_llenados ? clases_error : clases_no_error"
                 pInputText
@@ -30,22 +40,23 @@
             <div class="p-field">
                 <i class="fa fa-user"></i>
                 <input
-                [(ngModel)]="username"
-                [ngClass]="!username && datos_no_llenados ? clases_error : clases_no_error"
+                [(ngModel)]="email"
+                [ngClass]="!email && datos_no_llenados ? clases_error : clases_no_error"
                 pInputText
                 type="text"
-                placeholder="Usuario"
+                placeholder="Correo electrónico"
                 />
             </div>
             <div class="p-field">
-                <i class="fa fa-lock"></i>
-                <input
+                <p-password
                 [(ngModel)]="password"
                 [ngClass]="!password && datos_no_llenados ? clases_error : clases_no_error"
-                pPassword
-                type="password"
                 placeholder="Contraseña"
-                />
+                [disabled]="cargandoRegistro"
+                [toggleMask]="true"
+                >
+                
+                </p-password>
             </div>
         </div>
         <p-button [disabled]="cargandoRegistro" [outlined]="true" label="Registrarse" (click)="register($event)"></p-button>
