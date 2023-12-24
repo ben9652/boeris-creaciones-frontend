@@ -13,6 +13,7 @@
                 [(ngModel)]="username"
                 [ngClass]="!username && datos_no_llenados ? clases_error : clases_no_error"
                 pInputText
+                autocapitalize="none"
                 type="text"
                 placeholder="Usuario"
                 />
@@ -43,6 +44,8 @@
                 [(ngModel)]="email"
                 [ngClass]="!email && datos_no_llenados ? clases_error : clases_no_error"
                 pInputText
+                inputmode="email"
+                autocapitalize="none"
                 type="text"
                 placeholder="Correo electrónico"
                 />
