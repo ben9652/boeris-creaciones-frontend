@@ -31,7 +31,7 @@ header {
     max-width: 100%;
 }
 
-@media screen and (max-height: 576px) {
+@media screen and (max-width: 576px) {
     .header-text {
         font-size: x-large;
     }
