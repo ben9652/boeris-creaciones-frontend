@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EnvService } from './env.service';
 import { Observable, map } from 'rxjs';
-import { Usuario } from '../models/usuarios.entities';
+import { Usuario, UsuarioLogin } from '../components/users/usuarios.entities';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -15,13 +15,7 @@ export class AuthService {
   private isAuthenticated = false;
   private timeoutId: number | null | NodeJS.Timeout = null;
 
-  public userData: Usuario = {
-    id_usuario: 0,
-    nombres: '',
-    apellidos: '',
-    username: '',
-    rol: ''
-  };
+  public userData: Usuario = new Usuario();
 
   constructor(
     private http: HttpClient,
@@ -41,21 +35,22 @@ export class AuthService {
     this.userData = JSON.parse(sessionStorage.getItem('user') || '{}');
   }
   
-  login(username: string, password: string): Observable<boolean> {
-    return this.authenticate(username, password).pipe(
+  login(userObj: UsuarioLogin): Observable<boolean> {
+    return this.authenticate(userObj).pipe(
       map(res => {
         if (res.error) {
           this.startTimeout();
           return false;
         }
         else {
-          this.userData = {
-            id_usuario: res.mensaje.id_usuario,
-            nombres: res.mensaje.nombres,
-            apellidos: res.mensaje.apellidos,
-            username: res.mensaje.username,
-            rol: res.mensaje.rol
-          };
+          this.userData = new Usuario(
+            res.mensaje.id_usuario,
+            res.mensaje.username,
+            res.mensaje.apellidos,
+            res.mensaje.nombres,
+            res.mensaje.email,
+            res.mensaje.rol
+          );
           this.isAuthenticated = true;
           this.resetTimeout();
           return true;
@@ -67,13 +62,7 @@ export class AuthService {
   logout(): void {
     // Lógica para cerrar la sesión y establecer isAuthenticated en false
     this.isAuthenticated = false;
-    this.userData = {
-      id_usuario: 0,
-      nombres: '',
-      apellidos: '',
-      username: '',
-      rol: ''
-    };
+    this.userData = new Usuario();
     this.router.navigate(['/login']);
     this.clearTimeout();
   }
@@ -83,11 +72,9 @@ export class AuthService {
     return this.isAuthenticated;
   }
 
-  authenticate(username: string, password: string): Observable<any> {
-    console.log(this.urlBase);
-    const apiUrl = this.urlBase + 'AutenticarUsuario';
-    const query = apiUrl + '?username=' + username + '&password=' + password;
-    return this.http.get<any>(query, this.httpOptions);
+  authenticate(userObj: UsuarioLogin): Observable<any> {
+    const apiUrl = this.urlBase + 'Autenticar';
+    return this.http.post<any>(apiUrl, userObj, this.httpOptions);
   }
 
   private startTimeout(): void {
