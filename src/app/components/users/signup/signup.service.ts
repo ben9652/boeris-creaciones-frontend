@@ -27,7 +27,7 @@ export class SignupService {
   }
 
   registerClient(user: UsuarioRegistro): Observable<any> {
-    const apiUrl = this.urlBase + 'RegistrarUsuario';
+    const apiUrl = this.urlBase + 'Registrar';
     return this.http.post<any>(apiUrl, user, this.httpOptions);
   }
 }

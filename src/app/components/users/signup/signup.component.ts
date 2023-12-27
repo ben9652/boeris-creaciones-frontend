@@ -57,7 +57,6 @@ export class SignupComponent {
         )
         .subscribe(res => {
           this.cargandoRegistro = false;
-          console.log(res);
           this.router.navigate(['/login']);
         })
       }

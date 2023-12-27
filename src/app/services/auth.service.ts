@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EnvService } from './env.service';
 import { Observable, map } from 'rxjs';
-import { Usuario } from '../components/users/usuarios.entities';
+import { Usuario, UsuarioLogin } from '../components/users/usuarios.entities';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -35,8 +35,8 @@ export class AuthService {
     this.userData = JSON.parse(sessionStorage.getItem('user') || '{}');
   }
   
-  login(username: string, password: string): Observable<boolean> {
-    return this.authenticate(username, password).pipe(
+  login(userObj: UsuarioLogin): Observable<boolean> {
+    return this.authenticate(userObj).pipe(
       map(res => {
         if (res.error) {
           this.startTimeout();
@@ -44,12 +44,12 @@ export class AuthService {
         }
         else {
           this.userData = new Usuario(
-            res.id_usuario,
-            res.username,
-            res.apellidos,
-            res.nombres,
-            res.email,
-            res.rol
+            res.mensaje.id_usuario,
+            res.mensaje.username,
+            res.mensaje.apellidos,
+            res.mensaje.nombres,
+            res.mensaje.email,
+            res.mensaje.rol
           );
           this.isAuthenticated = true;
           this.resetTimeout();
@@ -72,11 +72,9 @@ export class AuthService {
     return this.isAuthenticated;
   }
 
-  authenticate(username: string, password: string): Observable<any> {
-    console.log(this.urlBase);
-    const apiUrl = this.urlBase + 'AutenticarUsuario';
-    const query = apiUrl + '?username=' + username + '&password=' + password;
-    return this.http.get<any>(query, this.httpOptions);
+  authenticate(userObj: UsuarioLogin): Observable<any> {
+    const apiUrl = this.urlBase + 'Autenticar';
+    return this.http.post<any>(apiUrl, userObj, this.httpOptions);
   }
 
   private startTimeout(): void {
