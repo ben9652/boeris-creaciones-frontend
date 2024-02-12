@@ -16,7 +16,7 @@ export class ListRawMaterialsComponent implements OnInit {
   constructor() {
     this.rawMaterialExample = new RawMaterial(
       2418290,
-      'D',
+      'U',
       'Palillos de madera',
       5120,
       'unidades',
@@ -27,6 +27,7 @@ export class ListRawMaterialsComponent implements OnInit {
       12,
       8,
       'Este proveedor es el mejor',
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, alias. Repellat quos nulla perferendis pariatur possimus temporibus? Fugit blanditiis, eius quos cupiditate quam asperiores consectetur perferendis impedit nihil earum explicabo? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil vero perspiciatis officia nobis et aliquam porro doloremque inventore, qui veniam unde odio asperiores, dolor cum repellendus voluptates cumque, quae illo.'
     );
   }
 }

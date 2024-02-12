@@ -10,6 +10,7 @@ export class CardRawMaterialComponent implements OnInit, AfterViewInit {
   @ViewChild('contenedorTexto') contTexto!: ElementRef;
   @ViewChild('tituloContenedorTexto') titContTexto!: ElementRef;
   @ViewChild('textoRazon') texto!: ElementRef;
+  @ViewChild('opTextRazon') overlayPanels!: ElementRef;
   isTextOverflowed: boolean = false;
   
   @Input({required: true}) rawMaterial: RawMaterial = new RawMaterial();

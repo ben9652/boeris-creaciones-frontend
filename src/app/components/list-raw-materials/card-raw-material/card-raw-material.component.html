@@ -105,7 +105,7 @@
                     </ng-template>
                 </p-overlayPanel>
                 <p
-                (click)="opTextRazon.toggle($event)"
+                (click)="isTextOverflowed && opTextRazon.toggle($event)"
                 [ngClass]="{'text-razon': isTextOverflowed}"
                 #textoRazon
                 >
@@ -127,7 +127,7 @@
                     </ng-template>
                 </p-overlayPanel>
                 <p
-                (click)="opTextRazon.toggle($event)"
+                (click)="isTextOverflowed && opTextRazon.toggle($event)"
                 [ngClass]="{'text-razon': isTextOverflowed}"
                 #textoRazon
                 >
