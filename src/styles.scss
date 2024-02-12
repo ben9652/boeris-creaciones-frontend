@@ -5,7 +5,6 @@
     src: url('/assets/fonts/Avoda\ Free\ Trial.ttf') format('truetype');
 }
 
-
 /* You can add global styles to this file, and also import other style files */
 body {
     margin: 0;
@@ -28,6 +27,44 @@ a {
     font-size: 1.2rem;
     color: $text-color-button;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, outline 0.1s;
+}
+
+.p-card .p-card-content {
+    padding: 0;
+}
+
+.p-card.p-component {
+    margin: 10px;
+}
+  
+.p-tooltip .p-tooltip-text {
+    background-color: $background-button-secondary !important;
+    color: $text-color-button-secondary !important;
+    display: block !important;
+    text-align: center !important;
+}
+
+.p-tooltip-arrow {
+    border-top-color: $background-button-secondary !important;
+    border-bottom-color: $background-button-secondary !important;
+}
+
+.p-overlaypanel-content {
+    background-color: $background-button-secondary !important;
+    color: $text-color-button-secondary !important;
+}
+
+.p-overlaypanel {
+    &:before {
+        content:none;
+    }
+
+    &:after {
+        content:none;
+    }
+
+    margin-top: 0px;
+    max-width: 25vw;
 }
 
 // :host ::ng-deep {
