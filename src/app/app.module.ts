@@ -23,6 +23,7 @@ import { CardModule } from 'primeng/card';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
 import { TooltipModule } from 'primeng/tooltip';
+import { ToastModule } from 'primeng/toast';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { DropdownModule } from 'primeng/dropdown';
@@ -62,6 +63,7 @@ import { MathJaxParagraphComponent } from './components/shared/math-jax-paragrap
     CardModule,
     PasswordModule,
     InputTextModule,
+    ToastModule,
     TooltipModule,
     FormsModule,
     DropdownModule,

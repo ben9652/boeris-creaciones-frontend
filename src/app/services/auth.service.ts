@@ -1,9 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { EnvService } from './env.service';
 import { Observable, map } from 'rxjs';
 import { Usuario, UsuarioLogin } from '../components/users/usuarios.entities';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
+import { ApiMessage } from '../components/users/mensajeAPI.entities';
 
 @Injectable({
   providedIn: 'root'
@@ -35,12 +37,11 @@ export class AuthService {
     this.userData = JSON.parse(sessionStorage.getItem('user') || '{}');
   }
   
-  login(userObj: UsuarioLogin): Observable<boolean> {
+  login(userObj: UsuarioLogin): Observable<ApiMessage> {
     return this.authenticate(userObj).pipe(
       map(res => {
         if (res.error) {
           this.startTimeout();
-          return false;
         }
         else {
           this.userData = new Usuario(
@@ -53,8 +54,9 @@ export class AuthService {
           );
           this.isAuthenticated = true;
           this.resetTimeout();
-          return true;
         }
+
+        return res;
       })
     )
   }
