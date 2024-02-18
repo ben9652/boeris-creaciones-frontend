@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { EnvService } from 'src/app/services/env.service';
 import { Usuario, UsuarioLogin } from '../usuarios.entities';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  providers: [MessageService]
 })
 export class LoginComponent implements OnInit {
   userData: Usuario = new Usuario();
@@ -20,7 +22,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    public envService: EnvService
+    public envService: EnvService,
+    private messageService: MessageService
   ) {
     
   }
@@ -33,23 +36,30 @@ export class LoginComponent implements OnInit {
   }
   
   login(event: any) {
-    if((event.key === 'Enter' || event.pointerId) && !this.cargandoLogin) {
-      this.cargandoLogin = true;
-      this.authService.login(
-        new UsuarioLogin(this.username, this.password)
-      )
-      .subscribe(isAuthenticated => {
-        this.cargandoLogin = false;
-        if(isAuthenticated) {
-          this.router.navigate(['home']);
-          this.userData = this.authService.userData;
-          sessionStorage.setItem('user', JSON.stringify(this.userData));
-          sessionStorage.setItem('authenticated', 'true');
-        }
-        else {
-          console.log('Inicio de sesión fallido');
-        }
-      });
+    if(this.username.length !== 0 && this.password.length !== 0) {
+      if((event.key === 'Enter' || event.pointerId) && !this.cargandoLogin) {
+        this.cargandoLogin = true;
+        this.authService.login(
+          new UsuarioLogin(this.username, this.password)
+        )
+        .subscribe(res => {
+          const isAuthenticated = !res.error;
+          this.cargandoLogin = false;
+          if(isAuthenticated) {
+            this.router.navigate(['home']);
+            this.userData = this.authService.userData;
+            sessionStorage.setItem('user', JSON.stringify(this.userData));
+            sessionStorage.setItem('authenticated', 'true');
+          }
+          else {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Inicio de sesión fallido',
+              detail: res.mensaje
+            })
+          }
+        });
+      }
     }
   }
 
