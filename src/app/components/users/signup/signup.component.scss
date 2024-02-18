@@ -60,6 +60,10 @@ button {
     font-weight: bold;
 }
 
+.relleno-para-espacio-de-fuerza-contrasenia {
+    height: 10vh;
+}
+
 :host ::ng-deep {
     button.p-ripple.p-element.p-button.p-component {
         display: flex;
