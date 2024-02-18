@@ -24,6 +24,10 @@ import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
 import { TooltipModule } from 'primeng/tooltip';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { DividerModule } from 'primeng/divider';
 
 /////////////////////////////////////////////////
 import { HomeComponent } from './components/home/home.component';
@@ -34,6 +38,7 @@ import { ForgotComponent } from './components/users/forgot/forgot.component';
 import { ListRawMaterialsComponent } from './components/list-raw-materials/list-raw-materials.component';
 import { CardRawMaterialComponent } from './components/list-raw-materials/card-raw-material/card-raw-material.component';
 import { CustomDatePipe } from './components/shared/pipes/custom-date.pipe';
+import { MathJaxParagraphComponent } from './components/shared/math-jax-paragraph/math-jax-paragraph.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +50,7 @@ import { CustomDatePipe } from './components/shared/pipes/custom-date.pipe';
     ForgotComponent,
     ListRawMaterialsComponent,
     CardRawMaterialComponent,
-    CustomDatePipe
+    CustomDatePipe,
   ],
   imports: [
     BrowserModule,
@@ -59,8 +64,13 @@ import { CustomDatePipe } from './components/shared/pipes/custom-date.pipe';
     InputTextModule,
     TooltipModule,
     FormsModule,
+    DropdownModule,
+    InputNumberModule,
+    DividerModule,
     OverlayPanelModule,
-    EllipsisModule
+    RadioButtonModule,
+    EllipsisModule,
+    MathJaxParagraphComponent
   ],
   providers: [
     EnvServiceProvider

@@ -1,6 +1,11 @@
 <p-card>
+    <!--
+            El contenedor tiene 3 secciones: contenedor, datos, y comentario/stockeo.
+        Pero divido la 1ra de las 2 restantes porque las dos últimas están coloreadas
+        de fondo de una forma particular.
+    -->
     <div class="contenedor">
-        <div class="estado" [ngClass]="background_color_estado">
+        <div class="p-card p-component estado" [ngClass]="background_color_estado">
             <fa-icon
             class="icon"
             [icon]="icono_estado"
@@ -9,136 +14,231 @@
             >
             </fa-icon>
         </div>
-        
-        <div class="datos p-card p-component contenedor-a-colorear">
-            <div class="datos-generales">
-                <div class="id-precio-nombre-unidad">
-                    <div class="label-field">
-                        <fa-icon class="icon" [icon]="['fas', 'barcode']"></fa-icon>
-                        <p pTooltip="ID del paquete" tooltipPosition="top">{{ rawMaterial.id_paquete }}</p>
+
+        <!-- Aplicando p-card y p-component es como se logra que el contenedor que da el color a la card esté redondeado en las esquinas (ver el SCSS) -->
+        <div class="p-card p-component contenedor-a-colorear">
+            <div class="datos">
+                <div class="datos-generales">
+                    <div class="datos-1">
+                        <div class="label-field">
+                            <div class="combined-icons">
+                                <fa-icon [icon]="['fas', 'barcode']"></fa-icon>
+                                <fa-icon
+                                class="sub-icon"
+                                [icon]="['fas', 'flask']"
+                                size="2xs"
+                                ></fa-icon>
+                            </div>
+                            <p pTooltip="ID de materia prima" tooltipPosition="top">{{ rawMaterial.ID_MP }}</p>
+                        </div>
+                    </div>
+                    <div class="datos-2">
+                        <div class="label-field">
+                            <div class="combined-icons">
+                                <fa-icon [icon]="['fas', 'barcode']"></fa-icon>
+                                <fa-icon
+                                class="sub-icon"
+                                [icon]="['fas', 'receipt']"
+                                size="2xs"
+                                ></fa-icon>
+                            </div>
+                            <p pTooltip="ID de la compra" tooltipPosition="top">{{ rawMaterial.ID_Compra }}</p>
+                        </div>
+                        <div class="label-field">
+                            <fa-icon class="icon" [icon]="['fas', 'dollar-sign']"></fa-icon>
+                            <p pTooltip="Precio unitario" tooltipPosition="top">{{ rawMaterial.Price }}</p>
+                        </div>
+                        <div class="label-field">
+                            <fa-icon class="icon" [icon]="['fas', 'cube']"></fa-icon>
+                            <p pTooltip="Producto" tooltipPosition="top">{{ rawMaterial.Name }}</p>
+                        </div>
+
+                        <div class="label-field" *ngIf="rawMaterial.EsContable()">
+                            <fa-icon class="icon" [icon]="['fas', 'boxes-stacked']"></fa-icon>
+                            <p pTooltip="Cantidad restante" tooltipPosition="top" *ngIf="rawMaterial.State === 'A'">{{ rawMaterial.CurrentQnty }}</p>
+                            <p style="margin: 0px 5px;" *ngIf="rawMaterial.State === 'A'">/</p>
+                            <p pTooltip="Cantidad por paquete" tooltipPosition="top">{{ rawMaterial.QntyPerPack }}</p>
+                        </div>
+
+                        <div class="label-field" *ngIf="rawMaterial.EsNoContable()">
+                            <fa-icon class="icon" [icon]="['fas', 'ruler']"></fa-icon>
+                            <p pTooltip="Medida" tooltipPosition="top">{{ rawMaterial.Measure }} {{ rawMaterial.MeasureUnit }}</p>
+                        </div>
+
                     </div>
                     <div class="label-field">
-                        <fa-icon class="icon" [icon]="['fas', 'dollar-sign']"></fa-icon>
-                        <p pTooltip="Precio" tooltipPosition="top">{{ rawMaterial.precio }}</p>
+                        <fa-icon class="icon" [icon]="['fas', 'user-tie']"></fa-icon>
+                        <p pTooltip="Proveedor" tooltipPosition="top">{{ rawMaterial.Provider }}</p>
                     </div>
+                </div>
+
+                <div class="fechas">
+                    <!-- Fecha de orden -->
                     <div class="label-field">
-                        <fa-icon class="icon" [icon]="['fas', 'cube']"></fa-icon>
-                        <p pTooltip="Producto" tooltipPosition="top">{{ rawMaterial.nombre }}</p>
+                        <fa-icon class="icon" [icon]="['fas', 'calendar-check']"></fa-icon>
+                        <p pTooltip="Fecha de pedido" tooltipPosition="top">{{ rawMaterial.OrderDate | customDate }}</p>
                     </div>
-                    <div class="label-field">
-                        <fa-icon class="icon" [icon]="['fas', 'ruler']"></fa-icon>
-                        <p pTooltip="Unidad de medida" tooltipPosition="top">{{ rawMaterial.unidad_medida }}</p>
+                    <!-- Fecha de stockeo -->
+                    <div class="label-field" *ngIf="rawMaterial.State !== 'P'">
+                        <fa-icon class="icon" [icon]="['fas', 'calendar-plus']"></fa-icon>
+                        <p pTooltip="Fecha de entrada en stock" tooltipPosition="top">{{ rawMaterial.StockDate | customDate }}</p>
                     </div>
                 </div>
-                <div class="label-field">
-                    <fa-icon class="icon" [icon]="['fas', 'user-tie']"></fa-icon>
-                    <p pTooltip="Proveedor" tooltipPosition="top">{{ rawMaterial.proveedor }}</p>
-                </div>
-            </div>
-            <div class="fechas">
-                <!-- Fecha de orden -->
-                <div class="label-field">
-                    <fa-icon class="icon" [icon]="['fas', 'calendar-check']"></fa-icon>
-                    <p pTooltip="Fecha de pedido" tooltipPosition="top">{{ rawMaterial.fecha_orden | customDate }}</p>
-                </div>
-                <!-- Fecha de stockeo -->
-                <div class="label-field" *ngIf="rawMaterial.estado === 'A' || rawMaterial.estado === 'U' || rawMaterial.estado === 'D'">
-                    <fa-icon class="icon" [icon]="['fas', 'calendar-plus']"></fa-icon>
-                    <p pTooltip="Fecha de entrada en stock" tooltipPosition="top">{{ rawMaterial.fecha_stock | customDate }}</p>
-                </div>
-                <!-- Fecha de utilización/desecho -->
-                <div class="label-field" *ngIf="rawMaterial.estado === 'U' || rawMaterial.estado === 'D'">
-                    <fa-icon *ngIf="rawMaterial.estado == 'U'" class="icon" [icon]="['fas', 'calendar-minus']"></fa-icon>
-                    <fa-icon *ngIf="rawMaterial.estado == 'D'" class="icon" [icon]="['fas', 'calendar-xmark']"></fa-icon>
-                    <p [pTooltip]="rawMaterial.estado === 'U' ? 'Fecha de utilización' : 'Fecha de desecho'" tooltipPosition="top">{{ rawMaterial.fecha_descarte | customDate }}</p>
-                </div>
-            </div>
-        </div>
 
-        <div [ngClass]="{
-            'stockeo-1': rawMaterial.estado === 'A',
-            'stockeo-2': rawMaterial.estado !== 'A',
-            'p-card p-component contenedor-a-colorear': true
-        }">
-            <!-- Sección derecha superior -->
-            <div class="cantidades">
-                <div class="por-paquete">
-                    <p pTooltip="Cantidad por paquete" tooltipPosition="top">×{{ rawMaterial.cantidad_por_paquete }}</p>
-                </div>
-                <div class="restante" *ngIf="rawMaterial.estado === 'A'">
-                    <p pTooltip="Cantidad restante" tooltipPosition="top">×{{ rawMaterial.cantidad_actual }}</p>
-                </div>
             </div>
-
-            <div class="a-restar" *ngIf="rawMaterial.estado === 'A'">
-                <input pInputText [(ngModel)]="cantidad_a_restar" placeholder="Cantidad a restar" type="text">
-            </div>
-
-            <!-- Sección derecha inferior -->
-            <div class="botones" *ngIf="rawMaterial.estado === 'A'">
-                <p-button (onClick)="usarMateriaPrima()" severity="success">
-                    <fa-icon class="icon" [icon]="['far', 'hand']"></fa-icon>
-                </p-button>
-                
-                <p-button (onClick)="descartarMateriaPrima()" severity="danger">
-                    <fa-icon class="icon" [icon]="['far', 'trash-can']"></fa-icon>
-                </p-button>
-            </div>
-
-            <div class="comentario" *ngIf="rawMaterial.estado === 'P'">
-                <p-overlayPanel #opComment>
-                    <ng-template pTemplate="content">
-                        <h5>{{ rawMaterial.comentario }}</h5>
-                    </ng-template>
-                </p-overlayPanel>
-                <p-button (click)="opComment.toggle($event)">Ver comentario</p-button>
-            </div>
-
-            <div class="contenedor-razon" #contenedorTexto *ngIf="rawMaterial.estado === 'U'">
-                <h2 #tituloContenedorTexto class="label-text">Aplicación</h2>
+            <div class="contenedor-comentario" #contenedorTexto *ngIf="rawMaterial.State === 'P'">
+                <h2 #tituloContenedorTexto class="label-text">Comentario</h2>
                 <p-overlayPanel
-                #opTextRazon
+                #opComentario
                 [appendTo]="'body'"
                 >
                     <ng-template pTemplate="content">
-                        <p>{{ rawMaterial.razon_aplicacion }}</p>
+                        <p>{{ rawMaterial.Comment }}</p>
                     </ng-template>
                 </p-overlayPanel>
                 <p
-                (click)="isTextOverflowed && opTextRazon.toggle($event)"
-                [ngClass]="{'text-razon': isTextOverflowed}"
-                #textoRazon
+                (click)="isTextOverflowed && opComentario.toggle($event)"
+                [ngClass]="{'text-comentario': isTextOverflowed}"
+                #comentario
                 >
                     {{
-                        rawMaterial.razon_aplicacion ?
-                        rawMaterial.razon_aplicacion :
-                        'No se especificó la aplicación de la materia prima'
+                        rawMaterial.Comment ?
+                        rawMaterial.Comment :
+                        'No se especificó un comentario en la compra'
                     }}
                 </p>
             </div>
 
-            <div class="contenedor-razon" #contenedorTexto *ngIf="rawMaterial.estado === 'D'">
-                <h2 #tituloContenedorTexto class="label-text">Razón de desecho</h2>
-                <p-overlayPanel
-                #opTextRazon
-                [appendTo]="'body'">
-                    <ng-template pTemplate="content">
-                        <p>{{ rawMaterial.razon_desecho }}</p>
-                    </ng-template>
-                </p-overlayPanel>
-                <p
-                (click)="isTextOverflowed && opTextRazon.toggle($event)"
-                [ngClass]="{'text-razon': isTextOverflowed}"
-                #textoRazon
-                >
-                    {{
-                        rawMaterial.razon_desecho ?
-                        rawMaterial.razon_desecho :
-                        'No se especificó la razón del desecho'
-                    }}
-                </p>
+            <div class="stockeo" *ngIf="rawMaterial.State !== 'P'">
+                <div class="utilizacion">
+
+                    <!-- Este contenedor no se renderizará solo en una materia prima contable en su estado 'En Stock' -->
+                    <div *ngIf="rawMaterial.EsNoContable() || rawMaterial.State !== 'A'">
+                        <div class="usos-contable" *ngIf="rawMaterial.EsContable()">
+                            <div class="label-field">
+                                <fa-icon
+                                class="icon"
+                                [icon]="['fas', 'check']"
+                                ></fa-icon>
+                                <p
+                                *ngIf="rawMaterial.QntyPerPack && rawMaterial.CurrentQnty"
+                                pTooltip="Utilizados con éxito"
+                                tooltipPosition="bottom"
+                                >
+                                    {{ rawMaterial.QntyPerPack - rawMaterial.CurrentQnty }}
+                                </p>
+                            </div>
+                            <div class="label-field">
+                                <fa-icon
+                                class="icon"
+                                [icon]="['fas', 'trash']"
+                                ></fa-icon>
+                                <p
+                                *ngIf="rawMaterial.CurrentQnty"
+                                pTooltip="Descartados"
+                                tooltipPosition="bottom"
+                                >
+                                    {{ rawMaterial.CurrentQnty }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="usos-no-contable" *ngIf="rawMaterial.EsNoContable()">
+                            <div class="label-field">
+                                <fa-icon
+                                class="icon"
+                                [icon]="['fas', 'hand']"
+                                ></fa-icon>
+                                <p pTooltip="Cantidad de usos" tooltipPosition="bottom">42</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gestion-resta" *ngIf="rawMaterial.State === 'A'">
+                        <div class="seleccion-subelemento" *ngIf="rawMaterial.EsNoContable()">
+                            <p-dropdown
+                            [(ngModel)]="subelemento"
+                            [options]="rawMaterial.Uses"
+                            optionLabel="cantidad"
+                            placeholder="Subelementos"
+                            emptyMessage="No se encontraron subelementos"
+                            ></p-dropdown>
+                            <!-- TODO Modal para edición de subelementos -->
+                            <p-button
+                            >
+                                <fa-icon
+                                [icon]="['fas', 'pencil']"
+                                [rotate]="90"
+                                ></fa-icon>
+                            </p-button>
+                        </div>
+                        <div class="resta">
+                            <div class="a-restar">
+                                <p-inputNumber
+                                [(ngModel)]="cantidad_a_restar"
+                                [showButtons]="true"
+                                [min]="0"
+                                [inputStyle]="{'text-align': 'right', 'width': '50px'}"
+                                inputId="toDiscountQnty"
+                                mode="decimal"
+                                ></p-inputNumber>
+                            </div>
+
+                            <div class="botones-uso" *ngIf="rawMaterial.State === 'A'">
+                                <!-- TODO Implementar funcionalidad del botón de uso -->
+                                <p-button
+                                >
+                                    <fa-icon
+                                    [icon]="['far', 'hand']"
+                                    ></fa-icon>
+                                </p-button>
+        
+                                <!-- TODO Implementar funcionalidad del botón de finalización de uso -->
+                                <p-button
+                                severity="success"
+                                >
+                                    <fa-icon
+                                    [icon]="['fas', 'check']"
+                                    ></fa-icon>
+                                </p-button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="fecha-uso-total" *ngIf="rawMaterial.State === 'U'">
+                        <div class="label-field">
+                            <fa-icon
+                            class="icon"
+                            [icon]="['fas', 'calendar-minus']"
+                            ></fa-icon>
+                            <p
+                            pTooltip="Fecha de finalización de uso"
+                            tooltipPosition="top"
+                            >
+                                {{ rawMaterial.TerminateDate | customDate }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ver-uso">
+                    <!-- TODO Implementar la tabla con las columnas "Fecha de uso", "Subelemento" (en caso de que sea NO contable), "Cantidad", y "Usuario" -->
+                    <p-button
+                    >
+                        <div class="combined-icons">
+                            <fa-icon
+                            [icon]="['fas', 'eye']"
+                            ></fa-icon>
+                            <fa-icon
+                            class="sub-icon"
+                            [icon]="['fas', 'hand']"
+                            size="2xs"
+                            ></fa-icon>
+                        </div>
+                    </p-button>
+                </div>
             </div>
-            <!--------------------->
         </div>
+
     </div>
 </p-card>
