@@ -120,6 +120,10 @@
   background: rgba(0, 58, 183, 0.12);
 }
 
+.p-inputtext:enabled:hover {
+  border-color: $secondary-color;
+}
+
 .p-inputtext:enabled:focus {
   border-color: $main-button;
 }
@@ -259,7 +263,7 @@
   background: $background-click-button-secondary;
 }
 .p-button.p-button-secondary:enabled:focus, .p-buttonset.p-button-secondary > .p-button:enabled:focus, .p-splitbutton.p-button-secondary > .p-button:enabled:focus {
-  background: $semi-dark-grey;
+  background: $background-button-secondary;
 }
 .p-button.p-button-secondary:enabled:active, .p-buttonset.p-button-secondary > .p-button:enabled:active, .p-splitbutton.p-button-secondary > .p-button:enabled:active {
   background: $background-click-button-secondary;
@@ -322,12 +326,12 @@
 }
 
 .p-button.p-button-success, .p-buttonset.p-button-success > .p-button, .p-splitbutton.p-button-success > .p-button {
-  background: $background-button-success;
+  background: #46992d;
   color: $text-color-button-success;
   border-color: $border-color-button-danger;
 }
 .p-button.p-button-success:enabled:hover, .p-buttonset.p-button-success > .p-button:enabled:hover, .p-splitbutton.p-button-success > .p-button:enabled:hover {
-  background: #c26e47;
+  background: #48b44b;
 }
 
 .p-button.p-button-success:enabled:focus, .p-buttonset.p-button-success > .p-button:enabled:focus, .p-splitbutton.p-button-success > .p-button:enabled:focus {
@@ -335,7 +339,7 @@
 }
 
 .p-button.p-button-success:enabled:focus, .p-buttonset.p-button-success > .p-button:enabled:focus, .p-splitbutton.p-button-success > .p-button:enabled:focus {
-  background: $click-filter-button;
+  background: #227a28;
 }
 .p-button.p-button-success.p-button-outlined, .p-buttonset.p-button-success > .p-button.p-button-outlined, .p-splitbutton.p-button-success > .p-button.p-button-outlined {
   color: $filter-button;
@@ -447,9 +451,9 @@
 }
 
 .p-button.p-button-danger, .p-buttonset.p-button-danger > .p-button, .p-splitbutton.p-button-danger > .p-button {
-  background-color: $background-button-danger;
-  color: $text-color-button-danger;
-  border-color: $border-color-button-success;
+  color: #ffffff;
+  background: #D32F2F;
+  border: 0 none;
 }
 .p-button.p-button-danger:enabled:hover, .p-buttonset.p-button-danger > .p-button:enabled:hover, .p-splitbutton.p-button-danger > .p-button:enabled:hover {
   background: rgba(211, 47, 47, 0.92);
@@ -460,7 +464,7 @@
   box-shadow: none;
 }
 .p-button.p-button-danger:enabled:active, .p-buttonset.p-button-danger > .p-button:enabled:active, .p-splitbutton.p-button-danger > .p-button:enabled:active {
-  background: rgba(211, 47, 47, 0.68);
+  background: rgb(187, 17, 17);
   color: #ffffff;
   border-color: transparent;
 }
@@ -888,21 +892,21 @@ p-autocomplete.ng-dirty.ng-invalid .p-autocomplete .p-autocomplete-multiple-cont
   background-color: rgba(33, 150, 243, 0.16);
 }
 
-.p-button.p-button-success:enabled:focus, .p-buttonset.p-button-success > .p-button:enabled:focus, .p-splitbutton.p-button-success > .p-button:enabled:focus {
-  background: $click-filter-button;
-}
-.p-button.p-button-success:enabled:active, .p-buttonset.p-button-success > .p-button:enabled:active, .p-splitbutton.p-button-success > .p-button:enabled:active {
-  background: $click-filter-button;
-}
-.p-button.p-button-success.p-button-text:enabled:focus, .p-button.p-button-success.p-button-outlined:enabled:focus, .p-buttonset.p-button-success > .p-button.p-button-text:enabled:focus, .p-buttonset.p-button-success > .p-button.p-button-outlined:enabled:focus, .p-splitbutton.p-button-success > .p-button.p-button-text:enabled:focus, .p-splitbutton.p-button-success > .p-button.p-button-outlined:enabled:focus {
-  background: $click-filter-button;
-}
-.p-button.p-button-success.p-button-text:enabled:active, .p-button.p-button-success.p-button-outlined:enabled:active, .p-buttonset.p-button-success > .p-button.p-button-text:enabled:active, .p-buttonset.p-button-success > .p-button.p-button-outlined:enabled:active, .p-splitbutton.p-button-success > .p-button.p-button-text:enabled:active, .p-splitbutton.p-button-success > .p-button.p-button-outlined:enabled:active {
-  background: $click-filter-button;
-}
-.p-button.p-button-success.p-button-text .p-ink, .p-button.p-button-success.p-button-outlined .p-ink, .p-buttonset.p-button-success > .p-button.p-button-text .p-ink, .p-buttonset.p-button-success > .p-button.p-button-outlined .p-ink, .p-splitbutton.p-button-success > .p-button.p-button-text .p-ink, .p-splitbutton.p-button-success > .p-button.p-button-outlined .p-ink {
-  background-color: $click-filter-button;
-}
+// .p-button.p-button-success:enabled:focus, .p-buttonset.p-button-success > .p-button:enabled:focus, .p-splitbutton.p-button-success > .p-button:enabled:focus {
+//   background: $click-filter-button;
+// }
+// .p-button.p-button-success:enabled:active, .p-buttonset.p-button-success > .p-button:enabled:active, .p-splitbutton.p-button-success > .p-button:enabled:active {
+//   background: $click-filter-button;
+// }
+// .p-button.p-button-success.p-button-text:enabled:focus, .p-button.p-button-success.p-button-outlined:enabled:focus, .p-buttonset.p-button-success > .p-button.p-button-text:enabled:focus, .p-buttonset.p-button-success > .p-button.p-button-outlined:enabled:focus, .p-splitbutton.p-button-success > .p-button.p-button-text:enabled:focus, .p-splitbutton.p-button-success > .p-button.p-button-outlined:enabled:focus {
+//   background: $click-filter-button;
+// }
+// .p-button.p-button-success.p-button-text:enabled:active, .p-button.p-button-success.p-button-outlined:enabled:active, .p-buttonset.p-button-success > .p-button.p-button-text:enabled:active, .p-buttonset.p-button-success > .p-button.p-button-outlined:enabled:active, .p-splitbutton.p-button-success > .p-button.p-button-text:enabled:active, .p-splitbutton.p-button-success > .p-button.p-button-outlined:enabled:active {
+//   background: $click-filter-button;
+// }
+// .p-button.p-button-success.p-button-text .p-ink, .p-button.p-button-success.p-button-outlined .p-ink, .p-buttonset.p-button-success > .p-button.p-button-text .p-ink, .p-buttonset.p-button-success > .p-button.p-button-outlined .p-ink, .p-splitbutton.p-button-success > .p-button.p-button-text .p-ink, .p-splitbutton.p-button-success > .p-button.p-button-outlined .p-ink {
+//   background-color: $click-filter-button;
+// }
 
 .p-button.p-button-warning:enabled:focus, .p-buttonset.p-button-warning > .p-button:enabled:focus, .p-splitbutton.p-button-warning > .p-button:enabled:focus {
   background: rgba(251, 192, 45, 0.76);
@@ -936,21 +940,21 @@ p-autocomplete.ng-dirty.ng-invalid .p-autocomplete .p-autocomplete-multiple-cont
   background-color: rgba(156, 39, 176, 0.16);
 }
 
-.p-button.p-button-danger:enabled:focus, .p-buttonset.p-button-danger > .p-button:enabled:focus, .p-splitbutton.p-button-danger > .p-button:enabled:focus {
-  background: rgba(211, 47, 47, 0.76);
-}
-.p-button.p-button-danger:enabled:active, .p-buttonset.p-button-danger > .p-button:enabled:active, .p-splitbutton.p-button-danger > .p-button:enabled:active {
-  background: rgba(211, 47, 47, 0.68);
-}
-.p-button.p-button-danger.p-button-text:enabled:focus, .p-button.p-button-danger.p-button-outlined:enabled:focus, .p-buttonset.p-button-danger > .p-button.p-button-text:enabled:focus, .p-buttonset.p-button-danger > .p-button.p-button-outlined:enabled:focus, .p-splitbutton.p-button-danger > .p-button.p-button-text:enabled:focus, .p-splitbutton.p-button-danger > .p-button.p-button-outlined:enabled:focus {
-  background: rgba(211, 47, 47, 0.12);
-}
-.p-button.p-button-danger.p-button-text:enabled:active, .p-button.p-button-danger.p-button-outlined:enabled:active, .p-buttonset.p-button-danger > .p-button.p-button-text:enabled:active, .p-buttonset.p-button-danger > .p-button.p-button-outlined:enabled:active, .p-splitbutton.p-button-danger > .p-button.p-button-text:enabled:active, .p-splitbutton.p-button-danger > .p-button.p-button-outlined:enabled:active {
-  background: rgba(211, 47, 47, 0.16);
-}
-.p-button.p-button-danger.p-button-text .p-ink, .p-button.p-button-danger.p-button-outlined .p-ink, .p-buttonset.p-button-danger > .p-button.p-button-text .p-ink, .p-buttonset.p-button-danger > .p-button.p-button-outlined .p-ink, .p-splitbutton.p-button-danger > .p-button.p-button-text .p-ink, .p-splitbutton.p-button-danger > .p-button.p-button-outlined .p-ink {
-  background-color: rgba(211, 47, 47, 0.16);
-}
+// .p-button.p-button-danger:enabled:focus, .p-buttonset.p-button-danger > .p-button:enabled:focus, .p-splitbutton.p-button-danger > .p-button:enabled:focus {
+//   background: rgba(211, 47, 47, 0.76);
+// }
+// .p-button.p-button-danger:enabled:active, .p-buttonset.p-button-danger > .p-button:enabled:active, .p-splitbutton.p-button-danger > .p-button:enabled:active {
+//   background: rgba(211, 47, 47, 0.68);
+// }
+// .p-button.p-button-danger.p-button-text:enabled:focus, .p-button.p-button-danger.p-button-outlined:enabled:focus, .p-buttonset.p-button-danger > .p-button.p-button-text:enabled:focus, .p-buttonset.p-button-danger > .p-button.p-button-outlined:enabled:focus, .p-splitbutton.p-button-danger > .p-button.p-button-text:enabled:focus, .p-splitbutton.p-button-danger > .p-button.p-button-outlined:enabled:focus {
+//   background: rgba(211, 47, 47, 0.12);
+// }
+// .p-button.p-button-danger.p-button-text:enabled:active, .p-button.p-button-danger.p-button-outlined:enabled:active, .p-buttonset.p-button-danger > .p-button.p-button-text:enabled:active, .p-buttonset.p-button-danger > .p-button.p-button-outlined:enabled:active, .p-splitbutton.p-button-danger > .p-button.p-button-text:enabled:active, .p-splitbutton.p-button-danger > .p-button.p-button-outlined:enabled:active {
+//   background: rgba(211, 47, 47, 0.16);
+// }
+// .p-button.p-button-danger.p-button-text .p-ink, .p-button.p-button-danger.p-button-outlined .p-ink, .p-buttonset.p-button-danger > .p-button.p-button-text .p-ink, .p-buttonset.p-button-danger > .p-button.p-button-outlined .p-ink, .p-splitbutton.p-button-danger > .p-button.p-button-text .p-ink, .p-splitbutton.p-button-danger > .p-button.p-button-outlined .p-ink {
+//   background-color: rgba(211, 47, 47, 0.16);
+// }
 
 .p-calendar-w-btn:not(.p-disabled).p-focus {
   border-color: $main-button;
@@ -1035,6 +1039,10 @@ p-chips.ng-dirty.ng-invalid .p-chips .p-chips-multiple-container:not(.p-disabled
   box-shadow: inset 0 0 0 1px #B00020, inset 0 0 0 1px #B00020, inset 0 0 0 1px #B00020, inset 0 0 0 1px #B00020;
 }
 
+.p-dropdown:not(.p-disabled):hover {
+  border-color: $main-button;
+}
+
 .p-dropdown:not(.p-disabled).p-focus {
   box-shadow: inset 0 0 0 1px $main-button, inset 0 0 0 1px $main-button, inset 0 0 0 1px $main-button, inset 0 0 0 1px $main-button;
 }
@@ -1064,6 +1072,10 @@ p-dropdown.ng-dirty.ng-invalid .p-dropdown:not(.p-disabled).p-focus {
 .p-galleria.p-galleria-indicator-onitem .p-galleria-indicators .p-galleria-indicator.p-highlight button {
   background: rgba(76, 175, 80, 0.68);
   color: #ffffff;
+}
+
+.p-inputtext:enabled:hover {
+  box-shadow: inset 0 0 0 1px $main-button, inset 0 0 0 1px $main-button, inset 0 0 0 1px $main-button, inset 0 0 0 1px $main-button;;
 }
 
 .p-inputtext:enabled:focus {
@@ -1098,6 +1110,10 @@ p-inputmask.ng-dirty.ng-invalid .p-inputtext:enabled:focus {
 
 p-inputnumber.ng-dirty.ng-invalid .p-inputtext:enabled:focus {
   box-shadow: inset 0 0 0 1px #B00020, inset 0 0 0 1px #B00020, inset 0 0 0 1px #B00020, inset 0 0 0 1px #B00020;
+}
+
+p-inputnumber {
+  height: 5vh;
 }
 
 .p-input-filled p-inputnumber.ng-dirty.ng-invalid .p-inputtext {
