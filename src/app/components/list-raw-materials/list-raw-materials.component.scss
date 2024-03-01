@@ -1,3 +1,263 @@
+@import 'src/assets/scss/boeris-colores';
+
 .fa-with-shadow {
     filter: drop-shadow(4px -1px 1px rgba(173, 173, 173, 0.644))
+}
+
+.contenedor {
+  background-color: white;
+}
+
+header {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.filtros {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 5px;
+}
+
+.campos-filtros {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.busqueda {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+}
+
+.busqueda-normal {
+  padding: 5px;
+}
+
+.ordenamiento {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+
+.sentido-orden {
+  padding-left: 5px;
+}
+
+.orden-por-fecha {
+  display: flex;
+  align-items: center;
+}
+
+@keyframes disappear-to-background {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes vanish {
+  0% {
+    opacity: 1;
+    // transform: rotateX(90deg);
+  }
+  25% {
+    opacity: 0.5;
+    // transform: rotateX(90deg);
+  }
+  50% {
+    opacity: 0;
+    // transform: rotateX(0deg);
+  }
+  75% {
+    opacity: 0.5;
+    // transform: rotateX(90deg);
+  }
+  100% {
+    opacity: 1;
+    // transform: rotateX(90deg);
+  }
+}
+
+.iconos-sentido-orden {
+  color: $main-color;
+  cursor: pointer;
+}
+
+.animados {
+  &.disappear {
+    animation-name: disappear-to-background;
+    animation-duration: 0.2s;
+    animation-timing-function: ease-in;
+  }
+
+  &.vanish {
+    animation-name: vanish;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in;
+  }
+}
+
+.botones {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.gestion-pedidos {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 50vw;
+}
+
+.utilizacion-materias-primas {
+  display: flex;
+  justify-content: center;
+  width: 50vw;
+}
+
+.listado {
+  padding: 10px 0px;
+}
+
+:host ::ng-deep {
+  .pedidas {
+    .p-checkbox .p-checkbox-box {
+      border: 2px solid rgb(182, 182, 0);
+    }
+    .p-checkbox .p-checkbox-box .p-checkbox-icon {
+      background-color: yellow;
+    }
+    .p-checkbox .p-checkbox-box.p-highlight {
+      border-color: yellow;
+      background: #dfdf00;
+    }
+    .p-checkbox .p-checkbox-box:not(.p-disabled):not(.p-highlight):hover {
+      border-color: rgba(255, 255, 0, 0.521);
+    }
+    .p-checkbox.p-checkbox-checked:not(.p-checkbox-disabled).p-checkbox-focused {
+      box-shadow: none;
+    }
+    .p-checkbox .p-checkbox-box:not(.p-disabled).p-focus {
+      outline: 0 none;
+      outline-offset: 0;
+      box-shadow: none;
+    }
+
+    label {
+      color: yellow;
+    }
+  }
+  
+  .en-stock {
+    .p-checkbox .p-checkbox-box {
+      border: 2px solid $main-color;
+    }
+    .p-checkbox .p-checkbox-box.p-highlight {
+      background: $main-color;
+    }
+    .p-checkbox .p-checkbox-box:not(.p-disabled):not(.p-highlight):hover {
+      border-color: $secondary-color;
+    }
+    .p-checkbox.p-checkbox-checked:not(.p-checkbox-disabled).p-checkbox-focused {
+      box-shadow: none;
+    }
+    .p-checkbox .p-checkbox-box:not(.p-disabled).p-focus {
+      outline: 0 none;
+      outline-offset: 0;
+      box-shadow: none;
+    }
+
+    label {
+      color: $main-button;
+    }
+  }
+
+  .utilizadas {
+    .p-checkbox .p-checkbox-box {
+      border: 2px solid rgb(17, 221, 17);
+    }
+    .p-checkbox .p-checkbox-box .p-checkbox-icon {
+      background-color: rgb(50, 255, 50);
+    }
+    .p-checkbox .p-checkbox-box.p-highlight {
+      border-color: rgb(50, 255, 50);
+      background: rgb(36, 186, 36);
+    }
+    .p-checkbox .p-checkbox-box:not(.p-disabled):not(.p-highlight):hover {
+      border-color: rgba(50, 255, 50, 0.521);
+    }
+    .p-checkbox.p-checkbox-checked:not(.p-checkbox-disabled).p-checkbox-focused {
+      box-shadow: none;
+    }
+    .p-checkbox .p-checkbox-box:not(.p-disabled).p-focus {
+      outline: 0 none;
+      outline-offset: 0;
+      box-shadow: none;
+    }
+
+    label {
+      color: rgb(50, 255, 50);
+    }
+  }
+
+  .circular-checkbox {
+    .p-checkbox .p-checkbox-box {
+      border-radius: 50%;
+    }
+    .p-checkbox .p-checkbox-icon {
+      display: none;
+    }
+
+    .p-checkbox .p-checkbox-box::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 50%;
+      height: 50%;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.5); // Color del centro del círculo
+    }
+  }
+
+  .botones {
+    .p-button.p-button-icon-only.p-button-rounded {
+      height: 40px;
+      width: 40px;
+    }
+  }
+
+  // .p-virtualscroller-header {
+  //   background-color: $light-color-2;
+  // }
+
+  .p-scroller {
+    background-color: white;
+  }
+
+  // .p-scroller-content {
+  //   height: 147vh;
+  // }
+
+  .p-virtualscroller .p-virtualscroller-header {
+    background-color: $light-color-3;
+    padding: 0.5rem 0.5rem;
+  }
+
+  .p-tree .p-tree-container .p-treenode .p-treenode-content .p-tree-toggler {
+    margin: 0;
+  }
 }

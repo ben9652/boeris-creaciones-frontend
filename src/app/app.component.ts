@@ -9,7 +9,13 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   constructor(private authService: AuthService, private router: Router) {
-    
+    const nums: string[] = ['A', 'U', 'A', 'U'];
+
+    nums.sort((a,b) => {
+      if(a === 'U') return 1;
+      if(b === 'U') return -1;
+      return 0;
+    })
   }
 
   ngOnInit(): void {

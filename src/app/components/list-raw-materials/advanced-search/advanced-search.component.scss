@@ -1,0 +1,10 @@
+.slide-down {
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+  max-height: 0;
+}
+
+.slide-down.open {
+  max-height: 500px; /* Elige una altura máxima que sea mayor que la altura máxima del contenido */
+  transition: max-height 1s ease-in-out;
+}

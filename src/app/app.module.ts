@@ -19,6 +19,7 @@ import { EllipsisModule } from 'ngx-ellipsis';
 /********** Componentes de PrimeNG *************/
 
 import { ButtonModule } from 'primeng/button';
+import { ToggleButtonModule } from 'primeng/togglebutton';
 import { CardModule } from 'primeng/card';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
@@ -29,6 +30,9 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DividerModule } from 'primeng/divider';
+import { VirtualScrollerModule } from 'primeng/virtualscroller';
+import { TreeSelectModule } from 'primeng/treeselect';
+import { CheckboxModule } from 'primeng/checkbox';
 
 /////////////////////////////////////////////////
 import { HomeComponent } from './components/home/home.component';
@@ -40,6 +44,7 @@ import { ListRawMaterialsComponent } from './components/list-raw-materials/list-
 import { CardRawMaterialComponent } from './components/list-raw-materials/card-raw-material/card-raw-material.component';
 import { CustomDatePipe } from './components/shared/pipes/custom-date.pipe';
 import { MathJaxParagraphComponent } from './components/shared/math-jax-paragraph/math-jax-paragraph.component';
+import { AdvancedSearchComponent } from './components/list-raw-materials/advanced-search/advanced-search.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +57,7 @@ import { MathJaxParagraphComponent } from './components/shared/math-jax-paragrap
     ListRawMaterialsComponent,
     CardRawMaterialComponent,
     CustomDatePipe,
+    AdvancedSearchComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +66,7 @@ import { MathJaxParagraphComponent } from './components/shared/math-jax-paragrap
     HttpClientModule,
     FontAwesomeModule,
     ButtonModule,
+    ToggleButtonModule,
     CardModule,
     PasswordModule,
     InputTextModule,
@@ -71,6 +78,9 @@ import { MathJaxParagraphComponent } from './components/shared/math-jax-paragrap
     DividerModule,
     OverlayPanelModule,
     RadioButtonModule,
+    CheckboxModule,
+    VirtualScrollerModule,
+    TreeSelectModule,
     EllipsisModule,
     MathJaxParagraphComponent
   ],
