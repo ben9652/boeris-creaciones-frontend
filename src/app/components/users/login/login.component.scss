@@ -69,6 +69,12 @@
     .campos-de-texto .p-inputtext {
         padding-left: 35px;
     }
+
+    &.muestra-cursor {
+        .p-password {
+            caret-color: transparent;
+        }
+    }
 }
 
 @media screen and (max-width: 576px) {

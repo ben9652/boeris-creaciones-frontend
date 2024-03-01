@@ -15,6 +15,7 @@
                 pInputText
                 [(ngModel)]="username"
                 [disabled]="cargandoLogin"
+                [readOnly]="cargandoLogin"
                 type="text"
                 placeholder="Usuario"
                 />
@@ -23,6 +24,7 @@
                 <fa-icon class="icon" [icon]="['fas', 'lock']"></fa-icon>
                 <p-password
                 [(ngModel)]="password"
+                [ngClass]="{'muestra-cursor': cargandoLogin}"
                 placeholder="Contraseña"
                 [disabled]="cargandoLogin"
                 [feedback]="false"

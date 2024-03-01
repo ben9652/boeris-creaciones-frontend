@@ -67,8 +67,8 @@ export class RawMaterialUse {
     }
 }
 
+const error_string_estado: string = 'El estado debe ser de 1 solo caracter.';
 export class RawMaterial {
-    private readonly error_string_estado: string = 'El estado debe ser de 1 solo caracter.';
     
     private id_materiaPrima: number;
     private id_compra: number;
@@ -219,7 +219,6 @@ export class RawMaterial {
                     this.proveedor =                args[4];
                     this.fecha_orden =              args[5];
                     this.cantidad_por_paquete =     args[6];
-                    this.cantidad_restante =        args[6];
                     this.comentario =               args[7];
                 }
                 else if(estaEnStock) {
@@ -287,7 +286,7 @@ export class RawMaterial {
 
     public set State(state: string) {
         if(state.length != 1) {
-            throw new Error(this.error_string_estado);
+            throw new Error(error_string_estado);
         }
         
         this.estado = state;
@@ -358,6 +357,6 @@ export class RawMaterial {
     }
 
     public EsNoContable(): boolean {
-        return this.cantidad_restante === undefined;
+        return this.unidad_medida !== undefined;
     }
 }
