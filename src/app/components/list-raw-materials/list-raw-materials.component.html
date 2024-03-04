@@ -163,9 +163,11 @@
     
     <div class="listado">
         <p-virtualScroller
+        #virtualScroller
         [value]="cadenaBusqueda === '' ? showedRawMaterials : searchedRawMaterials"
-        [scrollHeight]="(175 * showedRawMaterials.length + 3 * (showedRawMaterials.length + 1)).toString() + 'px'"
+        [scrollHeight]="remainingHeight.toString() + 'px'"
         [itemSize]="165"
+        
         >
             <ng-template pTemplate="header">
                 <div class="botones">
