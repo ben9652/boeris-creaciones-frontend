@@ -1,4 +1,4 @@
 export interface ApiMessage {
-    mensaje: string;
+    mensaje: any;
     error: boolean
 }

@@ -2,18 +2,7 @@ import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular
 import { RawMaterial } from './card-raw-material/raw-material.entities';
 import { SearchFilter, TreeSelectObject } from 'src/app/models/primeng.entities';
 import { FilterOptions } from './list-raw-materials.entities';
-
-export class FiltroTipoMateriaPrima {
-  public _pedidas: boolean;
-  public _en_stock: boolean;
-  public _utilizadas: boolean;
-
-  constructor(pedidas: boolean, en_stock: boolean, utilizadas: boolean) {
-    this._pedidas = pedidas;
-    this._en_stock = en_stock;
-    this._utilizadas = utilizadas;
-  }
-}
+import { ListRawMaterialsService } from './list-raw-materials.service';
 
 enum FiltroBusqueda {
   ID = "ID de materia prima",
@@ -124,7 +113,7 @@ export class ListRawMaterialsComponent implements OnInit {
     
   }
   
-  constructor() {
+  constructor(private listService: ListRawMaterialsService) {
     this.searchFilterOptions = [
       new SearchFilter('ID de materia prima'),
       new SearchFilter('Nombre del producto'),
@@ -148,14 +137,10 @@ export class ListRawMaterialsComponent implements OnInit {
     // Hago que el atributo de búsqueda predeterminado sea el ID
     this.searchFilterSelected = this.searchFilterOptions[0];
     
-    this.agregadoDeMateriasPrimas();
-    
-    this.showedRawMaterials = this.rawMaterials;
-    this.filtrarMateriasPrimas(null);
+    this.obtencionDeMateriasPrimas();
     
     this.windowHeight = window.innerHeight;
     this.calculateRemainingHeight();
-    console.log(this.remainingHeight, this.windowHeight)
   }
 
   @HostListener('window:resize', ['$event'])
@@ -293,12 +278,10 @@ export class ListRawMaterialsComponent implements OnInit {
         this.labelCapturada = false;
       }
     }
-
+    
     this.showedRawMaterials = this.rawMaterials.filter(material =>
       this.filtrosSeleccionados.length === 0 || this.filtrosSeleccionados.some(filtro => material.State === filtro.key)
     );
-    
-    console.log(this.showedRawMaterials)
 
     this.ordenarMateriasPrimas();
 
@@ -439,18 +422,18 @@ export class ListRawMaterialsComponent implements OnInit {
         this.showedRawMaterials = this.showedRawMaterials.concat(
           pedidas.sort((a: RawMaterial, b: RawMaterial) => 
             this.ordenAscendente ?
-                a.OrderDate.getTime() - b.OrderDate.getTime() :
-                b.OrderDate.getTime() - a.OrderDate.getTime()
+                new Date(a.OrderDate).getTime() - new Date(b.OrderDate).getTime() :
+                new Date(b.OrderDate).getTime() - new Date(a.OrderDate).getTime()
           ),
           en_stock.sort((a: RawMaterial, b: RawMaterial) => 
             this.ordenAscendente ?
-                a.OrderDate.getTime() - b.OrderDate.getTime() :
-                b.OrderDate.getTime() - a.OrderDate.getTime()
+                new Date(a.OrderDate).getTime() - new Date(b.OrderDate).getTime() :
+                new Date(b.OrderDate).getTime() - new Date(a.OrderDate).getTime()
           ),
           utilizadas.sort((a: RawMaterial, b: RawMaterial) => 
             this.ordenAscendente ?
-                a.OrderDate.getTime() - b.OrderDate.getTime() :
-                b.OrderDate.getTime() - a.OrderDate.getTime()
+                new Date(a.OrderDate).getTime() - new Date(b.OrderDate).getTime() :
+                new Date(b.OrderDate).getTime() - new Date(a.OrderDate).getTime()
           )
         );
         break;
@@ -466,16 +449,16 @@ export class ListRawMaterialsComponent implements OnInit {
               return 0;
             }
             return this.ordenAscendente ?
-            a.StockDate.getTime() - b.StockDate.getTime() :
-            b.StockDate.getTime() - a.StockDate.getTime();
+            new Date(a.StockDate).getTime() - new Date(b.StockDate).getTime() :
+            new Date(b.StockDate).getTime() - new Date(a.StockDate).getTime();
           }),
           utilizadas.sort((a: RawMaterial, b: RawMaterial) => {
             if(a.StockDate === undefined || b.StockDate === undefined) {
               return 0;
             }
             return this.ordenAscendente ?
-            a.StockDate.getTime() - b.StockDate.getTime() :
-            b.StockDate.getTime() - a.StockDate.getTime();
+            new Date(a.StockDate).getTime() - new Date(b.StockDate).getTime() :
+            new Date(b.StockDate).getTime() - new Date(a.StockDate).getTime();
           }),
           pedidas
         );
@@ -495,8 +478,8 @@ export class ListRawMaterialsComponent implements OnInit {
               return 0;
             }
             return this.ordenAscendente ?
-            a.StockDate.getTime() - b.StockDate.getTime() :
-            b.StockDate.getTime() - a.StockDate.getTime();
+            new Date(a.StockDate).getTime() - new Date(b.StockDate).getTime() :
+            new Date(b.StockDate).getTime() - new Date(a.StockDate).getTime();
           }),
           en_stock,
           pedidas
@@ -597,201 +580,34 @@ export class ListRawMaterialsComponent implements OnInit {
     })
   }
 
-  agregadoDeMateriasPrimas() {
-    this.rawMaterials.push(
-      new RawMaterial(
-        5478761,
-        30,
-        'Palillos de madera',
-        5120,
-        'Un gran proveedor de madera refinada',
-        new Date('2021-07-26'),
-        12,
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, reiciendis dolores! Saepe dicta voluptatibus molestiae placeat delectus quaerat similique quas et. Debitis est et, sed dolore magni necessitatibus deserunt corporis?Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat dignissimos beatae aliquid dicta sint mollitia cum tenetur nobis quidem provident odio eaque veritatis ea, inventore porro laudantium, ab nesciunt facilis.'
-      ),
-      new RawMaterial(
-        5339875,
-        30,
-        'Palillos de madera',
-        5120,
-        'Un gran proveedor de madera refinada',
-        new Date('2021-07-26'),
-        new Date('2021-07-28'),
-        12,
-        2
-      ),
-      new RawMaterial(
-        4868811,
-        30,
-        'Palillos de madera',
-        5120,
-        'Un gran proveedor de madera refinada',
-        new Date('2021-07-26'),
-        new Date('2021-07-28'),
-        new Date('2021-08-21'),
-        12,
-        2
-      ),
-      new RawMaterial(
-        1452098,
-        87,
-        'Tela blanca',
-        8009,
-        2,
-        'm2',
-        'El telar',
-        new Date('2022-05-12'),
-        'Se debe recoger por la tarde'
-      ),
-      new RawMaterial(
-        4378829,
-        90,
-        'Tela blanca',
-        8009,
-        2,
-        'm2',
-        'El telar',
-        new Date('2022-05-12'),
-        new Date('2022-05-23')
-      ),
-      new RawMaterial(
-        7613755,
-        100,
-        'Tela blanca',
-        8009,
-        2,
-        'm2',
-        'El telar',
-        new Date('2022-05-12'),
-        new Date('2022-05-23'),
-        new Date('2022-09-02')
-      ),
-      new RawMaterial(
-        8374812,
-        103,
-        'Tela azul',
-        7000,
-        3,
-        'm2',
-        'El telar',
-        new Date('2022-06-05'),
-        'Orden de compra pendiente'
-      ),
-      new RawMaterial(
-        1867828,
-        105,
-        'Cuero sintético',
-        6500,
-        5,
-        'm2',
-        'Fábrica de textiles',
-        new Date('2022-06-10'),
-        new Date('2022-06-15')
-      ),
-      new RawMaterial(
-        4891743,
-        110,
-        'Hilo de algodón',
-        300,
-        1000,
-        'metros',
-        'Hilandería S.A.',
-        new Date('2022-06-20'),
-        new Date('2022-06-25'),
-        new Date('2022-08-15')
-      ),
-      new RawMaterial(
-        3938915,
-        93,
-        'Cajas de cartón',
-        2500,
-        'Paquete de 50 unidades',
-        new Date('2022-06-20'),
-        new Date('2022-06-22'),
-        new Date('2022-06-30'),
-        50,
-        12
-      ),
-      new RawMaterial(
-        2722017,
-        95,
-        'Cajas de cartón',
-        2500,
-        'Paquete de 50 unidades',
-        new Date('2022-06-20'),
-        new Date('2022-06-22'),
-        new Date('2022-06-30'),
-        50,
-        5
-      ),
-      new RawMaterial(
-        8064685,
-        105,
-        'Papel de embalaje',
-        1500,
-        'Paquete de 100 hojas',
-        new Date('2022-06-25'),
-        new Date('2022-06-27'),
-        new Date('2022-07-05'),
-        100,
-        25
-      ),
-      new RawMaterial(
-        5016830,
-        110,
-        'Papel de embalaje',
-        1500,
-        'Paquete de 100 hojas',
-        new Date('2022-06-25'),
-        new Date('2022-06-27'),
-        new Date('2022-07-05'),
-        100,
-        15
-      ),
-      new RawMaterial(
-        3579885,
-        80,
-        'Aceite de cocina',
-        40,
-        5,
-        'litros',
-        'Distribuidora de alimentos',
-        new Date('2023-08-15'),
-        'Producto de alta calidad'
-      ),
-      new RawMaterial(
-        4239928,
-        85,
-        'Aceite de cocina',
-        40,
-        5,
-        'litros',
-        'Distribuidora de alimentos',
-        new Date('2023-08-15'),
-        'Producto de alta calidad'
-      ),
-      new RawMaterial(
-        2364081,
-        95,
-        'Harina de trigo',
-        30,
-        25,
-        'kilogramos',
-        'Molino San Pablo',
-        new Date('2023-08-20'),
-        'Materia prima para panadería'
-      ),
-      new RawMaterial(
-        4282411,
-        100,
-        'Harina de trigo',
-        30,
-        25,
-        'kilogramos',
-        'Molino San Pablo',
-        new Date('2023-08-20'),
-        'Materia prima para panadería'
-      ),
-    );
+  obtencionDeMateriasPrimas() {
+    this.listService.getRawMaterials().subscribe(apiResponse => {
+      if(apiResponse.error) {
+        throw new Error(apiResponse.mensaje);
+      }
+      
+      apiResponse.mensaje.forEach((materia_prima: any) => {
+        this.rawMaterials.push(new RawMaterial(
+          materia_prima.id_materiaPrima,
+          materia_prima.id_compra,
+          materia_prima.estado,
+          materia_prima.nombre,
+          materia_prima.precio,
+          materia_prima.proveedor,
+          materia_prima.fecha_orden,
+          materia_prima.fecha_stockeo,
+          materia_prima.fecha_finalizacion_uso,
+          materia_prima.medida,
+          materia_prima.unidad_medida,
+          materia_prima.cantidad_restante,
+          materia_prima.cantidad_por_paquete,
+          materia_prima.comentario,
+          materia_prima.usos
+        ));
+      })
+      
+      this.showedRawMaterials = this.rawMaterials;
+      this.filtrarMateriasPrimas(null);
+    });
   }
 }

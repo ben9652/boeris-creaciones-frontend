@@ -4,8 +4,7 @@ import { EnvService } from './env.service';
 import { Observable, map } from 'rxjs';
 import { Usuario, UsuarioLogin } from '../components/users/usuarios.entities';
 import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
-import { ApiMessage } from '../components/users/mensajeAPI.entities';
+import { ApiMessage } from '../models/mensajeAPI.entities';
 
 @Injectable({
   providedIn: 'root'
