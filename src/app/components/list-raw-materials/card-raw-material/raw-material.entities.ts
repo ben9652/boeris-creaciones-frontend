@@ -1,6 +1,6 @@
 export class RawMaterialUse {
     private fecha_uso: Date | null;
-    private subelemento?: string;
+    private materia_prima?: string;
     private cantidad: number;
     private nombre: string | null;
     private apellido: string | null;
@@ -12,7 +12,7 @@ export class RawMaterialUse {
      */
     constructor(
         fecha_uso: Date,
-        subelemento: string,
+        materia_prima: string,
         cantidad: number,
         nombre: string,
         apellido: string
@@ -43,7 +43,7 @@ export class RawMaterialUse {
         }
         else {
             this.fecha_uso = args[0];
-            this.subelemento = args[1];
+            this.materia_prima = args[1];
             this.cantidad = args[2];
             this.nombre = args[3];
             this.apellido = args[4];
@@ -55,7 +55,7 @@ export class RawMaterialUse {
     }
 
     public get Subelement(): string | undefined {
-        return this.subelemento;
+        return this.materia_prima;
     }
 
     public get Quantity(): number {
@@ -69,16 +69,15 @@ export class RawMaterialUse {
 
 const error_string_estado: string = 'El estado debe ser de 1 solo caracter.';
 export class RawMaterial {
-    
     private id_materiaPrima: number;
     private id_compra: number;
     private estado: string | null;
     private nombre: string | null;
     private precio: number;
     private proveedor: string | null;
-    private fecha_orden: Date;
-    private fecha_stockeo?: Date;
-    private fecha_finalizacion_uso?: Date;
+    private fecha_orden: string;
+    private fecha_stockeo?: string;
+    private fecha_finalizacion_uso?: string;
     
     // Solo presente en materias primas no contables
     private medida?: number;
@@ -92,6 +91,42 @@ export class RawMaterial {
     private usos: RawMaterialUse[] = [];
     
     constructor();
+
+    /**
+     * Constructor que incluye todos los parámetros
+     * @param id_materiaPrima 
+     * @param id_compra 
+     * @param estado 
+     * @param nombre 
+     * @param precio 
+     * @param proveedor 
+     * @param fecha_orden 
+     * @param fecha_stockeo 
+     * @param fecha_finalizacion_uso 
+     * @param medida 
+     * @param unidad_medida 
+     * @param cantidad_restante 
+     * @param cantidad_por_paquete 
+     * @param comentario 
+     * @param usos 
+     */
+    constructor(
+        id_materiaPrima: number,
+        id_compra: number,
+        estado: string | null,
+        nombre: string | null,
+        precio: number,
+        proveedor: string | null,
+        fecha_orden: string,
+        fecha_stockeo: string | undefined,
+        fecha_finalizacion_uso: string | undefined,
+        medida: number | undefined,
+        unidad_medida: string | undefined,
+        cantidad_restante: number | undefined,
+        cantidad_por_paquete: number | undefined,
+        comentario: string | undefined,
+        usos: RawMaterialUse[]
+    );
     
     /*** Constructores para las materias primas CONTABLES ***/
     
@@ -200,7 +235,46 @@ export class RawMaterial {
             this.nombre = null;
             this.precio = 0;
             this.proveedor = null;
-            this.fecha_orden = new Date();
+            this.fecha_orden = new Date().toISOString();
+        }
+        else if(args.length === 15) {
+            this.id_materiaPrima = args[0];
+            this.id_compra = args[1];
+            this.estado = args[2];
+            this.nombre = args[3];
+            this.precio = args[4];
+            this.proveedor = args[5];
+            this.fecha_orden = args[6];
+
+            if(args[7] !== null) {
+                this.fecha_stockeo = args[7];
+            }
+
+            if(args[8] !== null) {
+                this.fecha_finalizacion_uso = args[8];
+            }
+
+            if(args[9] !== null) {
+                this.medida = args[9];
+            }
+
+            if(args[10] !== null) {
+                this.unidad_medida = args[10];
+            }
+
+            if(args[11] !== null) {
+                this.cantidad_restante = args[11];
+            }
+
+            if(args[12] !== null) {
+                this.cantidad_por_paquete = args[12];
+            }
+
+            if(args[13] !== null) {
+                this.comentario = args[13];
+            }
+
+            this.usos = args[14];
         }
         else {
             this.id_materiaPrima =          args[0];
@@ -312,15 +386,15 @@ export class RawMaterial {
         return this.proveedor;
     }
 
-    public get OrderDate(): Date {
+    public get OrderDate(): string {
         return this.fecha_orden;
     }
 
-    public get StockDate(): Date | undefined {
+    public get StockDate(): string | undefined {
         return this.fecha_stockeo;
     }
 
-    public get TerminateDate(): Date | undefined {
+    public get TerminateDate(): string | undefined {
         return this.fecha_finalizacion_uso;
     }
 
