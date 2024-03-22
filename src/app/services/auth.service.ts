@@ -74,8 +74,8 @@ export class AuthService {
   }
 
   authenticate(userObj: UsuarioLogin): Observable<any> {
-    const apiUrl = this.urlBase + 'Autenticar';
-    return this.http.post<any>(apiUrl, userObj, this.httpOptions);
+    const apiUrl = this.urlBase + 'Autenticar?' + 'username=' + userObj.username + '&password=' + userObj.password;
+    return this.http.get<any>(apiUrl, this.httpOptions);
   }
 
   private startTimeout(): void {
