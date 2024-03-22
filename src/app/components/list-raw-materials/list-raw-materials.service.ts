@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { EnvService } from 'src/app/services/env.service';
 import { RawMaterial } from './card-raw-material/raw-material.entities';
 import { ApiMessage } from 'src/app/models/mensajeAPI.entities';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +15,8 @@ export class ListRawMaterialsService {
 
   constructor(
     private http: HttpClient,
-    private env: EnvService
   ) {
-    this.urlBase = env.apiUrlBase + 'MateriasPrimas/';
+    this.urlBase = environment.API_KEY + 'MateriasPrimas/';
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

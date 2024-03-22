@@ -5,6 +5,7 @@ import { Observable, map } from 'rxjs';
 import { Usuario, UsuarioLogin } from '../components/users/usuarios.entities';
 import { Router } from '@angular/router';
 import { ApiMessage } from '../models/mensajeAPI.entities';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class AuthService {
     private env: EnvService,
     private router: Router
   ) {
-    this.urlBase = env.apiUrlBase + 'Usuarios/';
+    this.urlBase = environment.API_KEY + 'Usuarios/';
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -75,6 +76,7 @@ export class AuthService {
 
   authenticate(userObj: UsuarioLogin): Observable<any> {
     const apiUrl = this.urlBase + 'Autenticar?' + 'username=' + userObj.username + '&password=' + userObj.password;
+    console.log(apiUrl)
     return this.http.get<any>(apiUrl, this.httpOptions);
   }
 
