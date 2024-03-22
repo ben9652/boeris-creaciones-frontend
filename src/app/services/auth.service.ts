@@ -76,7 +76,6 @@ export class AuthService {
 
   authenticate(userObj: UsuarioLogin): Observable<any> {
     const apiUrl = this.urlBase + 'Autenticar?' + 'username=' + userObj.username + '&password=' + userObj.password;
-    console.log(apiUrl)
     return this.http.get<any>(apiUrl, this.httpOptions);
   }
 
