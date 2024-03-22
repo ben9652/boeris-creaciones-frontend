@@ -25,3 +25,9 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+# Guías para el que use el repositorio
+
+## Environment
+
+Para crear la variable con la URL de la API, solo crea el archivo `.env`, y escribe `API_KEY = <link_to_API>`.
