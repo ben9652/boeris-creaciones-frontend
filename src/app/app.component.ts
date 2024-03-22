@@ -19,5 +19,6 @@ export class AppComponent {
     if (!isAuthenticated) {
       this.router.navigate(['/login']); // Si el usuario no está autenticado, redirigir a /login.
     }
+    console.log(this.title)
   }
 }
