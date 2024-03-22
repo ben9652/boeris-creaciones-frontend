@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  title = process.env["TITLE"];
+  
   constructor(private authService: AuthService, private router: Router) {
     
   }
