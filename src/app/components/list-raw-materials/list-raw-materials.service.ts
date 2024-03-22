@@ -1,8 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { EnvService } from 'src/app/services/env.service';
-import { RawMaterial } from './card-raw-material/raw-material.entities';
 import { ApiMessage } from 'src/app/models/mensajeAPI.entities';
 import { environment } from 'src/environments/environment.development';
 
