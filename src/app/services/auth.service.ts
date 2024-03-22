@@ -5,7 +5,7 @@ import { Observable, map } from 'rxjs';
 import { Usuario, UsuarioLogin } from '../components/users/usuarios.entities';
 import { Router } from '@angular/router';
 import { ApiMessage } from '../models/mensajeAPI.entities';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
