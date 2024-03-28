@@ -31,3 +31,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Environment
 
 Para crear la variable con la URL de la API, solo crea el archivo `.env`, y escribe `API_KEY = <link_to_API>`.
+Para acceder a dicha variable en todo el código, se escribe `process.env['API_KEY']` en el atributo `API_KEY`.

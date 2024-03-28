@@ -1,11 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
-import { EnvService } from './env.service';
+import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Usuario, UsuarioLogin } from '../components/users/usuarios.entities';
 import { Router } from '@angular/router';
 import { ApiMessage } from '../models/mensajeAPI.entities';
 import { environment } from 'src/environments/environment.development';
+import { TimingService } from './timing.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private env: EnvService,
+    private time: TimingService,
     private router: Router
   ) {
     this.urlBase = environment.API_KEY + 'Usuarios/';
@@ -38,6 +38,7 @@ export class AuthService {
   }
   
   login(userObj: UsuarioLogin): Observable<ApiMessage> {
+    this.time.start();
     return this.authenticate(userObj).pipe(
       map(res => {
         if (res.error) {
@@ -56,6 +57,7 @@ export class AuthService {
           this.resetTimeout();
         }
 
+        this.time.end();
         return res;
       })
     )
