@@ -1,0 +1,20 @@
+$primaryColor: #C0653B !default;
+$primaryLightColor: #C26E47 !default;
+$primaryDarkColor: #B95020 !default;
+$primaryDarkerColor: #b44917 !default;
+$primaryTextColor: #F8E5DD !default;
+
+$secondaryColor: #F8E5DD;
+$secondaryLightColor: #F5ECE8;
+$secondaryDarkColor: #FAD6C7;
+$secondaryDarkerColor: #F5C4B0;
+$secondaryTextColor: $primaryColor;
+
+$highlightBg: #EFF6FF !default;
+$highlightTextColor: $primaryDarkerColor !default;
+$highlightFocusBg: rgba($primaryColor, .24) !default;
+
+@import '../_variables';
+@import './_fonts';
+@import '../../../../theme-base/_components';
+@import '../_extensions';
