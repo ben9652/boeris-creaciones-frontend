@@ -4,6 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CustomTranslateService } from './services/custom-translate.service';
 import { ButtonModule } from 'primeng/button';
 import { FontAwesomeModule, IconDefinition } from '@fortawesome/angular-fontawesome';
+import { environment } from '../environments/environment'
 
 // En esta versión se importarán los iconos que necesite cada componente. De esta manera evitamos una sobrecarga innecesaria.
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
@@ -28,7 +29,7 @@ export class AppComponent {
   constructor(
     private translateService: CustomTranslateService
   ) {
-    this.apiUrl = process.env['API_URL']; // Ejemplo de uso de variable de entorno
+    this.apiUrl = environment.API_URL; // Ejemplo de uso de variable de entorno
   }
 
   // Uso de NgxTranslate en archivo TS
