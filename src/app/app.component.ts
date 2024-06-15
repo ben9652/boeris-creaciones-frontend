@@ -22,12 +22,13 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 })
 export class AppComponent {
   title = 'boeris-creaciones-frontend';
-  faCoffee: IconDefinition = faCoffee
+  faCoffee: IconDefinition = faCoffee;
+  apiUrl?: string; // Ejemplo de uso de una variable de entorno
 
   constructor(
     private translateService: CustomTranslateService
   ) {
-
+    this.apiUrl = process.env['API_URL']; // Ejemplo de uso de variable de entorno
   }
 
   // Uso de NgxTranslate en archivo TS
