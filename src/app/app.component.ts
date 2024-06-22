@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
-import { environment } from '../environments/environment'
+import { environment } from '../environments/environment';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { environment } from '../environments/environment'
   imports: [
     RouterOutlet,
     TranslateModule,
-    ButtonModule
+    ButtonModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -18,17 +19,22 @@ import { environment } from '../environments/environment'
 export class AppComponent {
   title = 'boeris-creaciones-frontend';
   apiUrl?: string; // Ejemplo de uso de una variable de entorno
-  translatedTitle?: string;
+  viewportHeight: number = 0;
 
   constructor(
-    public translateService: TranslateService
+    // private translateService: CustomTranslateService
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
-    this.apiUrl = environment.API_URL; // Ejemplo de uso de variable de entorno
-    this.translatedTitle = translateService.instant('TITLE');
+    this.apiUrl = environment.API_URL;
   }
 
   // Uso de NgxTranslate en archivo TS
   ngOnInit() {
-    
+    if (isPlatformBrowser(this.platformId)) {
+      if(typeof window !== "undefined") {
+        this.viewportHeight = window.innerHeight;
+        console.log(window.innerHeight);
+      }
+    }
   }
 }

@@ -1,0 +1,103 @@
+@import '../../../../../../public/theme/boeris-theme';
+
+h1 {
+    font-family: 'Avoda';
+    display: flex;
+    justify-content: center;
+    margin: 0.2em 0;
+    color: $primaryColor;
+    user-select: none;
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.fields {
+    display: flex;
+    flex-direction: column;
+    height: 130px;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.pi > label {
+    color: $primaryLightColor;
+}
+
+:host ::ng-deep {
+    p-floatlabel {
+        width: 100%;
+    }
+    
+    .p-password.p-component.p-inputwrapper {
+        flex: 1 1 auto;
+        width: 100%;
+    }
+
+    .p-inputgroup.p-element.p-inputgroup-addon {
+        color: red;
+    }
+
+    .p-inputgroup-addon {
+        color: $primaryLightColor;
+    }
+
+    .p-float-label > label {
+        color: $primaryLightColor;
+    }
+    
+    input.p-inputtext.p-component.p-element {
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+    
+    // input.p-inputtext.p-component.p-element {
+    //     width: 100%;
+    // }
+
+    // .ng-tns-c113329942-0.p-password.p-component.p-inputwrapper.p-input-icon-right {
+    //     width: 100%;
+    // }
+    
+    // .p-inputgroup {
+    //     width: 100%;
+    // }
+
+    .p-inputgroup-addon {
+        background-color: $secondaryColor;
+    }
+
+    .p-card.p-component {
+        border-radius: 20px;
+    }
+    
+    .p-card-body {
+        height: 380px;
+        border-radius: 20px;
+        background-color: $secondaryLightColor;
+    }
+    
+    .p-card-content {
+        height: 100%;
+    }
+    
+    p-button.p-element {
+        width: 100%;
+    }
+    
+    .p-button {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    &.ocultar-cursor {
+        .p-password {
+            caret-color: transparent;
+        }
+    }
+}

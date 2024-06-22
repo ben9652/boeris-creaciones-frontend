@@ -1,0 +1,61 @@
+<p-card>
+    <div class="container" (keypress)="onKeyPress($event)">
+        <h1 class="login-header">{{ 'SECTIONS.LOGIN.TITLE' | translate }}</h1>
+    
+        <div class="fields">
+            <p-inputGroup>
+                <p-inputGroupAddon>
+                    <i class="pi pi-user"></i>
+                </p-inputGroupAddon>
+                <p-floatLabel>
+                    <input
+                    type="text"
+                    pInputText
+                    autocapitalize="off"
+                    [(ngModel)]="credentials.username"
+                    [disabled]="cargandoLogin"
+                    [readOnly]="cargandoLogin"
+                    >
+                    <label for="user">{{ 'SECTIONS.LOGIN.FIELDS.USERNAME' | translate }}</label>
+                </p-floatLabel>
+            </p-inputGroup>
+
+            <p-inputGroup>
+                <p-inputGroupAddon>
+                    <i class="pi pi-lock"></i>
+                </p-inputGroupAddon>
+                <p-floatLabel>
+                    <p-password
+                    id="pass"
+                    [(ngModel)]="credentials.password"
+                    [ngClass]="{'ocultar-cursor': cargandoLogin}"
+                    [toggleMask]="true"
+                    [disabled]="cargandoLogin"
+                    [feedback]="false"
+                    />
+                    <label for="pass">{{ 'SECTIONS.LOGIN.FIELDS.PASSWORD' | translate }}</label>
+                </p-floatLabel>
+            </p-inputGroup>
+        </div>
+    
+        <div class="flex justify-content-center align-items-center">
+            @if (!cargandoLogin) {
+                <p-button
+                severity="primary"
+                [label]="translateService.instant('SECTIONS.LOGIN.BUTTON')"
+                (onClick)="onButtonClick()"
+                [disabled]="cargandoLogin"
+                ></p-button>
+            }
+
+            @if (cargandoLogin) {
+                <p-button
+                severity="primary"
+                [disabled]="cargandoLogin"
+                >
+                    <i class="pi pi-spin pi-spinner"></i>
+                </p-button>
+            }
+        </div>
+    </div>
+</p-card>
