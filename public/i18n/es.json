@@ -1,13 +1,35 @@
 {
     "TITLE": "Boeri's Creaciones",
-    "SIDEBAR": {
-        "HOME": "Inicio",
-        "CATALOGS": "Catálogos",
-        "PARTNERS": "Socios",
-        "PURCHASES": "Compras",
-        "MANUFACTURE": "Mano de obra",
-        "ACCOUNTING": "Contabilidad",
-        "STORE": "Almacén",
-        "SALES": "Ventas"
+    "SECTIONS": {
+        "LOGIN": {
+            "TITLE": "Inicio de sesión",
+            "FIELDS": {
+                "USERNAME": "Usuario",
+                "PASSWORD": "Contraseña"
+            },
+            "BUTTON": "Entrar"
+        },
+        "SIDEBAR": {
+            "ROOT": {
+                "HOME": "Inicio",
+                "CATALOGS": "Catálogos",
+                "PARTNERS": "Socios",
+                "PURCHASES": "Compras",
+                "MANUFACTURE": "Mano de obra",
+                "ACCOUNTING": "Contabilidad",
+                "STORE": "Almacén",
+                "SALES": "Ventas"
+            },
+            "LEVEL1": {
+                "RAW_MATERIALS": "Materias primas",
+                "PRODUCTS": "Productos",
+                "PROVIDERS": "Proveedores",
+                "BRANCHES": "Sucursales"
+            }
+        }
+    },
+    "BANNER": {
+        "EDIT_PROFILE": "Editar perfil",
+        "LOGOUT": "Cerrar sesión"
     }
 }
