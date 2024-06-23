@@ -358,49 +358,49 @@ $inputSwitchSliderOnHoverBg: $primaryDarkColor !default;
 $inputSwitchHandleOnBg: $shade000 !default;
 
 //panel
-$panelHeaderBorderColor: $shade300 !default;
-$panelHeaderBorder: 1px solid $shade300 !default;
-$panelHeaderBg: $shade100 !default;
-$panelHeaderTextColor: $shade800 !default;
+$panelHeaderBorderColor: $primaryColor !default;
+$panelHeaderBorder: 1px solid $primaryColor !default;
+$panelHeaderBg: $primaryColor !default;
+$panelHeaderTextColor: $secondaryColor !default;
 $panelHeaderFontWeight: 700 !default;
-$panelHeaderPadding: 1.25rem !default;
+$panelHeaderPadding: 1rem !default;
 $panelToggleableHeaderPadding: 0.75rem 1.25rem !default;
 
-$panelHeaderHoverBg: $shade200 !default;
-$panelHeaderHoverBorderColor: $shade300 !default;
-$panelHeaderTextHoverColor: $shade800 !default;
+$panelHeaderHoverBg: $primaryLightColor !default;
+$panelHeaderHoverBorderColor: $primaryColor !default;
+$panelHeaderTextHoverColor: $primaryColor !default;
 
 $panelContentBorderColor: $shade300 !default;
 $panelContentBorder: 1px solid $shade300 !default;
-$panelContentBg: $shade000 !default;
+$panelContentBg: $secondaryDarkerColor !default;
 $panelContentEvenRowBg: #f8f8fa !default;
-$panelContentTextColor: $shade700 !default;
-$panelContentPadding: 1.25rem !default;
+$panelContentTextColor: $primaryColor !default;
+$panelContentPadding: 1rem !default;
 
 $panelFooterBorder: 1px solid $shade300 !default;
 $panelFooterBg: $shade000 !default;
-$panelFooterTextColor: $shade700 !default;
+$panelFooterTextColor: $primaryColor !default;
 $panelFooterPadding: 0.75rem 1.25rem !default;
 
 //accordion
 $accordionSpacing: 4px !default;
 $accordionHeaderBorder: $panelHeaderBorder !default;
 $accordionHeaderBg: $panelHeaderBg !default;
-$accordionHeaderTextColor: $shade600 !default;
+$accordionHeaderTextColor: $panelHeaderTextColor !default;
 $accordionHeaderFontWeight: $panelHeaderFontWeight !default;
 $accordionHeaderPadding: $panelHeaderPadding !default;
 
-$accordionHeaderHoverBg: $shade200 !default;
-$accordionHeaderHoverBorderColor: $shade300 !default;
-$accordionHeaderTextHoverColor: $shade800 !default;
+$accordionHeaderHoverBg: $panelHeaderHoverBg !default;
+$accordionHeaderHoverBorderColor: $panelHeaderHoverBorderColor !default;
+$accordionHeaderTextHoverColor: $panelHeaderTextHoverColor !default;
 
-$accordionHeaderActiveBg: $panelHeaderBg !default;
-$accordionHeaderActiveBorderColor: $shade300 !default;
-$accordionHeaderTextActiveColor: $shade800 !default;
+$accordionHeaderActiveBg: $secondaryDarkColor !default;
+$accordionHeaderActiveBorderColor: $secondaryDarkerColor !default;
+$accordionHeaderTextActiveColor: $primaryColor !default;
 
-$accordionHeaderActiveHoverBg: $shade200 !default;
-$accordionHeaderActiveHoverBorderColor: $shade300 !default;
-$accordionHeaderTextActiveHoverColor: $shade800 !default;
+$accordionHeaderActiveHoverBg: $secondaryColor !default;
+$accordionHeaderActiveHoverBorderColor: $secondaryDarkColor !default;
+$accordionHeaderTextActiveHoverColor: $primaryColor !default;
 
 $accordionContentBorder: $panelContentBorder !default;
 $accordionContentBg: $panelContentBg !default;
@@ -665,18 +665,18 @@ $menuBorder: 1px solid $shade300 !default;
 $menuTextColor: $shade700 !default;
 $menuitemPadding: 0.75rem 1.25rem !default;
 $menuitemBorderRadius: 0 !default;
-$menuitemTextColor: $shade700 !default;
-$menuitemIconColor: $shade600 !default;
-$menuitemTextHoverColor: $shade700 !default;
-$menuitemIconHoverColor: $shade600 !default;
-$menuitemHoverBg: $shade200 !default;
-$menuitemTextFocusColor: $shade700 !default;
-$menuitemIconFocusColor: $shade700 !default;
-$menuitemFocusBg: $shade300 !default;
-$menuitemTextActiveColor: $highlightTextColor !default;
-$menuitemIconActiveColor: $highlightTextColor !default;
-$menuitemActiveBg: $highlightBg !default;
-$menuitemActiveFocusBg: $highlightFocusBg !default;
+$menuitemTextColor: $primaryColor !default;
+$menuitemIconColor: $primaryColor !default;
+$menuitemTextHoverColor: $primaryColor !default;
+$menuitemIconHoverColor: $primaryColor !default;
+$menuitemHoverBg: $secondaryDarkColor !default;
+$menuitemTextFocusColor: $primaryColor !default;
+$menuitemIconFocusColor: $primaryColor !default;
+$menuitemFocusBg: $secondaryLightColor !default;
+$menuitemTextActiveColor: $primaryColor !default;
+$menuitemIconActiveColor: $primaryColor !default;
+$menuitemActiveBg: $secondaryLightColor !default;
+$menuitemActiveFocusBg: $primaryLightColor !default;
 $menuitemSubmenuIconFontSize: 0.875rem !default;
 $submenuHeaderMargin: 0 !default;
 $submenuHeaderPadding: 0.75rem 1.25rem !default;

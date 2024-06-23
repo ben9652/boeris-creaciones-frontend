@@ -1,0 +1,63 @@
+@import '../../../../../../public/theme/boeris-theme';
+
+.header {
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
+    background-color: $primaryColor;
+    color: $secondaryColor;
+    z-index: 1;
+    width: 100%;
+}
+
+.header-text {
+    display: flex;
+    justify-content: center;
+    font-family: 'Tomatoes', sans-serif;
+    font-size: xx-large;
+
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.button {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding: 1rem;
+}
+
+.user-icon {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+::ng-deep .p-overlaypanel .p-overlaypanel-content {
+    padding: 0;
+}
+
+::ng-deep .p-button {
+    border-radius: 0;
+    width: 100%;
+}
+
+// El overlayPanel tiene dos flechas (una encima de la otra). Elimino una de ellas y coloreo la otra.
+::ng-deep .p-overlaypanel {
+    &:before {
+        content: none;
+        // border-bottom-color: $secondaryColor;
+    }
+
+    
+    &:after {
+        // content: none;
+        border-bottom-color: $secondaryColor;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+    .header-text {
+        font-size: x-large;
+    }
+}

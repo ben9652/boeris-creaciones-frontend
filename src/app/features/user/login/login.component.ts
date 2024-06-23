@@ -51,7 +51,7 @@ export class LoginComponent {
   login(credentials: LogIn) {
     this.authService.login(credentials).then((res: ApiMessage) => {
       if(!res.error) {
-        this.router.navigate(['home']);
+        this.router.navigate(['sections']);
         this.userData = this.authService.userData;
         // afterRender(() => {
         //   sessionStorage.setItem('userID', JSON.stringify(this.userData?.id_user));
