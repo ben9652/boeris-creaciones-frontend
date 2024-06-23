@@ -12,9 +12,9 @@
                     type="text"
                     pInputText
                     autocapitalize="off"
-                    [(ngModel)]="credentials.username"
-                    [disabled]="cargandoLogin"
-                    [readOnly]="cargandoLogin"
+                    [(ngModel)]="username"
+                    [disabled]="loginLoading()"
+                    [readOnly]="loginLoading()"
                     >
                     <label for="user">{{ 'SECTIONS.LOGIN.FIELDS.USERNAME' | translate }}</label>
                 </p-floatLabel>
@@ -27,11 +27,11 @@
                 <p-floatLabel>
                     <p-password
                     id="pass"
-                    [(ngModel)]="credentials.password"
-                    [ngClass]="{'ocultar-cursor': cargandoLogin}"
-                    [toggleMask]="true"
-                    [disabled]="cargandoLogin"
+                    [(ngModel)]="password"
+                    [ngClass]="{'ocultar-cursor': loginLoading()}"
+                    [disabled]="loginLoading()"
                     [feedback]="false"
+                    [toggleMask]="true"
                     />
                     <label for="pass">{{ 'SECTIONS.LOGIN.FIELDS.PASSWORD' | translate }}</label>
                 </p-floatLabel>
@@ -39,19 +39,18 @@
         </div>
     
         <div class="flex justify-content-center align-items-center">
-            @if (!cargandoLogin) {
+            @if (!loginLoading()) {
                 <p-button
                 severity="primary"
                 [label]="translateService.instant('SECTIONS.LOGIN.BUTTON')"
                 (onClick)="onButtonClick()"
-                [disabled]="cargandoLogin"
+                [disabled]="loginLoading()"
                 ></p-button>
             }
-
-            @if (cargandoLogin) {
+            @else {
                 <p-button
                 severity="primary"
-                [disabled]="cargandoLogin"
+                [disabled]="loginLoading()"
                 >
                     <i class="pi pi-spin pi-spinner"></i>
                 </p-button>
