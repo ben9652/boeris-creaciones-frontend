@@ -63,10 +63,10 @@ $actionIconWidth: 2rem !default;
 $actionIconHeight: 2rem !default;
 $actionIconBg: transparent !default;
 $actionIconBorder: 0 none !default;
-$actionIconColor: $shade600 !default;
-$actionIconHoverBg: $shade200 !default;
+$actionIconColor: $secondaryColor !default;
+$actionIconHoverBg: $secondaryDarkerDarkerColor !default;
 $actionIconHoverBorderColor: transparent !default;
-$actionIconHoverColor: $shade800 !default;
+$actionIconHoverColor: $primaryColor !default;
 $actionIconBorderRadius: 50% !default;
 
 //input field (e.g. inputtext, spinner, inputmask)
@@ -374,7 +374,7 @@ $panelContentBorderColor: $shade300 !default;
 $panelContentBorder: 1px solid $shade300 !default;
 $panelContentBg: $secondaryDarkerColor !default;
 $panelContentEvenRowBg: #f8f8fa !default;
-$panelContentTextColor: $primaryColor !default;
+$panelContentTextColor: $secondaryColor !default;
 $panelContentPadding: 1rem !default;
 
 $panelFooterBorder: 1px solid $shade300 !default;
@@ -394,7 +394,7 @@ $accordionHeaderHoverBg: $panelHeaderHoverBg !default;
 $accordionHeaderHoverBorderColor: $panelHeaderHoverBorderColor !default;
 $accordionHeaderTextHoverColor: $panelHeaderTextHoverColor !default;
 
-$accordionHeaderActiveBg: $secondaryDarkColor !default;
+$accordionHeaderActiveBg: $secondaryDarkerColor !default;
 $accordionHeaderActiveBorderColor: $secondaryDarkerColor !default;
 $accordionHeaderTextActiveColor: $primaryColor !default;
 
@@ -672,10 +672,10 @@ $menuitemIconHoverColor: $primaryColor !default;
 $menuitemHoverBg: $secondaryDarkColor !default;
 $menuitemTextFocusColor: $primaryColor !default;
 $menuitemIconFocusColor: $primaryColor !default;
-$menuitemFocusBg: $secondaryLightColor !default;
+$menuitemFocusBg: $secondaryDarkerDarkerColor !default;
 $menuitemTextActiveColor: $primaryColor !default;
 $menuitemIconActiveColor: $primaryColor !default;
-$menuitemActiveBg: $secondaryLightColor !default;
+$menuitemActiveBg: $secondaryDarkerColor !default;
 $menuitemActiveFocusBg: $primaryLightColor !default;
 $menuitemSubmenuIconFontSize: 0.875rem !default;
 $submenuHeaderMargin: 0 !default;

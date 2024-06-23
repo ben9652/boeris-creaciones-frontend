@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal, WritableSignal } from '@angular/core';
 
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { MenuItem } from 'primeng/api';
@@ -64,7 +64,7 @@ export class MainSectionComponent {
   
   sideMenu: MenuItem[] = [];
 
-  selectedNode: MenuItem = {};
+  menuOpened: WritableSignal<boolean> = signal(false);
 
   constructor(
     private translateService: TranslateService,

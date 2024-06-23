@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, model, ModelSignal } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
@@ -17,9 +17,11 @@ import { UserMenuComponent } from './user-menu/user-menu.component';
   styleUrl: './main-banner.component.scss'
 })
 export class MainBannerComponent {
+  menuVisible: ModelSignal<boolean> = model(false);
+  
   constructor(
     public translateService: TranslateService
   ) {
-
+    
   }
 }

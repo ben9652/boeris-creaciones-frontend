@@ -31,6 +31,19 @@
     align-items: center;
 }
 
+.icon-container {
+    display: flex;
+    justify-content: center;
+}
+
+.icon {
+    background-image: url('../../../../../public/icons/logo.png');
+    background-size: 5em;
+    background-repeat: no-repeat;
+    width: 5em;
+    height: 5em;
+}
+
 .sidebar {
     background-color: $primaryColor;
 }
@@ -53,4 +66,24 @@
 
 ::ng-deep .p-component {
     font-size: 0.9rem;
+}
+
+::ng-deep .p-sidebar .p-sidebar-header {
+    display: grid;
+    grid-template-columns: 14% 72% 14%;
+    align-items: center;
+    background-color: $primaryColor;
+}
+
+::ng-deep .p-sidebar .p-sidebar-content {
+    background-color: $primaryColor;
+    padding: 0;
+}
+
+::ng-deep .p-sidebar-left {
+    width: 11rem;
+}
+
+::ng-deep .p-sidebar .p-sidebar-header .p-sidebar-close, .p-sidebar .p-sidebar-header .p-sidebar-icon {
+    color: $secondaryColor;
 }
