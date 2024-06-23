@@ -1,0 +1,16 @@
+<div class="header">
+    <div class="menu-button" (click)="menuVisible.set(!menuVisible())">
+        <div class="menu-icon">
+            <i class="fas fa-bars fa-xl"></i>
+        </div>
+    </div>
+    <div class="header-text">{{ 'TITLE' | translate }}</div>
+    <div class="user-button">
+        <div class="user-icon" (click)="op.toggle($event)">
+            <i class="fas fa-user fa-xl"></i>
+        </div>
+        <p-overlayPanel #op>
+            <app-user-menu></app-user-menu>
+        </p-overlayPanel>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="panel">
+    <p-button
+    [label]="translateService.instant('BANNER.EDIT_PROFILE')"
+    severity="secondary"
+    />
+    <p-button
+    [label]="translateService.instant('BANNER.LOGOUT')"
+    severity="primary"
+    (onClick)="authService.logout()"
+    />
+</div>

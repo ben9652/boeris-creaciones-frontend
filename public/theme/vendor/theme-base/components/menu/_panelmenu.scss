@@ -1,12 +1,12 @@
 .p-panelmenu {
     .p-panelmenu-header {
         outline: 0 none;
-
+        
         .p-panelmenu-header-content {
             border: $accordionHeaderBorder;
             color: $accordionHeaderTextColor;
             background: $accordionHeaderBg;
-            border-radius: $borderRadius;
+            border-radius: 0;
             transition: $listItemTransition;
 
             .p-panelmenu-header-action {
@@ -50,10 +50,30 @@
                 margin-bottom: 0;
             }
 
+            .p-panelmenu-header-action {
+                color: $accordionHeaderTextActiveHoverColor;
+            }
+            
             &:hover {
                 .p-panelmenu-header-content {
                     border-color: $accordionHeaderActiveHoverBorderColor;
                     background: $accordionHeaderActiveHoverBg;
+                    color: $accordionHeaderTextActiveHoverColor;
+                }
+
+                .p-panelmenu-header-action {
+                    color: $accordionHeaderTextActiveHoverColor;
+                }
+            }
+
+            &:focus {
+                .p-panelmenu-header-action {
+                    color: $accordionHeaderTextActiveHoverColor;
+                }
+            }
+
+            &:active {
+                .p-panelmenu-header-action {
                     color: $accordionHeaderTextActiveHoverColor;
                 }
             }

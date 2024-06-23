@@ -1,7 +1,3 @@
-<p-button label="Número de stock" icon="pi pi-check" severity="primary"/>
-<fa-icon [icon]="faCoffee"></fa-icon>
-<p>{{ 'SIDEBAR.HOME' | translate }}</p>
-
-<p>URL de la API: {{ apiUrl }}</p>
-
-<router-outlet/>
+<div class="container" [style.height]="viewportHeight + 'px'">
+    <router-outlet/>
+</div>

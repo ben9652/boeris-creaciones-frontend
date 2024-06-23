@@ -1,0 +1,32 @@
+<div class="main-container">
+    <div class="upper-section">
+        <app-main-banner
+        [(menuVisible)]="menuOpened"
+        ></app-main-banner>
+    </div>
+    <div class="bottom-section">
+        <p-sidebar [(visible)]="menuOpened">
+            <ng-template pTemplate="header">
+                <div></div>
+                <div class="icon-container">
+                    <div class="icon"></div>
+                </div>
+                <!-- <div class="header">
+                    <div class="icon"></div>
+                </div> -->
+            </ng-template>
+            <div class="sidebar">
+                <p-panelMenu [model]="sideMenu"/>
+            </div>
+        </p-sidebar>
+        <div class="main-section">
+            @if (router.url === '/sections') {
+                <div class="without-menu-section">
+                    <p>¡Bienvenido!</p>
+                    <p>Haga click sobre un menú</p>
+                </div>
+            }
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

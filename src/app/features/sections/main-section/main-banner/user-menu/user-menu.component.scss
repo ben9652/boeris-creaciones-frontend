@@ -1,0 +1,8 @@
+.panel {
+    display: flex;
+    flex-direction: column;
+}
+
+::ng-deep .p-button-label {
+    text-wrap: nowrap;
+}

@@ -1,0 +1,60 @@
+<p-card>
+    <div class="container" (keypress)="onKeyPress($event)">
+        <h1 class="login-header">{{ 'SECTIONS.LOGIN.TITLE' | translate }}</h1>
+    
+        <div class="fields">
+            <p-inputGroup>
+                <p-inputGroupAddon>
+                    <i class="pi pi-user"></i>
+                </p-inputGroupAddon>
+                <p-floatLabel>
+                    <input
+                    type="text"
+                    pInputText
+                    autocapitalize="off"
+                    [(ngModel)]="username"
+                    [disabled]="loginLoading()"
+                    [readOnly]="loginLoading()"
+                    >
+                    <label for="user">{{ 'SECTIONS.LOGIN.FIELDS.USERNAME' | translate }}</label>
+                </p-floatLabel>
+            </p-inputGroup>
+
+            <p-inputGroup>
+                <p-inputGroupAddon>
+                    <i class="pi pi-lock"></i>
+                </p-inputGroupAddon>
+                <p-floatLabel>
+                    <p-password
+                    id="pass"
+                    [(ngModel)]="password"
+                    [ngClass]="{'ocultar-cursor': loginLoading()}"
+                    [disabled]="loginLoading()"
+                    [feedback]="false"
+                    [toggleMask]="true"
+                    />
+                    <label for="pass">{{ 'SECTIONS.LOGIN.FIELDS.PASSWORD' | translate }}</label>
+                </p-floatLabel>
+            </p-inputGroup>
+        </div>
+    
+        <div class="flex justify-content-center align-items-center">
+            @if (!loginLoading()) {
+                <p-button
+                severity="primary"
+                [label]="translateService.instant('SECTIONS.LOGIN.BUTTON')"
+                (onClick)="onButtonClick()"
+                [disabled]="loginLoading()"
+                ></p-button>
+            }
+            @else {
+                <p-button
+                severity="primary"
+                [disabled]="loginLoading()"
+                >
+                    <i class="pi pi-spin pi-spinner"></i>
+                </p-button>
+            }
+        </div>
+    </div>
+</p-card>

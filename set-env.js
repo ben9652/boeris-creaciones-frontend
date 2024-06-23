@@ -14,6 +14,10 @@ let envConfigFileProd = "export const environment = {";
 
 const envFilePath = path.join(__dirname, '.env');
 
+if(!fs.existsSync(envFilePath)) {
+  throw new Error('The .env file doesn\'t exists!!!');
+}
+
 const envFileContent = fs.readFileSync(envFilePath, { encoding: 'utf8' });
 
 const envConfig = dotenv.parse(envFileContent);
