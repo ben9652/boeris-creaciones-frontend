@@ -1,8 +1,10 @@
+<p-toast></p-toast>
 <div class="container">
     <app-banner></app-banner>
     <div class="login-container">
         <app-form
         (enterClicked)="login($event)"
+        [(loginLoading)]="isLoading"
         ></app-form>
     </div>
 </div>

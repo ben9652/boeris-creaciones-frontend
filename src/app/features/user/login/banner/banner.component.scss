@@ -1,3 +1,4 @@
+// TODO: Acceder al asset directamente desde la url para acceder globalmente a los assets
 @import '../../../../../../public/theme/boeris-theme';
 
 header {
@@ -9,6 +10,7 @@ header {
 }
 
 .icon {
+    // TODO: Acceder al asset directamente desde la url para acceder globalmente a los assets
     background-image: url('../../../../../../public/icons/logo-marca-agua.png');
     background-size: 5em;
     background-repeat: no-repeat;
