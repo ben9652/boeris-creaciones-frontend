@@ -17,18 +17,14 @@ import { isPlatformBrowser } from '@angular/common';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'boeris-creaciones-frontend';
-  apiUrl?: string; // Ejemplo de uso de una variable de entorno
   viewportHeight: number = 0;
 
   constructor(
-    // private translateService: CustomTranslateService
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
-    this.apiUrl = environment.API_URL;
+    
   }
 
-  // Uso de NgxTranslate en archivo TS
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
       if(typeof window !== "undefined") {

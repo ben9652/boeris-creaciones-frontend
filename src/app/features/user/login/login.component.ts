@@ -37,26 +37,12 @@ export class LoginComponent {
       }
      })
   }
-  
-  ngOnInit(): void {
-    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-    //Add 'implements AfterViewInit' to the class.
-    // afterRender(() => {
-    //   sessionStorage.removeItem('userID');
-    //   sessionStorage.removeItem('role');
-    //   sessionStorage.setItem('authenticated', 'false');
-    // });
-  }
 
   login(credentials: LogIn) {
     this.authService.login(credentials).then((res: ApiMessage) => {
       if(!res.error) {
         this.router.navigate(['sections']);
         this.userData = this.authService.userData;
-        // afterRender(() => {
-        //   sessionStorage.setItem('userID', JSON.stringify(this.userData?.id_user));
-        //   sessionStorage.setItem('authenticated', 'true');
-        // });
       }
       else {
         if(typeof res.mensaje === 'string') {

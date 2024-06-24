@@ -91,7 +91,6 @@ export class AuthService {
       else {
         if(typeof response.mensaje === 'object') {
           this.userData = response.mensaje;
-          console.log(this.userData);
           this.ownSessionStorage?.setItem('authenticated', 'true');
           this.ownSessionStorage?.setItem('user', JSON.stringify(this.userData));
         }
