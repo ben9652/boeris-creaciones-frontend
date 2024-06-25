@@ -52,7 +52,7 @@ export class AuthService {
         'Content-Type': 'application/json',
         'Access-Control-Max-Age': '86400',
         'x-cache': 'true',
-        'Authoriation': `Bearer ${this.token}`
+        'Authorization': `Bearer ${this.token}`
       });
 
       this.startTimeout();
