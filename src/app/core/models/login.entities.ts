@@ -1,19 +1,19 @@
 export class LogIn {
-    private _username?: string | undefined;
-    private _password?: string | undefined;
+    private username?: string | undefined;
+    private password?: string | undefined;
 
     constructor(
         username?: string,
         password?: string
     ) {
-        this._username = username;
-        this._password = password;
+        this.username = username;
+        this.password = password;
     }
     
-    public get username(): string | undefined {
-        return this._username;
+    public get getUsername(): string | undefined {
+        return this.username;
     }
-    public get password(): string | undefined {
-        return this._password;
+    public get getPassword(): string | undefined {
+        return this.password;
     }
 }
