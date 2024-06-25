@@ -61,13 +61,11 @@ export class AuthService {
 
   private authenticate(userObj: LogIn): Observable<any> {
     const apiUrl = this.urlBase;
-    console.log(userObj);
     return this.http.post<ApiMessage>(apiUrl, userObj, this.httpOptions);
   }
 
   getUser(): Observable<any> {
     const apiUrl = this.urlBase;
-    console.log('Opciones de HTTP al obtener el usuario:', this.httpOptions.headers);
     return this.http.get<User>(apiUrl, this.httpOptions);
   }
 
@@ -111,7 +109,6 @@ export class AuthService {
           'x-cache': 'true',
           'Authorization': `Bearer ${this.token}`
         });
-        console.log('Opciones de HTTP al lograr la conexión:', this.httpOptions.headers);
         this.ownSessionStorage?.setItem('authenticated', 'true');
         this.isAuthenticated = true;
         this.resetTimeout();
