@@ -1,6 +1,6 @@
 import { User } from "./user.entities";
 
 export interface ApiMessage {
-    mensaje: string | User;
+    mensaje: string;
     error: boolean;
 }
