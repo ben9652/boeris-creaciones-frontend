@@ -17,7 +17,9 @@ export class AuthService {
   // a este atributo y así asegurarme de que se esté usando el objeto con
   // el navegador ya inicializado con todos los objetos propios de este
   // ya definidos.
-  public ownSessionStorage?: Storage;
+  public ownSessionStorage: Storage | null = null;
+
+  private userData: User | null = null;
   
   urlBase: string;
   httpOptions: any;
@@ -55,6 +57,8 @@ export class AuthService {
         'Authorization': `Bearer ${this.token}`
       });
 
+      this.loadUser();
+
       this.startTimeout();
     });
   }
@@ -64,9 +68,25 @@ export class AuthService {
     return this.http.post<ApiMessage>(apiUrl, userObj, this.httpOptions);
   }
 
-  getUser(): Observable<any> {
+  askForUser(): Observable<any> {
     const apiUrl = this.urlBase;
     return this.http.get<User>(apiUrl, this.httpOptions);
+  }
+
+  getUser(): User | null {
+    if(this.userData !== null) {
+      return this.userData;
+    }
+    this.loadUser();
+    return this.userData;
+  }
+
+  getToken(): string | null {
+    if(this.token !== null) {
+      return this.token;
+    }
+    this.loadToken();
+    return this.token;
   }
 
   private startTimeout(): void {
@@ -111,7 +131,11 @@ export class AuthService {
         });
         this.ownSessionStorage?.setItem('authenticated', 'true');
         this.isAuthenticated = true;
-        this.resetTimeout();
+        this.askForUser().subscribe((user: User) => {
+          this.userData = user;
+          this.ownSessionStorage?.setItem('user', JSON.stringify(user));
+        });
+        this.startTimeout();
       }
     }
     catch(error) {
@@ -138,5 +162,21 @@ export class AuthService {
 
   checkAuthentication(): boolean {
     return this.isAuthenticated;
+  }
+
+  private loadUser(): void {
+    let userString: string | null;
+    if(this.ownSessionStorage !== null) {
+      userString = this.ownSessionStorage.getItem('user');
+      if(userString !== null) {
+        this.userData = JSON.parse(userString);
+      }
+    }
+  }
+
+  private loadToken(): void {
+    if(this.ownSessionStorage !== null) {
+      this.token = this.ownSessionStorage.getItem('token');
+    }
   }
 }

@@ -1,1 +1,51 @@
-<p>edit-profile works!</p>
+<div class="container">
+    <div class="banner">
+        <app-main-banner
+        [isDeployableMenu]="false"
+        [title]="translateService.instant('SECTIONS.PROFILE.TITLE')"
+        ></app-main-banner>
+    </div>
+    <div class="main-section">
+        <div class="change-user">
+            <h2>{{ 'SECTIONS.PROFILE.LABELS.CHANGE_USER' | translate }}</h2>
+            <p-divider></p-divider>
+            <input
+            [(ngModel)]="username"
+            pInputText
+            type="text"
+            [placeholder]="userData?.username"
+            />
+        </div>
+        <div class="change-password">
+            <h2>{{ 'SECTIONS.PROFILE.LABELS.CHANGE_PASSWORD' | translate }}</h2>
+            <p-divider></p-divider>
+
+            <input
+            pInputText
+            [(ngModel)]="currentPassword"
+            type="text"
+            [placeholder]="translateService.instant('SECTIONS.PROFILE.FIELDS_PLACEHOLDERS.CURRENT_PASSWORD')"
+            />
+
+            <p-password
+            [(ngModel)]="newPassword"
+            [feedback]="false"
+            [placeholder]="translateService.instant('SECTIONS.PROFILE.FIELDS_PLACEHOLDERS.NEW_PASSWORD')"
+            />
+
+            <p-password
+            [(ngModel)]="confirmedPassword"
+            [feedback]="false"
+            [placeholder]="translateService.instant('SECTIONS.PROFILE.FIELDS_PLACEHOLDERS.CONFIRM_PASSWORD')"
+            />
+        </div>
+        <div class="button">
+            <p-button
+            [label]="translateService.instant('SECTIONS.PROFILE.BUTTONS.CONFIRM_UPDATES')"
+            (onClick)="updateChanges()"
+            ></p-button>
+        </div>
+    </div>
+</div>
+
+<p-toast></p-toast>

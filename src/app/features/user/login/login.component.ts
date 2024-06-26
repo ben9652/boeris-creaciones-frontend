@@ -22,9 +22,7 @@ import { LogIn } from '../../../core/models/login.entities';
   providers: [MessageService]
 })
 export class LoginComponent {
-  userData: User | null = null;
   protected isLoading: WritableSignal<boolean> = signal(false);
-  private ownSessionStorage?: Storage;
 
   constructor(
     private authService: AuthService,
@@ -35,13 +33,6 @@ export class LoginComponent {
       if(sessionStorage.getItem('authenticated')) {
         router.navigate(['sections']);
       }
-      const userString: string | null = sessionStorage.getItem('user');
-      if(userString !== null) {
-        this.userData = JSON.parse(userString);
-      }
-      if(typeof sessionStorage !== 'undefined') {
-        this.ownSessionStorage = sessionStorage;
-      }
      })
   }
 
@@ -49,14 +40,11 @@ export class LoginComponent {
     this.authService.login(credentials).then((res: ApiMessage) => {
       if(!res.error) {
         this.router.navigate(['sections']);
-        this.authService.getUser().subscribe((user: User) => {
-          this.userData = user;
-          this.ownSessionStorage?.setItem('user', JSON.stringify(user));
-        });
       }
       else {
         this.messageService.add({
           severity: 'error',
+          // TODO: Agregar al translate estos mensajes y hacer uso de ellos
           summary: 'Inicio de sesión fallido',
           detail: res.mensaje
         });

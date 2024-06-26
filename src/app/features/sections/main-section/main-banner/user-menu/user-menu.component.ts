@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { AuthService } from '../../../../../core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-menu',
@@ -16,8 +17,13 @@ import { AuthService } from '../../../../../core/services/auth.service';
 export class UserMenuComponent {
   constructor(
     public translateService: TranslateService,
-    public authService: AuthService
+    public authService: AuthService,
+    private router: Router
   ) {
     
+  }
+
+  navigateToProfile() {
+    this.router.navigate(['profile']);
   }
 }
