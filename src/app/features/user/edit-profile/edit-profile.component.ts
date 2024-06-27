@@ -1,4 +1,4 @@
-import { afterRender, Component } from '@angular/core';
+import { afterRender, AfterRenderPhase, Component } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
@@ -13,6 +13,8 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { PatchObject } from '../../../core/models/patchObj.entities';
 import { ApiMessage } from '../../../core/models/apimessage.entities';
+import { CommonModule } from '@angular/common';
+import { catchError, map, Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-edit-profile',
@@ -25,7 +27,8 @@ import { ApiMessage } from '../../../core/models/apimessage.entities';
     DividerModule,
     TranslateModule,
     MainBannerComponent,
-    ToastModule
+    ToastModule,
+    CommonModule
   ],
   templateUrl: './edit-profile.component.html',
   styleUrl: './edit-profile.component.scss',
@@ -37,30 +40,89 @@ export class EditProfileComponent {
   newPassword?: string;
   confirmedPassword?: string;
 
-  userData: User | null = null;
+  userData?: User;
+
+  isLoading: boolean = false;
 
   constructor(
     public translateService: TranslateService,
-    private authService: AuthService,
-    private editProfileService: EditProfileService,
-    private messageService: MessageService
+    public editProfileService: EditProfileService,
+    private messageService: MessageService,
+    private authService: AuthService
   ) {
-    afterRender(() => {
-      this.userData = authService.getUser();
-    })
-  }
-
-  private updateUsername() {
     
   }
+  
+  ngDoCheck(): void {
+    //Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
+    //Add 'implements DoCheck' to the class.
+    this.userData = this.authService.getUser();
+  }
 
-  private update() {
+  private updateAttributes(attributesToChange: PatchObject[]): Observable<boolean> {
+    if(this.userData) {
+      return this.editProfileService.updateUser(this.userData.id_user, attributesToChange).pipe(
+        map((response) => {
+          if(response.status === 401) {
+            this.messageService.add({
+              severity: 'error',
+              // TODO: Agregar al translate estos mensajes y hacer uso de ellos
+              summary: 'Denegado',
+              detail: 'No estás autorizado para realizar esta acción'
+            });
+          }
+          let res: ApiMessage = response.body;
+          console.log(res);
+          if(res.error) {
+            this.messageService.add({
+              severity: 'error',
+              // TODO: Agregar al translate estos mensajes y hacer uso de ellos
+              summary: 'Error en los cambios',
+              detail: res.mensaje
+            });
+            return false;
+          }
+          this.userData = res.mensaje;
+          this.editProfileService.setUser(res.mensaje);
+          this.messageService.add({
+            severity: 'success',
+            // TODO: Agregar al translate estos mensajes y hacer uso de ellos
+            summary: 'Éxito',
+            detail: '¡Cambios realizados!'
+          });
 
+          this.username = '';
+          this.currentPassword = '';
+          this.newPassword = '';
+          this.confirmedPassword = '';
+          
+          return true;
+        }),
+        catchError((error) => {
+          this.messageService.add({
+            severity: 'error',
+            // TODO: Agregar al translate estos mensajes y hacer uso de ellos
+            summary: 'Error en los cambios',
+            detail: 'Error al actualizar el usuario'
+          });
+          
+          return of(false);
+        })
+      );
+    }
+    else {
+      return of(false);
+    }
   }
 
   updateChanges() {
+    this.isLoading = true;
     let attributesToChange: PatchObject[] = [];
     if(this.username) {
+      if(this.username === this.userData?.username) {
+        this.isLoading = false;
+        return;
+      }
       attributesToChange.push(
         new PatchObject('replace', 'username', this.username)
       );
@@ -73,6 +135,7 @@ export class EditProfileComponent {
           summary: 'Campos inválidos',
           detail: 'Las contraseñas no coinciden'
         });
+        this.isLoading = false;
         return;
       }
       else {
@@ -89,11 +152,11 @@ export class EditProfileComponent {
         summary: 'Campos inválidos',
         detail: 'No se llenaron los campos'
       });
-      return;
+      this.isLoading = false;
     }
     else {
-      if(this.userData !== null) {
-        if(this.currentPassword && this.newPassword) {
+      if(this.userData) {
+        if(this.username && this.currentPassword && this.newPassword || this.currentPassword && this.newPassword) {
           this.editProfileService.checkPassword(this.userData.id_user, this.currentPassword).subscribe((isActualPassword: boolean) => {
             if(!isActualPassword) {
               this.messageService.add({
@@ -102,55 +165,19 @@ export class EditProfileComponent {
                 summary: 'Campos inválidos',
                 detail: 'Contraseña incorrecta'
               });
+
+              this.isLoading = false;
             }
             else {
-              if(this.userData !== null) {
-                this.editProfileService.updateUser(this.userData.id_user, attributesToChange).subscribe((res: ApiMessage) => {
-                  this.messageService.add({
-                    severity: 'success',
-                    // TODO: Agregar al translate estos mensajes y hacer uso de ellos
-                    summary: 'Éxito',
-                    detail: res.mensaje
-                  });
-                });
-              }
+              this.updateAttributes(attributesToChange).subscribe((failed: boolean) => {
+                this.isLoading = false;
+              });
             }
           });
         }
         else if(this.username) {
-          if(this.userData !== null) {
-            this.editProfileService.updateUser(this.userData.id_user, attributesToChange).subscribe((res: ApiMessage) => {
-              this.messageService.add({
-                severity: 'success',
-                // TODO: Agregar al translate estos mensajes y hacer uso de ellos
-                summary: 'Éxito',
-                detail: res.mensaje
-              });
-            });
-          }
-        }
-        else if(this.username && this.currentPassword && this.newPassword) {
-          this.editProfileService.checkPassword(this.userData.id_user, this.currentPassword).subscribe((isActualPassword: boolean) => {
-            if(!isActualPassword) {
-              this.messageService.add({
-                severity: 'error',
-                // TODO: Agregar al translate estos mensajes y hacer uso de ellos
-                summary: 'Campos inválidos',
-                detail: 'Contraseña incorrecta'
-              });
-            }
-            else {
-              if(this.userData !== null) {
-                this.editProfileService.updateUser(this.userData.id_user, attributesToChange).subscribe((res: ApiMessage) => {
-                  this.messageService.add({
-                    severity: 'success',
-                    // TODO: Agregar al translate estos mensajes y hacer uso de ellos
-                    summary: 'Éxito',
-                    detail: res.mensaje
-                  });
-                });
-              }
-            }
+          this.updateAttributes(attributesToChange).subscribe((failed: boolean) => {
+            this.isLoading = false;
           });
         }
       }

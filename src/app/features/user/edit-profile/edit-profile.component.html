@@ -12,18 +12,18 @@
             <input
             [(ngModel)]="username"
             pInputText
+            autocapitalize="off"
             type="text"
-            [placeholder]="userData?.username"
+            [placeholder]="userData ? userData.username : ''"
             />
         </div>
         <div class="change-password">
             <h2>{{ 'SECTIONS.PROFILE.LABELS.CHANGE_PASSWORD' | translate }}</h2>
             <p-divider></p-divider>
 
-            <input
-            pInputText
+            <p-password
             [(ngModel)]="currentPassword"
-            type="text"
+            [feedback]="false"
             [placeholder]="translateService.instant('SECTIONS.PROFILE.FIELDS_PLACEHOLDERS.CURRENT_PASSWORD')"
             />
 
@@ -40,10 +40,19 @@
             />
         </div>
         <div class="button">
-            <p-button
-            [label]="translateService.instant('SECTIONS.PROFILE.BUTTONS.CONFIRM_UPDATES')"
-            (onClick)="updateChanges()"
-            ></p-button>
+            @if (!isLoading) {
+                <p-button
+                [label]="translateService.instant('SECTIONS.PROFILE.BUTTONS.CONFIRM_UPDATES')"
+                (onClick)="updateChanges()"
+                ></p-button>
+            }
+            @else {
+                <p-button
+                [disabled]="true"
+                >
+                    <i class="pi pi-spinner pi-spin"></i>
+                </p-button>
+            }
         </div>
     </div>
 </div>

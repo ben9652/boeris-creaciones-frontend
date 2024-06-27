@@ -19,7 +19,7 @@ export class AuthService {
   // ya definidos.
   public ownSessionStorage: Storage | null = null;
 
-  private userData: User | null = null;
+  private userData?: User;
   
   urlBase: string;
   httpOptions: any;
@@ -73,7 +73,7 @@ export class AuthService {
     return this.http.get<User>(apiUrl, this.httpOptions);
   }
 
-  getUser(): User | null {
+  getUser(): User | undefined {
     if(this.userData !== null) {
       return this.userData;
     }
