@@ -1,10 +1,15 @@
 <div class="header">
-    <div class="menu-button" (click)="menuVisible.set(!menuVisible())">
+    <div class="menu-button" (click)="onClickLeftBanner()">
         <div class="menu-icon">
-            <i class="fas fa-bars fa-xl"></i>
+            @if (isDeployableMenu()) {
+                <i class="fas fa-bars fa-xl"></i>
+            }
+            @else {
+                <i class="fas fa-arrow-left fa-xl"></i>
+            }
         </div>
     </div>
-    <div class="header-text">{{ 'TITLE' | translate }}</div>
+    <div class="header-text">{{ title() }}</div>
     <div class="user-button">
         <div class="user-icon" (click)="op.toggle($event)">
             <i class="fas fa-user fa-xl"></i>

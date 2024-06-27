@@ -3,6 +3,11 @@
     flex-direction: column;
 }
 
+:host ::ng-deep .p-button {
+    width: 100%;
+    border-radius: 0px;
+}
+
 ::ng-deep .p-button-label {
     text-wrap: nowrap;
 }

@@ -55,24 +55,28 @@
     padding: 0;
 }
 
-::ng-deep .p-button {
+.p-button {
     border-radius: 0;
     width: 100%;
 }
 
 // El overlayPanel tiene dos flechas (una encima de la otra). Elimino una de ellas y coloreo la otra.
 ::ng-deep .p-overlaypanel {
+    transform: translateX(-1vw) !important;
+    
     &:before {
         content: none;
         // border-bottom-color: $secondaryColor;
     }
-
     
     &:after {
         // content: none;
         border-bottom-color: $secondaryColor;
     }
+}
 
+::ng-deep .p-overlaypanel:after, .p-overlaypanel:before {
+    left: calc(88%);
 }
 
 @media screen and (max-width: 500px) {

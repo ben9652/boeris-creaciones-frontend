@@ -9,6 +9,21 @@
             },
             "BUTTON": "Entrar"
         },
+        "PROFILE": {
+            "TITLE": "Perfil",
+            "LABELS": {
+                "CHANGE_USER": "Cambiar usuario",
+                "CHANGE_PASSWORD": "Cambiar contraseña"
+            },
+            "FIELDS_PLACEHOLDERS": {
+                "CURRENT_PASSWORD": "Contraseña actual",
+                "NEW_PASSWORD": "Nueva contraseña",
+                "CONFIRM_PASSWORD": "Confirmar contraseña"
+            },
+            "BUTTONS": {
+                "CONFIRM_UPDATES": "Confirmar cambios"
+            }
+        },
         "SIDEBAR": {
             "ROOT": {
                 "HOME": "Inicio",

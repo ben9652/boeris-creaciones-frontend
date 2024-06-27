@@ -1,4 +1,4 @@
-import { Component, model, input, InputSignal, ModelSignal, OutputEmitterRef, output, ChangeDetectorRef } from '@angular/core';
+import { Component, model, ModelSignal, OutputEmitterRef, output } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -9,7 +9,6 @@ import { PasswordModule } from 'primeng/password';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
-import { EventEmitter } from 'stream';
 import { LogIn } from '../../../../core/models/login.entities';
 
 @Component({
@@ -41,8 +40,7 @@ export class FormComponent {
   eventObj: any;
 
   constructor(
-    public translateService: TranslateService,
-    private cdr: ChangeDetectorRef
+    public translateService: TranslateService
   ) {
 
   }

@@ -14,6 +14,7 @@ import { ProductsLabourComponent } from './features/sections/main-section/produc
 import { AccountingComponent } from './features/sections/main-section/accounting/accounting.component';
 import { StorageComponent } from './features/sections/main-section/storage/storage.component';
 import { SalesComponent } from './features/sections/main-section/sales/sales.component';
+import { EditProfileComponent } from './features/user/edit-profile/edit-profile.component';
 
 export const routes: Routes = [
     {
@@ -87,4 +88,8 @@ export const routes: Routes = [
             }
         ],
     },
+    {
+        path: 'profile',
+        component: EditProfileComponent
+    }
 ];
