@@ -35,7 +35,6 @@ export class EditProfileService {
 
   checkPassword(id: number, password: string): Observable<any> {
     password.replace(' ', '+');
-    console.log(this.httpOptions.headers)
     const apiUrl: string = this.urlBase + 'ComprobarPassword?' + `id=${id}` + `&password=${password}`;
     return this.http.get<boolean>(apiUrl, this.httpOptions);
   }
