@@ -89,7 +89,7 @@ export class EditProfileComponent {
           
           return true;
         }),
-        catchError((error) => { 
+        catchError((error) => {
           this.messageService.add({
             severity: 'error',
             // TODO: Agregar al translate estos mensajes y hacer uso de ellos
@@ -101,7 +101,7 @@ export class EditProfileComponent {
           this.currentPassword = '';
           this.newPassword = '';
           this.confirmedPassword = '';
-          
+
           return of(false);
         })
       );
