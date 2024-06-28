@@ -63,16 +63,7 @@ export class EditProfileComponent {
     if(this.userData) {
       return this.editProfileService.updateUser(this.userData.id_user, attributesToChange).pipe(
         map((response) => {
-          if(response.status === 401) {
-            this.messageService.add({
-              severity: 'error',
-              // TODO: Agregar al translate estos mensajes y hacer uso de ellos
-              summary: 'Denegado',
-              detail: 'No estás autorizado para realizar esta acción'
-            });
-          }
           let res: ApiMessage = response.body;
-          console.log(res);
           if(res.error) {
             this.messageService.add({
               severity: 'error',
@@ -98,13 +89,18 @@ export class EditProfileComponent {
           
           return true;
         }),
-        catchError((error) => {
+        catchError((error) => { 
           this.messageService.add({
             severity: 'error',
             // TODO: Agregar al translate estos mensajes y hacer uso de ellos
-            summary: 'Error en los cambios',
-            detail: 'Error al actualizar el usuario'
+            summary: 'Denegado',
+            detail: error
           });
+
+          this.username = '';
+          this.currentPassword = '';
+          this.newPassword = '';
+          this.confirmedPassword = '';
           
           return of(false);
         })
