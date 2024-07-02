@@ -123,21 +123,27 @@ export class EditProfileComponent {
         new PatchObject('replace', 'username', this.username)
       );
     }
-    if(this.currentPassword && this.newPassword && this.confirmedPassword) {
-      if(this.newPassword !== this.confirmedPassword) {
-        this.messageService.add({
-          severity: 'warn',
-          // TODO: Agregar al translate estos mensajes y hacer uso de ellos
-          summary: 'Campos inválidos',
-          detail: 'Las contraseñas no coinciden'
-        });
-        this.isLoading = false;
-        return;
+    if(this.currentPassword || this.newPassword || this.confirmedPassword) {
+      if(this.currentPassword && this.newPassword && this.confirmedPassword) {
+        if(this.newPassword !== this.confirmedPassword) {
+          this.messageService.add({
+            severity: 'warn',
+            // TODO: Agregar al translate estos mensajes y hacer uso de ellos
+            summary: 'Campos inválidos',
+            detail: 'Las contraseñas no coinciden'
+          });
+          this.isLoading = false;
+          return;
+        }
+        else {
+          attributesToChange.push(
+            new PatchObject('replace', 'password', this.newPassword)
+          );
+        }
       }
       else {
-        attributesToChange.push(
-          new PatchObject('replace', 'password', this.newPassword)
-        );
+        this.isLoading = false;
+        return;
       }
     }
 
