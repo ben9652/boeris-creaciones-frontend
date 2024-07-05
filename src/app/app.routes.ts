@@ -15,6 +15,9 @@ import { AccountingComponent } from './features/sections/main-section/accounting
 import { StorageComponent } from './features/sections/main-section/storage/storage.component';
 import { SalesComponent } from './features/sections/main-section/sales/sales.component';
 import { EditProfileComponent } from './features/user/edit-profile/edit-profile.component';
+import { RolesComponent } from './features/sections/main-section/partners/roles/roles.component';
+import { mobileAccessGuard } from './core/guards/mobile-access.guard';
+import { PartnerAdditionComponent } from './features/sections/main-section/partners/partner-addition/partner-addition.component';
 
 export const routes: Routes = [
     {
@@ -60,7 +63,19 @@ export const routes: Routes = [
             },
             {
                 path: 'partners',
-                component: PartnersComponent
+                component: PartnersComponent,
+                children: [
+                    {
+                        path: 'roles/:id',
+                        component: RolesComponent,
+                        canActivate: [mobileAccessGuard]
+                    },
+                    {
+                        path: 'addition',
+                        component: PartnerAdditionComponent,
+                        canActivate: [mobileAccessGuard]
+                    }
+                ]
             },
             {
                 path: 'purchases',

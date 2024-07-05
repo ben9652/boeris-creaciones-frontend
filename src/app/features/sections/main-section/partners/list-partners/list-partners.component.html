@@ -1,0 +1,42 @@
+@if (existingPartners) {
+<div class="seccion-lista">
+        <div class="botones">
+            <p-button label="Agregar socio" icon="fas fa-plus" (onClick)="addingNewPartner.set(true)"></p-button>
+        </div>
+        <div class="lista">
+            <div>
+                <input
+                pInputText
+                type="text"
+                [(ngModel)]="partnerSearch"
+                (keyup)="searchPartner()"
+                placeholder="Buscar socio"
+                >
+            </div>
+            <div>
+                <p-scroller
+                [items]="visibleExistingPartners"
+                [itemSize]="50"
+                scrollHeight="50vh"
+                [style]="{'width': '250px', 'height': '50vh'}"
+                >
+                    <ng-template pTemplate="item" let-item let-options="options">
+                        <div class="fila-lista" (click)="clickOnPartner(item)">
+                            @if (item.lastName) {
+                                {{ item.lastName }}, {{ item.firstName }}
+                            }
+                            @else {
+                                {{ item.firstName }}
+                            }
+                        </div>
+                    </ng-template>
+                </p-scroller>
+            </div>
+        </div>
+    </div>
+}
+@else {
+    <div class="loading-icon">
+        <i class="pi pi-spinner pi-spin" style="font-size: 5rem;"></i>
+    </div>
+}

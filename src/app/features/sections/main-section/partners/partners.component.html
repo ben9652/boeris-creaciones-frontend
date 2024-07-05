@@ -1,1 +1,30 @@
-<p>partners works!</p>
+<p-toast></p-toast>
+<div class="container">
+    <app-list-partners
+    [(addingNewPartner)]="addMode"
+    [addedNewPartner]="createdPartner.asObservable()"
+    (gotSelectedPartner)="getSelectedPartner($event)"
+    ></app-list-partners>
+    @if (selectedPartner && !isMobile) {
+        <p-divider layout="vertical"/>
+        <div class="vista-edicion">
+            @if (selectedPartner) {
+                @if (!addMode()) {
+                    <h2>{{ selectedPartner.firstName }} {{ selectedPartner.lastName }}</h2>
+                    <app-roles
+                    [(assignedRoles)]="assignedPartnerRoles"
+                    [(availableRoles)]="nonAssignedPartnerRoles"
+                    [(isLoading)]="isLoading"
+                    (onRolesApplying)="changeRoles($event)"
+                    ></app-roles>
+                }
+                @else {
+                    <app-partner-addition
+                    [(isLoading)]="isLoading"
+                    (onPartnerCreation)="addPartner($event)"
+                    ></app-partner-addition>
+                }
+            }
+        </div>
+    }
+</div>

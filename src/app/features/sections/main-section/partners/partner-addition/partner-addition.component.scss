@@ -1,0 +1,36 @@
+:host {
+    height: 100%;
+    width: 100%;
+    padding: 2rem;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    width: 200px;
+
+    input {
+        margin: 10px;
+    }
+}
+
+.botones {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+:host ::ng-deep .p-button {
+    display: flex;
+    justify-content: center;
+    height: 45px;
+    width: 130px;
+}

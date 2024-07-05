@@ -1,0 +1,59 @@
+@import '../../../../../../../public/theme/boeris-theme';
+
+.seccion-lista {
+    display: grid;
+    grid-template-rows: 20% 80%;
+    align-items: center;
+    height: 100%;
+}
+
+.lista {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+}
+
+.loading-icon {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+i {
+    color: $primaryColor;
+}
+
+.botones {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px;
+}
+
+:host ::ng-deep .botones .p-button {
+    width: 168px;
+}
+
+::ng-deep .p-inputtext {
+    user-select: none;
+}
+
+.fila-lista {
+    color: $primaryColor;
+    background-color: $secondaryColor;
+    cursor: pointer;
+    user-select: none;
+
+    display: flex;
+    align-items: center;
+    padding: .5rem;
+
+    &:hover {
+        background-color: $secondaryDarkColor;
+    }
+
+    &:active {
+        background-color: $secondaryDarkerColor;
+    }
+}

@@ -20,7 +20,7 @@
     }
 
 	.p-picklist-header {
-	  color: $panelHeaderTextColor;
+	  color: $secondaryDarkerDarkerColor;
         padding: $panelHeaderPadding;
         font-weight: $panelHeaderFontWeight;
 
@@ -80,7 +80,7 @@
 				background: $highlightBg;
 
 				&.p-focus {
-					background: $highlightFocusBg;
+					background: $highlightBg;
 				}
 			}
 		}
