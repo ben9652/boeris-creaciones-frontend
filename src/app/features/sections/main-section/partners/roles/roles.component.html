@@ -1,8 +1,9 @@
+<p-toast></p-toast>
 <div class="container">
     <div class="asignacion-roles">
         <p-pickList
-        [source]="availableRoles()"
-        [target]="assignedRoles()"
+        [source]="availableRoles"
+        [target]="assignedRoles"
         sourceHeader="Disponibles"
         targetHeader="Asignados"
         [sourceStyle]="{ width: 'auto', height: '280px' }"
@@ -33,7 +34,7 @@
         </p-fieldset>
     </div>
     <div class="botones">
-        @if (!isLoading()) {
+        @if (!isLoading) {
             <p-button
             label="Aplicar"
             (onClick)="applyChanges()"
@@ -41,7 +42,7 @@
         }
         @else {
             <p-button
-            [disabled]="isLoading()"
+            [disabled]="isLoading"
             >
                 <i class="pi pi-spin pi-spinner"></i>
             </p-button>

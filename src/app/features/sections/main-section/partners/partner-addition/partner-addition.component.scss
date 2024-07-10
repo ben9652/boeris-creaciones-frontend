@@ -11,6 +11,13 @@
     height: 100%;
 }
 
+.vista-lista-socios {
+    display: grid;
+    grid-template-rows: 20% 80%;
+    align-items: center;
+    height: 100%;
+}
+
 .form {
     display: flex;
     flex-direction: column;
@@ -22,10 +29,16 @@
     }
 }
 
+// .botones {
+//     display: flex;
+//     justify-content: space-evenly;
+//     width: 100%;
+// }
+
 .botones {
     display: flex;
     justify-content: space-evenly;
-    width: 100%;
+    padding: 10px;
 }
 
 :host ::ng-deep .p-button {

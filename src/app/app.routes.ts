@@ -63,19 +63,17 @@ export const routes: Routes = [
             },
             {
                 path: 'partners',
-                component: PartnersComponent,
-                children: [
-                    {
-                        path: 'roles/:id',
-                        component: RolesComponent,
-                        canActivate: [mobileAccessGuard]
-                    },
-                    {
-                        path: 'addition',
-                        component: PartnerAdditionComponent,
-                        canActivate: [mobileAccessGuard]
-                    }
-                ]
+                component: PartnersComponent
+            },
+            {
+                path: 'roles',
+                component: RolesComponent,
+                canActivate: [mobileAccessGuard]
+            },
+            {
+                path: 'addition',
+                component: PartnerAdditionComponent,
+                canActivate: [mobileAccessGuard]
             },
             {
                 path: 'purchases',

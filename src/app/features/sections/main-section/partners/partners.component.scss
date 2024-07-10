@@ -16,6 +16,12 @@
     height: 100%;
 }
 
+.botones {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
 h2 {
     color: $primaryColor;
     user-select: none;
