@@ -1,4 +1,4 @@
-import { afterRender, Component, signal, WritableSignal } from '@angular/core';
+import { afterRender, Component, effect, signal, WritableSignal } from '@angular/core';
 import { Partner, PartnerRegister, PartnerType } from '../../../../core/models/partner.entities';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
@@ -12,6 +12,7 @@ import { Subject, Subscription } from 'rxjs';
 import { DeviceTypeService } from '../../../../core/services/device-type.service';
 import { PartnersService } from './partners.service';
 import { ButtonModule } from 'primeng/button';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-partners',
@@ -34,42 +35,38 @@ export class PartnersComponent {
   isLoading: WritableSignal<boolean> = signal<boolean>(false);
   
   partnerSubscription?: Subscription;
-
+  
   selectedPartner?: Partner;
-
+  
   isMobile: boolean = false;
   
   constructor(
     private listPartnersService: ListPartnersService,
     private partnersService: PartnersService,
-    private deviceType: DeviceTypeService
+    private router: Router
   ) {
-
-    afterRender(() => {
-      this.isMobile = deviceType.isMobile();
-    })
+    listPartnersService.partners;
+    effect(() => {
+      this.selectedPartner = partnersService.partner;
+    });
+  }
+  
+  ngDoCheck(): void {
+    //Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
+    //Add 'implements DoCheck' to the class.
+    this.isMobile = sessionStorage.getItem('isMobile') !== null ? true : false;
   }
 
-  ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-    this.partnerSubscription = this.partnersService.partner.subscribe((partner: Partner) => {
-      this.selectedPartner = partner;
-    })
-  }
-
-  addPartner(registerPartnerData: PartnerRegister | null) {
+  addedPartner() {
     // Si se clickó el botón "Cancelar"
-    if(registerPartnerData === null) {
-      this.addMode = false;
-      return;
+    this.addMode = false;
+    return;
+  }
+
+  clickOnAddPartner() {
+    this.addMode = true;
+    if(this.isMobile) {
+      this.router.navigate(['partner-addition']);
     }
-    this.listPartnersService.registerPartner(registerPartnerData).subscribe((newPartner: Partner | null) => {
-      if(newPartner) {
-        this.partnersService.partner = newPartner;
-      }
-      this.isLoading.set(false);
-      this.addMode = false;
-    })
   }
 }

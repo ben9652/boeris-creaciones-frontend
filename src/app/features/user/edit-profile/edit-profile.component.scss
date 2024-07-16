@@ -42,3 +42,9 @@ input {
         width: 200px;
     }
 }
+
+@media screen and (max-width: 500px) {
+    .main-section {
+        margin-top: 10vh;
+    }
+}

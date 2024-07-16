@@ -1,33 +1,38 @@
-@if (existingPartners) {
+@if (!isLoading) {
     <div class="lista">
-        <div>
-            <input
-            pInputText
-            type="text"
-            [(ngModel)]="partnerSearch"
-            (keyup)="searchPartner()"
-            placeholder="Buscar socio"
-            >
-        </div>
-        <div>
-            <p-scroller
-            [items]="visibleExistingPartners"
-            [itemSize]="50"
-            scrollHeight="50vh"
-            [style]="{'width': '250px', 'height': '50vh'}"
-            >
-                <ng-template pTemplate="item" let-item let-options="options">
-                    <div class="fila-lista" (click)="clickOnPartner(item)">
-                        @if (item.lastName) {
-                            {{ item.lastName }}, {{ item.firstName }}
-                        }
-                        @else {
-                            {{ item.firstName }}
-                        }
-                    </div>
-                </ng-template>
-            </p-scroller>
-        </div>
+        @if (existingPartners.length !== 0) {
+            <div>
+                <input
+                pInputText
+                type="text"
+                [(ngModel)]="partnerSearch"
+                (keyup)="searchPartner()"
+                placeholder="Buscar socio"
+                >
+            </div>
+            <div>
+                <p-scroller
+                [items]="visibleExistingPartners"
+                [itemSize]="50"
+                scrollHeight="50vh"
+                [style]="{'width': '250px', 'height': '50vh'}"
+                >
+                    <ng-template pTemplate="item" let-item let-options="options">
+                        <div class="fila-lista" (click)="clickOnPartner(item)">
+                            @if (item.lastName) {
+                                {{ item.lastName }}, {{ item.firstName }}
+                            }
+                            @else {
+                                {{ item.firstName }}
+                            }
+                        </div>
+                    </ng-template>
+                </p-scroller>
+            </div>
+        }
+        @else {
+            <h2>No existen socios</h2>
+        }
     </div>
 }
 @else {

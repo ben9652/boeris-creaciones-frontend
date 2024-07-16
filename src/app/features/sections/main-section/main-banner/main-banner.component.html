@@ -11,11 +11,13 @@
     </div>
     <div class="header-text">{{ title() }}</div>
     <div class="user-button">
-        <div class="user-icon" (click)="op.toggle($event)">
-            <i class="fas fa-user fa-xl"></i>
-        </div>
-        <p-overlayPanel #op>
-            <app-user-menu></app-user-menu>
-        </p-overlayPanel>
+        @if (user_edition()) {
+            <div class="user-icon" (click)="op.toggle($event)">
+                <i class="fas fa-user fa-xl"></i>
+            </div>
+            <p-overlayPanel #op>
+                <app-user-menu></app-user-menu>
+            </p-overlayPanel>
+        }
     </div>
 </div>

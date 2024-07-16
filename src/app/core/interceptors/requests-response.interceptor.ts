@@ -4,9 +4,7 @@ import { MessageService } from "primeng/api";
 import { catchError, throwError } from "rxjs";
 
 function handleErrorResponse(error: HttpErrorResponse)  {
-    return throwError(() => {
-        return 'No estás autorizado a realizar esta acción';
-    });
+    return throwError(() => error);
 }
 
 export const RequestResponseInterceptor: HttpInterceptorFn = (req, next) => {

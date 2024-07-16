@@ -54,3 +54,18 @@ p {
     display: flex;
     justify-content: center;
 }
+
+.mensaje-socio-no-seleccionado {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
+    color: $primaryColor;
+    height: 100%;
+}
+
+@media screen and (max-width: 500px) {
+    .asignacion-roles {
+        flex-direction: column;
+    }
+}

@@ -15,9 +15,11 @@ import { AccountingComponent } from './features/sections/main-section/accounting
 import { StorageComponent } from './features/sections/main-section/storage/storage.component';
 import { SalesComponent } from './features/sections/main-section/sales/sales.component';
 import { EditProfileComponent } from './features/user/edit-profile/edit-profile.component';
-import { RolesComponent } from './features/sections/main-section/partners/roles/roles.component';
 import { mobileAccessGuard } from './core/guards/mobile-access.guard';
-import { PartnerAdditionComponent } from './features/sections/main-section/partners/partner-addition/partner-addition.component';
+import { RolesEditionComponent } from './features/sections/sub-sections/roles-edition/roles-edition.component';
+import { inject } from '@angular/core';
+import { ActiveRouteService } from './core/services/active-route.service';
+import { MobilePartnerAdditionComponent } from './features/sections/sub-sections/mobile-partner-addition/mobile-partner-addition.component';
 
 export const routes: Routes = [
     {
@@ -38,7 +40,17 @@ export const routes: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'home',
+                redirectTo: () => {
+                    const activeRouteService = inject(ActiveRouteService);
+                    const route: string | null = activeRouteService.route;
+                    if(route !== null) {
+                        const routes: string[] = route.split('/');
+                        if(routes[1] === 'sections') {
+                            return routes[2];
+                        }
+                    }
+                    return 'home';
+                },
                 pathMatch: 'full'
             },
             {
@@ -66,16 +78,6 @@ export const routes: Routes = [
                 component: PartnersComponent
             },
             {
-                path: 'roles',
-                component: RolesComponent,
-                canActivate: [mobileAccessGuard]
-            },
-            {
-                path: 'addition',
-                component: PartnerAdditionComponent,
-                canActivate: [mobileAccessGuard]
-            },
-            {
                 path: 'purchases',
                 component: PurchasesComponent
             },
@@ -100,6 +102,16 @@ export const routes: Routes = [
                 component: SalesComponent
             }
         ],
+    },
+    {
+        path: 'roles-edition',
+        component: RolesEditionComponent,
+        canActivate: [mobileAccessGuard]
+    },
+    {
+        path: 'partner-addition',
+        component: MobilePartnerAdditionComponent,
+        canActivate: [mobileAccessGuard]
     },
     {
         path: 'profile',

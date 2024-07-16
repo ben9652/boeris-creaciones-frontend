@@ -1,6 +1,6 @@
-import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable, of, switchMap } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpEvent, HttpHeaders } from '@angular/common/http';
+import { afterRender, Injectable } from '@angular/core';
+import { BehaviorSubject, catchError, map, Observable, of, switchMap, throwError } from 'rxjs';
 import { AuthService } from '../../../../../core/services/auth.service';
 import { environment } from '../../../../../../environments/environment';
 import { Partner, PartnerRegister } from '../../../../../core/models/partner.entities';
@@ -13,16 +13,28 @@ export class ListPartnersService {
   urlBase: string;
   httpOptions?: HttpOptions;
 
+  userAuthorized: boolean = true;
+
   // Observable para los socios existentes
   private partnersSource: BehaviorSubject<Partner[]> = new BehaviorSubject<Partner[]>([]);
   private partners$: Observable<Partner[]> = this.partnersSource.asObservable();
 
   private setPartners(): void {
-    this.httpOptions = new HttpOptions(this.authService.getToken());
     if(this.partnersSource.getValue().length === 0) {
-      this.http.get<Partner[]>(this.urlBase, this.httpOptions).subscribe((partners: Partner[]) => {
-        this.partnersSource.next(partners);
-      })
+      this.httpOptions = new HttpOptions(this.authService.getToken());
+      this.http.get<Partner[]>(this.urlBase, this.httpOptions).pipe(
+        map((partners: Partner[]) => {
+          this.partnersSource.next(partners);
+        }),
+        catchError((err: HttpErrorResponse) => {
+          if(err.status === 401 || err.status === 403) {
+            return of<Partner[]>([]);
+          }
+          
+          return throwError(() => err);
+        })
+      )
+      .subscribe();
     }
   }
 
@@ -31,6 +43,9 @@ export class ListPartnersService {
     private authService: AuthService,
   ) {
     this.urlBase = environment.API_URL + 'Socios/';
+    // afterRender(() => {
+    //   this.httpOptions = new HttpOptions(authService.getToken());
+    // })
     this.setPartners();
   }
 

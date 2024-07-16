@@ -31,7 +31,7 @@ export class ListPartnersComponent {
 
   partnersSubscription?: Subscription;
 
-  isMobile: boolean = false;
+  isLoading: boolean = false;
 
   constructor(
     private listPartnersService: ListPartnersService,
@@ -40,9 +40,7 @@ export class ListPartnersComponent {
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
-    afterRender(() => {
-      this.isMobile = deviceTypeService.isMobile();
-    })
+    
   }
   
   ngOnInit(): void {
@@ -50,6 +48,7 @@ export class ListPartnersComponent {
       this.existingPartners = partners;
       this.visibleExistingPartners = this.existingPartners;
       this.partnersService.partner = this.existingPartners[0];
+      // this.isLoading = false;
       this.searchPartner();
     });
   }
@@ -75,11 +74,9 @@ export class ListPartnersComponent {
   }
 
   clickOnPartner(partner: Partner) {
-    if(this.isMobile) {
-      this.router.navigate(['roles', partner.id_user], { relativeTo: this.activatedRoute })
+    if(this.deviceTypeService.isMobile()) {
+      this.router.navigate(['roles-edition'])
     }
-    else {
-      this.partnersService.partner = partner;
-    }
+    this.partnersService.partner = partner;
   }
 }

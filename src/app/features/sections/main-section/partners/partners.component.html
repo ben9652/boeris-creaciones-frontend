@@ -2,23 +2,24 @@
 <div class="container">
     <div class="vista-lista-socios">
         <div class="botones">
-            <p-button label="Agregar socio" icon="fas fa-plus" (onClick)="addMode = true"></p-button>
+            <p-button label="Agregar socio" icon="fas fa-plus" (onClick)="clickOnAddPartner()"></p-button>
         </div>
         <app-list-partners
         ></app-list-partners>
     </div>
-    <p-divider layout="vertical"/>
-    <div class="vista-edicion">
-        @if (!addMode) {
-            <h2>{{ selectedPartner?.firstName }} {{ selectedPartner?.lastName }}</h2>
-            <app-roles
-            ></app-roles>
-        }
-        @else {
-            <app-partner-addition
-            [(isLoading)]="isLoading"
-            (onPartnerCreation)="addPartner($event)"
-            ></app-partner-addition>
-        }
-    </div>
+    @if (!isMobile) {
+        <p-divider layout="vertical"/>
+        <div class="vista-edicion">
+            @if (!addMode) {
+                <h2>{{ selectedPartner?.firstName }} {{ selectedPartner?.lastName }}</h2>
+                <app-roles
+                ></app-roles>
+            }
+            @else {
+                <app-partner-addition
+                (onPartnerCreation)="addedPartner()"
+                ></app-partner-addition>
+            }
+        </div>
+    }
 </div>

@@ -6,6 +6,21 @@ export interface PartnerType {
     explanation_role: string;
 }
 
+function equalsRole(a: PartnerType, b: PartnerType): boolean {
+    return a.id === b.id;
+}
+
+export function equalsArraysRoles(a: PartnerType[], b: PartnerType[]): boolean {
+    if(a == null || b == null) return false;
+    if(a.length !== b.length) return false;
+
+    for(let i = 0; i < a.length; ++i) {
+        if(!equalsRole(a[i], b[i])) return false;
+    }
+
+    return true;
+}
+
 export interface Partner extends User {
     partnerRoles: PartnerType[];
 }

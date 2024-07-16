@@ -1,51 +1,59 @@
 <p-toast></p-toast>
 <div class="container">
-    <div class="asignacion-roles">
-        <p-pickList
-        [source]="availableRoles"
-        [target]="assignedRoles"
-        sourceHeader="Disponibles"
-        targetHeader="Asignados"
-        [sourceStyle]="{ width: 'auto', height: '280px' }"
-        [targetStyle]="{ width: 'auto', height: '280px' }"
-        [showSourceControls]="false"
-        [showTargetControls]="false"
-        breakpoint="1300px"
-        [metaKeySelection]="true"
-        (onSourceSelect)="onSelectedRole($event)"
-        (onTargetSelect)="onSelectedRole($event)"
-        >
-            <ng-template let-item pTemplate="item">
-                <div>
-                    <p>{{ item.role }}</p>
-                </div>
-            </ng-template>
-        </p-pickList>
-        <p-fieldset>
-            <ng-template pTemplate="header">
-                <p class="m-0">
-                    Descripción de rol {{ selectedRole?.role }}
-                </p>
-            </ng-template>
-            
-            <p class="m-0">
-                {{ selectedRole?.explanation_role }}
-            </p>
-        </p-fieldset>
-    </div>
-    <div class="botones">
-        @if (!isLoading) {
-            <p-button
-            label="Aplicar"
-            (onClick)="applyChanges()"
-            ></p-button>
-        }
-        @else {
-            <p-button
-            [disabled]="isLoading"
+    @if (rolesService.partner) {
+        <div class="asignacion-roles">
+            <p-pickList
+            [source]="availableRoles"
+            [target]="assignedRoles"
+            sourceHeader="Disponibles"
+            targetHeader="Asignados"
+            [sourceStyle]="{ width: 'auto', height: '280px' }"
+            [targetStyle]="{ width: 'auto', height: '280px' }"
+            [showSourceControls]="false"
+            [showTargetControls]="false"
+            breakpoint="300px"
+            [metaKeySelection]="false"
+            (onSourceSelect)="onSelectedRole($event)"
+            (onTargetSelect)="onSelectedRole($event)"
             >
-                <i class="pi pi-spin pi-spinner"></i>
-            </p-button>
+                <ng-template let-item pTemplate="item">
+                    <div>
+                        <p>{{ item.role }}</p>
+                    </div>
+                </ng-template>
+            </p-pickList>
+            <p-fieldset>
+                <ng-template pTemplate="header">
+                    <p class="m-0">
+                        Descripción de rol {{ selectedRole?.role }}
+                    </p>
+                </ng-template>
+                
+                <p class="m-0">
+                    {{ selectedRole?.explanation_role }}
+                </p>
+            </p-fieldset>
+        </div>
+        <div class="botones">
+            @if (!isLoading) {
+                <p-button
+                label="Aplicar"
+                [disabled]="equalsRoles()"
+                (onClick)="applyChanges()"
+                ></p-button>
+            }
+            @else {
+                <p-button
+                [disabled]="isLoading"
+                >
+                    <i class="pi pi-spin pi-spinner"></i>
+                </p-button>
+            }
+        </div>
+    }
+    @else {
+        @if (thereArePartners) {
+            <p class="mensaje-socio-no-seleccionado">Seleccione un socio</p>
         }
-    </div>
+    }
 </div>

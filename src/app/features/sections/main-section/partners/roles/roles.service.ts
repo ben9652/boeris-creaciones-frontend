@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { effect, Injectable, signal, WritableSignal } from '@angular/core';
 import { AuthService } from '../../../../../core/services/auth.service';
-import { BehaviorSubject, map, Observable, of, Subject, Subscription, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of, Subject, Subscription, switchMap, tap, throwError } from 'rxjs';
 import { Partner, PartnerType } from '../../../../../core/models/partner.entities';
 import { environment } from '../../../../../../environments/environment';
 import { HttpOptions } from '../../../../../core/models/httpOptions.entities';
@@ -21,15 +21,12 @@ export class RolesService {
   // Mapa de roles
   private mappedRoles: Map<number, PartnerType> = new Map<number, PartnerType>();
 
-  // Observables de los roles asignados
-  private assignedRolesSource: BehaviorSubject<PartnerType[]> = new BehaviorSubject<PartnerType[]>([]);
-  private assignedRoles$: Observable<PartnerType[]> = this.assignedRolesSource.asObservable();
+  // Signal de los roles asignados
+  private _assignedRoles: WritableSignal<PartnerType[]> = signal([]);
 
-  // Observables de los roles no asignados al socio
-  private nonAssignedRolesSource: BehaviorSubject<PartnerType[]> = new BehaviorSubject<PartnerType[]>([]);
-  private nonAssignedRoles$: Observable<PartnerType[]> = this.nonAssignedRolesSource.asObservable();
-
-  private partnerSubscription?: Subscription;
+  // Signal de los roles no asignados al socio
+  private _nonAssignedRoles: WritableSignal<PartnerType[]> = signal([]);
+  
   private activePartner?: Partner;
 
   private getRolesFromApi(): Observable<PartnerType[]> {
@@ -43,35 +40,31 @@ export class RolesService {
     private partnersService: PartnersService
   ) {
     this.urlBase = environment.API_URL + 'RolesSocios/';
-
+    
     // Cada vez que se actualice el socio en `PartnersService` se actualizará en este servicio `activePartner`
-    this.partnerSubscription = this.partnersService.partner.subscribe((partner: Partner) => {
-      if(this.mappedRoles.size === 0) {
-        // Obtengo de la API todos los roles y los agrego al mapa de roles
-        this.getRolesFromApi().subscribe((roles: PartnerType[]) => {
-          roles.forEach((role: PartnerType) => this.mappedRoles.set(role.id, role))
-          this.partner = partner;
-        });
+    effect(() => {
+      if (partnersService.partner) {
+        if(this.mappedRoles.size === 0) {
+          // Obtengo de la API todos los roles y los agrego al mapa de roles
+          this.getRolesFromApi().subscribe((roles: PartnerType[]) => {
+            roles.forEach((role: PartnerType) => this.mappedRoles.set(role.id, role))
+            this.partner = partnersService.partner;
+          });
+        }
+        else {
+          this.partner = partnersService.partner;
+        }
       }
-      else {
-        this.partner = partner;
-      }
-    });
-  }
-
-  ngOnDestroy(): void {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
-    this.partnerSubscription?.unsubscribe();
+    }, { allowSignalWrites: true })
   }
 
   // Convierto el mapa de roles a un arreglo de roles
-  get assignedRoles(): Observable<PartnerType[]> {
-    return this.assignedRoles$;
+  get assignedRoles(): PartnerType[] {
+    return this._assignedRoles();
   }
 
-  get nonAssignedRoles(): Observable<PartnerType[]> {
-    return this.nonAssignedRoles$;
+  get nonAssignedRoles(): PartnerType[] {
+    return this._nonAssignedRoles();
   }
 
   get partner(): Partner | undefined {
@@ -89,8 +82,8 @@ export class RolesService {
     partner.partnerRoles.forEach((role: PartnerType) => {
       this.mappedNonAssignedRoles.delete(role.id);
     })
-    this.assignedRolesSource.next(partner.partnerRoles);
-    this.nonAssignedRolesSource.next(Array.from(this.mappedNonAssignedRoles.values()));
+    this._assignedRoles.set(partner.partnerRoles);
+    this._nonAssignedRoles.set(Array.from(this.mappedNonAssignedRoles.values()));
   }
 
   assignRolesToPartner(roles: PartnerType[]): Observable<void> {

@@ -2,16 +2,16 @@
     <div class="form">
         <input pInputText placeholder="Nombre" [(ngModel)]="firstName"/>
         <input pInputText placeholder="Apellido" [(ngModel)]="lastName"/>
-        <input pInputText placeholder="E-mail" [(ngModel)]="email"/>
+        <input pInputText placeholder="E-mail" autocapitalize="off" inputmode="email" [(ngModel)]="email"/>
     </div>
     
     <div class="botones">
         <p-button
         severity="secondary"
         label="Cancelar"
-        (onClick)="onPartnerCreation.emit(null)"
+        (onClick)="clickOnCancel()"
         ></p-button>
-        @if (!isLoading()) {
+        @if (!isLoading) {
             <p-button
             label="Crear socio"
             (onClick)="createPartner()"
@@ -19,7 +19,7 @@
         }
         @else {
             <p-button
-            [disabled]="isLoading()"
+            [disabled]="isLoading"
             >
                 <i class="pi pi-spinner pi-spin"></i>
             </p-button>

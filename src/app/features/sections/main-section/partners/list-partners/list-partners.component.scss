@@ -1,5 +1,9 @@
 @import '../../../../../../../public/theme/boeris-theme';
 
+h2 {
+    color: $primaryColor;
+}
+
 .lista {
     display: flex;
     flex-direction: column;

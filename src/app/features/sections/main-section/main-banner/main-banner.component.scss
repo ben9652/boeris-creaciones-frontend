@@ -82,6 +82,7 @@
 @media screen and (max-width: 500px) {
     .header {
         grid-template-columns: 20% 60% 20%;
+        height: 10vh;
     }
     
     .header-text {
