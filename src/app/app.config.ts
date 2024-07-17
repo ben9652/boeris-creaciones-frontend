@@ -16,17 +16,10 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 
 export function initializeApp(
   translateService: TranslateService,
-  router: Router,
-  activeRouteService: ActiveRouteService
+  router: Router
 ) {
   return () => {
-    const currentRoute: string | null = activeRouteService.route;
-    if(currentRoute !== null) {
-      router.navigateByUrl(currentRoute);
-    }
-    else {
-      router.navigate(['/login']);
-    }
+    router.navigate(['/login']);
     
     translateService.setDefaultLang('es');
     return translateService.use('es');

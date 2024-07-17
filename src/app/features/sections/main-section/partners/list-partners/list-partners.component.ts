@@ -10,6 +10,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DeviceTypeService } from '../../../../../core/services/device-type.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PartnersService } from '../partners.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-list-partners',
@@ -18,7 +19,8 @@ import { PartnersService } from '../partners.service';
     ScrollerModule,
     InputTextModule,
     ButtonModule,
-    FormsModule
+    FormsModule,
+    TranslateModule
   ],
   templateUrl: './list-partners.component.html',
   styleUrl: './list-partners.component.scss'
@@ -31,14 +33,14 @@ export class ListPartnersComponent {
 
   partnersSubscription?: Subscription;
 
-  isLoading: boolean = false;
+  isLoading: boolean = true;
 
   constructor(
     private listPartnersService: ListPartnersService,
     private partnersService: PartnersService,
     private deviceTypeService: DeviceTypeService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    public translateService: TranslateService
   ) {
     
   }
@@ -48,7 +50,7 @@ export class ListPartnersComponent {
       this.existingPartners = partners;
       this.visibleExistingPartners = this.existingPartners;
       this.partnersService.partner = this.existingPartners[0];
-      // this.isLoading = false;
+      this.isLoading = false;
       this.searchPartner();
     });
   }

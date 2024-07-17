@@ -5,8 +5,8 @@
             <p-pickList
             [source]="availableRoles"
             [target]="assignedRoles"
-            sourceHeader="Disponibles"
-            targetHeader="Asignados"
+            [sourceHeader]="translateService.instant('SECTIONS.PARTNERS.ROLES.AVAILABLE_ROLES')"
+            [targetHeader]="translateService.instant('SECTIONS.PARTNERS.ROLES.ASSIGNED_ROLES')"
             [sourceStyle]="{ width: 'auto', height: '280px' }"
             [targetStyle]="{ width: 'auto', height: '280px' }"
             [showSourceControls]="false"
@@ -25,7 +25,7 @@
             <p-fieldset>
                 <ng-template pTemplate="header">
                     <p class="m-0">
-                        Descripción de rol {{ selectedRole?.role }}
+                        {{ 'SECTIONS.PARTNERS.ROLES.ROLE_DESCRIPTION' | translate }} {{ selectedRole?.role }}
                     </p>
                 </ng-template>
                 
@@ -37,7 +37,7 @@
         <div class="botones">
             @if (!isLoading) {
                 <p-button
-                label="Aplicar"
+                [label]="translateService.instant('SHARED.BUTTONS.APPLY')"
                 [disabled]="equalsRoles()"
                 (onClick)="applyChanges()"
                 ></p-button>
@@ -53,7 +53,7 @@
     }
     @else {
         @if (thereArePartners) {
-            <p class="mensaje-socio-no-seleccionado">Seleccione un socio</p>
+            <p class="mensaje-socio-no-seleccionado">{{ 'SECTIONS.PARTNERS.ROLES.SELECT_PARTNER' | translate }}</p>
         }
     }
 </div>

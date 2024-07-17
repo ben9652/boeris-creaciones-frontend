@@ -48,6 +48,9 @@ export const routes: Routes = [
                         if(routes[1] === 'sections') {
                             return routes[2];
                         }
+                        // else {
+                        //     return `/${routes[1]}`;
+                        // }
                     }
                     return 'home';
                 },

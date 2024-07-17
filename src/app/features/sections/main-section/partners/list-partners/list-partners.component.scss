@@ -7,7 +7,7 @@ h2 {
 .lista {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
     height: 85%;
 }
@@ -24,6 +24,10 @@ i {
 
 :host ::ng-deep .botones .p-button {
     width: 168px;
+}
+
+:host ::ng-deep .p-scroller-spacer {
+    height: 50vh !important;
 }
 
 ::ng-deep .p-inputtext {

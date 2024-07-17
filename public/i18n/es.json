@@ -1,5 +1,21 @@
 {
     "TITLE": "Boeri's Creaciones",
+    "SHARED": {
+        "BUTTONS": {
+            "CANCEL": "Cancelar",
+            "APPLY": "Aplicar",
+            "CONFIRM": "Confirmar"
+        },
+        "MESSAGES": {
+            "SUMMARY": {
+                "SUCCESS": "Éxito"
+            },
+            "DETAIL": {
+                "MODIFIED_ROLES": "Se modificaron los roles",
+                "CREATED_PARTNER": "Se creó un nuevo socio"
+            }
+        }
+    },
     "SECTIONS": {
         "LOGIN": {
             "TITLE": "Inicio de sesión",
@@ -22,6 +38,35 @@
             },
             "BUTTONS": {
                 "CONFIRM_UPDATES": "Confirmar cambios"
+            }
+        },
+        "PARTNERS": {
+            "ROOT": {
+                "ADD_PARTNER": "Agregar socio"
+            },
+            "LIST_PARTNERS": {
+                "SEARCH_PARTNER": "Buscar socio",
+                "NO_PARTNERS": "No existen socios"
+            },
+            "ROLES": {
+                "AVAILABLE_ROLES": "Disponibles",
+                "ASSIGNED_ROLES": "Asignados",
+                "ROLE_DESCRIPTION": "Descripción de rol",
+                "SELECT_PARTNER": "Seleccione un socio",
+                "MODIFIED_ROLES_MESSAGE": "Se modificaron los roles"
+            },
+            "PARTNER_ADDITION": {
+                "FORM": {
+                    "FIRST_NAME": "Nombre",
+                    "LAST_NAME": "Apellido",
+                    "EMAIL": "E-mail"
+                },
+                "CREATE_BUTTON": "Crear socio",
+                "CONFIRMATION": {
+                    "HEADER": "Datos del nuevo socio",
+                    "USERNAME": "Nombre de usuario",
+                    "PASSWORD": "Contraseña"
+                }
             }
         },
         "SIDEBAR": {

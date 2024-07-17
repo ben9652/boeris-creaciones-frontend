@@ -12,6 +12,7 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { catchError, of, Subscription, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-roles',
@@ -21,7 +22,8 @@ import { HttpErrorResponse } from '@angular/common/http';
     DragDropModule,
     FieldsetModule,
     ButtonModule,
-    ToastModule
+    ToastModule,
+    TranslateModule
   ],
   templateUrl: './roles.component.html',
   styleUrl: './roles.component.scss',
@@ -46,7 +48,8 @@ export class RolesComponent {
     private listPartnersService: ListPartnersService,
     public rolesService: RolesService,
     private location: Location,
-    private messageService: MessageService
+    private messageService: MessageService,
+    public translateService: TranslateService
   ) {
     listPartnersService.partners.subscribe((partners: Partner[]) => {
       if(partners.length === 0) {
@@ -89,7 +92,7 @@ export class RolesComponent {
     this.messageService.add({
       severity: 'success',
       summary: 'Éxito',
-      detail: 'Se modificaron los roles'
+      detail: this.translateService.instant('SHARED.MESSAGES.DETAIL.MODIFIED_ROLES')
     });
     
     this.isLoading = false;
@@ -99,7 +102,6 @@ export class RolesComponent {
     this.isLoading = true;
     this.rolesService.assignRolesToPartner(this.assignedRoles).subscribe({
       next: () => {
-        console.log('Se comienzan a asignar roles');
         // Si se asignaron correctamente los roles, se actualiza el socio para que se
         // actualice en todos los servicios y componentes que estén suscritos al
         // socio guardado en el servicio PartnersService

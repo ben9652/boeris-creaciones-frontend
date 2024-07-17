@@ -7,14 +7,14 @@
                 type="text"
                 [(ngModel)]="partnerSearch"
                 (keyup)="searchPartner()"
-                placeholder="Buscar socio"
+                [placeholder]="translateService.instant('SECTIONS.PARTNERS.LIST_PARTNERS.SEARCH_PARTNER')"
                 >
             </div>
             <div>
                 <p-scroller
                 [items]="visibleExistingPartners"
-                [itemSize]="50"
-                scrollHeight="50vh"
+                [itemSize]="40"
+                scrollHeight="60vh"
                 [style]="{'width': '250px', 'height': '50vh'}"
                 >
                     <ng-template pTemplate="item" let-item let-options="options">
@@ -31,7 +31,7 @@
             </div>
         }
         @else {
-            <h2>No existen socios</h2>
+            <h2>{{ 'SECTIONS.PARTNERS.LIST_PARTNERS.NO_PARTNERS' | translate }}</h2>
         }
     </div>
 }

@@ -1,14 +1,17 @@
-import { afterRender, Component, model, ModelSignal, output, OutputEmitterRef } from '@angular/core';
+import { Component, output, OutputEmitterRef } from '@angular/core';
 import { Partner, PartnerRegister } from '../../../../../core/models/partner.entities';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { ListPartnersService } from '../list-partners/list-partners.service';
 import { PartnersService } from '../partners.service';
-import { DeviceTypeService } from '../../../../../core/services/device-type.service';
 import { Location } from '@angular/common';
 import { catchError, of, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-partner-addition',
@@ -16,10 +19,14 @@ import { HttpErrorResponse } from '@angular/common/http';
   imports: [
     InputTextModule,
     ButtonModule,
-    FormsModule
+    FormsModule,
+    ToastModule,
+    ConfirmDialogModule,
+    TranslateModule
   ],
   templateUrl: './partner-addition.component.html',
-  styleUrl: './partner-addition.component.scss'
+  styleUrl: './partner-addition.component.scss',
+  providers: [ConfirmationService, MessageService]
 })
 export class PartnerAdditionComponent {
   firstName: string = '';
@@ -35,7 +42,10 @@ export class PartnerAdditionComponent {
   constructor(
     private listPartnersService: ListPartnersService,
     private partnersService: PartnersService,
-    private location: Location
+    private location: Location,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService,
+    public translateService: TranslateService
   ) {
 
   }
@@ -65,7 +75,15 @@ export class PartnerAdditionComponent {
 
             return of<Partner>(newPartner);
           }
-          return throwError(() => error);
+          return throwError(() => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: error.error.mensaje
+            });
+            this.isLoading = false;
+            return error;
+          });
         })
       )
       .subscribe((newPartner: Partner | null) => {
@@ -73,11 +91,24 @@ export class PartnerAdditionComponent {
           this.listPartnersService.addPartner(newPartner);
           this.partnersService.partner = newPartner;
         }
-        this.isLoading = false;
-        this.onPartnerCreation.emit();
-        if(this.isMobile) {
-          this.location.back();
-        }
+        this.confirmationService.confirm({
+          header: this.translateService.instant('SECTIONS.PARTNERS.PARTNER_ADDITION.CONFIRMATION.HEADER'),
+          message: newPartner?.username,
+          accept: () => {
+            this.onPartnerCreation.emit();
+            if(this.isMobile) {
+              this.location.back();
+            }
+            this.isLoading = false;
+          },
+          reject: () => {
+            this.onPartnerCreation.emit();
+            if(this.isMobile) {
+              this.location.back();
+            }
+            this.isLoading = false;
+          }
+        })
       })
     }
   }
@@ -86,6 +117,12 @@ export class PartnerAdditionComponent {
     this.onPartnerCreation.emit();
     if(this.isMobile) {
       this.location.back();
+    }
+  }
+
+  onKeyPressed(event: KeyboardEvent) {
+    if(event.key === 'Enter' && !this.isLoading) {
+      this.createPartner();
     }
   }
 }
