@@ -1,0 +1,42 @@
+@if (!isLoading) {
+    <div class="lista">
+        @if (existingPartners.length !== 0) {
+            <div>
+                <input
+                pInputText
+                type="text"
+                [(ngModel)]="partnerSearch"
+                (keyup)="searchPartner()"
+                [placeholder]="translateService.instant('SECTIONS.PARTNERS.LIST_PARTNERS.SEARCH_PARTNER')"
+                >
+            </div>
+            <div>
+                <p-scroller
+                [items]="visibleExistingPartners"
+                [itemSize]="40"
+                scrollHeight="60vh"
+                [style]="{'width': '250px', 'height': '50vh'}"
+                >
+                    <ng-template pTemplate="item" let-item let-options="options">
+                        <div class="fila-lista" (click)="clickOnPartner(item)">
+                            @if (item.lastName) {
+                                {{ item.lastName }}, {{ item.firstName }}
+                            }
+                            @else {
+                                {{ item.firstName }}
+                            }
+                        </div>
+                    </ng-template>
+                </p-scroller>
+            </div>
+        }
+        @else {
+            <h2>{{ 'SECTIONS.PARTNERS.LIST_PARTNERS.NO_PARTNERS' | translate }}</h2>
+        }
+    </div>
+}
+@else {
+    <div class="loading-icon">
+        <i class="pi pi-spinner pi-spin" style="font-size: 5rem;"></i>
+    </div>
+}

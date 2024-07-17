@@ -1,1 +1,25 @@
-<p>partners works!</p>
+<p-toast></p-toast>
+<div class="container">
+    <div class="vista-lista-socios">
+        <div class="botones">
+            <p-button label="Agregar socio" icon="fas fa-plus" (onClick)="clickOnAddPartner()"></p-button>
+        </div>
+        <app-list-partners
+        ></app-list-partners>
+    </div>
+    @if (!isMobile) {
+        <p-divider layout="vertical"/>
+        <div class="vista-edicion">
+            @if (!addMode) {
+                <h2>{{ selectedPartner?.firstName }} {{ selectedPartner?.lastName }}</h2>
+                <app-roles
+                ></app-roles>
+            }
+            @else {
+                <app-partner-addition
+                (onPartnerCreation)="addedPartner()"
+                ></app-partner-addition>
+            }
+        </div>
+    }
+</div>

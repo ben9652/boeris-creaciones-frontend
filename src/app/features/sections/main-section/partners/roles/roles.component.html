@@ -1,0 +1,59 @@
+<p-toast></p-toast>
+<div class="container">
+    @if (rolesService.partner) {
+        <div class="asignacion-roles">
+            <p-pickList
+            [source]="availableRoles"
+            [target]="assignedRoles"
+            [sourceHeader]="translateService.instant('SECTIONS.PARTNERS.ROLES.AVAILABLE_ROLES')"
+            [targetHeader]="translateService.instant('SECTIONS.PARTNERS.ROLES.ASSIGNED_ROLES')"
+            [sourceStyle]="{ width: 'auto', height: '280px' }"
+            [targetStyle]="{ width: 'auto', height: '280px' }"
+            [showSourceControls]="false"
+            [showTargetControls]="false"
+            breakpoint="300px"
+            [metaKeySelection]="false"
+            (onSourceSelect)="onSelectedRole($event)"
+            (onTargetSelect)="onSelectedRole($event)"
+            >
+                <ng-template let-item pTemplate="item">
+                    <div>
+                        <p>{{ item.role }}</p>
+                    </div>
+                </ng-template>
+            </p-pickList>
+            <p-fieldset>
+                <ng-template pTemplate="header">
+                    <p class="m-0">
+                        {{ 'SECTIONS.PARTNERS.ROLES.ROLE_DESCRIPTION' | translate }} {{ selectedRole?.role }}
+                    </p>
+                </ng-template>
+                
+                <p class="m-0">
+                    {{ selectedRole?.explanation_role }}
+                </p>
+            </p-fieldset>
+        </div>
+        <div class="botones">
+            @if (!isLoading) {
+                <p-button
+                [label]="translateService.instant('SHARED.BUTTONS.APPLY')"
+                [disabled]="equalsRoles()"
+                (onClick)="applyChanges()"
+                ></p-button>
+            }
+            @else {
+                <p-button
+                [disabled]="isLoading"
+                >
+                    <i class="pi pi-spin pi-spinner"></i>
+                </p-button>
+            }
+        </div>
+    }
+    @else {
+        @if (thereArePartners) {
+            <p class="mensaje-socio-no-seleccionado">{{ 'SECTIONS.PARTNERS.ROLES.SELECT_PARTNER' | translate }}</p>
+        }
+    }
+</div>

@@ -84,3 +84,9 @@
 ::ng-deep .p-sidebar .p-sidebar-header .p-sidebar-close, .p-sidebar .p-sidebar-header .p-sidebar-icon {
     color: $secondaryColor;
 }
+
+@media screen and (max-width: 500px) {
+    .bottom-section {
+        margin-top: 10vh;
+    }
+}

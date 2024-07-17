@@ -1,5 +1,5 @@
 import { APP_INITIALIZER, ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter, withComponentInputBinding } from '@angular/router';
+import { provideRouter, Router, withComponentInputBinding } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
@@ -8,13 +8,19 @@ import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-transla
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { RequestResponseInterceptor } from './core/interceptors/requests-response.interceptor';
+import { ActiveRouteService } from './core/services/active-route.service';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, '/i18n/', '.json');
 }
 
-export function initializeApp(translateService: TranslateService) {
+export function initializeApp(
+  translateService: TranslateService,
+  router: Router
+) {
   return () => {
+    router.navigate(['/login']);
+    
     translateService.setDefaultLang('es');
     return translateService.use('es');
   }
@@ -39,7 +45,7 @@ export const appConfig: ApplicationConfig = {
     {
       provide: APP_INITIALIZER,
       useFactory: initializeApp,
-      deps: [TranslateService],
+      deps: [TranslateService, Router, ActiveRouteService],
       multi: true
     },
     provideZoneChangeDetection({ eventCoalescing: true }),

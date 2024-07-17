@@ -158,6 +158,7 @@ export class AuthService {
     this.ownSessionStorage?.removeItem('authenticated');
     this.ownSessionStorage?.removeItem('token');
     this.ownSessionStorage?.removeItem('user');
+    this.ownSessionStorage?.removeItem('currentRoute');
   }
 
   checkAuthentication(): boolean {

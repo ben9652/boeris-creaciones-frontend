@@ -1,0 +1,35 @@
+@import '../../../../../../public/theme/boeris-theme';
+
+:host {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+
+    ::ng-deep .p-divider.p-divider-vertical:before {
+        border-color: $secondaryDarkerColor;
+    }
+}
+
+.container {
+    display: flex;
+    justify-content: space-evenly;
+    height: 100%;
+}
+
+.botones {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+h2 {
+    color: $primaryColor;
+    user-select: none;
+}
+
+.vista-edicion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+}

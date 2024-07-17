@@ -21,6 +21,7 @@ export class MainBannerComponent {
   menuVisible: ModelSignal<boolean> = model(false);
   isDeployableMenu: InputSignal<boolean> = input<boolean>(true);
   title: InputSignal<string> = input<string>('Boeri\'s Creaciones');
+  user_edition: InputSignal<boolean> = input<boolean>(true);
   
   constructor(
     public translateService: TranslateService,

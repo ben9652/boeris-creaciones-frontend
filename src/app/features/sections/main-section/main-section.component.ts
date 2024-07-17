@@ -19,6 +19,7 @@ import { ProductsLabourComponent } from './products-labour/products-labour.compo
 import { AccountingComponent } from './accounting/accounting.component';
 import { StorageComponent } from './storage/storage.component';
 import { SalesComponent } from './sales/sales.component';
+import { ActiveRouteService } from '../../../core/services/active-route.service';
 
 export enum ActiveSection {
   HOME,
@@ -69,7 +70,8 @@ export class MainSectionComponent {
   constructor(
     private translateService: TranslateService,
     public router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private activeRouteService: ActiveRouteService
   ) {
     let raw_materials_catalog: MenuItem = {
       label: translateService.instant('SECTIONS.SIDEBAR.LEVEL1.RAW_MATERIALS'),
@@ -164,6 +166,5 @@ export class MainSectionComponent {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    this.router.navigate(['home'], { relativeTo: this.activatedRoute });
   }
 }

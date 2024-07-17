@@ -1,0 +1,48 @@
+<p-toast></p-toast>
+<div class="container" (keypress)="onKeyPressed($event)">
+    <div class="form">
+        <input pInputText [placeholder]="translateService.instant('SECTIONS.PARTNERS.PARTNER_ADDITION.FORM.FIRST_NAME')" [(ngModel)]="firstName"/>
+        <input pInputText [placeholder]="translateService.instant('SECTIONS.PARTNERS.PARTNER_ADDITION.FORM.LAST_NAME')" [(ngModel)]="lastName"/>
+        <input pInputText [placeholder]="translateService.instant('SECTIONS.PARTNERS.PARTNER_ADDITION.FORM.EMAIL')" autocapitalize="off" inputmode="email" [(ngModel)]="email"/>
+    </div>
+    
+    <div class="botones">
+        <p-button
+        severity="secondary"
+        [label]="translateService.instant('SHARED.BUTTONS.CANCEL')"
+        (onClick)="clickOnCancel()"
+        ></p-button>
+        @if (!isLoading) {
+            <p-button
+            [label]="translateService.instant('SECTIONS.PARTNERS.PARTNER_ADDITION.CREATE_BUTTON')"
+            (onClick)="createPartner()"
+            ></p-button>
+        }
+        @else {
+            <p-button
+            [disabled]="isLoading"
+            >
+                <i class="pi pi-spinner pi-spin"></i>
+            </p-button>
+        }
+    </div>
+</div>
+
+<p-confirmDialog #cd>
+    <ng-template pTemplate="headless" let-message>
+        <div class="dialog">
+            <div class="border-circle bg-primary inline-flex justify-content-center align-items-center h-6rem w-6rem">
+                <i class="pi pi-info-circle text-5xl"></i>
+            </div>
+            <span class="dialog-header">{{ message.header }}</span>
+            <p class="mb-0">{{ 'SECTIONS.PARTNERS.PARTNER_ADDITION.CONFIRMATION.USERNAME' | translate }}: {{ message.message }}</p>
+            <p class="mb-0">{{ 'SECTIONS.PARTNERS.PARTNER_ADDITION.CONFIRMATION.PASSWORD' | translate }}: {{ message.message }}</p>
+            <div class="flex align-items-center gap-2 mt-4">
+                <p-button
+                [label]="translateService.instant('SHARED.BUTTONS.CONFIRM')"
+                (onClick)="cd.accept()"
+                ></p-button>
+            </div>
+        </div>
+    </ng-template>
+</p-confirmDialog>

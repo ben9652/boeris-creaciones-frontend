@@ -1,0 +1,9 @@
+@import '../../../../../../public/theme/boeris-theme';
+
+.container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 5rem;
+    height: 100%;
+    background-color: $secondaryLightColor;
+}

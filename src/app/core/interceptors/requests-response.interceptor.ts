@@ -4,15 +4,9 @@ import { MessageService } from "primeng/api";
 import { catchError, throwError } from "rxjs";
 
 function handleErrorResponse(error: HttpErrorResponse)  {
-    return throwError(() => {
-        switch(error.status) {
-            case 403:
-                return 'No estás autorizado a realizar esta acción';
-            default:
-                return 'Error en la consulta';
-        }
-    });
+    return throwError(() => error);
 }
 
-export const RequestResponseInterceptor: HttpInterceptorFn = (req, next) => 
-    next(req).pipe(catchError(handleErrorResponse));
+export const RequestResponseInterceptor: HttpInterceptorFn = (req, next) => {
+    return next(req).pipe(catchError(handleErrorResponse));
+}

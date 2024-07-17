@@ -1,0 +1,73 @@
+@import '../../../../../../../public/theme/boeris-theme';
+
+:host {
+    height: 100%;
+    width: 100%;
+    padding: 2rem;
+}
+
+p {
+    color: $primaryColor;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+}
+
+.dialog-header {
+    display: block;
+    font-weight: 700;
+    font-size: x-large;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: $primaryColor;
+}
+
+.dialog {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    border-radius: 6px;
+    background-color: $secondaryColor;
+}
+
+.vista-lista-socios {
+    display: grid;
+    grid-template-rows: 20% 80%;
+    align-items: center;
+    height: 100%;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    width: 200px;
+
+    input {
+        margin: 10px;
+    }
+}
+
+// .botones {
+//     display: flex;
+//     justify-content: space-evenly;
+//     width: 100%;
+// }
+
+.botones {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px;
+}
+
+:host ::ng-deep .p-button {
+    display: flex;
+    justify-content: center;
+    height: 45px;
+    width: 130px;
+}
