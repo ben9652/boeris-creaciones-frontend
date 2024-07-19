@@ -63,8 +63,7 @@ export class EditProfileComponent {
   private updateAttributes(attributesToChange: PatchObject[]): Observable<boolean> {
     if(this.userData) {
       return this.editProfileService.updateUser(this.userData.id_user, attributesToChange).pipe(
-        map((response) => {
-          let res: ApiMessage = response.body;
+        map((res) => {
           if(res.error) {
             this.messageService.add({
               severity: 'error',
