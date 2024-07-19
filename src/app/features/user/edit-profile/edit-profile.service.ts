@@ -6,13 +6,14 @@ import { AuthService } from '../../../core/services/auth.service';
 import { PatchObject } from '../../../core/models/patchObj.entities';
 import { ApiMessage } from '../../../core/models/apimessage.entities';
 import { User } from '../../../core/models/user.entities';
+import { HttpOptions } from '../../../core/models/httpOptions.entities';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EditProfileService {
   urlBase: string;
-  httpOptions: any;
+  httpOptions?: HttpOptions;
 
   constructor(
     private http: HttpClient,
@@ -20,28 +21,19 @@ export class EditProfileService {
   ) {
     this.urlBase = environment.API_URL + 'Usuarios/';
     afterRender(() => {
-      this.httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-          'Access-Control-Max-Age': '86400',
-          'x-cache': 'true',
-          'Authorization': `Bearer ${authService.getToken()}`
-        }),
-        responseType: 'json',
-        observe: 'response' as 'body'
-      };
+      this.httpOptions = new HttpOptions(authService.getToken());
     });
   }
 
-  checkPassword(id: number, password: string): Observable<any> {
+  checkPassword(id: number, password: string): Observable<boolean> {
     password.replace(' ', '+');
     const apiUrl: string = this.urlBase + 'ComprobarPassword?' + `id=${id}` + `&password=${password}`;
     return this.http.get<boolean>(apiUrl, this.httpOptions);
   }
 
-  updateUser(id: number, attribsToChange: PatchObject[]): Observable<any> {
+  updateUser(id: number, attribsToChange: PatchObject[]): Observable<ApiMessage> {
     const apiUrl: string = this.urlBase + `${id}`;
-    return this.http.patch<any>(apiUrl, attribsToChange, this.httpOptions);
+    return this.http.patch<ApiMessage>(apiUrl, attribsToChange, this.httpOptions);
   }
 
   setUser(user: User) {
