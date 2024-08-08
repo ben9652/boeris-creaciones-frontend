@@ -1,0 +1,24 @@
+<div class="data-container">
+    <div class="img-area">
+        <h4>Imagen</h4>
+        <div class="raw-material-img"></div>
+        <p-button label="Subir archivo" icon="fas fa-download"></p-button>
+    </div>
+    <div>
+        <div>
+            <p-dropdown [options]="rubros" placeholder="Rubro" [editable]="true"/>
+            <p-button icon="fas fa-plus"></p-button>
+            <p-button icon="fas fa-pencil"></p-button>
+        </div>
+        <div class="raw-material-text">
+            <input pInputText id="username" placeholder="Nombre" />
+            <p-dropdown [options]="unidad" placeholder="Unidad"></p-dropdown>
+            <textarea rows="5" cols="30" pInputTextarea [autoResize]="true" placeholder="Comentario">
+</textarea>
+        </div>
+    </div>
+</div>
+<div class="botones">
+    <p-button label="Cancelar" severity="secondary"></p-button>
+    <p-button label="Confirmar"></p-button>
+</div>

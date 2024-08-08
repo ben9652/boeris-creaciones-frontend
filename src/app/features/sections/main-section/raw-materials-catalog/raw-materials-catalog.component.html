@@ -1,1 +1,15 @@
-<p>raw-materials-catalog works!</p>
+<div class="container">
+    <div class="vista-lista-materias-primas">
+        <div class="botones">
+            <p-button label="Agregar" icon="fas fa-plus"></p-button>
+            <p-button label="Editar" icon="fas fa-pencil"></p-button>
+        </div>
+        <app-list-raw-materials></app-list-raw-materials>
+    </div>
+    <!--is not mobile-->
+    <p-divider layout="vertical"/>
+    <div class="vista-edicion">
+        <app-raw-materials-data></app-raw-materials-data>
+    </div>
+
+</div>
