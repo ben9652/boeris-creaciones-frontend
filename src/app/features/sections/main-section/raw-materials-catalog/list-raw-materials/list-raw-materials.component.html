@@ -8,7 +8,7 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-material>
-            <tr class="fila-lista">
+            <tr class="fila-lista" (click)="selectRawMaterial(material)">
                 <td>{{ material.id }}</td>
                 <td>{{ material.nombre }}</td>
                 <td>{{ material.stock}}</td>

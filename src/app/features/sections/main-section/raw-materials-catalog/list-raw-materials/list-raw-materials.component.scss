@@ -8,7 +8,7 @@ h2 {
     color: $primaryColor;
     background-color: $secondaryColor;
     cursor: pointer;
-    // user-select: none;
+    user-select: none;
 
     &:hover {
         background-color: $secondaryDarkColor;

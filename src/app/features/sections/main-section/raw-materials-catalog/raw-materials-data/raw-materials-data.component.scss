@@ -23,12 +23,20 @@ h4 {
 }
 
 .raw-material-img {
-    background-image: url('../../../../../../../public/pictures/leaf-solid.svg');
     border: 2px solid $primaryColor;
     border-radius: 5px;
     filter: brightness(0) saturate(100%) invert(44%) sepia(65%) saturate(511%) hue-rotate(334deg) brightness(91%) contrast(91%);
     margin-bottom: 1em;
-    padding: 5em;
+    padding: 3em;
+}
+
+.raw-material-img img {
+    width: 65px;
+    height: 65px;
+}
+
+.raw-material-category {
+    display: flex;
 }
 
 .raw-material-text {
@@ -40,4 +48,16 @@ h4 {
     display: flex;
     justify-content: space-evenly;
     padding: 10px;
+}
+
+
+@media screen and (max-width: 500px) {
+    .data-container {
+        flex-direction: column;
+        margin: 1em;
+    }
+    .img-area {
+        margin-top: 2em;
+        margin-bottom: 1em;
+    }
 }
