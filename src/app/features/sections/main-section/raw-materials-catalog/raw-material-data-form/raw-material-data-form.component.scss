@@ -1,0 +1,30 @@
+@import '../../../../../../../public/theme/boeris-theme';
+
+:host {
+    width: 70%;
+    height: 100%;
+    padding: 10px;
+}
+
+.rawMaterial-data-form-view {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+
+.rawMaterial-data-form {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.data-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.rawMaterial-data-form-buttons {
+    display: flex;
+    justify-content: space-evenly;
+}

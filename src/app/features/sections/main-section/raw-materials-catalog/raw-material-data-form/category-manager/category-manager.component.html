@@ -1,0 +1,5 @@
+<div>
+    <p-dropdown [options]="categorys" optionLabel="name" placeholder="Rubro" [style]="{ width: '60%' }" emptyMessage="No se encontraron rubros" [disabled]="this.disabledEdition()" [ngModel]="this.rawMaterialCatalogService.selectedRawMaterial()?.category" (ngModelChange)="updateRawMaterialCategory($event)"/>
+    <p-button icon="fas fa-plus"></p-button>
+    <p-button icon="fas fa-pencil" [disabled]="this.disabledEdition()"></p-button>
+</div>

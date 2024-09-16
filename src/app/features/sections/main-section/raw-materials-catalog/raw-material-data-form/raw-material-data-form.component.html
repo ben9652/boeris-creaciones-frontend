@@ -1,0 +1,23 @@
+<p-toast></p-toast>
+<div class="rawMaterial-data-form-view">
+    <div class="rawMaterial-data-form">
+        <div>
+            <app-image-manager></app-image-manager>
+        </div>
+        <div>
+            <app-category-manager></app-category-manager>
+            <div class="data-text">
+                <input type="text" pInputText placeholder="Nombre" [disabled]="this.disabledEdition()" [ngModel]="this.rawMaterialCatalogService.selectedRawMaterial()?.name" (ngModelChange)="updateRawMaterialName($event)"/>
+                <p-dropdown [options]="units" optionLabel="name" placeholder="Unidades" [style]="{ width: '100%' }" emptyMessage="No se encontraron unidades" [disabled]="this.disabledEdition()" [ngModel]="this.rawMaterialCatalogService.selectedRawMaterial()?.unit" (ngModelChange)="updateRawMaterialUnit($event)"/>
+                
+                <p-dropdown [options]="sources" optionLabel="value" placeholder="Origen" [style]="{ width: '100%' }" emptyMessage="No se encontraron origenes" [disabled]="this.disabledEdition()" [ngModel]="getSourceValue()" (ngModelChange)="updateRawMaterialSource($event)"/>
+
+                <textarea rows="5" cols="30" pInputTextarea [autoResize]="true" placeholder="Comentario" [disabled]="this.disabledEdition()" [ngModel]="this.rawMaterialCatalogService.selectedRawMaterial()?.comment" (ngModelChange)="updateRawMaterialComment($event)"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="rawMaterial-data-form-buttons">
+        <p-button label="Cancelar" severity="secondary" [disabled]="this.disabledEdition()"></p-button>
+        <p-button label="Confirmar" [disabled]="this.disabledEdition()" (onClick)="clickOnConfirm()"></p-button>
+    </div>
+</div>

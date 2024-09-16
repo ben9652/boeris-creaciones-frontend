@@ -1,0 +1,24 @@
+<div class="rawMaterials-list-view">
+    <div class="rawMaterial-list-buttons">
+        <p-button label="Agregar" icon="fas fa-plus" (onClick)="clickOnAddNewRawMaterial()"></p-button>
+        <!-- <p-button label="Editar" icon="fas fa-pencil"></p-button> -->
+    </div>
+    <div class="rawMaterial-list">
+        <p-table [value]="rawMaterialsList" [scrollable]="true" scrollHeight="60vh">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>ID</th>
+                    <th>NOMBRE</th>
+                    <th>STOCK</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rawMaterial>
+                <tr class="rowMaterial" (click)="clickOnRawMaterial(rawMaterial)">
+                    <td>{{ rawMaterial.id }}</td>
+                    <td>{{ rawMaterial.name }}</td>
+                    <td>{{ rawMaterial.stock }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

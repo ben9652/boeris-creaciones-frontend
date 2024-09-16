@@ -492,8 +492,10 @@ $tableHeaderFontWeight: 700 !default;
 $tableHeaderPadding: 1rem 1rem !default;
 
 $tableHeaderCellPadding: 1rem 1rem !default;
-$tableHeaderCellBg: $shade100 !default;
-$tableHeaderCellTextColor: $shade800 !default;
+//$tableHeaderCellBg: $shade100 !default;
+$tableHeaderCellBg: $primaryColor !default;
+//$tableHeaderCellTextColor: $shade800 !default;
+$tableHeaderCellTextColor: $secondaryColor !default;
 $tableHeaderCellFontWeight: 700 !default;
 $tableHeaderCellBorder: 1px solid $shade300 !default;
 $tableHeaderCellBorderWidth: 0 0 1px 0 !default;
@@ -785,7 +787,8 @@ $dividerHorizontalPadding: 0 1.25rem !default;
 $dividerVerticalMargin: 0 1.25rem !default;
 $dividerVerticalPadding: 1.25rem 0 !default;
 $dividerSize: 1px !default;
-$dividerColor: $shade300 !default;
+//$dividerColor: $shade300 !default;
+$dividerColor: $secondaryDarkerColor !default;
 
 //avatar
 $avatarBg: $shade300 !default;
