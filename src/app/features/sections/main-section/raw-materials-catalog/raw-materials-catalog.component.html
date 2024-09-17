@@ -1,6 +1,6 @@
 <div class="container">
     <app-raw-material-list></app-raw-material-list>
-    @if(!isMobile){
+    @if(!getIsMobileFromService()){
     <p-divider layout="vertical" />
     <app-raw-material-data-form></app-raw-material-data-form>
     }

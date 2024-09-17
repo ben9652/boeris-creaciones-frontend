@@ -28,3 +28,10 @@
     display: flex;
     justify-content: space-evenly;
 }
+
+@media screen and (max-width: 500px) {
+    .rawMaterial-data-form {
+        flex-direction: column;
+        margin: 1em;
+    }
+}

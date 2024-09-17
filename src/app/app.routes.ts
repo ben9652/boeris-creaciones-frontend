@@ -20,6 +20,7 @@ import { RolesEditionComponent } from './features/sections/sub-sections/roles-ed
 import { inject } from '@angular/core';
 import { ActiveRouteService } from './core/services/active-route.service';
 import { MobilePartnerAdditionComponent } from './features/sections/sub-sections/mobile-partner-addition/mobile-partner-addition.component';
+import { MobileRawMaterialDataComponent } from './features/sections/sub-sections/mobile-raw-material-data/mobile-raw-material-data.component';
 
 export const routes: Routes = [
     {
@@ -119,5 +120,13 @@ export const routes: Routes = [
     {
         path: 'profile',
         component: EditProfileComponent
+    },
+    {
+        path: 'raw-material-addition',
+        component: MobileRawMaterialDataComponent
+    },
+    {
+        path: 'raw-material-edition',
+        component: MobileRawMaterialDataComponent
     }
 ];

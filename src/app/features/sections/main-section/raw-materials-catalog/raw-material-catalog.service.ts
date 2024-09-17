@@ -8,11 +8,14 @@ import { environment } from '../../../../../environments/environment';
 import { signal } from '@angular/core'
 import { Category } from '../../../../core/models/category.entities';
 import { Unit } from '../../../../core/models/rawMaterial.entities';
+import { PatchObject } from '../../../../core/models/patchObj.entities';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RawMaterialCatalogService {
+
+  isMobile = signal<boolean>(false);
 
   httpOptions?: HttpOptions;
   urlBase: string = '';
@@ -22,6 +25,7 @@ export class RawMaterialCatalogService {
   disableDataEdition = signal<boolean>(true);
   mode = signal<string | null>(null);
   refreshNeeded = signal<boolean>(false);
+  patchData: PatchObject[] = [];
 
   constructor(private authService: AuthService, private http: HttpClient) { }
 
@@ -30,18 +34,15 @@ export class RawMaterialCatalogService {
   }
 
   triggerRefresh() {
-    console.log("TRIGGEREA EL REFRESCO");
     this.refreshNeeded.set(true);
   }
 
   resetRefresh() {
-    console.log("RESETEO EL REFRESCO");
     this.refreshNeeded.set(false);
   }
 
   selectRawMaterial(raw: RawMaterial) {
     this.selectedRawMaterial.set(raw);
-    console.log(this.selectedRawMaterial());
   }
 
   calculateNextId(id: number){
@@ -97,5 +98,24 @@ export class RawMaterialCatalogService {
     } else {
       return throwError(() => new Error('Debe completar todos los campos obligatorios'));
     }
+  }
+
+  addPatchObject(op: string, path: string, value: any) {
+    const allreadyPatch = this.patchData.find(patch => patch.path === path);
+    if(allreadyPatch){
+      allreadyPatch.value = value;
+    } else {
+      this.patchData.push(new PatchObject(op, path, value));
+    }
+  }
+
+  editRawMaterial(id: number, patchObj: PatchObject[]): Observable<RawMaterial> {
+    if((patchObj.find(patch => patch.path === '/name')?.value) !== ""){
+      console.log('NOMBRE LLENO');
+      return this.http.patch<RawMaterial>(this.urlBase + environment.API_URL + 'CatalogoMateriasPrimas/' + id, patchObj, this.httpOptions);
+    }
+    console.log('NOMBRE VACIO');
+    return throwError(() => new Error('El nombre no puede ser vacio'));
+    
   }
 }

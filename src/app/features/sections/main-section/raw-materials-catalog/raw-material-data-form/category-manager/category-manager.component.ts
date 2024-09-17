@@ -4,7 +4,7 @@ import { ButtonModule } from 'primeng/button';
 import { Category } from '../../../../../../core/models/category.entities';
 import { RawMaterialCatalogService } from '../../raw-material-catalog.service';
 import { FormsModule } from '@angular/forms';
-
+import { PatchObject } from '../../../../../../core/models/patchObj.entities';
 
 @Component({
   selector: 'app-category-manager',
@@ -15,6 +15,9 @@ import { FormsModule } from '@angular/forms';
 })
 export class CategoryManagerComponent {
   categorys: Category[] = [];
+  selectedCategory!: Category;
+  patchData: PatchObject[] = [];
+  
 
   constructor(public rawMaterialCatalogService: RawMaterialCatalogService) {
     effect(() => {
@@ -36,5 +39,6 @@ export class CategoryManagerComponent {
 
   updateRawMaterialCategory(value: Category){
     this.rawMaterialCatalogService.updateSelectedRawMaterial('category', value);
+    this.rawMaterialCatalogService.addPatchObject('replace', '/category', value);
   }
 }
