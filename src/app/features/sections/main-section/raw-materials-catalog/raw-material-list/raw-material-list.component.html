@@ -15,7 +15,7 @@
             <ng-template pTemplate="body" let-rawMaterial>
                 <tr class="rowMaterial" (click)="clickOnRawMaterial(rawMaterial)">
                     <td>{{ rawMaterial.id }}</td>
-                    <td>{{ rawMaterial.name }}</td>
+                    <td>{{ rawMaterial.name }} [{{ rawMaterial.unit.name }}]</td>
                     <td>{{ rawMaterial.stock }}</td>
                 </tr>
             </ng-template>

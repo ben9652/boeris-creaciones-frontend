@@ -623,9 +623,9 @@ $overlayContentBg: $panelContentBg !default;
 $overlayContainerShadow: 0 1px 3px rgba(0, 0, 0, 0.3) !default;
 
 //dialog
-$dialogHeaderBg: $shade000 !default;
+$dialogHeaderBg: $primaryColor !default;
 $dialogHeaderBorder: 0 none !default;
-$dialogHeaderTextColor: $shade800 !default;
+$dialogHeaderTextColor: $secondaryColor !default;
 $dialogHeaderFontWeight: 700 !default;
 $dialogHeaderFontSize: 1.25rem !default;
 $dialogHeaderPadding: 1.5rem !default;

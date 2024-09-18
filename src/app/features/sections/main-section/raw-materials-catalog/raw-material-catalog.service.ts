@@ -27,6 +27,9 @@ export class RawMaterialCatalogService {
   refreshNeeded = signal<boolean>(false);
   patchData: PatchObject[] = [];
 
+  modalVisibility = false;
+  modalTitle = "";
+
   constructor(private authService: AuthService, private http: HttpClient) { }
 
   getRefreshNeeded() {
@@ -111,11 +114,22 @@ export class RawMaterialCatalogService {
 
   editRawMaterial(id: number, patchObj: PatchObject[]): Observable<RawMaterial> {
     if((patchObj.find(patch => patch.path === '/name')?.value) !== ""){
-      console.log('NOMBRE LLENO');
       return this.http.patch<RawMaterial>(this.urlBase + environment.API_URL + 'CatalogoMateriasPrimas/' + id, patchObj, this.httpOptions);
     }
-    console.log('NOMBRE VACIO');
     return throwError(() => new Error('El nombre no puede ser vacio'));
-    
   }
+
+  createCategory(newCategory: Category): Observable<Category> {
+    this.modalVisibility = false;
+    if(newCategory.name == "" || null || undefined){
+      return throwError(() => new Error('El nombre del rubro no puede ser vacio'));
+    } else {
+      return this.http.post<Category>(this.urlBase + environment.API_URL + 'RubrosMateriasPrimas', newCategory, this.httpOptions);
+    }
+  }
+
+  editCategory(categoryId: number, newCategoryName: string): Observable<Category> {
+    return this.http.patch<Category>(this.urlBase + environment.API_URL + 'RubrosMateriasPrimas/' + categoryId, [{ "op": "replace", "path": "/name", "value": newCategoryName }], this.httpOptions);
+  }
+  
 }
