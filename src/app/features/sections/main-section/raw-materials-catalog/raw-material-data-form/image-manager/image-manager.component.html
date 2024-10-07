@@ -1,7 +1,22 @@
 <div class="img-manager-content">
     <h4>Imagen</h4>
-    <div class="rawMaterial-img">
-        <img [src]="getImage()" alt="rawMaterial-img">
+    <div [ngClass]="{
+        'rawMaterial-img': true,
+        'filter-img': rawMaterialCatalogService.selectedRawMaterial()?.picture === 'pictures/leaf-solid.svg' || rawMaterialCatalogService.selectedRawMaterial() === null
+    }">
+        <img [src]="getImage()" width="190px" alt="rawMaterial-img">
     </div>
-    <p-button label="Subir archivo" icon="fas fa-download" [disabled]="this.disabledEdition()"></p-button>
+    <p-fileUpload #fileUpload
+    mode="basic"
+    name="demo[]"
+    chooseLabel="Subir archivo"
+    chooseIcon="fas fa-upload"
+    uploadIcon="fas fa-upload"
+    [customUpload]="true"
+    accept="image/*"
+    (onSelect)="onUploadHandler($event)"
+    [disabled]="this.disabledEdition()"
+    [showCancelButton]="true"
+    >
+    </p-fileUpload>
 </div>

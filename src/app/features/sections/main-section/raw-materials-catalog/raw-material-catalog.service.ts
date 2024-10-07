@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { effect, Injectable, model, ModelSignal } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { RawMaterial } from '../../../../core/models/rawMaterial.entities';
 import { HttpOptions } from '../../../../core/models/httpOptions.entities';
@@ -9,6 +9,7 @@ import { signal } from '@angular/core'
 import { Category } from '../../../../core/models/category.entities';
 import { Unit } from '../../../../core/models/rawMaterial.entities';
 import { PatchObject } from '../../../../core/models/patchObj.entities';
+import { RawMaterialRow } from './raw-material-list/raw-material-list.entities';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +19,11 @@ export class RawMaterialCatalogService {
   isMobile = signal<boolean>(false);
 
   httpOptions?: HttpOptions;
-  urlBase: string = '';
+  urlBase: string;
 
+  previousRawMaterial: RawMaterial | null = null;
   selectedRawMaterial = signal<RawMaterial | null>(null);
+
   nextId = signal<number>(0);
   disableDataEdition = signal<boolean>(true);
   mode = signal<string | null>(null);
@@ -30,7 +33,9 @@ export class RawMaterialCatalogService {
   modalVisibility = false;
   modalTitle = "";
 
-  constructor(private authService: AuthService, private http: HttpClient) { }
+  constructor(private authService: AuthService, private http: HttpClient) {
+    this.urlBase = environment.API_URL;
+  }
 
   getRefreshNeeded() {
     return this.refreshNeeded;
@@ -44,8 +49,14 @@ export class RawMaterialCatalogService {
     this.refreshNeeded.set(false);
   }
 
-  selectRawMaterial(raw: RawMaterial) {
-    this.selectedRawMaterial.set(raw);
+  selectRawMaterial(rawMaterial: RawMaterialRow) {
+    // Hago copias completas de los objetos para pasarlos a estos otros objetos que quiero que adquieran sus mismos valores
+    // Si asigno directamente los objetos estaré asignando referencias de rawMaterial.nonModified y rawMaterial.modified, y solo
+    // quiero copias completas porque sino ocurren cosas raras.
+    const clonedNonModifiedRawMaterial: RawMaterial | null = structuredClone(rawMaterial.nonModified);
+    const clonedModifiedRawMaterial: RawMaterial | null = structuredClone(rawMaterial.modified);
+    this.previousRawMaterial = clonedNonModifiedRawMaterial;
+    this.selectedRawMaterial.set(clonedModifiedRawMaterial);
   }
 
   calculateNextId(id: number){
@@ -81,23 +92,27 @@ export class RawMaterialCatalogService {
 
   getRawMaterialsList(): Observable<RawMaterial[]> {
     this.httpOptions = new HttpOptions(this.authService.getToken());
-    return this.http.get<RawMaterial[]>(this.urlBase + environment.API_URL + 'CatalogoMateriasPrimas', this.httpOptions);
+    const apiUrl = this.urlBase + 'CatalogoMateriasPrimas';
+    return this.http.get<RawMaterial[]>(apiUrl, this.httpOptions);
   }
 
   getCategorys(): Observable<Category[]> {
     this.httpOptions = new HttpOptions(this.authService.getToken());
-    return this.http.get<Category[]>(this.urlBase + environment.API_URL + 'RubrosMateriasPrimas', this.httpOptions);
+    const apiUrl = this.urlBase + 'RubrosMateriasPrimas';
+    return this.http.get<Category[]>(apiUrl, this.httpOptions);
   }
 
   async getUnits(): Promise<Unit[]> {
-    const data = await fetch(this.urlBase + environment.API_URL + 'Unidades/');
+    const apiUrl = this.urlBase + 'Unidades';
+    const data = await fetch(apiUrl);
     return await data.json() ?? [];
   }
 
   addNewRawMaterial(): Observable<RawMaterial> {
     const newRawMaterial = this.selectedRawMaterial();
+    const apiUrl = this.urlBase + 'CatalogoMateriasPrimas';
     if(this.selectedRawMaterial()?.name && this.selectedRawMaterial()?.category && this.selectedRawMaterial()?.source && this.selectedRawMaterial()?.unit){
-      return this.http.post<RawMaterial>(this.urlBase + environment.API_URL + 'CatalogoMateriasPrimas', newRawMaterial, this.httpOptions);
+      return this.http.post<RawMaterial>(apiUrl, newRawMaterial, this.httpOptions);
     } else {
       return throwError(() => new Error('Debe completar todos los campos obligatorios'));
     }
@@ -113,23 +128,31 @@ export class RawMaterialCatalogService {
   }
 
   editRawMaterial(id: number, patchObj: PatchObject[]): Observable<RawMaterial> {
+    const apiUrl = this.urlBase + 'CatalogoMateriasPrimas/' + id;
     if((patchObj.find(patch => patch.path === '/name')?.value) !== ""){
-      return this.http.patch<RawMaterial>(this.urlBase + environment.API_URL + 'CatalogoMateriasPrimas/' + id, patchObj, this.httpOptions);
+      return this.http.patch<RawMaterial>(apiUrl, patchObj, this.httpOptions);
     }
-    return throwError(() => new Error('El nombre no puede ser vacio'));
+    return throwError(() => new Error('El nombre no puede ser vacío'));
   }
 
   createCategory(newCategory: Category): Observable<Category> {
     this.modalVisibility = false;
+    const apiUrl = this.urlBase + 'RubrosMateriasPrimas';
     if(newCategory.name == "" || null || undefined){
-      return throwError(() => new Error('El nombre del rubro no puede ser vacio'));
+      return throwError(() => new Error('El nombre del rubro no puede ser vacío'));
     } else {
-      return this.http.post<Category>(this.urlBase + environment.API_URL + 'RubrosMateriasPrimas', newCategory, this.httpOptions);
+      return this.http.post<Category>(apiUrl, newCategory, this.httpOptions);
     }
   }
 
   editCategory(categoryId: number, newCategoryName: string): Observable<Category> {
-    return this.http.patch<Category>(this.urlBase + environment.API_URL + 'RubrosMateriasPrimas/' + categoryId, [{ "op": "replace", "path": "/name", "value": newCategoryName }], this.httpOptions);
+    const apiUrl = this.urlBase + 'RubrosMateriasPrimas/' + categoryId;
+    const patchObj = new PatchObject("replace", "name", newCategoryName);
+    return this.http.patch<Category>(this.urlBase + environment.API_URL + 'RubrosMateriasPrimas/' + categoryId, patchObj, this.httpOptions);
   }
   
+  uploadImage(formData: FormData) {
+    const apiUrl = this.urlBase + 'CatalogoMateriasPrimas/' + 'upload-image';
+    this.http.post(apiUrl, formData, this.httpOptions);
+  }
 }

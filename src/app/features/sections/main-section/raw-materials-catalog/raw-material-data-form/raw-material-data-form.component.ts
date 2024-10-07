@@ -75,6 +75,11 @@ export class RawMaterialDataFormComponent {
     this.rawMaterialCatalogService.addPatchObject('replace', '/comment', value);
   }
 
+  updateRawMaterialPicture(value: string) {
+    this.rawMaterialCatalogService.updateSelectedRawMaterial('picture', value);
+    this.rawMaterialCatalogService.addPatchObject('replace', '/picture', value);
+  }
+
   disabledEdition(): boolean {
     return this.rawMaterialCatalogService.disableDataEdition();
   }
@@ -92,8 +97,8 @@ export class RawMaterialDataFormComponent {
           next: (response) => {
             this.messageService.add({
               severity: 'success',
-              summary: 'Exito',
-              detail: 'Materia Prima creada con exito'
+              summary: 'Éxito',
+              detail: 'Materia prima creada con éxito'
             });
             this.rawMaterialCatalogService.triggerRefresh();
           },
@@ -113,8 +118,8 @@ export class RawMaterialDataFormComponent {
             next: (response) => {
               this.messageService.add({
                 severity: 'success',
-                summary: 'Exito',
-                detail: 'Materia Prima actualizada con exito'
+                summary: 'Éxito',
+                detail: 'Materia prima actualizada con éxito'
               });
               this.rawMaterialCatalogService.patchData = [];
               this.rawMaterialCatalogService.triggerRefresh();
@@ -135,6 +140,8 @@ export class RawMaterialDataFormComponent {
   }
 
   clickOnCancel() {
+    const clonedRawMaterial: RawMaterial | null = structuredClone(this.rawMaterialCatalogService.previousRawMaterial);
+    this.rawMaterialCatalogService.selectedRawMaterial.set(clonedRawMaterial);
     this.rawMaterialCatalogService.toggleEdition(true);
   }
 
@@ -153,15 +160,15 @@ export class RawMaterialDataFormComponent {
           next: (response) => {
             this.messageService.add({
               severity: 'success',
-              summary: 'Exito',
-              detail: 'Rubro creado con exito'
+              summary: 'Éxito',
+              detail: 'Rubro creado con éxito'
             });
             this.rawMaterialCatalogService.triggerRefresh();
           }, error: (err) => {
             this.messageService.add({
               severity: 'error',
               summary: 'Error',
-              detail: err.message || 'Error al crear el Rubro'
+              detail: err.message || 'Error al crear el rubro'
             });
           }
         });
@@ -173,15 +180,15 @@ export class RawMaterialDataFormComponent {
             next: (response) => {
               this.messageService.add({
                 severity: 'success',
-                summary: 'Exito',
-                detail: 'El Rubro se edito correctamente'
+                summary: 'Éxito',
+                detail: 'El rubro se editó correctamente'
               });
               this.rawMaterialCatalogService.triggerRefresh();
             }, error: (err) => {
               this.messageService.add({
                 severity: 'error',
                 summary: 'Error',
-                detail: err.message || 'Error al editar el Rubro'
+                detail: err.message || 'Error al editar el rubro'
               });
             }
           });
@@ -206,5 +213,11 @@ export class RawMaterialDataFormComponent {
     this.editingCategoryId = category.id;
   }
   
-
+  onImageSelect(event: File) {
+    let selectedRawMaterial: RawMaterial | null = this.rawMaterialCatalogService.selectedRawMaterial();
+    if(selectedRawMaterial != null) {
+      selectedRawMaterial.picture = URL.createObjectURL(event);
+      // this.rawMaterialCatalogService.selectedRawMaterial.set(selectedRawMaterial);
+    }
+  }
 }

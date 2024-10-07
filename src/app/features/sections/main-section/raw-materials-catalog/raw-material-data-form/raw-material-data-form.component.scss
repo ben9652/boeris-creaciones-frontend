@@ -19,9 +19,11 @@
     justify-content: space-evenly;
 }
 
-.data-text {
+.fields {
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
+    width: 50%;
 }
 
 .rawMaterial-data-form-buttons {

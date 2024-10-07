@@ -1,5 +1,7 @@
-<div>
+<div class="container">
     <p-dropdown [options]="categorys" optionLabel="name" placeholder="Rubro" [style]="{ width: '60%' }" emptyMessage="No se encontraron rubros" [disabled]="this.disabledEdition()" [ngModel]="this.rawMaterialCatalogService.selectedRawMaterial()?.category" (ngModelChange)="updateRawMaterialCategory($event)"/>
-    <p-button icon="fas fa-plus" (onClick)="showModalCategory('new')"></p-button>
-    <p-button icon="fas fa-pencil" [disabled]="this.disabledEdition()" (onClick)="showModalCategory('edit')"></p-button>
+    <div class="buttons">
+        <p-button icon="fas fa-plus" (onClick)="showModalCategory('new')"></p-button>
+        <p-button icon="fas fa-pencil" [disabled]="this.disabledEdition()" (onClick)="showModalCategory('edit')"></p-button>
+    </div>
 </div>

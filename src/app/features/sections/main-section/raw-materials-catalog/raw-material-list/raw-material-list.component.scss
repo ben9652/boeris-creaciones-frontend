@@ -10,11 +10,8 @@
 .rawMaterials-list-view {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-}
-
-.rawMaterial-list-buttons {
-    padding-bottom: 2rem;
 }
 
 .rawMaterial-list {

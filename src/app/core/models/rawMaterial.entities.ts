@@ -20,3 +20,16 @@ export interface RawMaterial {
     picture: string | null,
     comment?: string | null
 }
+
+export function isRawMaterialNull(rawMaterial: RawMaterial): boolean {
+    const id: boolean = rawMaterial.id === 0;
+    const category: boolean = rawMaterial.category === null;
+    const unit: boolean = rawMaterial.unit === null;
+    const name: boolean = rawMaterial.name === null;
+    const source: boolean = rawMaterial.source === null;
+    const stock: boolean = rawMaterial.stock === 0;
+    const picture: boolean = rawMaterial.picture === 'pictures/leaf-solid.svg';
+    const comment: boolean = rawMaterial.comment === null;
+
+    return id && category && unit && name && source && stock && picture && comment;
+}

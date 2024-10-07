@@ -9,11 +9,27 @@ h4 {
 }
 
 .rawMaterial-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 2px solid $primaryColor;
     border-radius: 5px;
-    filter: brightness(0) saturate(100%) invert(44%) sepia(65%) saturate(511%) hue-rotate(334deg) brightness(91%) contrast(91%);
     margin-bottom: 1em;
     padding: 3em;
+    width: 200px;
+    height: 200px;
+}
+
+.filter-img {
+    filter: brightness(0) saturate(100%) invert(44%) sepia(65%) saturate(511%) hue-rotate(334deg) brightness(91%) contrast(91%);
+}
+
+:host ::ng-deep .p-fileupload .p-button-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px; /* Cambia este valor según el ancho que necesites */
+    display: block;
 }
 
 @media screen and (max-width: 500px) {

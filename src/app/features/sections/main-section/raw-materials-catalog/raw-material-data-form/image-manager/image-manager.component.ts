@@ -1,18 +1,22 @@
-import { Component } from '@angular/core';
-import { ButtonModule } from 'primeng/button';
+import { Component, output, OutputEmitterRef, ViewChild } from '@angular/core';
+import { FileUpload, FileUploadModule } from 'primeng/fileupload';
 import { RawMaterialCatalogService } from '../../raw-material-catalog.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-image-manager',
   standalone: true,
-  imports: [ButtonModule],
+  imports: [FileUploadModule, CommonModule],
   templateUrl: './image-manager.component.html',
   styleUrl: './image-manager.component.scss'
 })
 export class ImageManagerComponent {
+  uploadEvent: OutputEmitterRef<File> = output<File>();
 
-  constructor(private rawMaterialCatalogService: RawMaterialCatalogService) {
-
+  @ViewChild('fileUpload') fileUploadComponent!: FileUpload;
+  
+  constructor(public rawMaterialCatalogService: RawMaterialCatalogService) {
+    
   }
 
   getImage(): string{
@@ -22,5 +26,12 @@ export class ImageManagerComponent {
 
   disabledEdition(): boolean{
     return this.rawMaterialCatalogService.disableDataEdition();
+  }
+
+  onUploadHandler(event: any) {
+    const file: File = event.currentFiles[0];
+
+    this.uploadEvent.emit(file);
+    this.fileUploadComponent.clear();
   }
 }
