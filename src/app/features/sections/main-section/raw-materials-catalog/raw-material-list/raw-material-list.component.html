@@ -4,7 +4,7 @@
         <!-- <p-button label="Editar" icon="fas fa-pencil"></p-button> -->
     </div>
     <div class="rawMaterial-list">
-        <p-table [value]="rawMaterialsList" [scrollable]="true" scrollHeight="60vh">
+        <p-table [value]="rawMaterialsList" [(selection)]="selectedRow" [scrollable]="true" scrollHeight="60vh" selectionMode="single">
             <ng-template pTemplate="header">
                 <tr>
                     <th>ID</th>
@@ -13,7 +13,7 @@
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-rawMaterialRow>
-                <tr class="rowMaterial" (click)="clickOnRawMaterial(rawMaterialRow)">
+                <tr class="rowMaterial" [pSelectableRow]="rawMaterialRow" (click)="clickOnRawMaterial(rawMaterialRow)">
                     <td>{{ rawMaterialRow.nonModified.id }}</td>
                     <td>{{ rawMaterialRow.nonModified.name }} [{{ rawMaterialRow.nonModified.unit.name }}]</td>
                     <td>{{ rawMaterialRow.nonModified.stock }}</td>

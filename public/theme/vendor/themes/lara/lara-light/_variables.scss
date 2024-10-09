@@ -509,11 +509,11 @@ $tableHeaderCellHighlightHoverBg: $highlightBg !default;
 $tableHeaderCellHighlightTextHoverColor: $highlightTextColor !default;
 $tableSortableColumnBadgeSize: 1.143rem !default;
 
-$tableBodyRowBg: $shade000 !default;
-$tableBodyRowTextColor: $shade700 !default;
+$tableBodyRowBg: $secondaryColor !default;
+$tableBodyRowTextColor: $primaryColor !default;
 $tableBodyRowEvenBg: #f8f8fa !default;
-$tableBodyRowHoverBg: $shade200 !default;
-$tableBodyRowTextHoverColor: $shade700 !default;
+$tableBodyRowHoverBg: $secondaryDarkColor !default;
+$tableBodyRowTextHoverColor: $primaryColor !default;
 $tableBodyCellBorder: 1px solid $shade300 !default;
 $tableBodyCellBorderWidth: 0 0 1px 0 !default;
 $tableBodyCellPadding: 1rem 1rem !default;

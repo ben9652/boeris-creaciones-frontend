@@ -34,6 +34,32 @@ export function isRawMaterialNull(rawMaterial: RawMaterial): boolean {
     return id && category && unit && name && source && stock && picture && comment;
 }
 
+export function areRawMaterialsEqual(obj1: RawMaterial | null, obj2: RawMaterial | null): boolean {
+    if(obj1 !== null && obj2 !== null) {
+        if(obj1.id !== obj2.id)
+            return false;
+        if(obj1.category?.id !== obj2.category?.id || obj2.category?.name !== obj2.category?.name)
+            return false;
+        if(obj1.unit?.id !== obj1.unit?.id || obj2.unit?.name !== obj2.unit?.name)
+            return false;
+        if(obj1.name !== obj2.name)
+            return false;
+        if(obj1.source !== obj2.source)
+            return false;
+        if(obj1.stock !== obj2.stock)
+            return false;
+        if(obj1.picture !== obj2.picture)
+            return false;
+        if(obj1.comment !== obj2.comment)
+            return false;
+    }
+    else if(obj1 === null || obj2 === null) {
+        return false;
+    }
+    
+    return true;
+}
+
 export function constructNullRawMaterial(): RawMaterial {
     let newRawMaterial: RawMaterial = {
         id: 0,

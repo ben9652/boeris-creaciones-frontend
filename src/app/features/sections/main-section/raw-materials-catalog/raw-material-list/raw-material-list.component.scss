@@ -24,18 +24,8 @@ th {
 }
 
 .rowMaterial {
-    color: $primaryColor;
-    background-color: $secondaryColor;
     cursor: pointer;
     user-select: none;
-
-    &:hover {
-        background-color: $secondaryDarkColor;
-    }
-
-    &:active {
-        background-color: $secondaryDarkerColor;
-    }
 }
 
 @media screen and (max-width: 500px) {

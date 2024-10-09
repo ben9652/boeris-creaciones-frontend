@@ -8,7 +8,7 @@ import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button'
 import { RawMaterialCatalogService } from '../raw-material-catalog.service';
-import { RawMaterial, Source, Unit } from '../../../../../core/models/rawMaterial.entities';
+import { areRawMaterialsEqual, RawMaterial, Source, Unit } from '../../../../../core/models/rawMaterial.entities';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
@@ -167,15 +167,16 @@ export class RawMaterialDataFormComponent {
   }
 
   clickOnModalCancel() {
-    this.modalLoading = true;
+    this.modalLoading = false;
     this.rawMaterialCatalogService.modalVisibility = false;
   }
 
   clickOnModalConfirm() {
+    this.modalLoading = true;
     switch (this.rawMaterialCatalogService.modalTitle) {
       case "Nuevo":
         const newCategory: Category = {
-          id: this.categoryManager.categorys.length + 1,
+          id: this.categoryManager.categories.length + 1,
           name: this.newCategoryName
         }
         this.rawMaterialCatalogService.createCategory(newCategory).subscribe({
@@ -186,32 +187,37 @@ export class RawMaterialDataFormComponent {
               detail: 'Rubro creado con éxito'
             });
             this.rawMaterialCatalogService.triggerRefresh();
+            this.rawMaterialCatalogService.modalVisibility = false;
+            this.modalLoading = false;
           }, error: (err) => {
             this.messageService.add({
               severity: 'error',
               summary: 'Error',
               detail: err.message || 'Error al crear el rubro'
             });
+            this.rawMaterialCatalogService.modalVisibility = false;
           }
         });
         break;
       case "Editar":
-        console.log(this.newCategoryName);
         if(this.editingCategoryId){
           this.rawMaterialCatalogService.editCategory(this.editingCategoryId, this.newCategoryName).subscribe({
-            next: (response) => {
+            next: (response: Category) => {
               this.messageService.add({
                 severity: 'success',
                 summary: 'Éxito',
                 detail: 'El rubro se editó correctamente'
               });
               this.rawMaterialCatalogService.triggerRefresh();
+              this.rawMaterialCatalogService.modalVisibility = false;
+              this.modalLoading = false;
             }, error: (err) => {
               this.messageService.add({
                 severity: 'error',
                 summary: 'Error',
                 detail: err.message || 'Error al editar el rubro'
               });
+              this.rawMaterialCatalogService.modalVisibility = false;
             }
           });
         }
@@ -219,7 +225,12 @@ export class RawMaterialDataFormComponent {
       default:
         break;
     }
-    this.rawMaterialCatalogService.modalVisibility = false;
+  }
+
+  onModalKeyPress(event: KeyboardEvent) {
+    if(event.key === 'Enter' && this.newCategoryName !== this.rawMaterialCatalogService.selectedRawMaterial()?.category?.name) {
+      this.clickOnModalConfirm();
+    }
   }
 
   showWarningMessage(message: string) {

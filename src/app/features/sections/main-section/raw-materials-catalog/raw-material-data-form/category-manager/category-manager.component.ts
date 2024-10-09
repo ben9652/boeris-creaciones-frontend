@@ -1,4 +1,4 @@
-import { Component, effect, EventEmitter, Output } from '@angular/core';
+import { Component, effect, EventEmitter, output, OutputEmitterRef } from '@angular/core';
 import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 import { Category } from '../../../../../../core/models/category.entities';
@@ -14,35 +14,33 @@ import { PatchObject } from '../../../../../../core/models/patchObj.entities';
   styleUrl: './category-manager.component.scss'
 })
 export class CategoryManagerComponent {
-  categorys: Category[] = [];
+  categories: Category[] = [];
   selectedCategory!: Category;
   patchData: PatchObject[] = [];
 
-  @Output() warningMessage = new EventEmitter<string>();
-  @Output() nameOfCategory = new EventEmitter<Category>();
+  warningMessage: OutputEmitterRef<string> = output<string>();
+  nameOfCategory: OutputEmitterRef<Category> = output<Category>();
 
   constructor(public rawMaterialCatalogService: RawMaterialCatalogService) {
     effect(() => {
       if (this.rawMaterialCatalogService.refreshNeeded()) {
-        this.loadCategorys();
+        this.loadCategories();
       }
     });
   }
 
   ngOnInit() {
-    this.loadCategorys();
+    this.loadCategories();
   }
 
   disabledEdition(): boolean {
     return this.rawMaterialCatalogService.disableDataEdition();
   }
 
-  loadCategorys() {
-    this.rawMaterialCatalogService.getCategorys().subscribe(data => {
-      this.categorys = data;
+  loadCategories() {
+    this.rawMaterialCatalogService.getCategories().subscribe(data => {
+      this.categories = data;
       this.rawMaterialCatalogService.resetRefresh();
-    }, error => {
-
     });
   }
 
@@ -61,7 +59,6 @@ export class CategoryManagerComponent {
         this.rawMaterialCatalogService.modalTitle = "Editar";
         const rawMaterial = this.rawMaterialCatalogService.selectedRawMaterial();
         if(rawMaterial?.category){
-          console.log(rawMaterial.category);
           this.nameOfCategory.emit(rawMaterial.category);
           this.rawMaterialCatalogService.modalVisibility = true;
         } else {

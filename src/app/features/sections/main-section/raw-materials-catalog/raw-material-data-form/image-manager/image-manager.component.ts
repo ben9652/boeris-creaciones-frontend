@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ImageManagerComponent {
   uploadEvent: OutputEmitterRef<File> = output<File>();
+  loadingImage: boolean = true;
 
   @ViewChild('fileUpload') fileUploadComponent!: FileUpload;
   
@@ -22,6 +23,14 @@ export class ImageManagerComponent {
   getImage(): string{
     const defaultImage = 'pictures/leaf-solid.svg';
     return this.rawMaterialCatalogService.selectedRawMaterial()?.picture ? `${this.rawMaterialCatalogService.selectedRawMaterial()?.picture}` : defaultImage;
+  }
+
+  onImageLoad() {
+    this.loadingImage = false;
+  }
+
+  onImageError() {
+    this.loadingImage = false;
   }
 
   disabledEdition(): boolean{

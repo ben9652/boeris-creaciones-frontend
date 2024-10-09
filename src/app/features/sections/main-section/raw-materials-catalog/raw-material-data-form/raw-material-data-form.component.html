@@ -27,49 +27,51 @@
             <p-button
             class="bottom-button"
             label="Confirmar"
-            [disabled]="this.disabledEdition() || loading"
+            [disabled]="this.disabledEdition() || rawMaterialCatalogService.nonModified()"
             (onClick)="clickOnConfirm()"
             ></p-button>
         }
         @else {
             <p-button
             class="bottom-button"
-            [disabled]="loading"
+            [disabled]="true"
             >
                 <i class="pi pi-spin pi-spinner"></i>
             </p-button>
         }
     </div>
 </div>
-<p-dialog header="{{ this.rawMaterialCatalogService.modalTitle }} Rubro" [modal]="true" [(visible)]="this.rawMaterialCatalogService.modalVisibility" [style]="{ width: '25rem' }">
-    <div class="flex align-items-center gap-3 mt-3 mb-3">
-        <label for="category" class="font-semibold w-6rem">Rubro</label>
-        <input pInputText id="category" class="flex-auto" [(ngModel)]="newCategoryName" autocomplete="off"/>
-    </div>
-    <div class="flex justify-content-evenly gap-2">
-        <p-button
-        class="bottom-button"
-        label="Cancelar"
-        severity="secondary"
-        [disabled]="modalLoading"
-        (onClick)="clickOnModalCancel()"
-        />
-
-        @if (!modalLoading) {
+<p-dialog header="{{ this.rawMaterialCatalogService.modalTitle }} Rubro" [modal]="true" [closable]="!modalLoading" [closeOnEscape]="!modalLoading" [(visible)]="this.rawMaterialCatalogService.modalVisibility" [style]="{ width: '25rem' }">
+    <div (keypress)="onModalKeyPress($event)">
+        <div class="flex align-items-center gap-3 mt-3 mb-3">
+            <label for="category" class="font-semibold w-6rem">Rubro</label>
+            <input pInputText id="category" class="flex-auto" [readOnly]="modalLoading" [disabled]="modalLoading" [(ngModel)]="newCategoryName" autocomplete="off"/>
+        </div>
+        <div class="flex justify-content-evenly gap-2">
             <p-button
             class="bottom-button"
-            label="Confirmar"
+            label="Cancelar"
+            severity="secondary"
             [disabled]="modalLoading"
-            (onClick)="clickOnModalConfirm()"
-            ></p-button>
-        }
-        @else {
-            <p-button
-            class="bottom-button"
-            [disabled]="modalLoading"
-            >
-                <i class="pi pi-spin pi-spinner"></i>
-            </p-button>
-        }
+            (onClick)="clickOnModalCancel()"
+            />
+    
+            @if (!modalLoading) {
+                <p-button
+                class="bottom-button"
+                label="Confirmar"
+                [disabled]="modalLoading || rawMaterialCatalogService.selectedRawMaterial()?.category?.name === newCategoryName"
+                (onClick)="clickOnModalConfirm()"
+                ></p-button>
+            }
+            @else {
+                <p-button
+                class="bottom-button"
+                [disabled]="modalLoading"
+                >
+                    <i class="pi pi-spin pi-spinner"></i>
+                </p-button>
+            }
+        </div>
     </div>
 </p-dialog>

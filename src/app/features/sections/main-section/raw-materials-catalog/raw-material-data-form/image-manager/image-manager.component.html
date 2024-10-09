@@ -4,7 +4,10 @@
         'rawMaterial-img': true,
         'filter-img': rawMaterialCatalogService.selectedRawMaterial()?.picture === 'pictures/leaf-solid.svg' || rawMaterialCatalogService.selectedRawMaterial() === null
     }">
-        <img [src]="getImage()" width="190px" alt="rawMaterial-img">
+        <img [src]="getImage()" width="190px" (load)="onImageLoad()" (error)="onImageError()" [hidden]="loadingImage" alt="Imagen de materia prima">
+        @if(loadingImage) {
+            <i class="pi pi-spinner pi-spin"></i>
+        }
     </div>
     <p-fileUpload #fileUpload
     mode="basic"

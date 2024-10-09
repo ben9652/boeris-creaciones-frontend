@@ -15,23 +15,26 @@ import { RawMaterialRow } from './raw-material-list.entities';
 })
 export class RawMaterialListComponent {
   rawMaterialsList: RawMaterialRow[] = [];
+  selectedRow: RawMaterialRow | null = null;
 
   constructor(private rawMaterialCatalogService: RawMaterialCatalogService, private router: Router){
     effect(() => {
       if (this.rawMaterialCatalogService.refreshNeeded()) {
         this.loadRawMaterialsList();
       }
-      const rawMaterialModified: RawMaterial | null = rawMaterialCatalogService.selectedRawMaterial();
-      if(rawMaterialModified !== null && !isRawMaterialNull(rawMaterialModified)) {
-        const id: number | null = rawMaterialModified.id;
-        const index: number = this.rawMaterialsList.findIndex((rawMaterialRow: RawMaterialRow) => rawMaterialRow.modified.id === id);
-        
-        if(index !== -1) {
-          this.rawMaterialsList[index].modified = rawMaterialModified;
-        }
-        const disabledEdition: boolean = rawMaterialCatalogService.disableDataEdition()
-        if(disabledEdition) {
-          rawMaterialCatalogService.selectedRawMaterial.set(constructNullRawMaterial());
+      else {
+        const rawMaterialModified: RawMaterial | null = rawMaterialCatalogService.selectedRawMaterial();
+        if(rawMaterialModified !== null && !isRawMaterialNull(rawMaterialModified)) {
+          const id: number | null = rawMaterialModified.id;
+          const index: number = this.rawMaterialsList.findIndex((rawMaterialRow: RawMaterialRow) => rawMaterialRow.modified.id === id);
+          
+          if(index !== -1) {
+            this.rawMaterialsList[index].modified = rawMaterialModified;
+          }
+          const disabledEdition: boolean = rawMaterialCatalogService.disableDataEdition()
+          if(disabledEdition) {
+            rawMaterialCatalogService.selectedRawMaterial.set(constructNullRawMaterial());
+          }
         }
       }
     }, {allowSignalWrites: true});

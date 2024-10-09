@@ -1,11 +1,10 @@
-import { effect, Injectable, model, ModelSignal } from '@angular/core';
+import { effect, Injectable, model, signal, ModelSignal, WritableSignal } from '@angular/core';
 import { catchError, defer, from, map, Observable, of, switchMap, tap, throwError } from 'rxjs';
-import { RawMaterial } from '../../../../core/models/rawMaterial.entities';
+import { areRawMaterialsEqual, RawMaterial } from '../../../../core/models/rawMaterial.entities';
 import { HttpOptions } from '../../../../core/models/httpOptions.entities';
 import { AuthService } from '../../../../core/services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
-import { signal } from '@angular/core'
 import { Category } from '../../../../core/models/category.entities';
 import { Unit } from '../../../../core/models/rawMaterial.entities';
 import { PatchObject } from '../../../../core/models/patchObj.entities';
@@ -30,6 +29,8 @@ export class RawMaterialCatalogService {
   mode = signal<string | null>(null);
   refreshNeeded = signal<boolean>(false);
   patchData: PatchObject[] = [];
+
+  nonModified: WritableSignal<boolean> = signal<boolean>(true);
 
   modalVisibility = false;
   modalTitle = "";
@@ -58,6 +59,7 @@ export class RawMaterialCatalogService {
     const clonedModifiedRawMaterial: RawMaterial | null = structuredClone(rawMaterial.modified);
     this.previousRawMaterial = clonedNonModifiedRawMaterial;
     this.selectedRawMaterial.set(clonedModifiedRawMaterial);
+    this.nonModified.set(areRawMaterialsEqual(this.previousRawMaterial, this.selectedRawMaterial()));
   }
 
   calculateNextId(id: number){
@@ -84,6 +86,7 @@ export class RawMaterialCatalogService {
     const currentRawMaterial = this.selectedRawMaterial();
     if (currentRawMaterial) {
       this.selectedRawMaterial.set({ ...currentRawMaterial, [property]: value });
+      this.nonModified.set(areRawMaterialsEqual(this.previousRawMaterial, this.selectedRawMaterial()));
     }
   }
 
@@ -97,7 +100,7 @@ export class RawMaterialCatalogService {
     return this.http.get<RawMaterial[]>(apiUrl, this.httpOptions);
   }
 
-  getCategorys(): Observable<Category[]> {
+  getCategories(): Observable<Category[]> {
     this.httpOptions = new HttpOptions(this.authService.getToken());
     const apiUrl = this.urlBase + 'RubrosMateriasPrimas';
     return this.http.get<Category[]>(apiUrl, this.httpOptions);
@@ -212,8 +215,10 @@ export class RawMaterialCatalogService {
 
   editCategory(categoryId: number, newCategoryName: string): Observable<Category> {
     const apiUrl = this.urlBase + 'RubrosMateriasPrimas/' + categoryId;
-    const patchObj = new PatchObject("replace", "name", newCategoryName);
-    return this.http.patch<Category>(this.urlBase + environment.API_URL + 'RubrosMateriasPrimas/' + categoryId, patchObj, this.httpOptions);
+    const patchObj: PatchObject[] = [
+      new PatchObject("replace", "name", newCategoryName)
+    ];
+    return this.http.patch<Category>(apiUrl, patchObj, this.httpOptions);
   }
   
   uploadImage(formData: FormData) {
