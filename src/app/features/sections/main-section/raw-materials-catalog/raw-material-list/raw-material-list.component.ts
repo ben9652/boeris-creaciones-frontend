@@ -1,7 +1,7 @@
 import { Component, effect } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table'
-import { isRawMaterialNull, RawMaterial } from '../../../../../core/models/rawMaterial.entities';
+import { constructNullRawMaterial, isRawMaterialNull, RawMaterial } from '../../../../../core/models/rawMaterial.entities';
 import { RawMaterialCatalogService } from '../raw-material-catalog.service';
 import { Router } from '@angular/router';
 import { RawMaterialRow } from './raw-material-list.entities';
@@ -25,22 +25,13 @@ export class RawMaterialListComponent {
       if(rawMaterialModified !== null && !isRawMaterialNull(rawMaterialModified)) {
         const id: number | null = rawMaterialModified.id;
         const index: number = this.rawMaterialsList.findIndex((rawMaterialRow: RawMaterialRow) => rawMaterialRow.modified.id === id);
-        console.log('Materia prima NO modificada: ', this.rawMaterialsList[index].nonModified);
-        console.log('Materia prima modificada: ', rawMaterialModified);
-        console.log();
-        this.rawMaterialsList[index].modified = rawMaterialModified;
+        
+        if(index !== -1) {
+          this.rawMaterialsList[index].modified = rawMaterialModified;
+        }
         const disabledEdition: boolean = rawMaterialCatalogService.disableDataEdition()
         if(disabledEdition) {
-          rawMaterialCatalogService.selectedRawMaterial.set({
-            id: 0,
-            category: null,
-            unit: null,
-            name: null,
-            source: null,
-            stock: 0,
-            picture: 'pictures/leaf-solid.svg',
-            comment: null
-          });
+          rawMaterialCatalogService.selectedRawMaterial.set(constructNullRawMaterial());
         }
       }
     }, {allowSignalWrites: true});
@@ -71,6 +62,7 @@ export class RawMaterialListComponent {
   }
 
   loadRawMaterialsList() {
+    this.rawMaterialsList.splice(0);
     this.rawMaterialCatalogService.getRawMaterialsList().subscribe((data: RawMaterial[]) => {
       data.forEach((rawMaterial: RawMaterial) => {
         this.rawMaterialsList.push({

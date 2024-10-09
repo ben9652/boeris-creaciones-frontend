@@ -1,8 +1,8 @@
 <p-toast></p-toast>
 <div class="rawMaterial-data-form-view">
     <div class="rawMaterial-data-form">
-        <div>
-            <app-image-manager (uploadEvent)="onImageSelect($event)"></app-image-manager>
+        <div class="flex justify-content-center">
+            <app-image-manager (uploadEvent)="updateRawMaterialPicture($event)"></app-image-manager>
         </div>
         <div class="fields">
             <app-category-manager  (warningMessage)="showWarningMessage($event)" (nameOfCategory)="setModalCategoryName($event)"></app-category-manager>
@@ -15,8 +15,30 @@
         </div>
     </div>
     <div class="rawMaterial-data-form-buttons">
-        <p-button label="Cancelar" severity="secondary" [disabled]="this.disabledEdition()" (onClick)="clickOnCancel()"></p-button>
-        <p-button label="Confirmar" [disabled]="this.disabledEdition()" (onClick)="clickOnConfirm()"></p-button>
+        <p-button
+        class="bottom-button"
+        label="Cancelar"
+        severity="secondary"
+        [disabled]="this.disabledEdition() || loading"
+        (onClick)="clickOnCancel()"
+        ></p-button>
+
+        @if (!loading) {
+            <p-button
+            class="bottom-button"
+            label="Confirmar"
+            [disabled]="this.disabledEdition() || loading"
+            (onClick)="clickOnConfirm()"
+            ></p-button>
+        }
+        @else {
+            <p-button
+            class="bottom-button"
+            [disabled]="loading"
+            >
+                <i class="pi pi-spin pi-spinner"></i>
+            </p-button>
+        }
     </div>
 </div>
 <p-dialog header="{{ this.rawMaterialCatalogService.modalTitle }} Rubro" [modal]="true" [(visible)]="this.rawMaterialCatalogService.modalVisibility" [style]="{ width: '25rem' }">
@@ -24,8 +46,30 @@
         <label for="category" class="font-semibold w-6rem">Rubro</label>
         <input pInputText id="category" class="flex-auto" [(ngModel)]="newCategoryName" autocomplete="off"/>
     </div>
-    <div class="flex justify-content-end gap-2">
-        <p-button label="Cancelar" severity="secondary" (onClick)="clickOnModalCancel()"/>
-        <p-button label="Confirmar" (onClick)="clickOnModalConfirm()"/>
+    <div class="flex justify-content-evenly gap-2">
+        <p-button
+        class="bottom-button"
+        label="Cancelar"
+        severity="secondary"
+        [disabled]="modalLoading"
+        (onClick)="clickOnModalCancel()"
+        />
+
+        @if (!modalLoading) {
+            <p-button
+            class="bottom-button"
+            label="Confirmar"
+            [disabled]="modalLoading"
+            (onClick)="clickOnModalConfirm()"
+            ></p-button>
+        }
+        @else {
+            <p-button
+            class="bottom-button"
+            [disabled]="modalLoading"
+            >
+                <i class="pi pi-spin pi-spinner"></i>
+            </p-button>
+        }
     </div>
 </p-dialog>

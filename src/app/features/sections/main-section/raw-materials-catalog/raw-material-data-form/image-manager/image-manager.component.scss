@@ -2,6 +2,11 @@
 
 h4 {
     color: $primaryColor;
+    user-select: none;
+}
+
+img {
+    user-select: none;
 }
 
 .img-manager-content {
@@ -34,11 +39,20 @@ h4 {
 
 @media screen and (max-width: 500px) {
     img {
-        max-width: 20px;
+        max-width: 130px;
     }
     
     .img-manager-content {
-        margin-top: 3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         margin-bottom: 1em;
+    }
+
+    .rawMaterial-img {
+        padding: 0px;
+        width: 35vw;
+        height: 35vw;
     }
 }

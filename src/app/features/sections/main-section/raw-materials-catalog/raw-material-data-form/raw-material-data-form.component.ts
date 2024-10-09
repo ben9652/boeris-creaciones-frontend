@@ -4,7 +4,7 @@ import { ImageManagerComponent } from "./image-manager/image-manager.component";
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { DropdownModule } from 'primeng/dropdown';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button'
 import { RawMaterialCatalogService } from '../raw-material-catalog.service';
@@ -14,7 +14,6 @@ import { MessageService } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
 import { PatchObject } from '../../../../../core/models/patchObj.entities';
 import { Category } from '../../../../../core/models/category.entities';
-
 
 @Component({
   selector: 'app-raw-material-data-form',
@@ -42,13 +41,22 @@ export class RawMaterialDataFormComponent {
     }
   ];
   newCategoryName: string = "";
-  editingCategoryId: number | null = null; 
+  editingCategoryId: number | null = null;
+  loading: boolean = false;
+  modalLoading: boolean = false;
+  isMobile: boolean = false;
   @ViewChild(CategoryManagerComponent) categoryManager!: CategoryManagerComponent;
 
-  constructor(public rawMaterialCatalogService: RawMaterialCatalogService, private messageService: MessageService) {
+  constructor(public rawMaterialCatalogService: RawMaterialCatalogService, private messageService: MessageService, private location: Location) {
     effect(() => {
       this.getUnits();
     });
+  }
+  
+  ngDoCheck(): void {
+    //Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
+    //Add 'implements DoCheck' to the class.
+    this.isMobile = sessionStorage.getItem('isMobile') !== null ? true : false;
   }
 
   getSourceValue() {
@@ -75,9 +83,10 @@ export class RawMaterialDataFormComponent {
     this.rawMaterialCatalogService.addPatchObject('replace', '/comment', value);
   }
 
-  updateRawMaterialPicture(value: string) {
-    this.rawMaterialCatalogService.updateSelectedRawMaterial('picture', value);
-    this.rawMaterialCatalogService.addPatchObject('replace', '/picture', value);
+  updateRawMaterialPicture(value: File) {
+    const pictureString: string = URL.createObjectURL(value);
+    this.rawMaterialCatalogService.updateSelectedRawMaterial('picture', pictureString);
+    this.rawMaterialCatalogService.addPatchObject('replace', '/picture', pictureString);
   }
 
   disabledEdition(): boolean {
@@ -91,16 +100,18 @@ export class RawMaterialDataFormComponent {
   }
 
   clickOnConfirm() {
+    this.loading = true;
     switch (this.rawMaterialCatalogService.mode()) {
       case 'new':
         this.rawMaterialCatalogService.addNewRawMaterial().subscribe({
-          next: (response) => {
+          next: (response: RawMaterial) => {
             this.messageService.add({
               severity: 'success',
               summary: 'Éxito',
               detail: 'Materia prima creada con éxito'
             });
             this.rawMaterialCatalogService.triggerRefresh();
+            this.loading = false;
           },
           error: (err) => {
             this.messageService.add({
@@ -108,6 +119,7 @@ export class RawMaterialDataFormComponent {
               summary: 'Error',
               detail: err.message || 'Debe completar todos los campos obligatorios'
             });
+            this.loading = false;
           }
         });
         break;
@@ -115,7 +127,8 @@ export class RawMaterialDataFormComponent {
         const selectedId = this.rawMaterialCatalogService.selectedRawMaterial()?.id;
         if (selectedId && this.rawMaterialCatalogService.patchData.length > 0) {
           this.rawMaterialCatalogService.editRawMaterial(selectedId, this.rawMaterialCatalogService.patchData).subscribe({
-            next: (response) => {
+            next: (response: RawMaterial) => {
+              console.log(response);
               this.messageService.add({
                 severity: 'success',
                 summary: 'Éxito',
@@ -123,12 +136,14 @@ export class RawMaterialDataFormComponent {
               });
               this.rawMaterialCatalogService.patchData = [];
               this.rawMaterialCatalogService.triggerRefresh();
+              this.loading = false;
             }, error: (err) => {
               this.messageService.add({
                 severity: 'error',
                 summary: 'Error',
                 detail: err.message || 'Error al actualizar'
               });
+              this.loading = false;
             }
           });
         }
@@ -137,15 +152,22 @@ export class RawMaterialDataFormComponent {
         break;
     }
     this.rawMaterialCatalogService.toggleEdition(true);
+    if(this.isMobile) {
+      this.location.back();
+    }
   }
 
   clickOnCancel() {
     const clonedRawMaterial: RawMaterial | null = structuredClone(this.rawMaterialCatalogService.previousRawMaterial);
     this.rawMaterialCatalogService.selectedRawMaterial.set(clonedRawMaterial);
     this.rawMaterialCatalogService.toggleEdition(true);
+    if(this.isMobile) {
+      this.location.back();
+    }
   }
 
   clickOnModalCancel() {
+    this.modalLoading = true;
     this.rawMaterialCatalogService.modalVisibility = false;
   }
 
@@ -211,13 +233,5 @@ export class RawMaterialDataFormComponent {
   setModalCategoryName(category: Category) {
     this.newCategoryName = category.name;
     this.editingCategoryId = category.id;
-  }
-  
-  onImageSelect(event: File) {
-    let selectedRawMaterial: RawMaterial | null = this.rawMaterialCatalogService.selectedRawMaterial();
-    if(selectedRawMaterial != null) {
-      selectedRawMaterial.picture = URL.createObjectURL(event);
-      // this.rawMaterialCatalogService.selectedRawMaterial.set(selectedRawMaterial);
-    }
   }
 }

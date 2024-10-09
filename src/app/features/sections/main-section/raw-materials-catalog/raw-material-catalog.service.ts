@@ -1,5 +1,5 @@
 import { effect, Injectable, model, ModelSignal } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { catchError, defer, from, map, Observable, of, switchMap, tap, throwError } from 'rxjs';
 import { RawMaterial } from '../../../../core/models/rawMaterial.entities';
 import { HttpOptions } from '../../../../core/models/httpOptions.entities';
 import { AuthService } from '../../../../core/services/auth.service';
@@ -10,6 +10,7 @@ import { Category } from '../../../../core/models/category.entities';
 import { Unit } from '../../../../core/models/rawMaterial.entities';
 import { PatchObject } from '../../../../core/models/patchObj.entities';
 import { RawMaterialRow } from './raw-material-list/raw-material-list.entities';
+import { getImageFileFromUrl } from '../../../../shared/multimedia.helpers';
 
 @Injectable({
   providedIn: 'root'
@@ -109,30 +110,94 @@ export class RawMaterialCatalogService {
   }
 
   addNewRawMaterial(): Observable<RawMaterial> {
-    const newRawMaterial = this.selectedRawMaterial();
+    let newRawMaterial: RawMaterial | null = this.selectedRawMaterial();
     const apiUrl = this.urlBase + 'CatalogoMateriasPrimas';
-    if(this.selectedRawMaterial()?.name && this.selectedRawMaterial()?.category && this.selectedRawMaterial()?.source && this.selectedRawMaterial()?.unit){
-      return this.http.post<RawMaterial>(apiUrl, newRawMaterial, this.httpOptions);
+    const apiUrlToSavePicture: string = apiUrl + '/upload-image';
+    
+    if(this.selectedRawMaterial()?.name && this.selectedRawMaterial()?.category && this.selectedRawMaterial()?.source && this.selectedRawMaterial()?.unit) {
+      if(newRawMaterial?.picture !== 'pictures/leaf-solid.svg') {
+        return getImageFileFromUrl(newRawMaterial?.picture).pipe(
+          switchMap((file: File | undefined) => {
+            const formData = new FormData();
+            if(file) {
+              formData.append('file', file);
+            }
+
+            const httpOptionsToCreateImage: HttpOptions = new HttpOptions(this.authService.getToken(), true);
+            return this.http.post<string>(apiUrlToSavePicture, formData, httpOptionsToCreateImage).pipe(
+              switchMap((newPictureUrl: string) => {
+                if(newRawMaterial !== null) {
+                  newRawMaterial.picture = newPictureUrl;
+                }
+                return this.http.post<RawMaterial>(apiUrl, newRawMaterial, this.httpOptions);
+              })
+            );
+          })
+        )
+      }
+      else {
+        return this.http.post<RawMaterial>(apiUrl, newRawMaterial, this.httpOptions);
+      }
     } else {
       return throwError(() => new Error('Debe completar todos los campos obligatorios'));
     }
   }
 
   addPatchObject(op: string, path: string, value: any) {
-    const allreadyPatch = this.patchData.find(patch => patch.path === path);
-    if(allreadyPatch){
-      allreadyPatch.value = value;
+    const alreadyAddedPatch: PatchObject | undefined = this.patchData.find(patch => patch.path === path);
+    if(alreadyAddedPatch) {
+      alreadyAddedPatch.value = value;
     } else {
       this.patchData.push(new PatchObject(op, path, value));
     }
   }
 
   editRawMaterial(id: number, patchObj: PatchObject[]): Observable<RawMaterial> {
-    const apiUrl = this.urlBase + 'CatalogoMateriasPrimas/' + id;
-    if((patchObj.find(patch => patch.path === '/name')?.value) !== ""){
-      return this.http.patch<RawMaterial>(apiUrl, patchObj, this.httpOptions);
+    const apiUrl = this.urlBase + 'CatalogoMateriasPrimas';
+    const apiUrlWithId = this.urlBase + 'CatalogoMateriasPrimas/' + id;
+    if((patchObj.find(patch => patch.path === '/name')?.value) === "") {
+      return throwError(() => new Error('El nombre no puede ser vacío'));
     }
-    return throwError(() => new Error('El nombre no puede ser vacío'));
+
+    let picturePatch: PatchObject | undefined = patchObj.find(patch => patch.path === '/picture');
+    const apiUrlToSavePicture: string = apiUrl + '/upload-image';
+
+    const tokens: string[] | undefined = this.previousRawMaterial?.picture?.split('/');
+    let apiUrlToDeletePicture: string = apiUrl + '/delete-image/';
+    if(tokens) {
+      const pictureName: string = tokens[tokens.length - 1];
+      apiUrlToDeletePicture += pictureName;
+    }
+
+    if(picturePatch?.value) {
+      return getImageFileFromUrl(picturePatch.value).pipe(
+        switchMap((file: File | undefined) => {
+          const formData = new FormData();
+          if(file) {
+            formData.append('file', file);
+          }
+          
+          return this.http.delete<boolean>(apiUrlToDeletePicture, this.httpOptions).pipe(
+            switchMap((deletedImage: boolean) => {
+              const httpOptionsToCreateImage: HttpOptions = new HttpOptions(this.authService.getToken(), true);
+              return this.http.post<string>(apiUrlToSavePicture, formData, httpOptionsToCreateImage).pipe(
+                switchMap((imageUrl: string) => {
+                  picturePatch.value = imageUrl;
+                  return this.http.patch<RawMaterial>(apiUrlWithId, patchObj, this.httpOptions);
+                }),
+                catchError((res) => {
+                  console.log(res);
+                  return of();
+                })
+              )
+            })
+          )
+        })
+      )
+    }
+    else {
+      return this.http.patch<RawMaterial>(apiUrlWithId, patchObj, this.httpOptions);
+    }
   }
 
   createCategory(newCategory: Category): Observable<Category> {

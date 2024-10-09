@@ -7,6 +7,10 @@
     padding: 10px;
 }
 
+th {
+    user-select: none;
+}
+
 .rawMaterials-list-view {
     display: flex;
     flex-direction: column;
@@ -31,5 +35,11 @@
 
     &:active {
         background-color: $secondaryDarkerColor;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    :host {
+        width: 100%;
     }
 }

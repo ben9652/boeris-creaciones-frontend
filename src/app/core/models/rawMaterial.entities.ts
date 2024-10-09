@@ -33,3 +33,18 @@ export function isRawMaterialNull(rawMaterial: RawMaterial): boolean {
 
     return id && category && unit && name && source && stock && picture && comment;
 }
+
+export function constructNullRawMaterial(): RawMaterial {
+    let newRawMaterial: RawMaterial = {
+        id: 0,
+        category: null,
+        unit: null,
+        name: null,
+        source: null,
+        stock: 0,
+        picture: 'pictures/leaf-solid.svg',
+        comment: null
+    }
+
+    return newRawMaterial;
+}
