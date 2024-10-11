@@ -40,6 +40,7 @@ export class ProductsCatalogService {
     const currentProduct: Product | null = this.selectedProduct();
     if(currentProduct) {
       this.selectedProduct.set({ ...currentProduct, [property]: value });
+      this.nonModified = areProductsEqual(this.selectedNonModifiedProduct, this.selectedProduct());
     }
   }
 

@@ -4,6 +4,8 @@ import { TableModule } from 'primeng/table';
 import { areProductsEqual, createNullProduct, createProductRow, Product, ProductRow } from '../../../../../core/models/product.entities';
 import { ProductsCatalogService } from '../products-catalog.service';
 import { ProductsListService } from './products-list.service';
+import { DeviceTypeService } from '../../../../../core/services/device-type.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products-list',
@@ -20,7 +22,9 @@ export class ProductsListComponent {
 
   constructor(
     public productsCatalogService: ProductsCatalogService,
-    public productsListService: ProductsListService
+    public productsListService: ProductsListService,
+    private deviceTypeService: DeviceTypeService,
+    private router: Router
   ) {
     effect(() => {
       const selectedProduct: Product | null = productsCatalogService.selectedProduct();
@@ -30,7 +34,6 @@ export class ProductsListComponent {
         // Si no es indefinido el producto significa que seleccionamos un producto de la lista
         if(actualProduct !== undefined) {
           actualProduct.modified = selectedProduct;
-          productsCatalogService.nonModified = areProductsEqual(actualProduct.nonModified, actualProduct.modified);
 
           // Si el producto sufrió una modificación en la base de datos
           if(!productsCatalogService.nonModified && productsCatalogService.productUpdated) {
@@ -64,7 +67,6 @@ export class ProductsListComponent {
 
   getProductsList(): ProductRow[] {
     const productRows: ProductRow[] = Array.from(this.productsMap.values());
-    // console.log('Filas de productos: ', productRows);
     return productRows;
   }
 
@@ -74,10 +76,16 @@ export class ProductsListComponent {
 
   clickOnAddNewProduct() {
     this.productsCatalogService.selectedProduct.set(createNullProduct());
+    if(this.deviceTypeService.isMobile()) {
+      this.router.navigate(['product-addition']);
+    }
   }
 
   clickOnProduct(product: ProductRow) {
     this.productsCatalogService.selectedNonModifiedProduct = product.nonModified;
     this.productsCatalogService.selectedProduct.set(product.modified);
+    if(this.deviceTypeService.isMobile()) {
+      this.router.navigate(['product-edition']);
+    }
   }
 }

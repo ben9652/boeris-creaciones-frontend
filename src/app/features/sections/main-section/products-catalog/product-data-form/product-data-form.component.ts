@@ -70,6 +70,9 @@ export class ProductDataFormComponent {
   }
 
   clickOnCancel() {
+    if(this.deviceTypeService.isMobile()) {
+      this.location.back();
+    }
     this.productsCatalogService.selectedProduct.set(null);
     this.productsCatalogService.selectedNonModifiedProduct = null;
     this.productsCatalogService.patchData.splice(0);
