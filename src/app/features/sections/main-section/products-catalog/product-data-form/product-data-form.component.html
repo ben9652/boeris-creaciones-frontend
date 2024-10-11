@@ -1,0 +1,74 @@
+<p-toast></p-toast>
+<div class="product-data-form-view">
+    <div class="product-data-form">
+        <div class="flex justify-content-center">
+
+            <app-image-manager
+            [picture]="getPicture()"
+            [disabled]="loading"
+            (uploadEvent)="updateProductPicture($event)"
+            ></app-image-manager>
+        </div>
+        <div class="fields">
+            <input
+            type="text"
+            pInputText
+            placeholder="Nombre"
+            [disabled]="productsCatalogService.selectedProduct() === null || loading"
+            [ngModel]="productsCatalogService.selectedProduct()?.name"
+            (ngModelChange)="updateProductName($event)"
+            >
+
+            <p-inputNumber
+            inputId="minmaxfraction"
+            mode="decimal"
+            placeholder="Precio"
+            [minFractionDigits]="2"
+            [maxFractionDigits]="2"
+            [disabled]="productsCatalogService.selectedProduct() === null || loading"
+            [ngModel]="productsCatalogService.selectedProduct()?.price"
+            (ngModelChange)="updateProductPrice($event)"
+            ></p-inputNumber>
+
+            <textarea
+            rows="5"
+            cols="30"
+            pInputTextarea
+            [autoResize]="true"
+            placeholder="Comentario"
+            [disabled]="productsCatalogService.selectedProduct() === null || loading"
+            [ngModel]="productsCatalogService.selectedProduct()?.comment"
+            (ngModelChange)="updateProductComment($event)"
+            ></textarea>
+        </div>
+    </div>
+    <div class="product-data-form-buttons">
+        <p-button
+        class="bottom-button"
+        label="Cancelar"
+        severity="secondary"
+        [disabled]="productsCatalogService.selectedProduct() === null || loading"
+        (onClick)="clickOnCancel()"
+        ></p-button>
+
+        @if (!loading) {
+            <p-button
+            class="bottom-button"
+            label="Confirmar"
+            [disabled]="
+                productsCatalogService.selectedProduct() === null ||
+                productsCatalogService.nonModified && productsCatalogService.selectedProduct() !== null && productsCatalogService.selectedProduct()?.id !== 0
+            "
+            (onClick)="clickOnConfirm()"
+            ></p-button>
+        }
+        @else {
+            <p-button
+            class="bottom-button"
+            [disabled]="true"
+            >
+                <i class="pi pi-spin pi-spinner"></i>
+            </p-button>
+        }
+    </div>
+</div>

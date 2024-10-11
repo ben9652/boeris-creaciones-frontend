@@ -1,0 +1,35 @@
+
+@import '../../../../../../../public/theme/boeris-theme';
+
+:host {
+    width: 30%;
+    height: 100%;
+    padding: 10px;
+}
+
+th {
+    user-select: none;
+}
+
+.products-list-view {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.products-list {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.product {
+    cursor: pointer;
+    user-select: none;
+}
+
+@media screen and (max-width: 500px) {
+    :host {
+        width: 100%;
+    }
+}
