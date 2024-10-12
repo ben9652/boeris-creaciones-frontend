@@ -5,19 +5,29 @@ import { constructNullRawMaterial, isRawMaterialNull, RawMaterial } from '../../
 import { RawMaterialCatalogService } from '../raw-material-catalog.service';
 import { Router } from '@angular/router';
 import { RawMaterialRow } from './raw-material-list.entities';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-raw-material-list',
   standalone: true,
-  imports: [ButtonModule, TableModule],
+  imports: [
+    ButtonModule,
+    TableModule,
+    TranslateModule
+  ],
   templateUrl: './raw-material-list.component.html',
-  styleUrl: './raw-material-list.component.scss'
+  styleUrl: './raw-material-list.component.scss',
+  providers: [TranslateService]
 })
 export class RawMaterialListComponent {
   rawMaterialsList: RawMaterialRow[] = [];
   selectedRow: RawMaterialRow | null = null;
 
-  constructor(private rawMaterialCatalogService: RawMaterialCatalogService, private router: Router){
+  constructor(
+    private rawMaterialCatalogService: RawMaterialCatalogService,
+    private router: Router,
+    public translateService: TranslateService
+  ) {
     effect(() => {
       if (this.rawMaterialCatalogService.refreshNeeded()) {
         this.loadRawMaterialsList();

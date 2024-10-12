@@ -14,30 +14,43 @@ import { MessageService } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
 import { PatchObject } from '../../../../../core/models/patchObj.entities';
 import { Category } from '../../../../../core/models/category.entities';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-raw-material-data-form',
   standalone: true,
-  imports: [CategoryManagerComponent, ImageManagerComponent, InputTextModule, InputTextareaModule, DropdownModule, CommonModule, FormsModule, ButtonModule, ToastModule, DialogModule],
+  imports: [
+    CategoryManagerComponent,
+    ImageManagerComponent,
+    InputTextModule,
+    InputTextareaModule,
+    DropdownModule,
+    CommonModule,
+    FormsModule,
+    ButtonModule,
+    ToastModule,
+    DialogModule,
+    TranslateModule
+  ],
   templateUrl: './raw-material-data-form.component.html',
   styleUrl: './raw-material-data-form.component.scss',
-  providers: [MessageService]
+  providers: [MessageService, TranslateService]
 })
 export class RawMaterialDataFormComponent {
 
   units: Unit[] = [];
   sources: Source[] = [
     {
-      "label": "C",
-      "value": "Por compra"
+      label: "C",
+      value: "Por compra"
     },
     {
-      "label": "E",
-      "value": "Por elaboración"
+      label: "E",
+      value: "Por elaboración"
     },
     {
-      "label": "P",
-      "value": "Por producción propia"
+      label: "P",
+      value: "Por producción propia"
     }
   ];
   newCategoryName: string = "";
@@ -47,7 +60,12 @@ export class RawMaterialDataFormComponent {
   isMobile: boolean = false;
   @ViewChild(CategoryManagerComponent) categoryManager!: CategoryManagerComponent;
 
-  constructor(public rawMaterialCatalogService: RawMaterialCatalogService, private messageService: MessageService, private location: Location) {
+  constructor(
+    public rawMaterialCatalogService: RawMaterialCatalogService,
+    private messageService: MessageService,
+    private location: Location,
+    public translateService: TranslateService
+  ) {
     effect(() => {
       this.getUnits();
     });
@@ -107,8 +125,8 @@ export class RawMaterialDataFormComponent {
           next: (response: RawMaterial) => {
             this.messageService.add({
               severity: 'success',
-              summary: 'Éxito',
-              detail: 'Materia prima creada con éxito'
+              summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.SUCCESS'),
+              detail: this.translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.SUCCESSES.CREATED')
             });
             this.rawMaterialCatalogService.triggerRefresh();
             this.loading = false;
@@ -116,8 +134,8 @@ export class RawMaterialDataFormComponent {
           error: (err) => {
             this.messageService.add({
               severity: 'error',
-              summary: 'Error',
-              detail: err.message || 'Debe completar todos los campos obligatorios'
+              summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.FAILED'),
+              detail: err.message || this.translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.ERRORS.FIELDS_LACK')
             });
             this.loading = false;
           }
@@ -131,8 +149,8 @@ export class RawMaterialDataFormComponent {
               console.log(response);
               this.messageService.add({
                 severity: 'success',
-                summary: 'Éxito',
-                detail: 'Materia prima actualizada con éxito'
+                summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.SUCCESS'),
+                detail: this.translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.SUCCESSES.UPDATED')
               });
               this.rawMaterialCatalogService.patchData = [];
               this.rawMaterialCatalogService.triggerRefresh();
@@ -140,8 +158,8 @@ export class RawMaterialDataFormComponent {
             }, error: (err) => {
               this.messageService.add({
                 severity: 'error',
-                summary: 'Error',
-                detail: err.message || 'Error al actualizar'
+                summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.FAILED'),
+                detail: err.message || this.translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.ERRORS.UPDATE')
               });
               this.loading = false;
             }
@@ -183,8 +201,8 @@ export class RawMaterialDataFormComponent {
           next: (response) => {
             this.messageService.add({
               severity: 'success',
-              summary: 'Éxito',
-              detail: 'Rubro creado con éxito'
+              summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.SUCCESS'),
+              detail: this.translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.SUCCESSES.CATEGORY_CREATED')
             });
             this.rawMaterialCatalogService.triggerRefresh();
             this.rawMaterialCatalogService.modalVisibility = false;
@@ -192,8 +210,8 @@ export class RawMaterialDataFormComponent {
           }, error: (err) => {
             this.messageService.add({
               severity: 'error',
-              summary: 'Error',
-              detail: err.message || 'Error al crear el rubro'
+              summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.FAILED'),
+              detail: err.message || this.translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.ERRORS.CATEGORY_CREATION')
             });
             this.rawMaterialCatalogService.modalVisibility = false;
           }
@@ -205,8 +223,8 @@ export class RawMaterialDataFormComponent {
             next: (response: Category) => {
               this.messageService.add({
                 severity: 'success',
-                summary: 'Éxito',
-                detail: 'El rubro se editó correctamente'
+                summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.SUCCESS'),
+                detail: this.translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.SUCCESSES.CATEGORY_UPDATED')
               });
               this.rawMaterialCatalogService.triggerRefresh();
               this.rawMaterialCatalogService.modalVisibility = false;
@@ -214,8 +232,8 @@ export class RawMaterialDataFormComponent {
             }, error: (err) => {
               this.messageService.add({
                 severity: 'error',
-                summary: 'Error',
-                detail: err.message || 'Error al editar el rubro'
+                summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.FAILED'),
+                detail: err.message || this.translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.ERRORS.CATEGORY_UPDATING')
               });
               this.rawMaterialCatalogService.modalVisibility = false;
             }
@@ -236,7 +254,7 @@ export class RawMaterialDataFormComponent {
   showWarningMessage(message: string) {
     this.messageService.add({
       severity: 'warn',
-      summary: 'Advertencia',
+      summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.WARNING'),
       detail: message
     });
   }

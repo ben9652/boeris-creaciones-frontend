@@ -10,6 +10,7 @@ import { Unit } from '../../../../core/models/rawMaterial.entities';
 import { PatchObject } from '../../../../core/models/patchObj.entities';
 import { RawMaterialRow } from './raw-material-list/raw-material-list.entities';
 import { getImageFileFromUrl } from '../../../../shared/multimedia.helpers';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +36,11 @@ export class RawMaterialCatalogService {
   modalVisibility = false;
   modalTitle = "";
 
-  constructor(private authService: AuthService, private http: HttpClient) {
+  constructor(
+    private authService: AuthService,
+    private http: HttpClient,
+    public translateService: TranslateService
+  ) {
     this.urlBase = environment.API_URL;
   }
 

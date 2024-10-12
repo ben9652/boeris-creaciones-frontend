@@ -9,7 +9,8 @@
         "MESSAGES": {
             "SUMMARY": {
                 "SUCCESS": "Éxito",
-                "FAILED": "Error"
+                "FAILED": "Error",
+                "WARNING": "Advertencia"
             },
             "DETAIL": {
                 "MODIFIED_ROLES": "Se modificaron los roles",
@@ -71,6 +72,55 @@
             }
         },
         "CATALOGS": {
+            "RAW_MATERIALS": {
+                "LIST": {
+                    "HEADER": {
+                        "ID": "ID",
+                        "NAME": "NOMBRE",
+                        "STOCK": "STOCK"
+                    }
+                },
+                "FIELDS": {
+                    "CATEGORY": "Rubro",
+                    "NAME": "Nombre",
+                    "UNITS": "Unidades",
+                    "SOURCE": "Origen",
+                    "COMMENT": "Comentario",
+                    "PICTURE": "Imagen"
+                },
+                "PICTURE": {
+                    "DEFAULT": "pictures/leaf-solid.svg",
+                    "ALT": "Imagen de materia prima"
+                },
+                "ERRORS": {
+                    "FIELDS_LACK": "Debe completar todos los campos obligatorios",
+                    "UPDATE": "Error al actualizar",
+                    "CATEGORY_CREATION": "Error al crear el rubro",
+                    "CATEGORY_UPDATING": "Error al editar el rubro"
+                },
+                "EMPTY_MESSAGES": {
+                    "CATEGORIES": "No se encontraron rubros",
+                    "UNITS": "No se encontraron unidades",
+                    "SOURCES": "No se encontraron orígenes"
+                },
+                "SUCCESSES": {
+                    "CREATED": "Materia prima creada con éxito",
+                    "UPDATED": "Materia prima actualizada con éxito",
+                    "CATEGORY_CREATED": "Rubro creado con éxito",
+                    "CATEGORY_UPDATED": "El rubro se editó correctamente"
+                },
+                "CATEGORY_MODAL": {
+                    "CREATION": {
+                        "TITLE": "Nuevo"
+                    },
+                    "UPDATING": {
+                        "TITLE": "Editar"
+                    },
+                    "WARNINGS": {
+                        "MUST_SELECT_CATEGORY": "Debe seleccionar un rubro para editar"
+                    }
+                }
+            },
             "PRODUCTS": {
                 "LIST": {
                     "HEADER": {
