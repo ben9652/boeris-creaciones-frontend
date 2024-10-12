@@ -1,40 +1,76 @@
-import { Component, effect, input, InputSignal, output, OutputEmitterRef, ViewChild } from '@angular/core';
+import { Component, effect, input, InputSignal, output, OutputEmitterRef, SimpleChanges, ViewChild } from '@angular/core';
 import { ProductsListService } from '../../products-list/products-list.service';
 import { Product } from '../../../../../../core/models/product.entities';
 import { ProductsCatalogService } from '../../products-catalog.service';
 import { CommonModule } from '@angular/common';
 import { FileUpload, FileUploadModule } from 'primeng/fileupload';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-image-manager',
   standalone: true,
   imports: [
     FileUploadModule,
-    CommonModule
+    CommonModule,
+    TranslateModule
   ],
   templateUrl: './image-manager.component.html',
-  styleUrl: './image-manager.component.scss'
+  styleUrl: './image-manager.component.scss',
+  providers: [TranslateService]
 })
 export class ImageManagerComponent {
   loadingImage: boolean = true;
 
-  picture: InputSignal<string | null> = input.required<string | null>();
+  selectedProduct: InputSignal<Product | null> = input.required();
+
   disabled: InputSignal<boolean> = input.required<boolean>();
   uploadEvent: OutputEmitterRef<File> = output<File>();
+
+  imageSrc: string | null = null;
 
   @ViewChild('fileUpload') fileUploadComponent!: FileUpload;
 
   constructor(
-    public productsCatalogService: ProductsCatalogService
+    public productsCatalogService: ProductsCatalogService,
+    private sanitizer: DomSanitizer,
+    public translateService: TranslateService
   ) {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const selectedProduct = changes['selectedProduct'];
+    console.log(selectedProduct);
+    if(
+      selectedProduct &&
+      (selectedProduct.previousValue === undefined ||
+      selectedProduct.previousValue === null ||
+      selectedProduct.currentValue === null ||
+      selectedProduct.previousValue.id !== selectedProduct.currentValue.id ||
+      selectedProduct.previousValue.picture !== selectedProduct.currentValue.picture)
+    ) {
+      this.updateImage();
+    }
+  }
+
+  updateImage() {
+    this.loadingImage = true;
     
+    this.imageSrc = null;
+    
+    setTimeout(() => {
+      this.imageSrc = this.getImage();
+    }, 0);
   }
 
   getImage(): string {
-    const defaultImage: string = 'pictures/cube-solid.svg';
-    const picture: string | null = this.picture();
-
-    return picture !== null ? picture : defaultImage;
+    const selectedProduct: Product | null = this.productsCatalogService.selectedProduct();
+    if(selectedProduct && selectedProduct.picture) {
+      return this.sanitizer.bypassSecurityTrustUrl(selectedProduct.picture) as string;
+    }
+    else {
+      return this.translateService.instant('SECTIONS.CATALOGS.PRODUCTS.PICTURE.DEFAULT');
+    }
   }
 
   onImageLoad() {
@@ -43,6 +79,7 @@ export class ImageManagerComponent {
 
   onImageError() {
     this.loadingImage = false;
+    this.imageSrc = null;
   }
 
   onUploadHandler(event: any) {

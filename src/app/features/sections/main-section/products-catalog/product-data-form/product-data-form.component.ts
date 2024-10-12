@@ -12,6 +12,7 @@ import { ProductsCatalogService } from '../products-catalog.service';
 import { ProductsListService } from '../products-list/products-list.service';
 import { MessageService } from 'primeng/api';
 import { DeviceTypeService } from '../../../../../core/services/device-type.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product-data-form',
@@ -28,7 +29,7 @@ import { DeviceTypeService } from '../../../../../core/services/device-type.serv
   ],
   templateUrl: './product-data-form.component.html',
   styleUrl: './product-data-form.component.scss',
-  providers: [MessageService]
+  providers: [MessageService, TranslateService]
 })
 export class ProductDataFormComponent {
   loading: boolean = false;
@@ -38,7 +39,8 @@ export class ProductDataFormComponent {
     public productsListService: ProductsListService,
     private messageService: MessageService,
     private deviceTypeService: DeviceTypeService,
-    private location: Location
+    private location: Location,
+    public translateService: TranslateService
   ) {
     
   }
@@ -60,8 +62,15 @@ export class ProductDataFormComponent {
   }
 
   updateProductComment(value: string) {
-    this.productsCatalogService.updateSelectedProduct('comment', value);
-    this.productsCatalogService.addPatchObject('replace', 'comment', value);
+    let comment: string | null;
+    if(value.length === 0) {
+      comment = null;
+    }
+    else {
+      comment = value;
+    }
+    this.productsCatalogService.updateSelectedProduct('comment', comment);
+    this.productsCatalogService.addPatchObject('replace', 'comment', comment);
   }
 
   getPicture(): string | null {
@@ -74,7 +83,6 @@ export class ProductDataFormComponent {
       this.location.back();
     }
     this.productsCatalogService.selectedProduct.set(null);
-    this.productsCatalogService.selectedNonModifiedProduct = null;
     this.productsCatalogService.patchData.splice(0);
   }
 
@@ -88,8 +96,8 @@ export class ProductDataFormComponent {
           this.productsListService.addProduct(response);
           this.messageService.add({
             severity: 'success',
-            summary: 'Éxito',
-            detail: 'Producto creado con éxito'
+            summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.SUCCESS'),
+            detail: this.translateService.instant('SECTIONS.CATALOGS.PRODUCTS.SUCCESSES.CREATED')
           });
           this.loading = false;
           if(this.deviceTypeService.isMobile()) {
@@ -104,8 +112,8 @@ export class ProductDataFormComponent {
         error: (err) => {
           this.messageService.add({
             severity: 'error',
-            summary: 'Error',
-            detail: err.message || 'Debe completar todos los campos obligatorios'
+            summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.FAILED'),
+            detail: err.message || this.translateService.instant('SECTIONS.CATALOGS.PRODUCTS.ERRORS.FIELDS_LACK')
           });
           this.loading = false;
         }
@@ -120,8 +128,8 @@ export class ProductDataFormComponent {
           next: (response: Product) => {
             this.messageService.add({
               severity: 'success',
-              summary: 'Éxito',
-              detail: 'Producto actualizado con éxito'
+              summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.SUCCESS'),
+              detail: this.translateService.instant('SECTIONS.CATALOGS.PRODUCTS.SUCCESSES.UPDATED')
             });
             this.productsCatalogService.patchData.splice(0);
             this.productsCatalogService.productUpdated = true;
@@ -138,8 +146,8 @@ export class ProductDataFormComponent {
           error: (err) => {
             this.messageService.add({
               severity: 'error',
-              summary: 'Error',
-              detail: err.message || 'Error al actualizar'
+              summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.FAILED'),
+              detail: err.message || this.translateService.instant('SECTIONS.CATALOGS.PRODUCTS.ERRORS.UPDATE')
             });
             this.loading = false;
           }

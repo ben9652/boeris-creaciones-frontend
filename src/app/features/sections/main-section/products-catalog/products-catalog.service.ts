@@ -85,11 +85,21 @@ export class ProductsCatalogService {
 
   addPatchObject(op: string, path: string, value: any) {
     const alreadyAddedPatch: PatchObject | undefined = this.patchData.find(patch => patch.path === path);
-    if(alreadyAddedPatch) {
-      alreadyAddedPatch.value = value;
+    const isNotNull: boolean = value !== null && value !== undefined;
+
+    if(alreadyAddedPatch && !isNotNull) {
+      const index: number = this.patchData.indexOf(alreadyAddedPatch);
+      this.patchData.splice(index, 1);
+      return;
     }
-    else {
-      this.patchData.push(new PatchObject(op, path, value));
+    
+    if(isNotNull) {
+      if(alreadyAddedPatch) {
+        alreadyAddedPatch.value = value;
+      }
+      else {
+        this.patchData.push(new PatchObject(op, path, value));
+      }
     }
   }
 

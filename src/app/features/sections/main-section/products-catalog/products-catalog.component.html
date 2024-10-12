@@ -1,6 +1,6 @@
 <div class="container">
     <app-products-list></app-products-list>
-    @if(!isMobile()) {
+    @if(!deviceTypeService.isMobile()) {
         <p-divider layout="vertical" />
         <app-product-data-form></app-product-data-form>
     }

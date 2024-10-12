@@ -2,9 +2,8 @@
 <div class="product-data-form-view">
     <div class="product-data-form">
         <div class="flex justify-content-center">
-
             <app-image-manager
-            [picture]="getPicture()"
+            [selectedProduct]="productsCatalogService.selectedProduct()"
             [disabled]="loading"
             (uploadEvent)="updateProductPicture($event)"
             ></app-image-manager>
@@ -13,7 +12,7 @@
             <input
             type="text"
             pInputText
-            placeholder="Nombre"
+            [placeholder]="translateService.instant('SECTIONS.CATALOGS.PRODUCTS.FIELDS.NAME')"
             [disabled]="productsCatalogService.selectedProduct() === null || loading"
             [ngModel]="productsCatalogService.selectedProduct()?.name"
             (ngModelChange)="updateProductName($event)"
@@ -22,7 +21,7 @@
             <p-inputNumber
             inputId="minmaxfraction"
             mode="decimal"
-            placeholder="Precio"
+            [placeholder]="translateService.instant('SECTIONS.CATALOGS.PRODUCTS.FIELDS.PRICE')"
             [minFractionDigits]="2"
             [maxFractionDigits]="2"
             [disabled]="productsCatalogService.selectedProduct() === null || loading"
@@ -35,7 +34,7 @@
             cols="30"
             pInputTextarea
             [autoResize]="true"
-            placeholder="Comentario"
+            [placeholder]="translateService.instant('SECTIONS.CATALOGS.PRODUCTS.FIELDS.COMMENT')"
             [disabled]="productsCatalogService.selectedProduct() === null || loading"
             [ngModel]="productsCatalogService.selectedProduct()?.comment"
             (ngModelChange)="updateProductComment($event)"
@@ -45,7 +44,7 @@
     <div class="product-data-form-buttons">
         <p-button
         class="bottom-button"
-        label="Cancelar"
+        [label]="translateService.instant('SHARED.BUTTONS.CANCEL')"
         severity="secondary"
         [disabled]="productsCatalogService.selectedProduct() === null || loading"
         (onClick)="clickOnCancel()"
@@ -54,7 +53,7 @@
         @if (!loading) {
             <p-button
             class="bottom-button"
-            label="Confirmar"
+            [label]="translateService.instant('SHARED.BUTTONS.CONFIRM')"
             [disabled]="
                 productsCatalogService.selectedProduct() === null ||
                 productsCatalogService.nonModified && productsCatalogService.selectedProduct() !== null && productsCatalogService.selectedProduct()?.id !== 0

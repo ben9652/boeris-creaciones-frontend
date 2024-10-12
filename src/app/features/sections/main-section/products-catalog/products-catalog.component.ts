@@ -18,13 +18,8 @@ import { DeviceTypeService } from '../../../../core/services/device-type.service
 export class ProductsCatalogComponent {
 
   constructor(
-    public deviceType: DeviceTypeService
+    public deviceTypeService: DeviceTypeService
   ) {
     
-  }
-
-  isMobile() {
-    const isMobile: boolean = this.deviceType.isMobile();
-    return isMobile;
   }
 }

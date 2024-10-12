@@ -13,7 +13,7 @@ export class ProductsListService {
   urlBase: string;
   httpOptions?: HttpOptions;
 
-  products: WritableSignal<Product[]> = signal<Product[]>([]);
+  products: WritableSignal<Product[] | null> = signal<Product[] | null>(null);
 
   constructor(
     private http: HttpClient,
@@ -23,21 +23,24 @@ export class ProductsListService {
   }
 
   addProduct(product: Product) {
-    this.products().push(product);
+    this.products()?.push(product);
   }
 
   getProductsFromDatabase(): Observable<Product[]> {
-    if(this.products.length === 0) {
+    const products: Product[] | null = this.products();
+
+    if(!products) {
       this.httpOptions = new HttpOptions(this.authService.getToken());
       return this.http.get<Product[]>(this.urlBase, this.httpOptions);
     }
-
-    return of(this.products());
+    else {
+      return of(products);
+    }
   }
 
   getProduct(id: number): Product | undefined {
     if(this.products.length !== 0) {
-      let product: Product | undefined = this.products().find(product => product.id === id);
+      let product: Product | undefined = this.products()?.find(product => product.id === id);
       if(product) {
         return product;
       }

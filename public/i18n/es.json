@@ -8,7 +8,8 @@
         },
         "MESSAGES": {
             "SUMMARY": {
-                "SUCCESS": "Éxito"
+                "SUCCESS": "Éxito",
+                "FAILED": "Error"
             },
             "DETAIL": {
                 "MODIFIED_ROLES": "Se modificaron los roles",
@@ -67,6 +68,42 @@
                     "USERNAME": "Nombre de usuario",
                     "PASSWORD": "Contraseña"
                 }
+            }
+        },
+        "CATALOGS": {
+            "PRODUCTS": {
+                "LIST": {
+                    "HEADER": {
+                        "ID": "ID",
+                        "NAME": "NOMBRE",
+                        "STOCK": "STOCK"
+                    }
+                },
+                "FIELDS": {
+                    "NAME": "Nombre",
+                    "PRICE": "Precio",
+                    "COMMENT": "Comentario",
+                    "PICTURE": "Imagen"
+                },
+                "PICTURE": {
+                    "DEFAULT": "pictures/cube-solid.svg",
+                    "ALT": "Imagen de producto"
+                },
+                "ERRORS": {
+                    "FIELDS_LACK": "Debe completar todos los campos obligatorios",
+                    "UPDATE": "Error al actualizar",
+                    "NAME_LACK": "El nombre no puede ser vacío",
+                    "PICTURE_ADDING": "No se pudo agregar una imagen",
+                    "PICTURE_DELETING": "No se pudo eliminar la imagen anterior"
+                },
+                "SUCCESSES": {
+                    "CREATED": "Producto creado con éxito",
+                    "UPDATED": "Producto actualizado con éxito"
+                }
+            },
+            "BUTTONS": {
+                "ADD": "Agregar",
+                "UPLOAD": "Subir archivo"
             }
         },
         "SIDEBAR": {
