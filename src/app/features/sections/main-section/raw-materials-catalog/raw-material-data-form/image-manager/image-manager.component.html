@@ -1,0 +1,25 @@
+<div class="img-manager-content">
+    <h4>Imagen</h4>
+    <div [ngClass]="{
+        'rawMaterial-img': true,
+        'filter-img': rawMaterialCatalogService.selectedRawMaterial()?.picture === 'pictures/leaf-solid.svg' || rawMaterialCatalogService.selectedRawMaterial() === null
+    }">
+        <img [src]="getImage()" width="190px" (load)="onImageLoad()" (error)="onImageError()" [hidden]="loadingImage" alt="Imagen de materia prima">
+        @if(loadingImage) {
+            <i class="pi pi-spinner pi-spin"></i>
+        }
+    </div>
+    <p-fileUpload #fileUpload
+    mode="basic"
+    name="demo[]"
+    chooseLabel="Subir archivo"
+    chooseIcon="fas fa-upload"
+    uploadIcon="fas fa-upload"
+    [customUpload]="true"
+    accept="image/*"
+    (onSelect)="onUploadHandler($event)"
+    [disabled]="this.disabledEdition()"
+    [showCancelButton]="true"
+    >
+    </p-fileUpload>
+</div>

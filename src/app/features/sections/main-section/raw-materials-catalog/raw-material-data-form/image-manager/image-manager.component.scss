@@ -1,0 +1,62 @@
+@import '../../../../../../../../public/theme/boeris-theme';
+
+h4 {
+    color: $primaryColor;
+    user-select: none;
+}
+
+img {
+    user-select: none;
+}
+
+.img-manager-content {
+    text-align: center;
+}
+
+i {
+    color: $primaryColor;
+}
+
+.rawMaterial-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid $primaryColor;
+    border-radius: 5px;
+    margin-bottom: 1em;
+    padding: 3em;
+    width: 200px;
+    height: 200px;
+}
+
+.filter-img {
+    filter: brightness(0) saturate(100%) invert(44%) sepia(65%) saturate(511%) hue-rotate(334deg) brightness(91%) contrast(91%);
+}
+
+:host ::ng-deep .p-fileupload .p-button-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px; /* Cambia este valor según el ancho que necesites */
+    display: block;
+}
+
+@media screen and (max-width: 500px) {
+    img {
+        max-width: 130px;
+    }
+    
+    .img-manager-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1em;
+    }
+
+    .rawMaterial-img {
+        padding: 0px;
+        width: 35vw;
+        height: 35vw;
+    }
+}

@@ -1,0 +1,53 @@
+@import '../../../../../../../public/theme/boeris-theme';
+
+:host {
+    width: 70%;
+    height: 100%;
+    padding: 10px;
+}
+
+.product-data-form-view {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.product-data-form {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.fields {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 50%;
+}
+
+.product-data-form-buttons {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+:host ::ng-deep {
+    .bottom-button {
+        .p-button {
+            width: 120px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .product-data-form {
+        flex-direction: column;
+    }
+
+    .fields {
+        width: 100%;
+        height: 40vh;
+    }
+}

@@ -1,0 +1,32 @@
+<div class="products-list-view">
+    <div class="product-list-buttons">
+        <p-button [label]="translateService.instant('SECTIONS.CATALOGS.BUTTONS.ADD')" icon="fas fa-plus" (click)="clickOnAddNewProduct()"></p-button>
+    </div>
+    <div class="products-list">
+        @if (productsListService.products() !== null) {
+            <p-table [value]="getProductsList()" [scrollable]="true" scrollHeight="60vh" selectionMode="single">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>{{ 'SECTIONS.CATALOGS.PRODUCTS.LIST.HEADER.ID' | translate }}</th>
+                        <th>{{ 'SECTIONS.CATALOGS.PRODUCTS.LIST.HEADER.NAME' | translate }}</th>
+                        <th>{{ 'SECTIONS.CATALOGS.PRODUCTS.LIST.HEADER.STOCK' | translate }}</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-productRow>
+                    <tr class="product" [pSelectableRow]="youAreAdding()" (click)="clickOnProduct(productRow)">
+                        <td>{{ productRow.nonModified.id }}</td>
+                        <td>{{ productRow.nonModified.name }}</td>
+                        <td>{{ productRow.nonModified.stock }}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        }
+        @else {
+            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+            <p-skeleton styleClass="mb-2"></p-skeleton>
+            <p-skeleton styleClass="mb-2"></p-skeleton>
+            <p-skeleton styleClass="mb-2"></p-skeleton>
+            <p-skeleton styleClass="mb-2"></p-skeleton>
+        }
+    </div>
+</div>
