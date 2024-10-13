@@ -5,6 +5,7 @@
         <app-form
         (enterClicked)="login($event)"
         [(loginLoading)]="isLoading"
+        [hidden]="!showForm"
         >
         </app-form>
     </div>

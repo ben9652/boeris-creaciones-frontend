@@ -1,4 +1,4 @@
-import { afterRender, Component, signal, WritableSignal } from '@angular/core';
+import { afterRender, AfterViewInit, ChangeDetectorRef, Component, DoCheck, OnInit, signal, SimpleChanges, WritableSignal } from '@angular/core';
 import { BannerComponent } from './banner/banner.component';
 import { FormComponent } from './form/form.component';
 import { ToastModule } from 'primeng/toast';
@@ -24,16 +24,26 @@ import { LogIn } from '../../../core/models/login.entities';
 export class LoginComponent {
   protected isLoading: WritableSignal<boolean> = signal(false);
 
+  showForm: boolean = false;
+
   constructor(
     private authService: AuthService,
     private router: Router,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private cdRef: ChangeDetectorRef
   ) {
      afterRender(() => {
       if(sessionStorage.getItem('authenticated')) {
         router.navigate(['sections']);
       }
-     })
+      this.renderForm();
+    })
+  }
+
+  renderForm(): void {
+    this.showForm = true;
+
+    this.cdRef.detectChanges();
   }
 
   login(credentials: LogIn) {
