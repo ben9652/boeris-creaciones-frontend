@@ -1,4 +1,4 @@
-import { Component, model, ModelSignal, OutputEmitterRef, output } from '@angular/core';
+import { Component, model, ModelSignal, OutputEmitterRef, output, InputSignal, input, SimpleChanges } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -36,8 +36,6 @@ export class FormComponent {
   loginLoading: ModelSignal<boolean> = model(false);
 
   enterClicked: OutputEmitterRef<LogIn> = output<LogIn>({});
-
-  eventObj: any;
 
   constructor(
     public translateService: TranslateService
