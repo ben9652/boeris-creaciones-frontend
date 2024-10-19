@@ -2,7 +2,9 @@
     <h4>Imagen</h4>
     <div [ngClass]="{
         'rawMaterial-img': true,
-        'filter-img': rawMaterialCatalogService.selectedRawMaterial()?.picture === 'pictures/leaf-solid.svg' || rawMaterialCatalogService.selectedRawMaterial() === null
+        'filter-img':
+            rawMaterialCatalogService.selectedRawMaterial() === null ||
+            rawMaterialCatalogService.selectedRawMaterial()?.picture === 'pictures/leaf-solid.svg'
     }">
         <img [src]="getImage()" width="190px" (load)="onImageLoad()" (error)="onImageError()" [hidden]="loadingImage" alt="Imagen de materia prima">
         @if(loadingImage) {
