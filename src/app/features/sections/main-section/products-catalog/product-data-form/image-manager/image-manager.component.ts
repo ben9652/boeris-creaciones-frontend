@@ -40,7 +40,6 @@ export class ImageManagerComponent {
 
   ngOnChanges(changes: SimpleChanges): void {
     const selectedProduct = changes['selectedProduct'];
-    console.log(selectedProduct);
     if(
       selectedProduct &&
       (selectedProduct.previousValue === undefined ||
