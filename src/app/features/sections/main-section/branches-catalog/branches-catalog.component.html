@@ -1,1 +1,7 @@
-<p>branches-catalog works!</p>
+<div class="container">
+    <app-branches-list></app-branches-list>
+    @if (!deviceTypeService.isMobile()) {
+        <p-divider layout="vertical" />
+        <app-branches-data-form></app-branches-data-form>
+    }
+</div>
