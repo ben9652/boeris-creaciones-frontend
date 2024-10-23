@@ -205,6 +205,27 @@
                     }
                 }
             },
+            "BRANCHES": {
+                "LIST": {
+                    "HEADER": {
+                        "ID": "ID",
+                        "NAME": "NOMBRE"
+                    }
+                },
+                "FIELDS": {
+                    "NAME": "Nombre",
+                    "LOCATION": "Localidad"
+                },
+                "SUCCESSES": {
+                    "CREATED": "Sucursal creada con éxito",
+                    "UPDATED": "Sucursal actualizada con éxito"
+                },
+                "ERRORS": {
+                    "FIELDS_LACK": "Debe completar todos los campos obligatorios",
+                    "UPDATE": "Error al actualizar",
+                    "NAME_LACK": "El nombre no puede ser vacío"
+                }
+            },
             "BUTTONS": {
                 "ADD": "Agregar",
                 "UPLOAD": "Subir archivo"
