@@ -16,6 +16,17 @@
                 "MODIFIED_ROLES": "Se modificaron los roles",
                 "CREATED_PARTNER": "Se creó un nuevo socio"
             }
+        },
+        "CATEGORIES": {
+            "MESSAGES": {
+                "FAILED": "Algo falló en la creación de un rubro",
+                "CREATED": "El rubro se creó correctamente",
+                "UPDATED": "El rubro se modificó correctamente"
+            },
+            "TITLE": {
+                "ON_CREATION": "Crear rubro",
+                "ON_EDITION": "Editar rubro"
+            }
         }
     },
     "SECTIONS": {
@@ -149,6 +160,49 @@
                 "SUCCESSES": {
                     "CREATED": "Producto creado con éxito",
                     "UPDATED": "Producto actualizado con éxito"
+                }
+            },
+            "PROVIDERS": {
+                "LIST": {
+                    "HEADER": {
+                        "ID": "ID",
+                        "NAME": "NOMBRE",
+                        "CATEGORY": "RUBRO"
+                    }
+                },
+                "FIELDS": {
+                    "CATEGORY": "Rubro",
+                    "NAME": "Nombre",
+                    "RESIDENCE": "Domicilio",
+                    "PHONE": "Teléfono",
+                    "CVU_OR_ALIAS": "CVU o alias"
+                },
+                "ERRORS": {
+                    "FIELDS_LACK": "Debe completar todos los campos obligatorios",
+                    "FIELD_NAME_LACK": "Debe llenarse el campo de nombre",
+                    "UPDATE": "Error al actualizar",
+                    "CATEGORY_CREATION": "Error al crear el rubro",
+                    "CATEGORY_UPDATING": "Error al editar el rubro"
+                },
+                "EMPTY_MESSAGES": {
+                    "CATEGORIES": "No se encontraron rubros"
+                },
+                "SUCCESSES": {
+                    "CREATED": "Proveedor creado con éxito",
+                    "UPDATED": "Proveedor actualizado con éxito",
+                    "CATEGORY_CREATED": "Rubro creado con éxito",
+                    "CATEGORY_UPDATED": "El rubro se editó correctamente"
+                },
+                "CATEGORY_MODAL": {
+                    "CREATION": {
+                        "TITLE": "Nuevo"
+                    },
+                    "UPDATING": {
+                        "TITLE": "Editar"
+                    },
+                    "WARNINGS": {
+                        "MUST_SELECT_CATEGORY": "Debe seleccionar un rubro"
+                    }
                 }
             },
             "BUTTONS": {

@@ -1,1 +1,7 @@
-<p>providers-catalog works!</p>
+<div class="container">
+    <app-providers-list></app-providers-list>
+    @if(!deviceTypeService.isMobile()) {
+        <p-divider layout="vertical"/>
+        <app-provider-data-form></app-provider-data-form>
+    }
+</div>

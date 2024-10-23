@@ -22,6 +22,7 @@ import { ActiveRouteService } from './core/services/active-route.service';
 import { MobilePartnerAdditionComponent } from './features/sections/sub-sections/mobile-partner-addition/mobile-partner-addition.component';
 import { MobileRawMaterialDataComponent } from './features/sections/sub-sections/mobile-raw-material-data/mobile-raw-material-data.component';
 import { MobileProductDataComponent } from './features/sections/sub-sections/mobile-product-data/mobile-product-data.component';
+import { MobileProviderDataComponent } from './features/sections/sub-sections/mobile-provider-data/mobile-provider-data.component';
 
 export const routes: Routes = [
     {
@@ -137,5 +138,13 @@ export const routes: Routes = [
     {
         path: 'product-edition',
         component: MobileProductDataComponent
+    },
+    {
+        path: 'provider-addition',
+        component: MobileProviderDataComponent
+    },
+    {
+        path: 'provider-edition',
+        component: MobileProviderDataComponent
     }
 ];
