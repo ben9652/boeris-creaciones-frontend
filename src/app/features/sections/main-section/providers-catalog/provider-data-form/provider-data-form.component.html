@@ -1,0 +1,78 @@
+<p-toast></p-toast>
+<div class="provider-data-form-view">
+    <div class="provider-data-form">
+        <div class="fields">
+            <app-category-manager
+            [disabled]="providersCatalogService.selectedProvider() === null || loading"
+            [category]="providersCatalogService.selectedProvider()?.category"
+            (ngModelChange)="updateProviderCategory($event)"
+            ></app-category-manager>
+
+            <input
+            type="text"
+            pInputText
+            [placeholder]="translateService.instant('SECTIONS.CATALOGS.PROVIDERS.FIELDS.NAME')"
+            [disabled]="providersCatalogService.selectedProvider() === null || loading"
+            [ngModel]="providersCatalogService.selectedProvider()?.name"
+            (ngModelChange)="updateProviderName($event)"
+            >
+
+            <input type="text"
+            pInputText
+            [placeholder]="translateService.instant('SECTIONS.CATALOGS.PROVIDERS.FIELDS.RESIDENCE')"
+            [maxLength]="50"
+            [disabled]="providersCatalogService.selectedProvider() === null || loading"
+            [ngModel]="providersCatalogService.selectedProvider()?.residence"
+            (ngModelChange)="updateProviderResidence($event)"
+            >
+
+            <p-inputNumber
+            inputId="withoutgrouping"
+            mode="decimal"
+            [useGrouping]="false"
+            [placeholder]="translateService.instant('SECTIONS.CATALOGS.PROVIDERS.FIELDS.PHONE')"
+            [disabled]="providersCatalogService.selectedProvider() === null || loading"
+            [ngModel]="providersCatalogService.selectedProvider()?.phone"
+            (ngModelChange)="updateProviderPhone($event)"
+            ></p-inputNumber>
+            
+            <input type="text"
+            pInputText
+            [placeholder]="translateService.instant('SECTIONS.CATALOGS.PROVIDERS.FIELDS.CVU_OR_ALIAS')"
+            [maxLength]="30"
+            [disabled]="providersCatalogService.selectedProvider() === null || loading"
+            [ngModel]="providersCatalogService.selectedProvider()?.cvu_or_alias"
+            (ngModelChange)="updateProviderCVUorAlias($event)"
+            >
+        </div>
+    </div>
+    <div class="provider-data-form-buttons">
+        <p-button
+        class="bottom-button"
+        [label]="translateService.instant('SHARED.BUTTONS.CANCEL')"
+        severity="secondary"
+        [disabled]="providersCatalogService.selectedProvider() === null || loading"
+        (onClick)="clickOnCancel()"
+        ></p-button>
+
+        @if (!loading) {
+            <p-button
+            class="bottom-button"
+            [label]="translateService.instant('SHARED.BUTTONS.CONFIRM')"
+            [disabled]="
+                providersCatalogService.selectedProvider() === null ||
+                providersCatalogService.nonModified && providersCatalogService.selectedProvider() !== null && providersCatalogService.selectedProvider()?.id !== 0
+            "
+            (onClick)="clickOnConfirm()"
+            ></p-button>
+        }
+        @else {
+            <p-button
+            class="bottom-button"
+            [disabled]="true"
+            >
+                <i class="pi pi-spin pi-spinner"></i>
+            </p-button>
+        }
+    </div>
+</div>
