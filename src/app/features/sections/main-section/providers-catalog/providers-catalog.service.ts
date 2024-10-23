@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { areProvidersEqual, Provider } from '../../../../core/models/provider.entities';
 import { PatchObject } from '../../../../core/models/patchObj.entities';
 import { Observable, throwError } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -28,9 +29,10 @@ export class ProvidersCatalogService {
   
   constructor(
     private authService: AuthService,
-    private http: HttpClient
+    private http: HttpClient,
+    private translateService: TranslateService
   ) {
-    this.urlBase = environment.API_URL;
+    this.urlBase = environment.API_URL + 'CatalogoProveedores';
     this.httpOptions = new HttpOptions(authService.getToken());
   }
 
@@ -44,22 +46,22 @@ export class ProvidersCatalogService {
 
   addNewProvider(): Observable<Provider> {
     let newProvider: Provider | null = this.selectedProvider();
-    const apiUrl: string = this.urlBase + 'CatalogoProveedores';
+    const apiUrl: string = this.urlBase;
     
     if(this.httpOptions === undefined)
       this.httpOptions = new HttpOptions(this.authService.getToken());
 
     if(this.selectedProvider()?.name === null)
-      return throwError(() => new Error('Debe llenarse el campo de nombre'));
+      return throwError(() => new Error(this.translateService.instant('SECTIONS.CATALOGS.PROVIDERS.ERRORS.FIELD_NAME_LACK')));
 
     if(this.selectedProvider()?.category === null)
-      return throwError(() => new Error('Se debe seleccionar un rubro'));
+      return throwError(() => new Error(this.translateService.instant('SECTIONS.CATALOGS.PROVIDERS.CATEGORY_MODAL.WARNINGS.MUST_SELECT_CATEGORY')));
 
     if(this.selectedProvider()?.name && this.selectedProvider()?.category) {
       return this.http.post<Provider>(apiUrl, newProvider, this.httpOptions);
     }
     else {
-      return throwError(() => new Error('Debe completar todos los campos obligatorios'));
+      return throwError(() => new Error(this.translateService.instant('SECTIONS.CATALOGS.PROVIDERS.ERRORS.FIELDS_LACK')));
     }
   }
 
@@ -80,14 +82,14 @@ export class ProvidersCatalogService {
   }
 
   editProvider(id: number): Observable<Provider> {
-    const apiUrl: string = this.urlBase + 'CatalogoProveedores';
-    const apiUrlWithId: string = this.urlBase + 'CatalogoProveedores/' + id;
+    const apiUrl: string = this.urlBase;
+    const apiUrlWithId: string = this.urlBase + `/${id}`;
 
     if(this.patchData.find(patch => patch.path === 'name')?.value === null)
-      return throwError(() => new Error('El nombre no puede ser vacío'));
+      return throwError(() => new Error(this.translateService.instant('SECTIONS.CATALOGS.PROVIDERS.ERRORS.FIELD_NAME_LACK')));
 
     if(this.patchData.find(patch => patch.path === 'category')?.value === null)
-      return throwError(() => new Error('Se debe seleccionar un rubro'));
+      return throwError(() => new Error(this.translateService.instant('SECTIONS.CATALOGS.PROVIDERS.CATEGORY_MODAL.WARNINGS.MUST_SELECT_CATEGORY')));
 
     return this.http.patch<Provider>(apiUrlWithId, this.patchData, this.httpOptions);
   }

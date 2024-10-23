@@ -179,6 +179,7 @@
                 },
                 "ERRORS": {
                     "FIELDS_LACK": "Debe completar todos los campos obligatorios",
+                    "FIELD_NAME_LACK": "Debe llenarse el campo de nombre",
                     "UPDATE": "Error al actualizar",
                     "CATEGORY_CREATION": "Error al crear el rubro",
                     "CATEGORY_UPDATING": "Error al editar el rubro"
@@ -200,7 +201,7 @@
                         "TITLE": "Editar"
                     },
                     "WARNINGS": {
-                        "MUST_SELECT_CATEGORY": "Debe seleccionar un rubro para editar"
+                        "MUST_SELECT_CATEGORY": "Debe seleccionar un rubro"
                     }
                 }
             },
