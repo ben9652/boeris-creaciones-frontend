@@ -83,6 +83,8 @@ export class BranchesListComponent {
   }
 
   clickOnBranch(branch: BranchRow){
+    console.log("CLICK ON BRANCH");
+    console.log(branch);
     this.branchesCatalogService.selectedNonModifiedBranch = branch.nonModified;
     this.branchesCatalogService.selectedBranch.set(branch.modified);
     this.branchesCatalogService.nonModified = areBranchesEqual(branch.nonModified, branch.modified);

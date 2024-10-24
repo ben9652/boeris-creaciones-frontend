@@ -34,8 +34,8 @@ export class BranchesDataFormComponent {
   }
 
   updateBranchLocation(value: string){
-    this.branchesCatalogService.updateSelectedBranch('location', value);
-    this.branchesCatalogService.addPatchObject('replace', 'location', value);
+    this.branchesCatalogService.updateSelectedBranch('locality', value);
+    this.branchesCatalogService.addPatchObject('replace', 'locality', value);
   }
 
   clickOnCancel(){

@@ -2,7 +2,7 @@
 <div class="branch-data-form-view">
     <div class="branch-data-form">
         <div class="fields">
-            <input type="text" pInputText [placeholder]="translateService.instant('SECTIONS.CATALOGS.BRANCHES.FIELDS.LOCATION')" [disabled]="branchesCatalogService.selectedBranch() === null || loading" [ngModel]="branchesCatalogService.selectedBranch()?.location" (ngModelChange)="updateBranchLocation($event)"/>
+            <input type="text" pInputText [placeholder]="translateService.instant('SECTIONS.CATALOGS.BRANCHES.FIELDS.LOCATION')" [disabled]="branchesCatalogService.selectedBranch() === null || loading" [ngModel]="branchesCatalogService.selectedBranch()?.locality?.name" (ngModelChange)="updateBranchLocation($event)"/>
 
             <input type="text" pInputText [placeholder]="translateService.instant('SECTIONS.CATALOGS.BRANCHES.FIELDS.NAME')" [disabled]="branchesCatalogService.selectedBranch() === null || loading" [ngModel]="branchesCatalogService.selectedBranch()?.name" (ngModelChange)="updateBranchName($event)"/>
         </div>

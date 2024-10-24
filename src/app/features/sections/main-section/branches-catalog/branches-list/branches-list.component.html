@@ -13,8 +13,8 @@
                 </ng-template>
     
                 <ng-template pTemplate="body" let-branchRow>
-                    <tr class="branch">
-                        <td [pSelectableRow]="youAreAdding()" (click)="clickOnBranch(branchRow)">{{ branchRow.nonModified.id }}</td>
+                    <tr class="branch" [pSelectableRow]="youAreAdding()" (click)="clickOnBranch(branchRow)">
+                        <td>{{ branchRow.nonModified.id }}</td>
                         <td>{{ branchRow.nonModified.name }}</td>
                     </tr>
                 </ng-template>

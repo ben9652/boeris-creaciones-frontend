@@ -42,7 +42,7 @@ export class BrancesCatalogService {
     if(this.httpOptions === undefined){
       this.httpOptions = new HttpOptions(this.authService.getToken());
     }
-    if(this.selectedBranch()?.name && this.selectedBranch()?.location){
+    if(this.selectedBranch()?.name && this.selectedBranch()?.locality){
       return this.http.post<Branch>(apiUrl, newBranch, this.httpOptions);
     } else {
       return throwError(() => new Error('Debe completar todos los campos obligatorios'));
