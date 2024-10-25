@@ -39,7 +39,7 @@ export class ProductsListService {
   }
 
   getProduct(id: number): Product | undefined {
-    if(this.products.length !== 0) {
+    if(this.products()?.length !== 0) {
       let product: Product | undefined = this.products()?.find(product => product.id === id);
       if(product) {
         return product;

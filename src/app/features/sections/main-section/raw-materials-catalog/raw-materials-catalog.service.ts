@@ -1,51 +1,52 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import { HttpOptions } from '../../../../core/models/httpOptions.entities';
-import { environment } from '../../../../../environments/environment';
-import { areProductsEqual, Product } from '../../../../core/models/product.entities';
-import { areRawMaterialsEqual } from '../../../../core/models/rawMaterial.entities';
-import { catchError, Observable, of, switchMap, tap, throwError } from 'rxjs';
-import { getImageFileFromUrl } from '../../../../shared/multimedia.helpers';
+import { areRawMaterialsEqual, RawMaterial } from '../../../../core/models/rawMaterial.entities';
+import { PatchObject } from '../../../../core/models/patchObj.entities';
 import { AuthService } from '../../../../core/services/auth.service';
 import { HttpClient } from '@angular/common/http';
-import { PatchObject } from '../../../../core/models/patchObj.entities';
+import { environment } from '../../../../../environments/environment';
+import { catchError, Observable, of, switchMap, throwError } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+import { getImageFileFromUrl } from '../../../../shared/multimedia.helpers';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductsCatalogService {
+export class RawMaterialsCatalogService {
   urlBase: string;
   httpOptions?: HttpOptions;
-  
-  // Si hay un producto seleccionado, este tendrá un ID correspondiente al ID del producto
+
+  // Si hay una materia prima seleccionada, esta tendrá un ID correspondiente al ID de la materia prima
   // Si aún no se seleccionó nada, es nulo
-  // Si su ID es 0, es porque se está agregando un producto nuevo
-  selectedProduct: WritableSignal<Product | null> = signal<Product | null>(null);
-  selectedNonModifiedProduct: Product | null = null;
+  // Si su ID es 0, es porque se está agregando una materia prima nueva
+  selectedRawMaterial: WritableSignal<RawMaterial | null> = signal<RawMaterial | null>(null);
+  selectedNonModifiedRawMaterial: RawMaterial | null = null;
 
   nonModified: boolean = true;
 
-  productUpdated: boolean = false;
+  rawMaterialUpdated: boolean = false;
 
   patchData: PatchObject[] = [];
 
   constructor(
     private authService: AuthService,
-    private http: HttpClient
+    private http: HttpClient,
+    private translateService: TranslateService
   ) {
-    this.urlBase = environment.API_URL + 'CatalogoProductos';
+    this.urlBase = environment.API_URL + 'CatalogoMateriasPrimas';
     this.httpOptions = new HttpOptions(authService.getToken());
   }
 
-  updateSelectedProduct(property: keyof Product, value: any) {
-    const currentProduct: Product | null = this.selectedProduct();
-    if(currentProduct) {
-      this.selectedProduct.set({ ...currentProduct, [property]: value });
-      this.nonModified = areProductsEqual(this.selectedNonModifiedProduct, this.selectedProduct());
+  updateSelectedRawMaterial(property: keyof RawMaterial, value: any) {
+    const currentRawMaterial: RawMaterial | null = this.selectedRawMaterial();
+    if(currentRawMaterial) {
+      this.selectedRawMaterial.set({ ...currentRawMaterial, [property]: value });
+      this.nonModified = areRawMaterialsEqual(this.selectedNonModifiedRawMaterial, this.selectedRawMaterial());
     }
   }
 
-  addNewProduct(): Observable<Product> {
-    let newProduct: Product | null = this.selectedProduct();
+  addNewRawMaterial(): Observable<RawMaterial> {
+    let newRawMaterial: RawMaterial | null = this.selectedRawMaterial();
     const apiUrl: string = this.urlBase;
     const apiUrlToSavePicture: string = apiUrl + '/upload-image';
 
@@ -53,11 +54,19 @@ export class ProductsCatalogService {
       this.httpOptions = new HttpOptions(this.authService.getToken());
     }
 
-    if(this.selectedProduct()?.name && this.selectedProduct()?.price) {
-      if(newProduct?.picture !== 'pictures/cube-solid.svg') {
-        return getImageFileFromUrl(newProduct?.picture).pipe(
+    if(this.selectedRawMaterial()?.name === null) {
+      return throwError(() => new Error(this.translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.WARNINGS.FIELD_NAME_LACK')));
+    }
+
+    if(this.selectedRawMaterial()?.category === null) {
+      return throwError(() => new Error(this.translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.CATEGORY_MODAL.WARNINGS.MUST_SELECT_CATEGORY')));
+    }
+
+    if(this.selectedRawMaterial()?.name && this.selectedRawMaterial()?.category) {
+      if(newRawMaterial?.picture !== 'pictures/leaf-solid.svg') {
+        return getImageFileFromUrl(newRawMaterial?.picture).pipe(
           switchMap((file: File | undefined) => {
-            const formData = new FormData();
+            const formData: FormData = new FormData();
             if(file) {
               formData.append('file', file);
             }
@@ -65,35 +74,35 @@ export class ProductsCatalogService {
             const httpOptionsToCreateImage: HttpOptions = new HttpOptions(this.authService.getToken(), true);
             return this.http.post<string>(apiUrlToSavePicture, formData, httpOptionsToCreateImage).pipe(
               switchMap((newPictureUrl: string) => {
-                if(newProduct !== null) {
-                  newProduct.picture = newPictureUrl;
+                if(newRawMaterial !== null) {
+                  newRawMaterial.picture = newPictureUrl;
                 }
-                return this.http.post<Product>(apiUrl, newProduct, this.httpOptions);
+                return this.http.post<RawMaterial>(apiUrl, newRawMaterial, this.httpOptions);
               })
             )
           })
         )
       }
       else {
-        return this.http.post<Product>(apiUrl, newProduct, this.httpOptions);
+        return this.http.post<RawMaterial>(apiUrl, newRawMaterial, this.httpOptions);
       }
     }
     else {
-      return throwError(() => new Error('Debe completar todos los campos obligatorios'));
+      return throwError(() => new Error(this.translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.WARNINGS.FIELDS_LACK')));
     }
   }
 
-  editProduct(id: number): Observable<Product> {
+  editRawMaterial(id: number): Observable<RawMaterial> {
     const apiUrl: string = this.urlBase;
     const apiUrlWithId: string = apiUrl + `/${id}`;
     if(this.patchData.find(patch => patch.path === 'name')?.value === '') {
-      return throwError(() => new Error('El nombre no puede ser vacío'));
+      return throwError(() => new Error(this.translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.WARNINGS.FIELD_NAME_LACK')));
     }
 
     let picturePatch: PatchObject | undefined = this.patchData.find(patch => patch.path === 'picture');
     const apiUrlToSavePicture: string = apiUrl + '/upload-image';
 
-    const tokens: string[] | undefined = this.selectedNonModifiedProduct?.picture?.split('/');
+    const tokens: string[] | undefined = this.selectedNonModifiedRawMaterial?.picture?.split('/');
     let apiUrlToDeletePicture: string = apiUrl + '/delete-image/';
     if(tokens) {
       const pictureName: string = tokens[tokens.length - 1];
@@ -103,7 +112,7 @@ export class ProductsCatalogService {
     if(picturePatch?.value) {
       return getImageFileFromUrl(picturePatch.value).pipe(
         switchMap((file: File | undefined) => {
-          const formData = new FormData();
+          const formData: FormData = new FormData();
           if(file) {
             formData.append('file', file);
           }
@@ -114,7 +123,7 @@ export class ProductsCatalogService {
               return this.http.post<string>(apiUrlToSavePicture, formData, httpOptionsForImageManaging).pipe(
                 switchMap((imageUrl: string) => {
                   picturePatch.value = imageUrl;
-                  return this.http.patch<Product>(apiUrlWithId, this.patchData, this.httpOptions);
+                  return this.http.patch<RawMaterial>(apiUrlWithId, this.patchData, this.httpOptions);
                 }),
                 catchError((res) => {
                   console.log('No se pudo agregar una imagen: ', res);
@@ -131,7 +140,7 @@ export class ProductsCatalogService {
       )
     }
     else {
-      return this.http.patch<Product>(apiUrlWithId, this.patchData, this.httpOptions);
+      return this.http.patch<RawMaterial>(apiUrlWithId, this.patchData, this.httpOptions);
     }
   }
 
@@ -144,14 +153,10 @@ export class ProductsCatalogService {
       this.patchData.splice(index, 1);
       return;
     }
-    
-    if(isNotNull) {
-      if(alreadyAddedPatch) {
-        alreadyAddedPatch.value = value;
-      }
-      else {
-        this.patchData.push(new PatchObject(op, path, value));
-      }
-    }
+
+    if(alreadyAddedPatch && isNotNull)
+      alreadyAddedPatch.value = value;
+    else
+      this.patchData.push(new PatchObject(op, path, value));
   }
 }

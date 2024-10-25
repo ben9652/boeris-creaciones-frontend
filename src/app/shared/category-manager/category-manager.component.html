@@ -1,0 +1,28 @@
+<p-toast></p-toast>
+
+<div class="container">
+    <p-dropdown
+    [options]="categories"
+    optionLabel="name"
+    [placeholder]="translateService.instant('SECTIONS.CATALOGS.PROVIDERS.FIELDS.CATEGORY')"
+    [style]="{ width: '60%' }"
+    [emptyMessage]="translateService.instant('SHARED.DROPDOWN.EMPTY_MESSAGES.CATEGORIES')"
+    [disabled]="disabled()"
+    [ngModel]="selectedCategory"
+    (ngModelChange)="emitCategory($event)"
+    ></p-dropdown>
+
+    <div class="buttons">
+        <p-button
+        icon="fas fa-plus"
+        [disabled]="disabled()"
+        (onClick)="showModalCategory()"
+        ></p-button>
+
+        <p-button
+        icon="fas fa-pencil"
+        [disabled]="disabled()"
+        (onClick)="showModalCategory(true)"
+        ></p-button>
+    </div>
+</div>
