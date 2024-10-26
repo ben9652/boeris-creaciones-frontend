@@ -214,7 +214,10 @@
                 },
                 "FIELDS": {
                     "NAME": "Nombre",
-                    "LOCATION": "Localidad"
+                    "LOCALITY": "Localidad"
+                },
+                "EMPTY_MESSAGES": {
+                    "LOCALITY": "No se encontraron localidades"
                 },
                 "SUCCESSES": {
                     "CREATED": "Sucursal creada con éxito",
@@ -224,6 +227,9 @@
                     "FIELDS_LACK": "Debe completar todos los campos obligatorios",
                     "UPDATE": "Error al actualizar",
                     "NAME_LACK": "El nombre no puede ser vacío"
+                },
+                "LOCALITY_MODAL": {
+                    "TITLE": "Nueva localidad"
                 }
             },
             "BUTTONS": {

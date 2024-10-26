@@ -2,19 +2,25 @@
 <div class="branch-data-form-view">
     <div class="branch-data-form">
         <div class="fields">
-            <input type="text" pInputText [placeholder]="translateService.instant('SECTIONS.CATALOGS.BRANCHES.FIELDS.LOCATION')" [disabled]="branchesCatalogService.selectedBranch() === null || loading" [ngModel]="branchesCatalogService.selectedBranch()?.locality?.name" (ngModelChange)="updateBranchLocation($event)"/>
-
-            <input type="text" pInputText [placeholder]="translateService.instant('SECTIONS.CATALOGS.BRANCHES.FIELDS.NAME')" [disabled]="branchesCatalogService.selectedBranch() === null || loading" [ngModel]="branchesCatalogService.selectedBranch()?.name" (ngModelChange)="updateBranchName($event)"/>
+            <app-locality-manager></app-locality-manager>
+            <input type="text" pInputText
+                [placeholder]="translateService.instant('SECTIONS.CATALOGS.BRANCHES.FIELDS.NAME')"
+                [disabled]="branchesCatalogService.selectedBranch() === null || loading"
+                [ngModel]="branchesCatalogService.selectedBranch()?.name" (ngModelChange)="updateBranchName($event)" />
         </div>
     </div>
     <div class="branch-data-form-buttons">
-        <p-button class="bottom-button" [label]="translateService.instant('SHARED.BUTTONS.CANCEL')" severity="secondary" [disabled]="branchesCatalogService.selectedBranch() === null || loading" (onClick)="clickOnCancel()"></p-button>
+        <p-button class="bottom-button" [label]="translateService.instant('SHARED.BUTTONS.CANCEL')" severity="secondary"
+            [disabled]="branchesCatalogService.selectedBranch() === null || loading"
+            (onClick)="clickOnCancel()"></p-button>
         @if (!loading) {
-            <p-button class="bottom-button" [label]="translateService.instant('SHARED.BUTTONS.CONFIRM')" [disabled]="branchesCatalogService.selectedBranch() === null || branchesCatalogService.nonModified && branchesCatalogService.selectedBranch() !== null && branchesCatalogService.selectedBranch()?.id !== 0" (onClick)="cliclOnConfirm()"></p-button>
+        <p-button class="bottom-button" [label]="translateService.instant('SHARED.BUTTONS.CONFIRM')"
+            [disabled]="branchesCatalogService.selectedBranch() === null || branchesCatalogService.nonModified && branchesCatalogService.selectedBranch() !== null && branchesCatalogService.selectedBranch()?.id !== 0"
+            (onClick)="cliclOnConfirm()"></p-button>
         } @else {
-            <p-button class="bottom-button" [disabled]="true">
-                <i class="pi pi-spin pi-spinner"></i>
-            </p-button>
+        <p-button class="bottom-button" [disabled]="true">
+            <i class="pi pi-spin pi-spinner"></i>
+        </p-button>
         }
     </div>
 </div>

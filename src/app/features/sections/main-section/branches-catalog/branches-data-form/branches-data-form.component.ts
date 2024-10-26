@@ -8,15 +8,16 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule, Location } from '@angular/common';
 import { MessageService } from 'primeng/api';
 import { DeviceTypeService } from '../../../../../core/services/device-type.service';
-import { Branch } from '../../../../../core/models/branch.entities';
+import { Branch, Locality } from '../../../../../core/models/branch.entities';
 import { BranchesListService } from '../branches-list/branches-list.service';
+import { LocalityManagerComponent } from "./locality-manager/locality-manager.component";
 
 
 
 @Component({
   selector: 'app-branches-data-form',
   standalone: true,
-  imports: [ToastModule, ButtonModule, InputTextModule, CommonModule, FormsModule],
+  imports: [ToastModule, ButtonModule, InputTextModule, CommonModule, FormsModule, LocalityManagerComponent],
   templateUrl: './branches-data-form.component.html',
   styleUrl: './branches-data-form.component.scss',
   providers: [MessageService, TranslateService]
@@ -33,12 +34,8 @@ export class BranchesDataFormComponent {
     this.branchesCatalogService.addPatchObject('replace', 'name', value);
   }
 
-  updateBranchLocation(value: string){
-    this.branchesCatalogService.updateSelectedBranch('locality', value);
-    this.branchesCatalogService.addPatchObject('replace', 'locality', value);
-  }
-
   clickOnCancel(){
+    this.branchesCatalogService.toggleEdition(true);
     if(this.deviceTypeService.isMobile()){
       this.location.back();
     }

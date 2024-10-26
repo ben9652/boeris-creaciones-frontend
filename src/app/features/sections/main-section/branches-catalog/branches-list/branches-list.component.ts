@@ -76,6 +76,7 @@ export class BranchesListComponent {
   }
 
   clicOnAddNewBranch(){
+    this.branchesCatalogService.toggleEdition(false);
     this.branchesCatalogService.selectedBranch.set(createNullBranch());
     if(this.deviceTypeService.isMobile()){
       this.router.navigate(['branch-addition']);
@@ -83,8 +84,8 @@ export class BranchesListComponent {
   }
 
   clickOnBranch(branch: BranchRow){
-    console.log("CLICK ON BRANCH");
-    console.log(branch);
+    console.log(branch.nonModified);
+    this.branchesCatalogService.toggleEdition(false);
     this.branchesCatalogService.selectedNonModifiedBranch = branch.nonModified;
     this.branchesCatalogService.selectedBranch.set(branch.modified);
     this.branchesCatalogService.nonModified = areBranchesEqual(branch.nonModified, branch.modified);

@@ -1,6 +1,6 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import { HttpOptions } from '../../../../core/models/httpOptions.entities';
-import { areBranchesEqual, Branch } from '../../../../core/models/branch.entities';
+import { areBranchesEqual, Branch, Locality } from '../../../../core/models/branch.entities';
 import { PatchObject } from '../../../../core/models/patchObj.entities';
 import { AuthService } from '../../../../core/services/auth.service';
 import { HttpClient } from '@angular/common/http';
@@ -14,6 +14,8 @@ export class BrancesCatalogService {
   urlBase: string;
   httpOptions?: HttpOptions;
 
+  disableDataEdition = signal<boolean>(true);
+
   selectedBranch: WritableSignal<Branch | null> = signal<Branch | null>(null);
   selectedNonModifiedBranch: Branch | null = null;
 
@@ -22,6 +24,9 @@ export class BrancesCatalogService {
   branchUpdated: boolean = false;
 
   patchData: PatchObject[] = [];
+
+  modalTitle = "";
+  modalVisibility = false;
 
   constructor(private authService: AuthService, private http: HttpClient) {
     this.urlBase = environment.API_URL;
@@ -74,4 +79,14 @@ export class BrancesCatalogService {
     }
     return this.http.patch<Branch>(apiUrlWithId, this.patchData, this.httpOptions);
    }
+
+   toggleEdition(change: boolean) {
+    this.disableDataEdition.set(change);
+  }
+
+  getLocalities(): Observable<Locality[]> {
+    this.httpOptions = new HttpOptions(this.authService.getToken());
+    const apiUrl = this.urlBase + 'Localidades';
+    return this.http.get<Locality[]>(apiUrl, this.httpOptions);
+  }
 }

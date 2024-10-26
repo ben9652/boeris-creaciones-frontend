@@ -1,0 +1,4 @@
+<div>
+    <p-dropdown [options]="localities" optionLabel="name" [placeholder]="translateService.instant('SECTIONS.CATALOGS.BRANCHES.FIELDS.LOCALITY')" [style]="{width: '60%'}" [emptyMessage]="translateService.instant('SECTIONS.CATALOGS.BRANCHES.EMPTY_MESSAGES.LOCALITY')" [disabled]="this.disabledEdition()" [ngModel]="this.branchCatalogService.selectedBranch()?.locality" (ngModelChange)="updateBranchLocality($event)"/>
+     <p-button icon="fas fa-plus" [disabled]="this.disabledEdition()" (onClick)="newLocalityClick()"></p-button>
+</div>
