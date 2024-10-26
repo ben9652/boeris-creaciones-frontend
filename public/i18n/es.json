@@ -191,13 +191,6 @@
                     "PHONE": "Teléfono",
                     "CVU_OR_ALIAS": "CVU o alias"
                 },
-                "ERRORS": {
-                    "FIELDS_LACK": "Debe completar todos los campos obligatorios",
-                    "FIELD_NAME_LACK": "Debe llenarse el campo de nombre",
-                    "UPDATE": "Error al actualizar",
-                    "CATEGORY_CREATION": "Error al crear el rubro",
-                    "CATEGORY_UPDATING": "Error al editar el rubro"
-                },
                 "EMPTY_MESSAGES": {
                     "CATEGORIES": "No se encontraron rubros"
                 },
@@ -206,6 +199,19 @@
                     "UPDATED": "Proveedor actualizado con éxito",
                     "CATEGORY_CREATED": "Rubro creado con éxito",
                     "CATEGORY_UPDATED": "El rubro se editó correctamente"
+                },
+                "WARNINGS": {
+                    "FIELDS_LACK": {
+                        "CATEGORY": "Debe elegirse un rubro",
+                        "NAME": "Debe llenarse el campo de nombre"
+                    }
+                },
+                "ERRORS": {
+                    "FIELDS_LACK": "Debe completar todos los campos obligatorios",
+                    "FIELD_NAME_LACK": "Debe llenarse el campo de nombre",
+                    "UPDATE": "Error al actualizar",
+                    "CATEGORY_CREATION": "Error al crear el rubro",
+                    "CATEGORY_UPDATING": "Error al editar el rubro"
                 },
                 "CATEGORY_MODAL": {
                     "CREATION": {

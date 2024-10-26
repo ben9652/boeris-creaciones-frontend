@@ -1,7 +1,6 @@
 <div class="rawMaterials-list-view">
     <div class="rawMaterial-list-buttons">
         <p-button [label]="translateService.instant('SECTIONS.CATALOGS.BUTTONS.ADD')" icon="fas fa-plus" (click)="clickOnAddNewRawMaterial()"></p-button>
-        <!-- <p-button label="Editar" icon="fas fa-pencil"></p-button> -->
     </div>
     <div class="rawMaterial-list">
         @if (rawMaterialsListService.rawMaterials() !== null) {

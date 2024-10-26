@@ -13,6 +13,7 @@ import { ProductsListService } from '../products-list/products-list.service';
 import { MessageService } from 'primeng/api';
 import { DeviceTypeService } from '../../../../../core/services/device-type.service';
 import { TranslateService } from '@ngx-translate/core';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-product-data-form',
@@ -95,25 +96,23 @@ export class ProductDataFormComponent {
 
   clickOnConfirm() {
     this.loading = true;
+    
+    const selectedProduct: Product | null = this.productsCatalogService.selectedProduct();
+    if(selectedProduct) {
+      const isNameNull: boolean = selectedProduct.name === null;
+      const isPriceNull: boolean = selectedProduct.price === null;
 
-    if(this.productsCatalogService.patchData.find(patch => patch.path === 'name') === undefined) {
-      this.messageService.add({
-        severity: 'warning',
-        summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.WARNING'),
-        detail: this.translateService.instant('SECTIONS.CATALOGS.PRODUCTS.WARNINGS.FIELDS_LACK.NAME')
-      });
-      this.loading = false;
-      return;
-    }
+      if(isNameNull || isPriceNull) {
+        this.loading = false;
 
-    if(this.productsCatalogService.patchData.find(patch => patch.path === 'price') === undefined) {
-      this.messageService.add({
-        severity: 'warning',
-        summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.WARNING'),
-        detail: this.translateService.instant('SECTIONS.CATALOGS.PRODUCTS.WARNINGS.FIELDS_LACK.PRICE')
-      });
-      this.loading = false;
-      return;
+        const nullField: boolean[] = [
+          isNameNull,
+          isPriceNull
+        ];
+        this.throwWarningForEmptyFields(nullField);
+
+        return;
+      }
     }
 
     // Si se crea un nuevo producto
@@ -170,7 +169,7 @@ export class ProductDataFormComponent {
               this.productsCatalogService.selectedNonModifiedProduct = response;
             }
           },
-          error: (err) => {
+          error: (err: HttpErrorResponse) => {
             this.messageService.add({
               severity: 'error',
               summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.FAILED'),
@@ -178,8 +177,26 @@ export class ProductDataFormComponent {
             });
             this.loading = false;
           }
-        })
+        });
       }
+    }
+  }
+
+  private throwWarningForEmptyFields(nullField: boolean[]) {
+    if(nullField[0]) {
+      this.messageService.add({
+        severity: 'warn',
+        summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.WARNING'),
+        detail: this.translateService.instant('SECTIONS.CATALOGS.PRODUCTS.WARNINGS.FIELDS_LACK.NAME')
+      });
+    }
+    
+    else if(nullField[1]) {
+      this.messageService.add({
+        severity: 'warn',
+        summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.WARNING'),
+        detail: this.translateService.instant('SECTIONS.CATALOGS.PRODUCTS.WARNINGS.FIELDS_LACK.PRICE')
+      });
     }
   }
 }

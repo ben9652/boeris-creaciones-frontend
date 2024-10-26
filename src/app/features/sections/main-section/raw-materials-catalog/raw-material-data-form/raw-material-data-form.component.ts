@@ -1,4 +1,4 @@
-import { Component, effect, ViewChild } from '@angular/core';
+import { Component, effect } from '@angular/core';
 import { ImageManagerComponent } from "./image-manager/image-manager.component";
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
@@ -7,17 +7,17 @@ import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button'
 import { RawMaterialsCatalogService } from '../raw-materials-catalog.service';
-import { areRawMaterialsEqual, RawMaterial, Source, Unit } from '../../../../../core/models/rawMaterial.entities';
+import { RawMaterial, Source, Unit } from '../../../../../core/models/rawMaterial.entities';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
-import { PatchObject } from '../../../../../core/models/patchObj.entities';
 import { Category } from '../../../../../core/models/category.entities';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { RawMaterialsListService } from '../raw-materials-list/raw-materials-list.service';
 import { DeviceTypeService } from '../../../../../core/services/device-type.service';
 import { UnitsService } from '../units.service';
 import { CategoryManagerComponent } from '../../../../../shared/category-manager/category-manager.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-raw-material-data-form',
@@ -45,6 +45,8 @@ export class RawMaterialDataFormComponent {
   units: Unit[] = [];
   sources: Source[];
 
+  selectedSource: Source | undefined;
+
   constructor(
     public rawMaterialsCatalogService: RawMaterialsCatalogService,
     public rawMaterialsListService: RawMaterialsListService,
@@ -54,9 +56,14 @@ export class RawMaterialDataFormComponent {
     private location: Location,
     public translateService: TranslateService
   ) {
+    effect(() => {
+      const source: string | null | undefined = this.rawMaterialsCatalogService.selectedRawMaterial()?.source;
+      this.selectedSource = this.sources.find(src => src.label === source);
+    });
+    
     unitsService.get().subscribe((units: Unit[]) => {
       this.units = units;
-    })
+    });
     
     this.sources = [
       new Source('C', 'Por compra'),
@@ -71,15 +78,15 @@ export class RawMaterialDataFormComponent {
   }
 
   updateRawMaterialName(value: string) {
-    let comment: string | null;
+    let name: string | null;
     if(value.length === 0) {
-      comment = null;
+      name = null;
     }
     else {
-      comment = value;
+      name = value;
     }
-    this.rawMaterialsCatalogService.updateSelectedRawMaterial('name', comment);
-    this.rawMaterialsCatalogService.addPatchObject('replace', 'name', comment);
+    this.rawMaterialsCatalogService.updateSelectedRawMaterial('name', name);
+    this.rawMaterialsCatalogService.addPatchObject('replace', 'name', name);
   }
 
   updateRawMaterialUnit(value: Unit | null) {
@@ -125,45 +132,27 @@ export class RawMaterialDataFormComponent {
 
   clickOnConfirm() {
     this.loading = true;
+    
+    const selectedRawMaterial: RawMaterial | null = this.rawMaterialsCatalogService.selectedRawMaterial();
+    if(selectedRawMaterial) {
+      const isCategoryNull: boolean = selectedRawMaterial.category === null;
+      const isNameNull: boolean = selectedRawMaterial.name === null;
+      const isUnitNull: boolean = selectedRawMaterial.unit === null;
+      const isSourceNull: boolean = selectedRawMaterial.source === null;
 
-    if(this.rawMaterialsCatalogService.patchData.find(patch => patch.path === 'category') === undefined) {
-      this.messageService.add({
-        severity: 'warn',
-        summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.WARNING'),
-        detail: this.translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.WARNINGS.FIELDS_LACK.CATEGORY')
-      });
-      this.loading = false;
-      return;
-    }
+      if(isCategoryNull || isNameNull || isUnitNull || isSourceNull) {
+        this.loading = false;
 
-    if(this.rawMaterialsCatalogService.patchData.find(patch => patch.path === 'name') === undefined) {
-      this.messageService.add({
-        severity: 'warn',
-        summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.WARNING'),
-        detail: this.translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.WARNINGS.FIELDS_LACK.NAME')
-      });
-      this.loading = false;
-      return;
-    }
-
-    if(this.rawMaterialsCatalogService.patchData.find(patch => patch.path === 'unit') === undefined) {
-      this.messageService.add({
-        severity: 'warn',
-        summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.WARNING'),
-        detail: this.translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.WARNINGS.FIELDS_LACK.UNIT')
-      });
-      this.loading = false;
-      return;
-    }
-
-    if(this.rawMaterialsCatalogService.patchData.find(patch => patch.path === 'source') === undefined) {
-      this.messageService.add({
-        severity: 'warn',
-        summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.WARNING'),
-        detail: this.translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.WARNINGS.FIELDS_LACK.SOURCE')
-      });
-      this.loading = false;
-      return;
+        const nullField: boolean[] = [
+          isCategoryNull,
+          isNameNull,
+          isUnitNull,
+          isSourceNull
+        ];
+        this.throwWarningForEmptyFields(nullField);
+        
+        return;
+      }
     }
 
     // Si se crea una nueva materia prima
@@ -198,6 +187,72 @@ export class RawMaterialDataFormComponent {
     }
 
     // Si se edita una materia prima
+    else {
+      const selectedId: number | undefined = this.rawMaterialsCatalogService.selectedRawMaterial()?.id;
+      if(selectedId && this.rawMaterialsCatalogService.patchData.length > 0) {
+        this.rawMaterialsCatalogService.editRawMaterial(selectedId).subscribe({
+          next: (response: RawMaterial) => {
+            this.messageService.add({
+              severity: 'success',
+              summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.SUCCESS'),
+              detail: this.translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.SUCCESSES.UPDATED')
+            });
+            this.rawMaterialsCatalogService.patchData.splice(0);
+            this.rawMaterialsCatalogService.rawMaterialUpdated = true;
+            this.loading = false;
+            if(this.deviceTypeService.isMobile()) {
+              this.rawMaterialsCatalogService.selectedRawMaterial.set(null);
+              this.location.back();
+            }
+            else {
+              this.rawMaterialsCatalogService.selectedRawMaterial.set(response);
+              this.rawMaterialsCatalogService.selectedNonModifiedRawMaterial = response;
+            }
+          },
+          error: (err: HttpErrorResponse) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.FAILED'),
+              detail: err.message || this.translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.ERRORS.UPDATE')
+            });
+            this.loading = false;
+          }
+        });
+      }
+    }
+  }
 
+  private throwWarningForEmptyFields(nullField: boolean[]) {
+    if(nullField[0]) {
+      this.messageService.add({
+        severity: 'warn',
+        summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.WARNING'),
+        detail: this.translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.WARNINGS.FIELDS_LACK.CATEGORY')
+      });
+    }
+
+    else if(nullField[1]) {
+      this.messageService.add({
+        severity: 'warn',
+        summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.WARNING'),
+        detail: this.translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.WARNINGS.FIELDS_LACK.NAME')
+      });
+    }
+
+    else if(nullField[2]) {
+      this.messageService.add({
+        severity: 'warn',
+        summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.WARNING'),
+        detail: this.translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.WARNINGS.FIELDS_LACK.UNIT')
+      });
+    }
+
+    else if(nullField[3]) {
+      this.messageService.add({
+        severity: 'warn',
+        summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.WARNING'),
+        detail: this.translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.WARNINGS.FIELDS_LACK.SOURCE')
+      });
+    }
   }
 }

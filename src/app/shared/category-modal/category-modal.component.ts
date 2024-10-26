@@ -5,9 +5,9 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { Category } from '../../core/models/category.entities';
-import { CategoryManagerService } from '../../features/sections/main-section/providers-catalog/provider-data-form/category-manager/category-manager.service';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { HttpErrorResponse } from '@angular/common/http';
+import { CategoryManagerService } from '../category-manager/category-manager.service';
 
 @Component({
   selector: 'app-category-modal',

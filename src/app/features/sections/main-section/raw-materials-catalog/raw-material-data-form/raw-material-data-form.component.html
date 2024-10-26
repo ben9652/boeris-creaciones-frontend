@@ -42,7 +42,7 @@
             [style]="{ width: '100%' }"
             [emptyMessage]="translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.EMPTY_MESSAGES.SOURCES')"
             [disabled]="rawMaterialsCatalogService.selectedRawMaterial() === null || loading"
-            [ngModel]="sources"
+            [ngModel]="selectedSource"
             (ngModelChange)="updateRawMaterialSource($event)"
             />
 
