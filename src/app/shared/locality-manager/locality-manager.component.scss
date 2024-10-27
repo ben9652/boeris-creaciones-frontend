@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-evenly;
+    width: 30%;
+}
+
+p-dropdown {
+    width: 75%;
+}
+
+:host ::ng-deep .p-dropdown {
+    width: 100% !important;
+}

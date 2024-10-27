@@ -9,6 +9,7 @@
                     <tr>
                         <th>{{ 'SECTIONS.CATALOGS.BRANCHES.LIST.HEADER.ID' | translate }}</th>
                         <th>{{ 'SECTIONS.CATALOGS.BRANCHES.LIST.HEADER.NAME' | translate }}</th>
+                        <th>{{ 'SECTIONS.CATALOGS.BRANCHES.LIST.HEADER.LOCALITY' | translate }}</th>
                     </tr>
                 </ng-template>
     
@@ -16,6 +17,7 @@
                     <tr class="branch" [pSelectableRow]="youAreAdding()" (click)="clickOnBranch(branchRow)">
                         <td>{{ branchRow.nonModified.id }}</td>
                         <td>{{ branchRow.nonModified.name }}</td>
+                        <td>{{ branchRow.nonModified.locality.name }}</td>
                     </tr>
                 </ng-template>
             </p-table>

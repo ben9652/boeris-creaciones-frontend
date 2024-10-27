@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BranchesDataFormComponent } from './branches-data-form.component';
+import { BranchDataFormComponent } from './branch-data-form.component';
 
 describe('BranchesDataFormComponent', () => {
-  let component: BranchesDataFormComponent;
-  let fixture: ComponentFixture<BranchesDataFormComponent>;
+  let component: BranchDataFormComponent;
+  let fixture: ComponentFixture<BranchDataFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BranchesDataFormComponent]
+      imports: [BranchDataFormComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(BranchesDataFormComponent);
+    fixture = TestBed.createComponent(BranchDataFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

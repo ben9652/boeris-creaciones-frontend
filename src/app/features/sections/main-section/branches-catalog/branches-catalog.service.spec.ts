@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { BrancesCatalogService } from './brances-catalog.service';
+import { BranchesCatalogService } from './brances-catalog.service';
 
 describe('BrancesCatalogService', () => {
-  let service: BrancesCatalogService;
+  let service: BranchesCatalogService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(BrancesCatalogService);
+    service = TestBed.inject(BranchesCatalogService);
   });
 
   it('should be created', () => {

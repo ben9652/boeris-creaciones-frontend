@@ -1,3 +1,6 @@
+import { areLocalitiesEqual, Locality } from "./locality.entities";
+import { RowList } from "./rowList.entities";
+
 export interface Branch {
     id: number,
     name: string | null;
@@ -5,14 +8,8 @@ export interface Branch {
     domicile: string | null;
 }
 
-export interface BranchRow {
-    nonModified: Branch;
-    modified: Branch;
-}
-
-export interface Locality {
-    id: number;
-    name: string;
+export interface BranchRow extends RowList<Branch> {
+    
 }
 
 export function createNullBranch(): Branch {
@@ -26,16 +23,19 @@ export function createNullBranch(): Branch {
 }
 
 export function areBranchesEqual(obj1: Branch | null, obj2: Branch | null): boolean {
-    if(obj1 !== null && obj2 !== null){
+    if(obj1 !== null && obj2 !== null) {
         if(obj1.id !== obj2.id)
             return false;
         if(obj1.name !== obj2.name)
             return false;
         if(obj1.domicile !== obj2.domicile)
             return false;
-    } else if(obj1 === null || obj2 === null){
-        return false;
+        if(!areLocalitiesEqual(obj1.locality, obj2.locality))
+            return false;
     }
+    else if(obj1 === null || obj2 === null)
+        return false;
+
     return true;
 }
 

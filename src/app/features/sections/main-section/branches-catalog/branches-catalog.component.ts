@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { BranchesListComponent } from "./branches-list/branches-list.component";
-import { BranchesDataFormComponent } from './branches-data-form/branches-data-form.component';
+import { BranchDataFormComponent } from './branch-data-form/branch-data-form.component';
 import { DeviceTypeService } from '../../../../core/services/device-type.service';
 import { DividerModule } from 'primeng/divider';
 
 @Component({
   selector: 'app-branches-catalog',
   standalone: true,
-  imports: [BranchesListComponent, BranchesDataFormComponent,DividerModule],
+  imports: [BranchesListComponent, BranchDataFormComponent,DividerModule],
   templateUrl: './branches-catalog.component.html',
   styleUrl: './branches-catalog.component.scss'
 })
