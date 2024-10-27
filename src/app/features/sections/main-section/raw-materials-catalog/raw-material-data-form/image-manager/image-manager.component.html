@@ -1,12 +1,19 @@
 <div class="img-manager-content">
-    <h4>Imagen</h4>
+    <h4>{{ 'SECTIONS.CATALOGS.RAW_MATERIALS.FIELDS.PICTURE' | translate }}</h4>
     <div [ngClass]="{
         'rawMaterial-img': true,
         'filter-img':
-            rawMaterialCatalogService.selectedRawMaterial() === null ||
-            rawMaterialCatalogService.selectedRawMaterial()?.picture === 'pictures/leaf-solid.svg'
+            selectedRawMaterial() === null ||
+            selectedRawMaterial()?.picture === translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.PICTURE.DEFAULT')
     }">
-        <img [src]="getImage()" width="190px" (load)="onImageLoad()" (error)="onImageError()" [hidden]="loadingImage" alt="Imagen de materia prima">
+        <img
+        [src]="imageSrc"
+        width="190px"
+        (load)="onImageLoad()"
+        (error)="onImageError()"
+        [hidden]="loadingImage"
+        [alt]="translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.PICTURE.ALT')"
+        >
         @if(loadingImage) {
             <i class="pi pi-spinner pi-spin"></i>
         }
@@ -14,13 +21,13 @@
     <p-fileUpload #fileUpload
     mode="basic"
     name="demo[]"
-    chooseLabel="Subir archivo"
+    [chooseLabel]="translateService.instant('SECTIONS.CATALOGS.BUTTONS.UPLOAD')"
     chooseIcon="fas fa-upload"
     uploadIcon="fas fa-upload"
     [customUpload]="true"
     accept="image/*"
     (onSelect)="onUploadHandler($event)"
-    [disabled]="this.disabledEdition()"
+    [disabled]="rawMaterialsCatalogService.selectedRawMaterial() === null || disabled()"
     [showCancelButton]="true"
     >
     </p-fileUpload>

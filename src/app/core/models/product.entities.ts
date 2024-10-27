@@ -1,3 +1,5 @@
+import { RowList } from "./rowList.entities";
+
 export interface Product {
     id: number,
     name: string | null,
@@ -7,9 +9,8 @@ export interface Product {
     comment?: string
 }
 
-export interface ProductRow {
-    nonModified: Product,
-    modified: Product
+export interface ProductRow extends RowList<Product> {
+    
 }
 
 export function createNullProduct(): Product {

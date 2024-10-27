@@ -120,16 +120,24 @@
                     "CATEGORY_CREATION": "Error al crear el rubro",
                     "CATEGORY_UPDATING": "Error al editar el rubro"
                 },
-                "EMPTY_MESSAGES": {
-                    "CATEGORIES": "No se encontraron rubros",
-                    "UNITS": "No se encontraron unidades",
-                    "SOURCES": "No se encontraron orígenes"
+                "WARNINGS": {
+                    "FIELDS_LACK": {
+                        "CATEGORY": "Debe elegirse un rubro",
+                        "NAME": "Debe llenarse el campo de nombre",
+                        "UNIT": "Debe asignársele una unidad a la materia prima",
+                        "SOURCE": "Debe elegirse un origen de materia prima"
+                    }
                 },
                 "SUCCESSES": {
                     "CREATED": "Materia prima creada con éxito",
                     "UPDATED": "Materia prima actualizada con éxito",
                     "CATEGORY_CREATED": "Rubro creado con éxito",
                     "CATEGORY_UPDATED": "El rubro se editó correctamente"
+                },
+                "EMPTY_MESSAGES": {
+                    "CATEGORIES": "No se encontraron rubros",
+                    "UNITS": "No se encontraron unidades",
+                    "SOURCES": "No se encontraron orígenes"
                 },
                 "CATEGORY_MODAL": {
                     "CREATION": {
@@ -167,6 +175,12 @@
                     "NAME_LACK": "El nombre no puede ser vacío",
                     "PICTURE_ADDING": "No se pudo agregar una imagen",
                     "PICTURE_DELETING": "No se pudo eliminar la imagen anterior"
+                },
+                "WARNINGS": {
+                    "FIELDS_LACK": {
+                        "NAME": "Debe llenarse el campo de nombre",
+                        "PRICE": "Debe asignársele un precio al producto"
+                    }
                 },
                 "SUCCESSES": {
                     "CREATED": "Producto creado con éxito",

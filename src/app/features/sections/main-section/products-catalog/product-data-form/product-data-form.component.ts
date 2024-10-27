@@ -46,8 +46,15 @@ export class ProductDataFormComponent {
   }
 
   updateProductName(value: string) {
-    this.productsCatalogService.updateSelectedProduct('name', value);
-    this.productsCatalogService.addPatchObject('replace', 'name', value);
+    let comment: string | null;
+    if(value.length === 0) {
+      comment = null;
+    }
+    else {
+      comment = value;
+    }
+    this.productsCatalogService.updateSelectedProduct('name', comment);
+    this.productsCatalogService.addPatchObject('replace', 'name', comment);
   }
 
   updateProductPrice(value: number) {
@@ -88,6 +95,26 @@ export class ProductDataFormComponent {
 
   clickOnConfirm() {
     this.loading = true;
+
+    if(this.productsCatalogService.patchData.find(patch => patch.path === 'name') === undefined) {
+      this.messageService.add({
+        severity: 'warning',
+        summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.WARNING'),
+        detail: this.translateService.instant('SECTIONS.CATALOGS.PRODUCTS.WARNINGS.FIELDS_LACK.NAME')
+      });
+      this.loading = false;
+      return;
+    }
+
+    if(this.productsCatalogService.patchData.find(patch => patch.path === 'price') === undefined) {
+      this.messageService.add({
+        severity: 'warning',
+        summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.WARNING'),
+        detail: this.translateService.instant('SECTIONS.CATALOGS.PRODUCTS.WARNINGS.FIELDS_LACK.PRICE')
+      });
+      this.loading = false;
+      return;
+    }
 
     // Si se crea un nuevo producto
     if(this.productsCatalogService.selectedProduct()?.id === 0) {

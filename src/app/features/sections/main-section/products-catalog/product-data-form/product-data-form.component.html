@@ -4,7 +4,7 @@
         <div class="flex justify-content-center">
             <app-image-manager
             [selectedProduct]="productsCatalogService.selectedProduct()"
-            [disabled]="loading"
+            [disabled]="productsCatalogService.selectedProduct() === null || loading"
             (uploadEvent)="updateProductPicture($event)"
             ></app-image-manager>
         </div>
