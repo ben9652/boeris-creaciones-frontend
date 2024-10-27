@@ -7,20 +7,12 @@ export interface Unit {
 }
 
 export class Source {
-    private _label: string;
-    private _value: string;
+    label: string;
+    value: string;
 
     constructor(label: string, value: string) {
-        this._label = label;
-        this._value = value;
-    }
-
-    public get label(): string {
-        return this._label;
-    }
-
-    public get value(): string {
-        return this._value;
+        this.label = label;
+        this.value = value;
     }
 }
 

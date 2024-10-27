@@ -9,10 +9,10 @@ import { ToastModule } from 'primeng/toast';
 import { ProvidersCatalogService } from '../providers-catalog.service';
 import { ProvidersListService } from '../providers-list/providers-list.service';
 import { DeviceTypeService } from '../../../../../core/services/device-type.service';
-import { CategoryManagerComponent } from './category-manager/category-manager.component';
 import { Category } from '../../../../../core/models/category.entities';
 import { Provider } from '../../../../../core/models/provider.entities';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { CategoryManagerComponent } from '../../../../../shared/category-manager/category-manager.component';
 
 @Component({
   selector: 'app-provider-data-form',
@@ -50,8 +50,15 @@ export class ProviderDataFormComponent {
   }
 
   updateProviderName(value: string) {
-    this.providersCatalogService.updateSelectedProvider('name', value);
-    this.providersCatalogService.addPatchObject('replace', 'name', value);
+    let name: string | null;
+
+    if(value.length === 0)
+      name = null;
+    else
+      name = value;
+    
+    this.providersCatalogService.updateSelectedProvider('name', name);
+    this.providersCatalogService.addPatchObject('replace', 'name', name);
   }
 
   updateProviderResidence(value: string) {
@@ -63,7 +70,7 @@ export class ProviderDataFormComponent {
       residence = value;
     
     this.providersCatalogService.updateSelectedProvider('residence', residence);
-    this.providersCatalogService.addPatchObject('replace', 'residence', value);
+    this.providersCatalogService.addPatchObject('replace', 'residence', residence);
   }
 
   updateProviderPhone(value: number | null) {
@@ -80,7 +87,7 @@ export class ProviderDataFormComponent {
       cvu_or_alias = value;
     
     this.providersCatalogService.updateSelectedProvider('cvu_or_alias', cvu_or_alias);
-    this.providersCatalogService.addPatchObject('replace', 'cvu_or_alias', value);
+    this.providersCatalogService.addPatchObject('replace', 'cvu_or_alias', cvu_or_alias);
   }
 
   clickOnCancel() {
@@ -93,6 +100,24 @@ export class ProviderDataFormComponent {
 
   clickOnConfirm() {
     this.loading = true;
+
+    const selectedProvider: Provider | null = this.providersCatalogService.selectedProvider();
+    if(selectedProvider) {
+      const isCategoryNull: boolean = selectedProvider.category === null;
+      const isNameNull: boolean = selectedProvider.name === null;
+
+      if(isCategoryNull || isNameNull) {
+        this.loading = false;
+
+        const nullField: boolean[] = [
+          isCategoryNull,
+          isNameNull
+        ];
+        this.throwWarningForEmptyFields(nullField);
+
+        return;
+      }
+    }
 
     // Si se crea un nuevo proveedor
     if(this.providersCatalogService.selectedProvider()?.id === 0) {
@@ -158,6 +183,24 @@ export class ProviderDataFormComponent {
           }
         })
       }
+    }
+  }
+
+  private throwWarningForEmptyFields(nullField: boolean[]) {
+    if(nullField[0]) {
+      this.messageService.add({
+        severity: 'warn',
+        summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.WARNING'),
+        detail: this.translateService.instant('SECTIONS.CATALOGS.PROVIDERS.WARNINGS.FIELDS_LACK.CATEGORY')
+      });
+    }
+
+    else if(nullField[1]) {
+      this.messageService.add({
+        severity: 'warn',
+        summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.WARNING'),
+        detail: this.translateService.instant('SECTIONS.CATALOGS.PROVIDERS.WARNINGS.FIELDS_LACK.NAME')
+      });
     }
   }
 }

@@ -1,7 +1,0 @@
-<div class="container">
-    <p-dropdown [options]="categories" optionLabel="name" [placeholder]="translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.FIELDS.CATEGORY')" [style]="{ width: '60%' }" [emptyMessage]="translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.EMPTY_MESSAGES.CATEGORIES')" [disabled]="this.disabledEdition()" [ngModel]="this.rawMaterialCatalogService.selectedRawMaterial()?.category" (ngModelChange)="updateRawMaterialCategory($event)"/>
-    <div class="buttons">
-        <p-button icon="fas fa-plus" [disabled]="this.disabledEdition()" (onClick)="showModalCategory('new')"></p-button>
-        <p-button icon="fas fa-pencil" [disabled]="this.disabledEdition()" (onClick)="showModalCategory('edit')"></p-button>
-    </div>
-</div>
