@@ -1,0 +1,28 @@
+<p-toast></p-toast>
+
+<div class="container">
+    <p-dropdown
+    [options]="localities"
+    optionLabel="name"
+    [placeholder]="translateService.instant('SECTIONS.CATALOGS.BRANCHES.FIELDS.LOCALITY')"
+    [style]="{ width: '60%' }"
+    [emptyMessage]="translateService.instant('SECTIONS.CATALOGS.BRANCHES.EMPTY_MESSAGES.LOCALITIES')"
+    [disabled]="disabled()"
+    [ngModel]="selectedLocality"
+    (ngModelChange)="emitLocality($event)"
+    ></p-dropdown>
+
+    <div class="buttons">
+        <p-button
+        icon="fas fa-plus"
+        [disabled]="disabled()"
+        (onClick)="showModalLocality()"
+        ></p-button>
+
+        <p-button
+        icon="fas fa-pencil"
+        [disabled]="disabled()"
+        (onClick)="showModalLocality(true)"
+        ></p-button>
+    </div>
+</div>

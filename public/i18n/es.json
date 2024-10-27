@@ -27,6 +27,17 @@
                 "ON_CREATION": "Crear rubro",
                 "ON_EDITION": "Editar rubro"
             }
+        },
+        "LOCALITIES": {
+            "MESSAGES": {
+                "FAILED": "Algo falló en la creación de una localidad",
+                "CREATED": "La localidad se creó correctamente",
+                "UPDATED": "La localidad se modificó correctamente"
+            },
+            "TITLE": {
+                "ON_CREATION": "Crear localidad",
+                "ON_EDITION": "Editar localidad"
+            }
         }
     },
     "SECTIONS": {
@@ -203,6 +214,35 @@
                     "WARNINGS": {
                         "MUST_SELECT_CATEGORY": "Debe seleccionar un rubro"
                     }
+                }
+            },
+            "BRANCHES": {
+                "LIST": {
+                    "HEADER": {
+                        "ID": "ID",
+                        "NAME": "NOMBRE",
+                        "LOCALITY": "LOCALIDAD"
+                    }
+                },
+                "FIELDS": {
+                    "NAME": "Nombre",
+                    "LOCALITY": "Localidad",
+                    "DOMICILE": "Domicilio"
+                },
+                "EMPTY_MESSAGES": {
+                    "LOCALITY": "No se encontraron localidades"
+                },
+                "SUCCESSES": {
+                    "CREATED": "Sucursal creada con éxito",
+                    "UPDATED": "Sucursal actualizada con éxito"
+                },
+                "ERRORS": {
+                    "FIELDS_LACK": "Debe completar todos los campos obligatorios",
+                    "UPDATE": "Error al actualizar",
+                    "NAME_LACK": "El nombre no puede ser vacío"
+                },
+                "LOCALITY_MODAL": {
+                    "TITLE": "Nueva localidad"
                 }
             },
             "BUTTONS": {

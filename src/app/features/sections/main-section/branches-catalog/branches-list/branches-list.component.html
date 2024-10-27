@@ -1,0 +1,30 @@
+<div class="branches-list-view">
+    <div class="branches-list-buttons">
+        <p-button [label]="translateService.instant('SECTIONS.CATALOGS.BUTTONS.ADD')" icon="fas fa-plus" (click)="clicOnAddNewBranch()"></p-button>
+    </div>
+    <div class="branches-list">
+        @if (branchesListService.branches() !== null) {
+            <p-table [value]="getBranchesList()" [scrollable]="true" scrollHeight="60vh" selectionMode="single">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>{{ 'SECTIONS.CATALOGS.BRANCHES.LIST.HEADER.ID' | translate }}</th>
+                        <th>{{ 'SECTIONS.CATALOGS.BRANCHES.LIST.HEADER.NAME' | translate }}</th>
+                        <th>{{ 'SECTIONS.CATALOGS.BRANCHES.LIST.HEADER.LOCALITY' | translate }}</th>
+                    </tr>
+                </ng-template>
+    
+                <ng-template pTemplate="body" let-branchRow>
+                    <tr class="branch" [pSelectableRow]="youAreAdding()" (click)="clickOnBranch(branchRow)">
+                        <td>{{ branchRow.nonModified.id }}</td>
+                        <td>{{ branchRow.nonModified.name }}</td>
+                        <td>{{ branchRow.nonModified.locality.name }}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        } @else {
+            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+            <p-skeleton styleClass="mb-2"></p-skeleton>
+        }
+        
+    </div>
+</div>

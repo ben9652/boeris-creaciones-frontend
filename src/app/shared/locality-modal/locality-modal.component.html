@@ -1,0 +1,45 @@
+<div (keypress)="onKeyPress($event)">
+    <div class="flex align-items-center gap-3 mt-3 mb-3">
+        <label for="locality" class="font-semibold w-6rem">
+            {{ 'SECTIONS.CATALOGS.BRANCHES.FIELDS.LOCALITY' | translate }}
+        </label>
+
+        <input
+        pInputText
+        id="locality"
+        class="flex-auto"
+        [readOnly]="loading"
+        [disabled]="loading"
+        [(ngModel)]="localityName"
+        autocomplete="off"
+        >
+    </div>
+
+    <div class="flex justify-content-evenly gap-2">
+        <p-button
+        class="bottom-button"
+        [label]="translateService.instant('SHARED.BUTTONS.CANCEL')"
+        severity="secondary"
+        [disabled]="loading"
+        (onClick)="onCancel()"
+        ></p-button>
+
+        @if (!loading) {
+            <p-button
+            class="bottom-button"
+            [label]="translateService.instant('SHARED.BUTTONS.CONFIRM')"
+            [disabled]="loading || lastLocalityName === localityName"
+            (onClick)="onConfirm()"
+            ></p-button>
+        }
+        @else {
+            <p-button
+            class="bottom-button"
+            [disabled]="loading"
+            >
+                <i class="pi pi-spin pi-spinner"></i>
+            </p-button>
+        }
+        
+    </div>
+</div>
