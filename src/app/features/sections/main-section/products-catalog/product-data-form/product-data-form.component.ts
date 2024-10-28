@@ -134,6 +134,7 @@ export class ProductDataFormComponent {
             this.productsCatalogService.selectedProduct.set(response);
             this.productsCatalogService.selectedNonModifiedProduct = response;
           }
+          this.productsListService.addProduct(response);
         },
         error: (e: HttpErrorResponse) => {
           const error = e.error;
@@ -169,6 +170,7 @@ export class ProductDataFormComponent {
               this.productsCatalogService.selectedProduct.set(response);
               this.productsCatalogService.selectedNonModifiedProduct = response;
             }
+            this.productsListService.editProduct(response.id, response);
           },
           error: (e: HttpErrorResponse) => {
             const error = e.error;
