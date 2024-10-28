@@ -61,8 +61,8 @@ export class CategoryModalComponent {
         next: (response: Category) => {
           this.ref.close(response);
         },
-        error: (err) => {
-          this.ref.close(null);
+        error: (e: HttpErrorResponse) => {
+          this.ref.close(e.error.message);
         }
       });
     }
@@ -75,8 +75,8 @@ export class CategoryModalComponent {
         next: (response: Category) => {
           this.ref.close(response);
         },
-        error: (err: HttpErrorResponse) => {
-          this.ref.close(err.message);
+        error: (e: HttpErrorResponse) => {
+          this.ref.close(e.error.message);
         }
       });
     }

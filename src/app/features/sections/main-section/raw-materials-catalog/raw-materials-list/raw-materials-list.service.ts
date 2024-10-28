@@ -26,6 +26,16 @@ export class RawMaterialsListService {
     this.rawMaterials()?.push(rawMaterial);
   }
 
+  editRawMaterial(id: number, rawMaterial: RawMaterial) {
+    const index: number | undefined = this.rawMaterials()?.findIndex(rm => rm.id === id);
+
+    if(index !== undefined && index !== -1) {
+      const rawMaterials: RawMaterial[] | null = this.rawMaterials();
+      if(rawMaterials)
+        rawMaterials[index] = { ...rawMaterial };
+    }
+  }
+
   getRawMaterialsFromDatabase(): Observable<RawMaterial[]> {
     const rawMaterials: RawMaterial[] | null = this.rawMaterials();
 
@@ -33,6 +43,7 @@ export class RawMaterialsListService {
       this.httpOptions = new HttpOptions(this.authService.getToken());
       return this.http.get<RawMaterial[]>(this.urlBase, this.httpOptions);
     }
+    
     else return of(rawMaterials);
   }
 

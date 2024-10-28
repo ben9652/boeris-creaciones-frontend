@@ -26,6 +26,16 @@ export class ProductsListService {
     this.products()?.push(product);
   }
 
+  editProduct(id: number, product: Product) {
+    const index: number | undefined = this.products()?.findIndex(p => p.id === id);
+
+    if(index !== undefined && index !== -1) {
+      const products: Product[] | null = this.products();
+      if(products)
+        products[index] = { ...product };
+    }
+  }
+
   getProductsFromDatabase(): Observable<Product[]> {
     const products: Product[] | null = this.products();
 
@@ -33,20 +43,17 @@ export class ProductsListService {
       this.httpOptions = new HttpOptions(this.authService.getToken());
       return this.http.get<Product[]>(this.urlBase, this.httpOptions);
     }
-    else {
-      return of(products);
-    }
+    
+    return of(products);
   }
 
   getProduct(id: number): Product | undefined {
     if(this.products()?.length !== 0) {
       let product: Product | undefined = this.products()?.find(product => product.id === id);
-      if(product) {
+      if(product)
         return product;
-      }
-      else {
+      else
         return undefined;
-      }
     }
     return undefined;
   }

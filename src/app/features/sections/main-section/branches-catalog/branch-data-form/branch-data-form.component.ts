@@ -12,9 +12,10 @@ import { BranchesListService } from '../branches-list/branches-list.service';
 import { LocalityManagerComponent } from '../../../../../shared/locality-manager/locality-manager.component';
 import { BranchesCatalogService } from '../branches-catalog.service';
 import { Locality } from '../../../../../core/models/locality.entities';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'app-branches-data-form',
+  selector: 'app-branch-data-form',
   standalone: true,
   imports: [
     LocalityManagerComponent,
@@ -49,9 +50,8 @@ export class BranchDataFormComponent {
 
   localityNameEdition(value: Locality) {
     let currentBranch: Branch | null = this.branchesCatalogService.selectedBranch();
-    if(currentBranch) {
+    if(currentBranch)
       currentBranch.locality = value;
-    }
   }
 
   updateBranchName(value: string) {
@@ -66,7 +66,7 @@ export class BranchDataFormComponent {
     this.branchesCatalogService.addPatchObject('replace', 'name', name);
   }
 
-  updateProviderDomicile(value: string) {
+  updateBranchDomicile(value: string) {
     let domicile: string | null;
     
     if(value.length === 0)
@@ -126,12 +126,14 @@ export class BranchDataFormComponent {
             this.branchesCatalogService.selectedBranch.set(response);
             this.branchesCatalogService.selectedNonModifiedBranch = response;
           }
+          this.branchesListService.addBranch(response);
         },
-        error: (err) => {
+        error: (e: HttpErrorResponse) => {
+          const error = e.error;
           this.messageService.add({
             severity: 'error',
             summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.FAILED'),
-            detail: err.message || this.translateService.instant('SECTIONS.CATALOGS.BRANCHES.ERRORS.FIELDS_LACK')
+            detail: error ? error.message : this.translateService.instant('SECTIONS.CATALOGS.BRANCHES.ERRORS.FIELDS_LACK')
           });
           this.loading = false;
         }
@@ -160,12 +162,14 @@ export class BranchDataFormComponent {
               this.branchesCatalogService.selectedBranch.set(response);
               this.branchesCatalogService.selectedNonModifiedBranch = response;
             }
+            this.branchesListService.editBranch(response.id, response);
           },
-          error: (err) => {
+          error: (e: HttpErrorResponse) => {
+            const error = e.error;
             this.messageService.add({
               severity: 'error',
               summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.FAILED'),
-              detail: err.message || this.translateService.instant('SECTIONS.CATALOGS.BRANCHES.ERRORS.UPDATE')
+              detail: error ? error.message : this.translateService.instant('SECTIONS.CATALOGS.BRANCHES.ERRORS.UPDATE')
             });
             this.loading = false;
           }

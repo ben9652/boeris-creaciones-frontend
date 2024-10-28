@@ -12,6 +12,8 @@ import { DialogModule } from 'primeng/dialog';
 import { ToastModule } from 'primeng/toast';
 import { Locality } from '../../core/models/locality.entities';
 import { LocalityManagerService } from './locality-manager.service';
+import { SkeletonModule } from 'primeng/skeleton';
+import { DeviceTypeService } from '../../core/services/device-type.service';
 
 @Component({
   selector: 'app-locality-manager',
@@ -24,7 +26,8 @@ import { LocalityManagerService } from './locality-manager.service';
     InputTextModule,
     DialogModule,
     TranslateModule,
-    ToastModule
+    ToastModule,
+    SkeletonModule
   ],
   templateUrl: './locality-manager.component.html',
   styleUrl: './locality-manager.component.scss',
@@ -37,7 +40,7 @@ export class LocalityManagerComponent implements OnChanges {
 
   ref: DynamicDialogRef | undefined;
 
-  locality: InputSignal<Locality | null | undefined> = input.required<Locality | null | undefined>();
+  locality: InputSignal<Locality | null | undefined> = input<Locality | null | undefined>();
   selectedLocality: Locality | null | undefined;
 
   ngModelChange: OutputEmitterRef<Locality | null> = output<Locality | null>();
@@ -53,11 +56,13 @@ export class LocalityManagerComponent implements OnChanges {
     public translateService: TranslateService,
     public dialogService: DialogService,
     private messageService: MessageService,
+    public deviceTypeService: DeviceTypeService,
     private localityManagerService: LocalityManagerService,
     private cdr: ChangeDetectorRef
   ) {
     localityManagerService.getLocalities().subscribe((response: Locality[]) => {
       this.localities = response;
+      this.selectedLocality = this.locality();
     })
   }
   

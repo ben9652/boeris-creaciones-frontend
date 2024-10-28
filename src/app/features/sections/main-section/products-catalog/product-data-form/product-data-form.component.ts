@@ -135,11 +135,12 @@ export class ProductDataFormComponent {
             this.productsCatalogService.selectedNonModifiedProduct = response;
           }
         },
-        error: (err) => {
+        error: (e: HttpErrorResponse) => {
+          const error = e.error;
           this.messageService.add({
             severity: 'error',
             summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.FAILED'),
-            detail: err.message || this.translateService.instant('SECTIONS.CATALOGS.PRODUCTS.ERRORS.FIELDS_LACK')
+            detail: error ? error.message : this.translateService.instant('SECTIONS.CATALOGS.PRODUCTS.ERRORS.FIELDS_LACK')
           });
           this.loading = false;
         }
@@ -169,11 +170,12 @@ export class ProductDataFormComponent {
               this.productsCatalogService.selectedNonModifiedProduct = response;
             }
           },
-          error: (err: HttpErrorResponse) => {
+          error: (e: HttpErrorResponse) => {
+            const error = e.error;
             this.messageService.add({
               severity: 'error',
               summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.FAILED'),
-              detail: err.message || this.translateService.instant('SECTIONS.CATALOGS.PRODUCTS.ERRORS.UPDATE')
+              detail: error ? error.message : this.translateService.instant('SECTIONS.CATALOGS.PRODUCTS.ERRORS.UPDATE')
             });
             this.loading = false;
           }

@@ -13,6 +13,7 @@ import { Category } from '../../../../../core/models/category.entities';
 import { Provider } from '../../../../../core/models/provider.entities';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { CategoryManagerComponent } from '../../../../../shared/category-manager/category-manager.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-provider-data-form',
@@ -47,6 +48,12 @@ export class ProviderDataFormComponent {
   updateProviderCategory(value: Category | null) {
     this.providersCatalogService.updateSelectedProvider('category', value);
     this.providersCatalogService.addPatchObject('replace', 'category', value);
+  }
+
+  categoryNameEdition(value: Category) {
+    let currentProvider: Provider | null = this.providersCatalogService.selectedProvider();
+    if(currentProvider)
+      currentProvider.category = value;
   }
 
   updateProviderName(value: string) {
@@ -138,12 +145,14 @@ export class ProviderDataFormComponent {
             this.providersCatalogService.selectedProvider.set(response);
             this.providersCatalogService.selectedNonModifiedProvider = response;
           }
+          this.providersListService.addProvider(response);
         },
-        error: (err) => {
+        error: (e: HttpErrorResponse) => {
+          const error = e.error;
           this.messageService.add({
             severity: 'error',
             summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.FAILED'),
-            detail: err.message || this.translateService.instant('SECTIONS.CATALOGS.PROVIDERS.ERRORS.FIELDS_LACK')
+            detail: error ? error.message : this.translateService.instant('SECTIONS.CATALOGS.PROVIDERS.ERRORS.FIELDS_LACK')
           });
           this.loading = false;
         }
@@ -172,12 +181,14 @@ export class ProviderDataFormComponent {
               this.providersCatalogService.selectedProvider.set(response);
               this.providersCatalogService.selectedNonModifiedProvider = response;
             }
+            this.providersListService.editProvider(response.id, response);
           },
-          error: (err) => {
+          error: (e: HttpErrorResponse) => {
+            const error = e.error;
             this.messageService.add({
               severity: 'error',
               summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.FAILED'),
-              detail: err.message || this.translateService.instant('SECTIONS.CATALOGS.PROVIDERS.ERRORS.UPDATE')
+              detail: error ? error.message : this.translateService.instant('SECTIONS.CATALOGS.PROVIDERS.ERRORS.UPDATE')
             });
             this.loading = false;
           }

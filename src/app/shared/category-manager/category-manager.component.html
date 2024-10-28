@@ -1,17 +1,22 @@
 <p-toast></p-toast>
 
 <div class="container">
-    <p-dropdown
-    [options]="categories"
-    optionLabel="name"
-    [placeholder]="translateService.instant('SECTIONS.CATALOGS.PROVIDERS.FIELDS.CATEGORY')"
-    [style]="{ width: '60%' }"
-    [emptyMessage]="translateService.instant('SHARED.DROPDOWN.EMPTY_MESSAGES.CATEGORIES')"
-    [disabled]="disabled()"
-    [ngModel]="selectedCategory"
-    (ngModelChange)="emitCategory($event)"
-    ></p-dropdown>
-
+    @if (selectedCategory || !deviceTypeService.isMobile()) {
+        <p-dropdown
+        [options]="categories"
+        optionLabel="name"
+        [placeholder]="translateService.instant('SECTIONS.CATALOGS.PROVIDERS.FIELDS.CATEGORY')"
+        [style]="{ width: '60%' }"
+        [emptyMessage]="translateService.instant('SHARED.DROPDOWN.EMPTY_MESSAGES.CATEGORIES')"
+        [disabled]="disabled()"
+        [ngModel]="selectedCategory"
+        (ngModelChange)="emitCategory($event)"
+        ></p-dropdown>
+    }
+    @else {
+        <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+    }
+    
     <div class="buttons">
         <p-button
         icon="fas fa-plus"

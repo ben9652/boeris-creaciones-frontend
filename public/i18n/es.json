@@ -256,6 +256,12 @@
                     "CREATED": "Sucursal creada con éxito",
                     "UPDATED": "Sucursal actualizada con éxito"
                 },
+                "WARNINGS": {
+                    "FIELDS_LACK": {
+                        "LOCALITY": "Debe elegirse una localidad",
+                        "NAME": "Debe llenarse el campo de nombre"
+                    }
+                },
                 "ERRORS": {
                     "FIELDS_LACK": "Debe completar todos los campos obligatorios",
                     "UPDATE": "Error al actualizar",

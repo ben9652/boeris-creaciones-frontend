@@ -43,6 +43,11 @@ export class LocalityModalComponent {
     this.localityName = this.lastLocalityName;
   }
 
+  onKeyPress(event: KeyboardEvent) {
+    if(event.key === 'Enter' && this.localityName !== this.lastLocalityName)
+      this.onConfirm();
+  }
+
   onConfirm() {
     this.config.closable = false;
     this.config.closeOnEscape = false;
@@ -81,10 +86,5 @@ export class LocalityModalComponent {
 
   onCancel() {
     this.ref.close(null);
-  }
-
-  onKeyPress(event: KeyboardEvent) {
-    if(event.key === 'Enter' && this.localityName !== this.lastLocalityName)
-      this.onConfirm();
   }
 }

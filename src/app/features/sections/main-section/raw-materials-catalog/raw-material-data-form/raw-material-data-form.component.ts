@@ -174,12 +174,14 @@ export class RawMaterialDataFormComponent {
             this.rawMaterialsCatalogService.selectedRawMaterial.set(response);
             this.rawMaterialsCatalogService.selectedNonModifiedRawMaterial = response;
           }
+          this.rawMaterialsListService.addRawMaterial(response);
         },
-        error: (err) => {
+        error: (e: HttpErrorResponse) => {
+          const error = e.error;
           this.messageService.add({
             severity: 'error',
             summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.FAILED'),
-            detail: err.message || this.translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.ERRORS.FIELDS_LACK')
+            detail: error ? error.message : this.translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.ERRORS.FIELDS_LACK')
           });
           this.loading = false;
         }
@@ -208,12 +210,14 @@ export class RawMaterialDataFormComponent {
               this.rawMaterialsCatalogService.selectedRawMaterial.set(response);
               this.rawMaterialsCatalogService.selectedNonModifiedRawMaterial = response;
             }
+            this.rawMaterialsListService.editRawMaterial(response.id, response);
           },
-          error: (err: HttpErrorResponse) => {
+          error: (e: HttpErrorResponse) => {
+            const error = e.error;
             this.messageService.add({
               severity: 'error',
               summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.FAILED'),
-              detail: err.message || this.translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.ERRORS.UPDATE')
+              detail: error ? error.message : this.translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.ERRORS.UPDATE')
             });
             this.loading = false;
           }
