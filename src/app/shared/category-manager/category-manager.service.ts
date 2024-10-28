@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpOptions } from '../../../../../../core/models/httpOptions.entities';
 import { TranslateService } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../../../../../environments/environment';
 import { Observable } from 'rxjs';
-import { Category } from '../../../../../../core/models/category.entities';
-import { AuthService } from '../../../../../../core/services/auth.service';
-import { PatchObject } from '../../../../../../core/models/patchObj.entities';
+import { HttpOptions } from '../../core/models/httpOptions.entities';
+import { AuthService } from '../../core/services/auth.service';
+import { environment } from '../../../environments/environment';
+import { Category } from '../../core/models/category.entities';
+import { PatchObject } from '../../core/models/patchObj.entities';
 
 @Injectable({
   providedIn: 'root'

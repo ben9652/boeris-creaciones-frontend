@@ -120,16 +120,24 @@
                     "CATEGORY_CREATION": "Error al crear el rubro",
                     "CATEGORY_UPDATING": "Error al editar el rubro"
                 },
-                "EMPTY_MESSAGES": {
-                    "CATEGORIES": "No se encontraron rubros",
-                    "UNITS": "No se encontraron unidades",
-                    "SOURCES": "No se encontraron orígenes"
+                "WARNINGS": {
+                    "FIELDS_LACK": {
+                        "CATEGORY": "Debe elegirse un rubro",
+                        "NAME": "Debe llenarse el campo de nombre",
+                        "UNIT": "Debe asignársele una unidad a la materia prima",
+                        "SOURCE": "Debe elegirse un origen de materia prima"
+                    }
                 },
                 "SUCCESSES": {
                     "CREATED": "Materia prima creada con éxito",
                     "UPDATED": "Materia prima actualizada con éxito",
                     "CATEGORY_CREATED": "Rubro creado con éxito",
                     "CATEGORY_UPDATED": "El rubro se editó correctamente"
+                },
+                "EMPTY_MESSAGES": {
+                    "CATEGORIES": "No se encontraron rubros",
+                    "UNITS": "No se encontraron unidades",
+                    "SOURCES": "No se encontraron orígenes"
                 },
                 "CATEGORY_MODAL": {
                     "CREATION": {
@@ -168,6 +176,12 @@
                     "PICTURE_ADDING": "No se pudo agregar una imagen",
                     "PICTURE_DELETING": "No se pudo eliminar la imagen anterior"
                 },
+                "WARNINGS": {
+                    "FIELDS_LACK": {
+                        "NAME": "Debe llenarse el campo de nombre",
+                        "PRICE": "Debe asignársele un precio al producto"
+                    }
+                },
                 "SUCCESSES": {
                     "CREATED": "Producto creado con éxito",
                     "UPDATED": "Producto actualizado con éxito"
@@ -188,13 +202,6 @@
                     "PHONE": "Teléfono",
                     "CVU_OR_ALIAS": "CVU o alias"
                 },
-                "ERRORS": {
-                    "FIELDS_LACK": "Debe completar todos los campos obligatorios",
-                    "FIELD_NAME_LACK": "Debe llenarse el campo de nombre",
-                    "UPDATE": "Error al actualizar",
-                    "CATEGORY_CREATION": "Error al crear el rubro",
-                    "CATEGORY_UPDATING": "Error al editar el rubro"
-                },
                 "EMPTY_MESSAGES": {
                     "CATEGORIES": "No se encontraron rubros"
                 },
@@ -203,6 +210,19 @@
                     "UPDATED": "Proveedor actualizado con éxito",
                     "CATEGORY_CREATED": "Rubro creado con éxito",
                     "CATEGORY_UPDATED": "El rubro se editó correctamente"
+                },
+                "WARNINGS": {
+                    "FIELDS_LACK": {
+                        "CATEGORY": "Debe elegirse un rubro",
+                        "NAME": "Debe llenarse el campo de nombre"
+                    }
+                },
+                "ERRORS": {
+                    "FIELDS_LACK": "Debe completar todos los campos obligatorios",
+                    "FIELD_NAME_LACK": "Debe llenarse el campo de nombre",
+                    "UPDATE": "Error al actualizar",
+                    "CATEGORY_CREATION": "Error al crear el rubro",
+                    "CATEGORY_UPDATING": "Error al editar el rubro"
                 },
                 "CATEGORY_MODAL": {
                     "CREATION": {
@@ -235,6 +255,12 @@
                 "SUCCESSES": {
                     "CREATED": "Sucursal creada con éxito",
                     "UPDATED": "Sucursal actualizada con éxito"
+                },
+                "WARNINGS": {
+                    "FIELDS_LACK": {
+                        "LOCALITY": "Debe elegirse una localidad",
+                        "NAME": "Debe llenarse el campo de nombre"
+                    }
                 },
                 "ERRORS": {
                     "FIELDS_LACK": "Debe completar todos los campos obligatorios",

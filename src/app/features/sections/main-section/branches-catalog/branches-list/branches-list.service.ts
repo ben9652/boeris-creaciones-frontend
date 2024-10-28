@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../../../../core/services/auth.service';
 import { environment } from '../../../../../../environments/environment';
 import { Observable, of } from 'rxjs';
+import { DeviceTypeService } from '../../../../../core/services/device-type.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,11 @@ export class BranchesListService {
 
   branches: WritableSignal<Branch[] | null> = signal<Branch[] | null>(null);
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+    private deviceTypeService: DeviceTypeService
+  ) {
     this.urlBase = environment.API_URL + 'CatalogoSucursales';
   }
 
@@ -23,24 +28,34 @@ export class BranchesListService {
     this.branches()?.push(branch);
   }
 
-  getBranchesFromDatabase(): Observable<Branch[]> {
-    const branches: Branch[] | null = this.branches();
-    if(!branches){
-      this.httpOptions = new HttpOptions(this.authService.getToken());
-      return this.http.get<Branch[]>(this.urlBase, this.httpOptions);
-    } else {
-      return of(branches);
+  editBranch(id: number, branch: Branch) {
+    const index: number | undefined = this.branches()?.findIndex(b => b.id === id);
+    
+    if(index !== undefined && index !== -1) {
+      const branches: Branch[] | null = this.branches();
+      if(branches)
+        branches[index] = { ...branch };
     }
   }
 
+  getBranchesFromDatabase(): Observable<Branch[]> {
+    const branches: Branch[] | null = this.branches();
+
+    if(!branches) {
+      this.httpOptions = new HttpOptions(this.authService.getToken());
+      return this.http.get<Branch[]>(this.urlBase, this.httpOptions);
+    }
+    
+    return of(branches);
+  }
+
   getBranch(id: number): Branch | undefined {
-    if(this.branches.length !== 0){
+    if(this.branches()?.length !== 0){
       let branch: Branch | undefined = this.branches()?.find(branch => branch.id === id);
-      if(branch){
+      if(branch)
         return branch;
-      } else {
+      else
         return undefined;
-      }
     }
     return undefined;
   }

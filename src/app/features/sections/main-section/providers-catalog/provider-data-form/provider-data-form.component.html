@@ -6,6 +6,7 @@
             [disabled]="providersCatalogService.selectedProvider() === null || loading"
             [category]="providersCatalogService.selectedProvider()?.category"
             (ngModelChange)="updateProviderCategory($event)"
+            (itemEdition)="categoryNameEdition($event)"
             ></app-category-manager>
 
             <input

@@ -1,33 +1,33 @@
 <p-toast></p-toast>
 
 <div class="container">
-    @if(selectedLocality || !deviceTypeService.isMobile()) {
+    @if (selectedCategory || !deviceTypeService.isMobile()) {
         <p-dropdown
-        [options]="localities"
+        [options]="categories"
         optionLabel="name"
-        [placeholder]="translateService.instant('SECTIONS.CATALOGS.BRANCHES.FIELDS.LOCALITY')"
+        [placeholder]="translateService.instant('SECTIONS.CATALOGS.PROVIDERS.FIELDS.CATEGORY')"
         [style]="{ width: '60%' }"
-        [emptyMessage]="translateService.instant('SHARED.DROPDOWN.EMPTY_MESSAGES.LOCALITIES')"
+        [emptyMessage]="translateService.instant('SHARED.DROPDOWN.EMPTY_MESSAGES.CATEGORIES')"
         [disabled]="disabled()"
-        [ngModel]="selectedLocality"
-        (ngModelChange)="emitLocality($event)"
+        [ngModel]="selectedCategory"
+        (ngModelChange)="emitCategory($event)"
         ></p-dropdown>
     }
     @else {
         <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
     }
-
+    
     <div class="buttons">
         <p-button
         icon="fas fa-plus"
         [disabled]="disabled()"
-        (onClick)="showModalLocality()"
+        (onClick)="showModalCategory()"
         ></p-button>
 
         <p-button
         icon="fas fa-pencil"
         [disabled]="disabled()"
-        (onClick)="showModalLocality(true)"
+        (onClick)="showModalCategory(true)"
         ></p-button>
     </div>
 </div>

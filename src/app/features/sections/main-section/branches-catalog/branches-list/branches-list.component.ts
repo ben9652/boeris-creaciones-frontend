@@ -73,7 +73,7 @@ export class BranchesListComponent {
     });
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.branchesListService.getBranchesFromDatabase().subscribe((response: Branch[]) => {
       this.branchesListService.branches.set(response);
       response.forEach((branch: Branch) => {

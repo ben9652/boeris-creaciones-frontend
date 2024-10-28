@@ -65,6 +65,19 @@ export class ProvidersCatalogService {
     }
   }
 
+  editProvider(id: number): Observable<Provider> {
+    const apiUrl: string = this.urlBase;
+    const apiUrlWithId: string = apiUrl + `/${id}`;
+
+    if(this.patchData.find(patch => patch.path === 'name')?.value === null)
+      return throwError(() => new Error(this.translateService.instant('SECTIONS.CATALOGS.PROVIDERS.ERRORS.FIELD_NAME_LACK')));
+
+    if(this.patchData.find(patch => patch.path === 'category')?.value === null)
+      return throwError(() => new Error(this.translateService.instant('SECTIONS.CATALOGS.PROVIDERS.CATEGORY_MODAL.WARNINGS.MUST_SELECT_CATEGORY')));
+
+    return this.http.patch<Provider>(apiUrlWithId, this.patchData, this.httpOptions);
+  }
+
   addPatchObject(op: string, path: string, value: any) {
     const alreadyAddedPatch: PatchObject | undefined = this.patchData.find(patch => patch.path === path);
     const isNotNull: boolean = value !== null && value !== undefined;
@@ -79,18 +92,5 @@ export class ProvidersCatalogService {
       alreadyAddedPatch.value = value;
     else
       this.patchData.push(new PatchObject(op, path, value));
-  }
-
-  editProvider(id: number): Observable<Provider> {
-    const apiUrl: string = this.urlBase;
-    const apiUrlWithId: string = this.urlBase + `/${id}`;
-
-    if(this.patchData.find(patch => patch.path === 'name')?.value === null)
-      return throwError(() => new Error(this.translateService.instant('SECTIONS.CATALOGS.PROVIDERS.ERRORS.FIELD_NAME_LACK')));
-
-    if(this.patchData.find(patch => patch.path === 'category')?.value === null)
-      return throwError(() => new Error(this.translateService.instant('SECTIONS.CATALOGS.PROVIDERS.CATEGORY_MODAL.WARNINGS.MUST_SELECT_CATEGORY')));
-
-    return this.http.patch<Provider>(apiUrlWithId, this.patchData, this.httpOptions);
   }
 }

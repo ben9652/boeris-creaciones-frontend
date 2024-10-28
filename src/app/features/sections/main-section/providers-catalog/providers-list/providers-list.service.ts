@@ -26,6 +26,16 @@ export class ProvidersListService {
     this.providers()?.push(provider);
   }
 
+  editProvider(id: number, provider: Provider) {
+    const index: number | undefined = this.providers()?.findIndex(p => p.id === id);
+
+    if(index !== undefined && index !== -1) {
+      const providers: Provider[] | null = this.providers();
+      if(providers)
+        providers[index] = { ...provider };
+    }
+  }
+
   getProvidersFromDatabase(): Observable<Provider[]> {
     const providers: Provider[] | null = this.providers();
 
@@ -33,9 +43,8 @@ export class ProvidersListService {
       this.httpOptions = new HttpOptions(this.authService.getToken());
       return this.http.get<Provider[]>(this.urlBase, this.httpOptions);
     }
-    else {
-      return of(providers);
-    }
+
+    return of(providers);
   }
 
   getProvider(id: number): Provider | undefined {

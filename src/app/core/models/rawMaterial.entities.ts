@@ -1,17 +1,23 @@
-import { Category } from "./category.entities"
+import { areCategoriesEqual, Category } from "./category.entities"
+import { RowList } from "./rowList.entities";
 
 export interface Unit {
     id: number,
     name: string
 }
 
-export interface Source {
-    label: string,
-    value: string
+export class Source {
+    label: string;
+    value: string;
+
+    constructor(label: string, value: string) {
+        this.label = label;
+        this.value = value;
+    }
 }
 
 export interface RawMaterial {
-    id: number | null,
+    id: number,
     category: Category | null,
     unit: Unit | null,
     name: string | null,
@@ -19,6 +25,25 @@ export interface RawMaterial {
     stock: number | null,
     picture: string | null,
     comment?: string | null
+}
+
+export interface RawMaterialRow extends RowList<RawMaterial> {
+
+}
+
+export function createNullRawMaterial(): RawMaterial {
+    let newRawMaterial: RawMaterial = {
+        id: 0,
+        category: null,
+        unit: null,
+        name: null,
+        source: null,
+        stock: 0,
+        picture: 'pictures/leaf-solid.svg',
+        comment: null
+    }
+
+    return newRawMaterial;
 }
 
 export function isRawMaterialNull(rawMaterial: RawMaterial): boolean {
@@ -38,7 +63,7 @@ export function areRawMaterialsEqual(obj1: RawMaterial | null, obj2: RawMaterial
     if(obj1 !== null && obj2 !== null) {
         if(obj1.id !== obj2.id)
             return false;
-        if(obj1.category?.id !== obj2.category?.id || obj2.category?.name !== obj2.category?.name)
+        if(!areCategoriesEqual(obj1.category, obj2.category))
             return false;
         if(obj1.unit?.id !== obj1.unit?.id || obj2.unit?.name !== obj2.unit?.name)
             return false;
@@ -60,17 +85,14 @@ export function areRawMaterialsEqual(obj1: RawMaterial | null, obj2: RawMaterial
     return true;
 }
 
-export function constructNullRawMaterial(): RawMaterial {
-    let newRawMaterial: RawMaterial = {
-        id: 0,
-        category: null,
-        unit: null,
-        name: null,
-        source: null,
-        stock: 0,
-        picture: 'pictures/leaf-solid.svg',
-        comment: null
-    }
+export function createRawMaterialRow(nonModified: RawMaterial, modified: RawMaterial): RawMaterialRow {
+    let rawMaterialRow: RawMaterialRow = {
+        nonModified: createNullRawMaterial(),
+        modified: createNullRawMaterial()
+    };
 
-    return newRawMaterial;
+    rawMaterialRow.nonModified = nonModified;
+    rawMaterialRow.modified = modified;
+
+    return rawMaterialRow;
 }

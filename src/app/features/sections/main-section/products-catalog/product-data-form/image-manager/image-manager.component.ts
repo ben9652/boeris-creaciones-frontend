@@ -42,11 +42,13 @@ export class ImageManagerComponent {
     const selectedProduct = changes['selectedProduct'];
     if(
       selectedProduct &&
-      (selectedProduct.previousValue === undefined ||
-      selectedProduct.previousValue === null ||
-      selectedProduct.currentValue === null ||
-      selectedProduct.previousValue.id !== selectedProduct.currentValue.id ||
-      selectedProduct.previousValue.picture !== selectedProduct.currentValue.picture)
+      (
+        selectedProduct.previousValue === undefined ||
+        selectedProduct.previousValue === null ||
+        selectedProduct.currentValue === null ||
+        selectedProduct.previousValue.id !== selectedProduct.currentValue.id ||
+        selectedProduct.previousValue.picture !== selectedProduct.currentValue.picture
+      )
     ) {
       this.updateImage();
     }

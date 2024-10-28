@@ -2,16 +2,60 @@
 <div class="rawMaterial-data-form-view">
     <div class="rawMaterial-data-form">
         <div class="flex justify-content-center">
-            <app-image-manager (uploadEvent)="updateRawMaterialPicture($event)"></app-image-manager>
+            <app-image-manager
+            [selectedRawMaterial]="rawMaterialsCatalogService.selectedRawMaterial()"
+            [disabled]="rawMaterialsCatalogService.selectedRawMaterial() === null || loading"
+            (uploadEvent)="updateRawMaterialPicture($event)"
+            ></app-image-manager>
         </div>
         <div class="fields">
-            <app-category-manager  (warningMessage)="showWarningMessage($event)" (nameOfCategory)="setModalCategoryName($event)"></app-category-manager>
-            <input type="text" pInputText [placeholder]="translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.FIELDS.NAME')" [disabled]="this.disabledEdition()" [ngModel]="this.rawMaterialCatalogService.selectedRawMaterial()?.name" (ngModelChange)="updateRawMaterialName($event)"/>
-            <p-dropdown [options]="units" optionLabel="name" [placeholder]="translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.FIELDS.UNITS')" [style]="{ width: '100%' }" [emptyMessage]="translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.EMPTY_MESSAGES.UNITS')" [disabled]="this.disabledEdition()" [ngModel]="this.rawMaterialCatalogService.selectedRawMaterial()?.unit" (ngModelChange)="updateRawMaterialUnit($event)"/>
-            
-            <p-dropdown [options]="sources" optionLabel="value" [placeholder]="translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.FIELDS.SOURCE')" [style]="{ width: '100%' }" [emptyMessage]="translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.EMPTY_MESSAGES.SOURCES')" [disabled]="this.disabledEdition()" [ngModel]="getSourceValue()" (ngModelChange)="updateRawMaterialSource($event)"/>
+            <app-category-manager
+            [disabled]="rawMaterialsCatalogService.selectedRawMaterial() === null || loading"
+            [category]="rawMaterialsCatalogService.selectedRawMaterial()?.category"
+            (ngModelChange)="updateRawMaterialCategory($event)"
+            ></app-category-manager>
 
-            <textarea rows="5" cols="30" pInputTextarea [autoResize]="true" [placeholder]="translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.FIELDS.COMMENT')" [disabled]="this.disabledEdition()" [ngModel]="this.rawMaterialCatalogService.selectedRawMaterial()?.comment" (ngModelChange)="updateRawMaterialComment($event)"></textarea>
+            <input
+            type="text"
+            pInputText
+            [placeholder]="translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.FIELDS.NAME')"
+            [disabled]="rawMaterialsCatalogService.selectedRawMaterial() === null || loading"
+            [ngModel]="this.rawMaterialsCatalogService.selectedRawMaterial()?.name"
+            (ngModelChange)="updateRawMaterialName($event)"
+            />
+
+            <p-dropdown
+            [options]="units"
+            optionLabel="name"
+            [placeholder]="translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.FIELDS.UNITS')"
+            [style]="{ width: '100%' }"
+            [emptyMessage]="translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.EMPTY_MESSAGES.UNITS')"
+            [disabled]="rawMaterialsCatalogService.selectedRawMaterial() === null || loading"
+            [ngModel]="this.rawMaterialsCatalogService.selectedRawMaterial()?.unit"
+            (ngModelChange)="updateRawMaterialUnit($event)"
+            />
+            
+            <p-dropdown
+            [options]="sources"
+            optionLabel="value"
+            [placeholder]="translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.FIELDS.SOURCE')"
+            [style]="{ width: '100%' }"
+            [emptyMessage]="translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.EMPTY_MESSAGES.SOURCES')"
+            [disabled]="rawMaterialsCatalogService.selectedRawMaterial() === null || loading"
+            [ngModel]="selectedSource"
+            (ngModelChange)="updateRawMaterialSource($event)"
+            />
+
+            <textarea
+            rows="5"
+            cols="30"
+            pInputTextarea
+            [autoResize]="true"
+            [placeholder]="translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.FIELDS.COMMENT')"
+            [disabled]="rawMaterialsCatalogService.selectedRawMaterial() === null || loading"
+            [ngModel]="this.rawMaterialsCatalogService.selectedRawMaterial()?.comment"
+            (ngModelChange)="updateRawMaterialComment($event)"
+            ></textarea>
         </div>
     </div>
     <div class="rawMaterial-data-form-buttons">
@@ -19,7 +63,7 @@
         class="bottom-button"
         [label]="translateService.instant('SHARED.BUTTONS.CANCEL')"
         severity="secondary"
-        [disabled]="this.disabledEdition() || loading"
+        [disabled]="rawMaterialsCatalogService.selectedRawMaterial() === null || loading"
         (onClick)="clickOnCancel()"
         ></p-button>
 
@@ -27,7 +71,10 @@
             <p-button
             class="bottom-button"
             [label]="translateService.instant('SHARED.BUTTONS.CONFIRM')"
-            [disabled]="this.disabledEdition() || rawMaterialCatalogService.nonModified()"
+            [disabled]="
+                rawMaterialsCatalogService.selectedRawMaterial() === null ||
+                rawMaterialsCatalogService.nonModified && rawMaterialsCatalogService.selectedRawMaterial() !== null && rawMaterialsCatalogService.selectedRawMaterial()?.id !== 0
+            "
             (onClick)="clickOnConfirm()"
             ></p-button>
         }
@@ -41,37 +88,3 @@
         }
     </div>
 </div>
-<p-dialog [header]="this.rawMaterialCatalogService.modalTitle + translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.FIELDS.CATAGORY')" [modal]="true" [closable]="!modalLoading" [closeOnEscape]="!modalLoading" [(visible)]="this.rawMaterialCatalogService.modalVisibility" [style]="{ width: '25rem' }">
-    <div (keypress)="onModalKeyPress($event)">
-        <div class="flex align-items-center gap-3 mt-3 mb-3">
-            <label for="category" class="font-semibold w-6rem">{{ 'SECTIONS.CATALOGS.RAW_MATERIALS.FIELDS.CATEGORY' | translate }}</label>
-            <input pInputText id="category" class="flex-auto" [readOnly]="modalLoading" [disabled]="modalLoading" [(ngModel)]="newCategoryName" autocomplete="off"/>
-        </div>
-        <div class="flex justify-content-evenly gap-2">
-            <p-button
-            class="bottom-button"
-            [label]="translateService.instant('SHARED.BUTTONS.CANCEL')"
-            severity="secondary"
-            [disabled]="modalLoading"
-            (onClick)="clickOnModalCancel()"
-            />
-    
-            @if (!modalLoading) {
-                <p-button
-                class="bottom-button"
-                [label]="translateService.instant('SHARED.BUTTONS.CONFIRM')"
-                [disabled]="modalLoading || rawMaterialCatalogService.selectedRawMaterial()?.category?.name === newCategoryName"
-                (onClick)="clickOnModalConfirm()"
-                ></p-button>
-            }
-            @else {
-                <p-button
-                class="bottom-button"
-                [disabled]="modalLoading"
-                >
-                    <i class="pi pi-spin pi-spinner"></i>
-                </p-button>
-            }
-        </div>
-    </div>
-</p-dialog>

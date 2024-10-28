@@ -24,7 +24,7 @@
             [placeholder]="translateService.instant('SECTIONS.CATALOGS.BRANCHES.FIELDS.DOMICILE')"
             [disabled]="branchesCatalogService.selectedBranch() === null || loading"
             [ngModel]="branchesCatalogService.selectedBranch()?.domicile"
-            (ngModelChange)="updateBranchName($event)"
+            (ngModelChange)="updateBranchDomicile($event)"
             >
         </div>
     </div>

@@ -13,6 +13,7 @@ import { ProductsListService } from '../products-list/products-list.service';
 import { MessageService } from 'primeng/api';
 import { DeviceTypeService } from '../../../../../core/services/device-type.service';
 import { TranslateService } from '@ngx-translate/core';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-product-data-form',
@@ -46,8 +47,15 @@ export class ProductDataFormComponent {
   }
 
   updateProductName(value: string) {
-    this.productsCatalogService.updateSelectedProduct('name', value);
-    this.productsCatalogService.addPatchObject('replace', 'name', value);
+    let comment: string | null;
+    if(value.length === 0) {
+      comment = null;
+    }
+    else {
+      comment = value;
+    }
+    this.productsCatalogService.updateSelectedProduct('name', comment);
+    this.productsCatalogService.addPatchObject('replace', 'name', comment);
   }
 
   updateProductPrice(value: number) {
@@ -88,6 +96,24 @@ export class ProductDataFormComponent {
 
   clickOnConfirm() {
     this.loading = true;
+    
+    const selectedProduct: Product | null = this.productsCatalogService.selectedProduct();
+    if(selectedProduct) {
+      const isNameNull: boolean = selectedProduct.name === null;
+      const isPriceNull: boolean = selectedProduct.price === null;
+
+      if(isNameNull || isPriceNull) {
+        this.loading = false;
+
+        const nullField: boolean[] = [
+          isNameNull,
+          isPriceNull
+        ];
+        this.throwWarningForEmptyFields(nullField);
+
+        return;
+      }
+    }
 
     // Si se crea un nuevo producto
     if(this.productsCatalogService.selectedProduct()?.id === 0) {
@@ -109,11 +135,12 @@ export class ProductDataFormComponent {
             this.productsCatalogService.selectedNonModifiedProduct = response;
           }
         },
-        error: (err) => {
+        error: (e: HttpErrorResponse) => {
+          const error = e.error;
           this.messageService.add({
             severity: 'error',
             summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.FAILED'),
-            detail: err.message || this.translateService.instant('SECTIONS.CATALOGS.PRODUCTS.ERRORS.FIELDS_LACK')
+            detail: error ? error.message : this.translateService.instant('SECTIONS.CATALOGS.PRODUCTS.ERRORS.FIELDS_LACK')
           });
           this.loading = false;
         }
@@ -143,16 +170,35 @@ export class ProductDataFormComponent {
               this.productsCatalogService.selectedNonModifiedProduct = response;
             }
           },
-          error: (err) => {
+          error: (e: HttpErrorResponse) => {
+            const error = e.error;
             this.messageService.add({
               severity: 'error',
               summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.FAILED'),
-              detail: err.message || this.translateService.instant('SECTIONS.CATALOGS.PRODUCTS.ERRORS.UPDATE')
+              detail: error ? error.message : this.translateService.instant('SECTIONS.CATALOGS.PRODUCTS.ERRORS.UPDATE')
             });
             this.loading = false;
           }
-        })
+        });
       }
+    }
+  }
+
+  private throwWarningForEmptyFields(nullField: boolean[]) {
+    if(nullField[0]) {
+      this.messageService.add({
+        severity: 'warn',
+        summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.WARNING'),
+        detail: this.translateService.instant('SECTIONS.CATALOGS.PRODUCTS.WARNINGS.FIELDS_LACK.NAME')
+      });
+    }
+    
+    else if(nullField[1]) {
+      this.messageService.add({
+        severity: 'warn',
+        summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.WARNING'),
+        detail: this.translateService.instant('SECTIONS.CATALOGS.PRODUCTS.WARNINGS.FIELDS_LACK.PRICE')
+      });
     }
   }
 }

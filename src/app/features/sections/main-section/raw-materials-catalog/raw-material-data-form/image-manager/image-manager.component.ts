@@ -1,28 +1,77 @@
-import { Component, output, OutputEmitterRef, ViewChild } from '@angular/core';
+import { Component, input, InputSignal, output, OutputEmitterRef, SimpleChanges, ViewChild } from '@angular/core';
 import { FileUpload, FileUploadModule } from 'primeng/fileupload';
-import { RawMaterialCatalogService } from '../../raw-material-catalog.service';
 import { CommonModule } from '@angular/common';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { RawMaterial } from '../../../../../../core/models/rawMaterial.entities';
+import { RawMaterialsCatalogService } from '../../raw-materials-catalog.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-image-manager',
   standalone: true,
-  imports: [FileUploadModule, CommonModule],
+  imports: [
+    FileUploadModule,
+    CommonModule,
+    TranslateModule
+  ],
   templateUrl: './image-manager.component.html',
-  styleUrl: './image-manager.component.scss'
+  styleUrl: './image-manager.component.scss',
+  providers: [TranslateService]
 })
 export class ImageManagerComponent {
-  uploadEvent: OutputEmitterRef<File> = output<File>();
   loadingImage: boolean = true;
 
+  selectedRawMaterial: InputSignal<RawMaterial | null> = input.required<RawMaterial | null>();
+
+  disabled: InputSignal<boolean> = input.required<boolean>();
+  uploadEvent: OutputEmitterRef<File> = output<File>();
+
+  imageSrc: string | null = null;
+
   @ViewChild('fileUpload') fileUploadComponent!: FileUpload;
-  
-  constructor(public rawMaterialCatalogService: RawMaterialCatalogService) {
-    
+
+  constructor(
+    public rawMaterialsCatalogService: RawMaterialsCatalogService,
+    private sanitizer: DomSanitizer,
+    public translateService: TranslateService
+  ) {
+
   }
 
-  getImage(): string{
-    const defaultImage = 'pictures/leaf-solid.svg';
-    return this.rawMaterialCatalogService.selectedRawMaterial()?.picture ? `${this.rawMaterialCatalogService.selectedRawMaterial()?.picture}` : defaultImage;
+  ngOnChanges(changes: SimpleChanges): void {
+    const selectedRawMaterial = changes['selectedRawMaterial'];
+    if(
+      selectedRawMaterial &&
+      (
+        selectedRawMaterial.previousValue === undefined ||
+        selectedRawMaterial.previousValue === null ||
+        selectedRawMaterial.currentValue === null ||
+        selectedRawMaterial.previousValue.id !== selectedRawMaterial.currentValue.id ||
+        selectedRawMaterial.previousValue.picture !== selectedRawMaterial.currentValue.picture
+      )
+    ) {
+      this.updateImage();
+    }
+  }
+
+  updateImage() {
+    this.loadingImage = true;
+
+    this.imageSrc = null;
+
+    setTimeout(() => {
+      this.imageSrc = this.getImage();
+    }, 0);
+  }
+
+  getImage(): string {
+    const selectedRawMaterial: RawMaterial | null = this.rawMaterialsCatalogService.selectedRawMaterial();
+    if(selectedRawMaterial && selectedRawMaterial.picture) {
+      return this.sanitizer.bypassSecurityTrustUrl(selectedRawMaterial.picture) as string;
+    }
+    else {
+      return this.translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.PICTURE.DEFAULT');
+    }
   }
 
   onImageLoad() {
@@ -31,10 +80,7 @@ export class ImageManagerComponent {
 
   onImageError() {
     this.loadingImage = false;
-  }
-
-  disabledEdition(): boolean{
-    return this.rawMaterialCatalogService.disableDataEdition();
+    this.imageSrc = null;
   }
 
   onUploadHandler(event: any) {
