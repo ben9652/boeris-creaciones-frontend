@@ -105,7 +105,7 @@
                 "FIELDS": {
                     "CATEGORY": "Rubro",
                     "NAME": "Nombre",
-                    "UNITS": "Unidades",
+                    "UNIT": "Unidad",
                     "SOURCE": "Origen",
                     "COMMENT": "Comentario",
                     "PICTURE": "Imagen"

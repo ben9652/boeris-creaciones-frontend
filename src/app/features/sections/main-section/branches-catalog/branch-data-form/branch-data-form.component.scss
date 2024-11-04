@@ -6,6 +6,10 @@
     padding: 10px;
 }
 
+input {
+    user-select: none;
+}
+
 .branch-data-form-view {
     height: 100%;
     display: flex;

@@ -6,6 +6,14 @@
     padding: 10px;
 }
 
+input {
+    user-select: none;
+}
+
+p-inputNumber {
+    user-select: none;
+}
+
 .provider-data-form-view {
     height: 100%;
     display: flex;

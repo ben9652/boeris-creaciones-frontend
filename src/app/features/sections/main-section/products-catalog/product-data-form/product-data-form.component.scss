@@ -6,6 +6,18 @@
     padding: 10px;
 }
 
+input {
+    user-select: none;
+}
+
+p-inputNumber {
+    user-select: none;
+}
+
+textarea {
+    user-select: none;
+}
+
 .product-data-form-view {
     height: 100%;
     display: flex;
