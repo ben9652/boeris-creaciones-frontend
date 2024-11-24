@@ -1,7 +1,7 @@
 <p-toast></p-toast>
 
 <div class="container">
-    @if (selectedCategory || !deviceTypeService.isMobile()) {
+    @if (categories !== null) {
         <p-dropdown
         [options]="categories"
         optionLabel="name"
@@ -14,7 +14,7 @@
         ></p-dropdown>
     }
     @else {
-        <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+        <p-skeleton height="3rem" styleClass="mb-2"></p-skeleton>
     }
     
     <div class="buttons">

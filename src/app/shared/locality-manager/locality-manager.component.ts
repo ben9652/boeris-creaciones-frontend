@@ -34,7 +34,7 @@ import { DeviceTypeService } from '../../core/services/device-type.service';
   providers: [TranslateService, DialogService, MessageService]
 })
 export class LocalityManagerComponent implements OnChanges {
-  localities: Locality[] = [];
+  localities: Locality[] | null = null;
   loading: boolean = false;
   disabled: InputSignal<boolean> = input.required<boolean>();
 
@@ -70,7 +70,7 @@ export class LocalityManagerComponent implements OnChanges {
     const locality: Locality | null | undefined = this.locality();
     
     if(locality) {
-      const selectedLocality: Locality | null | undefined = this.localities.find(localityElement => localityElement.id === locality.id);
+      const selectedLocality: Locality | null | undefined = this.localities?.find(localityElement => localityElement.id === locality.id);
       this.selectedLocality = selectedLocality;
     }
     else
@@ -127,7 +127,7 @@ export class LocalityManagerComponent implements OnChanges {
             summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.SUCCESS'),
             detail: this.translateService.instant('SHARED.LOCALITIES.MESSAGES.UPDATED')
           });
-          let locality: Locality | null | undefined = this.localities.find(locality => locality.id === this.selectedLocality?.id);
+          let locality: Locality | null | undefined = this.localities?.find(locality => locality.id === this.selectedLocality?.id);
           if(locality)
             locality.name = response.name;
           this.selectedLocality = response;
@@ -140,7 +140,7 @@ export class LocalityManagerComponent implements OnChanges {
             summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.SUCCESS'),
             detail: this.translateService.instant('SHARED.LOCALITIES.MESSAGES.CREATED')
           });
-          this.localities.push(response);
+          this.localities?.push(response);
           this.selectedLocality = response;
         }
       }

@@ -1,4 +1,4 @@
-<div class="header">
+<div [ngClass]="user_edition() ? 'header' : 'header-without-button'">
     <div class="menu-button" (click)="onClickLeftBanner()">
         <div class="menu-icon">
             @if (isDeployableMenu()) {
@@ -10,14 +10,14 @@
         </div>
     </div>
     <div class="header-text">{{ title() }}</div>
-    <div class="user-button">
-        @if (user_edition()) {
+    @if (user_edition()) {
+        <div class="user-button">
             <div class="user-icon" (click)="op.toggle($event)">
                 <i class="fas fa-user fa-xl"></i>
             </div>
             <p-overlayPanel #op>
                 <app-user-menu></app-user-menu>
             </p-overlayPanel>
-        }
-    </div>
+        </div>
+    }
 </div>
