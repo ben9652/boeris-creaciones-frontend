@@ -9,3 +9,7 @@
     background-color: $secondaryLightColor;
     height: 100%;
 }
+
+::ng-deep app-banner-subsections app-main-banner .header-text {
+    font-size: 2rem !important;
+}

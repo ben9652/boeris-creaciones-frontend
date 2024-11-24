@@ -34,7 +34,7 @@ import { SkeletonModule } from 'primeng/skeleton';
   providers: [TranslateService, DialogService, MessageService]
 })
 export class CategoryManagerComponent {
-  categories: Category[] = [];
+  categories: Category[] | null = null;
   loading: boolean = false;
   disabled: InputSignal<boolean> = input.required<boolean>();
 
@@ -70,7 +70,7 @@ export class CategoryManagerComponent {
     const category: Category | null | undefined = this.category();
 
     if(category) {
-      const selectedCategory: Category | null | undefined = this.categories.find(categoryElement => categoryElement.id === category.id);
+      const selectedCategory: Category | null | undefined = this.categories?.find(categoryElement => categoryElement.id === category.id);
       this.selectedCategory = selectedCategory;
     }
     else
@@ -127,7 +127,7 @@ export class CategoryManagerComponent {
             summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.SUCCESS'),
             detail: this.translateService.instant('SHARED.CATEGORIES.MESSAGES.UPDATED')
           });
-          let category: Category | null | undefined = this.categories.find(category => category.id === this.selectedCategory?.id);
+          let category: Category | null | undefined = this.categories?.find(category => category.id === this.selectedCategory?.id);
           if(category)
             category.name = response.name;
           this.selectedCategory = response;
@@ -140,7 +140,7 @@ export class CategoryManagerComponent {
             summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.SUCCESS'),
             detail: this.translateService.instant('SHARED.CATEGORIES.MESSAGES.CREATED')
           });
-          this.categories.push(response);
+          this.categories?.push(response);
           this.selectedCategory = response;
         }
       }

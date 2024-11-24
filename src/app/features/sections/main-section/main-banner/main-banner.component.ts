@@ -3,7 +3,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { UserMenuComponent } from './user-menu/user-menu.component';
-import { Location } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 
 @Component({
   selector: 'app-main-banner',
@@ -12,7 +12,8 @@ import { Location } from '@angular/common';
     TranslateModule,
     ButtonModule,
     OverlayPanelModule,
-    UserMenuComponent
+    UserMenuComponent,
+    CommonModule
   ],
   templateUrl: './main-banner.component.html',
   styleUrl: './main-banner.component.scss'
