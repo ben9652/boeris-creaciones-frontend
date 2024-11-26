@@ -1,0 +1,17 @@
+@if (rawMaterials) {
+    <p-dropdown
+    [(ngModel)]="selectedRawMaterial"
+    [options]="rawMaterials"
+    [style]="{ width: '16.5rem' }"
+    optionLabel="name"
+    [filter]="true"
+    filterBy="name"
+    [emptyMessage]="'No se encontraron elementos'"
+    [emptyFilterMessage]="'No hay resultados'"
+    [placeholder]="'Selecciona una materia prima'"
+    (onChange)="onSelection($event)"
+    ></p-dropdown>
+}
+@else {
+    <p-skeleton width="16.5rem" height="3rem" styleClass="mb-2"></p-skeleton>
+}
