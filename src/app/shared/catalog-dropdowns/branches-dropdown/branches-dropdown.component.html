@@ -1,12 +1,12 @@
-@if (rawMaterials) {
+@if (groupedBranches) {
     <p-dropdown
-    [options]="rawMaterials"
-    [style]="{ width: '16.5rem' }"
+    [options]="groupedBranches"
+    [style]="{ width: '15rem' }"
     [filter]="true"
-    filterBy="name"
+    filterBy="label"
     [emptyMessage]="'No se encontraron elementos'"
     [emptyFilterMessage]="'No hay resultados'"
-    [placeholder]="'Selecciona una materia prima'"
+    [placeholder]="'Selecciona una sucursal'"
     [group]="true"
     (onChange)="onSelection($event)"
     >
@@ -18,5 +18,5 @@
     </p-dropdown>
 }
 @else {
-    <p-skeleton width="16.5rem" height="3rem" styleClass="mb-2"></p-skeleton>
+    <p-skeleton width="15rem" height="3rem" styleClass="mb-2"></p-skeleton>
 }

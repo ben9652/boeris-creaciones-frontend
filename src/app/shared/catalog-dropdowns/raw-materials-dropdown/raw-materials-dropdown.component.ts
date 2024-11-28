@@ -1,10 +1,11 @@
 import { Component, output, OutputEmitterRef } from '@angular/core';
 import { RawMaterialsService } from '../../../core/services/catalogs/raw-materials.service';
-import { RawMaterial } from '../../../core/models/rawMaterial.entities';
+import { RawMaterial, RawMaterialBase } from '../../../core/models/rawMaterial.entities';
 import { DropdownChangeEvent, DropdownModule } from 'primeng/dropdown';
 import { SkeletonModule } from 'primeng/skeleton';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { SelectItemGroup } from 'primeng/api';
 
 @Component({
   selector: 'app-raw-materials-dropdown',
@@ -19,22 +20,20 @@ import { CommonModule } from '@angular/common';
   styleUrl: './raw-materials-dropdown.component.scss'
 })
 export class RawMaterialsDropdownComponent {
-  rawMaterials: RawMaterial[] | null = null;
+  rawMaterials: SelectItemGroup[] | null = null;
 
-  emitRawMaterial: OutputEmitterRef<RawMaterial> = output<RawMaterial>();
-
-  selectedRawMaterial: RawMaterial | null = null;
+  getRawMaterial: OutputEmitterRef<RawMaterialBase> = output<RawMaterialBase>();
 
   constructor(
     private rawMaterialsService: RawMaterialsService
   ) {
-    rawMaterialsService.getRawMaterialsFromDatabase().subscribe((rawMaterials: RawMaterial[]) => {
+    rawMaterialsService.getRawMaterialsFromDatabase().subscribe((rawMaterials: SelectItemGroup[]) => {
       rawMaterialsService.rawMaterials.set(rawMaterials);
       this.rawMaterials = rawMaterials;
     })
   }
 
   onSelection(event: DropdownChangeEvent) {
-    this.emitRawMaterial.emit(event.value);
+    this.getRawMaterial.emit(event.value);
   }
 }

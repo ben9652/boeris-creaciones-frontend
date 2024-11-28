@@ -1,13 +1,16 @@
 import { areCategoriesEqual, Category } from "./category.entities";
 import { RowList } from "./rowList.entities";
 
-export interface Provider {
-    id: number,
-    name: string | null,
-    category: Category | null,
-    residence: string | null,
-    phone: number | null,
+export interface ProviderBase {
+    id: number
+    name: string | null
+    residence: string | null
+    phone: number | null
     cvu_or_alias: string | null
+}
+
+export interface Provider extends ProviderBase {
+    category: Category | null
 }
 
 export interface ProviderRow extends RowList<Provider> {

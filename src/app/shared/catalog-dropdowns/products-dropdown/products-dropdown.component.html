@@ -1,0 +1,16 @@
+@if (products) {
+    <p-dropdown
+    [options]="products"
+    [style]="{ width: '15rem' }"
+    optionLabel="name"
+    [filter]="true"
+    filterBy="name"
+    [emptyMessage]="'No se encontraron elementos'"
+    [emptyFilterMessage]="'No hay resultados'"
+    [placeholder]="'Selecciona un producto'"
+    (onChange)="onSelection($event)"
+    ></p-dropdown>
+}
+@else {
+    <p-skeleton width="15rem" height="3rem" styleClass="mb-2"></p-skeleton>
+}
