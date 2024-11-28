@@ -16,15 +16,18 @@ export class Source {
     }
 }
 
-export interface RawMaterial {
-    id: number,
-    category: Category | null,
-    unit: Unit | null,
-    name: string | null,
-    source: string | null,
-    stock: number | null,
-    picture: string | null,
+export interface RawMaterialBase {
+    id: number
+    unit: Unit | null
+    name: string | null
+    source: string | null
+    stock: number | null
+    picture: string | null
     comment?: string | null
+}
+
+export interface RawMaterial extends RawMaterialBase {
+    category: Category | null
 }
 
 export interface RawMaterialRow extends RowList<RawMaterial> {

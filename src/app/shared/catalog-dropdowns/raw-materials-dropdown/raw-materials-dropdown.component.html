@@ -1,0 +1,22 @@
+@if (rawMaterials) {
+    <p-dropdown
+    [options]="rawMaterials"
+    [style]="{ width: '16.5rem' }"
+    [filter]="true"
+    filterBy="name"
+    [emptyMessage]="'No se encontraron elementos'"
+    [emptyFilterMessage]="'No hay resultados'"
+    [placeholder]="'Selecciona una materia prima'"
+    [group]="true"
+    (onChange)="onSelection($event)"
+    >
+        <ng-template let-group pTemplate="group">
+            <div class="flex align-items-center">
+                <span>{{ group.label }}</span>
+            </div>
+        </ng-template>
+    </p-dropdown>
+}
+@else {
+    <p-skeleton width="16.5rem" height="3rem" styleClass="mb-2"></p-skeleton>
+}

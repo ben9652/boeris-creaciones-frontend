@@ -1,8 +1,12 @@
+import { BranchBase } from "./branch.entities";
 import { areProvincesEqual, Province } from "./province.entities";
 
-export interface Locality {
-    id: number,
-    name: string,
+export interface LocalityBase{
+    id: number
+    name: string
+}
+
+export interface Locality extends LocalityBase {
     province: Province
 }
 

@@ -1,11 +1,14 @@
 import { areLocalitiesEqual, Locality } from "./locality.entities";
 import { RowList } from "./rowList.entities";
 
-export interface Branch {
-    id: number,
-    name: string | null;
-    locality: Locality | null;
-    domicile: string | null;
+export interface BranchBase {
+    id: number
+    name: string | null
+    domicile: string | null
+}
+
+export interface Branch extends BranchBase {
+    locality: Locality | null
 }
 
 export interface BranchRow extends RowList<Branch> {
@@ -39,7 +42,7 @@ export function areBranchesEqual(obj1: Branch | null, obj2: Branch | null): bool
     return true;
 }
 
-export function createBranchRow(nonModified: Branch, modified: Branch): BranchRow{
+export function createBranchRow(nonModified: Branch, modified: Branch): BranchRow {
     let branchRow: BranchRow = {
         nonModified: createNullBranch(),
         modified: createNullBranch()
