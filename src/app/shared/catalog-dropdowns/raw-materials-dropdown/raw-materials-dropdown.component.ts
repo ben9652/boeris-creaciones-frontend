@@ -8,16 +8,15 @@ import { CommonModule } from '@angular/common';
 import { SelectItemGroup } from 'primeng/api';
 
 @Component({
-  selector: 'app-raw-materials-dropdown',
-  standalone: true,
-  imports: [
-    DropdownModule,
-    SkeletonModule,
-    FormsModule,
-    CommonModule
-  ],
-  templateUrl: './raw-materials-dropdown.component.html',
-  styleUrl: './raw-materials-dropdown.component.scss'
+    selector: 'app-raw-materials-dropdown',
+    imports: [
+        DropdownModule,
+        SkeletonModule,
+        FormsModule,
+        CommonModule
+    ],
+    templateUrl: './raw-materials-dropdown.component.html',
+    styleUrl: './raw-materials-dropdown.component.scss'
 })
 export class RawMaterialsDropdownComponent {
   rawMaterials: SelectItemGroup[] | null = null;

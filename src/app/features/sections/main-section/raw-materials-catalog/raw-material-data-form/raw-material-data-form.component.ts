@@ -1,7 +1,7 @@
 import { Component, effect } from '@angular/core';
 import { ImageManagerComponent } from "./image-manager/image-manager.component";
 import { InputTextModule } from 'primeng/inputtext';
-import { InputTextareaModule } from 'primeng/inputtextarea';
+import { TextareaModule } from 'primeng/textarea';
 import { DropdownModule } from 'primeng/dropdown';
 import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -20,24 +20,23 @@ import { CategoryManagerComponent } from '../../../../../shared/category-manager
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'app-raw-material-data-form',
-  standalone: true,
-  imports: [
-    ImageManagerComponent,
-    CategoryManagerComponent,
-    InputTextModule,
-    InputTextareaModule,
-    DropdownModule,
-    CommonModule,
-    FormsModule,
-    ButtonModule,
-    ToastModule,
-    DialogModule,
-    TranslateModule
-  ],
-  templateUrl: './raw-material-data-form.component.html',
-  styleUrl: './raw-material-data-form.component.scss',
-  providers: [MessageService, TranslateService]
+    selector: 'app-raw-material-data-form',
+    imports: [
+        ImageManagerComponent,
+        CategoryManagerComponent,
+        InputTextModule,
+        TextareaModule,
+        DropdownModule,
+        CommonModule,
+        FormsModule,
+        ButtonModule,
+        ToastModule,
+        DialogModule,
+        TranslateModule
+    ],
+    templateUrl: './raw-material-data-form.component.html',
+    styleUrl: './raw-material-data-form.component.scss',
+    providers: [MessageService, TranslateService]
 })
 export class RawMaterialDataFormComponent {
   loading: boolean = false;

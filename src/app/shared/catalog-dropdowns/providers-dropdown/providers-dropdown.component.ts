@@ -7,15 +7,14 @@ import { FormsModule } from '@angular/forms';
 import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
-  selector: 'app-providers-dropdown',
-  standalone: true,
-  imports: [
-    DropdownModule,
-    FormsModule,
-    SkeletonModule
-  ],
-  templateUrl: './providers-dropdown.component.html',
-  styleUrl: './providers-dropdown.component.scss'
+    selector: 'app-providers-dropdown',
+    imports: [
+        DropdownModule,
+        FormsModule,
+        SkeletonModule
+    ],
+    templateUrl: './providers-dropdown.component.html',
+    styleUrl: './providers-dropdown.component.scss'
 })
 export class ProvidersDropdownComponent {
   groupedProviders: SelectItemGroup[] | null = null;

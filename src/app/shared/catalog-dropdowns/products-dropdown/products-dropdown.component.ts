@@ -6,15 +6,14 @@ import { Product } from '../../../core/models/product.entities';
 import { ProductsService } from '../../../core/services/catalogs/products.service';
 
 @Component({
-  selector: 'app-products-dropdown',
-  standalone: true,
-  imports: [
-    DropdownModule,
-    FormsModule,
-    SkeletonModule
-  ],
-  templateUrl: './products-dropdown.component.html',
-  styleUrl: './products-dropdown.component.scss'
+    selector: 'app-products-dropdown',
+    imports: [
+        DropdownModule,
+        FormsModule,
+        SkeletonModule
+    ],
+    templateUrl: './products-dropdown.component.html',
+    styleUrl: './products-dropdown.component.scss'
 })
 export class ProductsDropdownComponent {
   products: Product[] | null = null;

@@ -42,15 +42,14 @@ export enum ActiveSection {
 }
 
 @Component({
-  selector: 'app-main-section',
-  standalone: true,
-  imports: [
-    MainBannerComponent,
-    MenuSidebarComponent,
-    RouterModule
-  ],
-  templateUrl: './main-section.component.html',
-  styleUrl: './main-section.component.scss'
+    selector: 'app-main-section',
+    imports: [
+        MainBannerComponent,
+        MenuSidebarComponent,
+        RouterModule
+    ],
+    templateUrl: './main-section.component.html',
+    styleUrl: './main-section.component.scss'
 })
 export class MainSectionComponent {
   activeSection = ActiveSection;

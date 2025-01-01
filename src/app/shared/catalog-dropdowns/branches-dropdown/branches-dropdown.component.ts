@@ -7,15 +7,14 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { SelectItemGroup } from 'primeng/api';
 
 @Component({
-  selector: 'app-branches-dropdown',
-  standalone: true,
-  imports: [
-    DropdownModule,
-    FormsModule,
-    SkeletonModule
-  ],
-  templateUrl: './branches-dropdown.component.html',
-  styleUrl: './branches-dropdown.component.scss'
+    selector: 'app-branches-dropdown',
+    imports: [
+        DropdownModule,
+        FormsModule,
+        SkeletonModule
+    ],
+    templateUrl: './branches-dropdown.component.html',
+    styleUrl: './branches-dropdown.component.scss'
 })
 export class BranchesDropdownComponent {
   groupedBranches: SelectItemGroup[] | null = null;

@@ -19,22 +19,21 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { DataAccessService } from '../../../core/services/data-access/data-access.service';
 
 @Component({
-  selector: 'app-edit-profile',
-  standalone: true,
-  imports: [
-    FormsModule,
-    InputTextModule,
-    PasswordModule,
-    ButtonModule,
-    DividerModule,
-    TranslateModule,
-    MainBannerComponent,
-    ToastModule,
-    CommonModule
-  ],
-  templateUrl: './edit-profile.component.html',
-  styleUrl: './edit-profile.component.scss',
-  providers: [MessageService]
+    selector: 'app-edit-profile',
+    imports: [
+        FormsModule,
+        InputTextModule,
+        PasswordModule,
+        ButtonModule,
+        DividerModule,
+        TranslateModule,
+        MainBannerComponent,
+        ToastModule,
+        CommonModule
+    ],
+    templateUrl: './edit-profile.component.html',
+    styleUrl: './edit-profile.component.scss',
+    providers: [MessageService]
 })
 export class EditProfileComponent {
   username?: string;

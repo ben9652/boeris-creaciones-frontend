@@ -5,14 +5,13 @@ import { Partner } from '../../../../core/models/partner.entities';
 import { PartnersService } from '../../main-section/partners/partners.service';
 
 @Component({
-  selector: 'app-roles-edition',
-  standalone: true,
-  imports: [
-    RolesComponent,
-    BannerSubsectionsComponent
-  ],
-  templateUrl: './roles-edition.component.html',
-  styleUrl: './roles-edition.component.scss'
+    selector: 'app-roles-edition',
+    imports: [
+        RolesComponent,
+        BannerSubsectionsComponent
+    ],
+    templateUrl: './roles-edition.component.html',
+    styleUrl: './roles-edition.component.scss'
 })
 export class RolesEditionComponent {
   firstName: string;

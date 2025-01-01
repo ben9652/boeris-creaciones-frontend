@@ -11,17 +11,16 @@ import { RawMaterialsListService } from './raw-materials-list.service';
 import { DeviceTypeService } from '../../../../../core/services/device-type/device-type.service';
 
 @Component({
-  selector: 'app-raw-material-list',
-  standalone: true,
-  imports: [
-    TableModule,
-    ButtonModule,
-    TranslateModule,
-    SkeletonModule
-  ],
-  templateUrl: './raw-materials-list.component.html',
-  styleUrl: './raw-materials-list.component.scss',
-  providers: [TranslateService]
+    selector: 'app-raw-material-list',
+    imports: [
+        TableModule,
+        ButtonModule,
+        TranslateModule,
+        SkeletonModule
+    ],
+    templateUrl: './raw-materials-list.component.html',
+    styleUrl: './raw-materials-list.component.scss',
+    providers: [TranslateService]
 })
 export class RawMaterialListComponent {
   rawMaterialsMap: Map<number, RawMaterialRow> = new Map<number, RawMaterialRow>();

@@ -5,15 +5,14 @@ import { DeviceTypeService } from '../../../../core/services/device-type/device-
 import { RawMaterialDataFormComponent } from './raw-material-data-form/raw-material-data-form.component';
 
 @Component({
-  selector: 'app-raw-materials-catalog',
-  standalone: true,
-  imports: [
-    RawMaterialListComponent,
-    RawMaterialDataFormComponent,
-    DividerModule
-  ],
-  templateUrl: './raw-materials-catalog.component.html',
-  styleUrl: './raw-materials-catalog.component.scss'
+    selector: 'app-raw-materials-catalog',
+    imports: [
+        RawMaterialListComponent,
+        RawMaterialDataFormComponent,
+        DividerModule
+    ],
+    templateUrl: './raw-materials-catalog.component.html',
+    styleUrl: './raw-materials-catalog.component.scss'
 })
 export class RawMaterialsCatalogComponent {
 

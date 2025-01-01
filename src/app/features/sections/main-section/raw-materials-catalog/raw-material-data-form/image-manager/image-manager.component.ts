@@ -7,16 +7,15 @@ import { RawMaterialsCatalogService } from '../../raw-materials-catalog.service'
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-image-manager',
-  standalone: true,
-  imports: [
-    FileUploadModule,
-    CommonModule,
-    TranslateModule
-  ],
-  templateUrl: './image-manager.component.html',
-  styleUrl: './image-manager.component.scss',
-  providers: [TranslateService]
+    selector: 'app-image-manager',
+    imports: [
+        FileUploadModule,
+        CommonModule,
+        TranslateModule
+    ],
+    templateUrl: './image-manager.component.html',
+    styleUrl: './image-manager.component.scss',
+    providers: [TranslateService]
 })
 export class ImageManagerComponent {
   loadingImage: boolean = true;

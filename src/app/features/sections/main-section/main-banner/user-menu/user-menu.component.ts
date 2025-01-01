@@ -5,14 +5,13 @@ import { AuthService } from '../../../../../core/services/auth/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-user-menu',
-  standalone: true,
-  imports: [
-    ButtonModule,
-    TranslateModule
-  ],
-  templateUrl: './user-menu.component.html',
-  styleUrl: './user-menu.component.scss'
+    selector: 'app-user-menu',
+    imports: [
+        ButtonModule,
+        TranslateModule
+    ],
+    templateUrl: './user-menu.component.html',
+    styleUrl: './user-menu.component.scss'
 })
 export class UserMenuComponent {
   constructor(

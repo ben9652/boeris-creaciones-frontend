@@ -16,20 +16,19 @@ import { CategoryManagerComponent } from '../../../../../shared/category-manager
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'app-provider-data-form',
-  standalone: true,
-  imports: [
-    CategoryManagerComponent,
-    InputTextModule,
-    InputNumberModule,
-    FormsModule,
-    CommonModule,
-    ButtonModule,
-    ToastModule
-  ],
-  templateUrl: './provider-data-form.component.html',
-  styleUrl: './provider-data-form.component.scss',
-  providers: [MessageService, TranslateService]
+    selector: 'app-provider-data-form',
+    imports: [
+        CategoryManagerComponent,
+        InputTextModule,
+        InputNumberModule,
+        FormsModule,
+        CommonModule,
+        ButtonModule,
+        ToastModule
+    ],
+    templateUrl: './provider-data-form.component.html',
+    styleUrl: './provider-data-form.component.scss',
+    providers: [MessageService, TranslateService]
 })
 export class ProviderDataFormComponent {
   loading: boolean = false;

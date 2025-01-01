@@ -15,19 +15,18 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-roles',
-  standalone: true,
-  imports: [
-    PickListModule,
-    DragDropModule,
-    FieldsetModule,
-    ButtonModule,
-    ToastModule,
-    TranslateModule
-  ],
-  templateUrl: './roles.component.html',
-  styleUrl: './roles.component.scss',
-  providers: [MessageService]
+    selector: 'app-roles',
+    imports: [
+        PickListModule,
+        DragDropModule,
+        FieldsetModule,
+        ButtonModule,
+        ToastModule,
+        TranslateModule
+    ],
+    templateUrl: './roles.component.html',
+    styleUrl: './roles.component.scss',
+    providers: [MessageService]
 })
 export class RolesComponent {
   selectedRole?: PartnerType;

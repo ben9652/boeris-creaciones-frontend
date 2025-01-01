@@ -10,17 +10,16 @@ import { Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-products-list',
-  standalone: true,
-  imports: [
-    TableModule,
-    ButtonModule,
-    TranslateModule,
-    SkeletonModule
-  ],
-  templateUrl: './products-list.component.html',
-  styleUrl: './products-list.component.scss',
-  providers: [TranslateService]
+    selector: 'app-products-list',
+    imports: [
+        TableModule,
+        ButtonModule,
+        TranslateModule,
+        SkeletonModule
+    ],
+    templateUrl: './products-list.component.html',
+    styleUrl: './products-list.component.scss',
+    providers: [TranslateService]
 })
 export class ProductsListComponent {
   productsMap: Map<number, ProductRow> = new Map<number, ProductRow>();

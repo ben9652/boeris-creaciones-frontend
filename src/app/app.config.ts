@@ -7,10 +7,14 @@ import { HttpClient, provideHttpClient, withFetch, withInterceptors } from '@ang
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { RequestResponseInterceptor } from './core/interceptors/requests-response.interceptor';
 import { ActiveRouteService } from './core/services/active-route/active-route.service';
 import { SESSION_STORAGE } from './tokens';
 import { isPlatformServer } from '@angular/common';
+import { BoerisCreaciones } from './theme/boeris-creaciones-preset';
+import { providePrimeNG } from 'primeng/config';
+import Aura from '@primeng/themes/aura';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, '/i18n/', '.json');
@@ -62,6 +66,15 @@ export const appConfig: ApplicationConfig = {
         return sessionStorage;
       },
       deps: [PLATFORM_ID]
-    }
+    },
+    provideAnimationsAsync(),
+    providePrimeNG({
+      theme: {
+        preset: BoerisCreaciones,
+        options: {
+          darkModeSelector: false || 'none'
+        }
+      }
+    })
   ]
 };

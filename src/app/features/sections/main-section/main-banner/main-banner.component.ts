@@ -6,17 +6,16 @@ import { UserMenuComponent } from './user-menu/user-menu.component';
 import { CommonModule, Location } from '@angular/common';
 
 @Component({
-  selector: 'app-main-banner',
-  standalone: true,
-  imports: [
-    TranslateModule,
-    ButtonModule,
-    OverlayPanelModule,
-    UserMenuComponent,
-    CommonModule
-  ],
-  templateUrl: './main-banner.component.html',
-  styleUrl: './main-banner.component.scss'
+    selector: 'app-main-banner',
+    imports: [
+        TranslateModule,
+        ButtonModule,
+        OverlayPanelModule,
+        UserMenuComponent,
+        CommonModule
+    ],
+    templateUrl: './main-banner.component.html',
+    styleUrl: './main-banner.component.scss'
 })
 export class MainBannerComponent {
   menuVisible: ModelSignal<boolean> = model(false);

@@ -16,22 +16,21 @@ import { DeviceTypeService } from '../../core/services/device-type/device-type.s
 import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
-  selector: 'app-category-manager',
-  standalone: true,
-  imports: [
-    DropdownModule,
-    ButtonModule,
-    FormsModule,
-    CommonModule,
-    InputTextModule,
-    DialogModule,
-    TranslateModule,
-    ToastModule,
-    SkeletonModule
-  ],
-  templateUrl: './category-manager.component.html',
-  styleUrl: './category-manager.component.scss',
-  providers: [TranslateService, DialogService, MessageService]
+    selector: 'app-category-manager',
+    imports: [
+        DropdownModule,
+        ButtonModule,
+        FormsModule,
+        CommonModule,
+        InputTextModule,
+        DialogModule,
+        TranslateModule,
+        ToastModule,
+        SkeletonModule
+    ],
+    templateUrl: './category-manager.component.html',
+    styleUrl: './category-manager.component.scss',
+    providers: [TranslateService, DialogService, MessageService]
 })
 export class CategoryManagerComponent {
   categories: Category[] | null = null;

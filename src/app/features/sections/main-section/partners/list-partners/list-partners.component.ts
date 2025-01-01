@@ -13,17 +13,16 @@ import { PartnersService } from '../partners.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-list-partners',
-  standalone: true,
-  imports: [
-    ScrollerModule,
-    InputTextModule,
-    ButtonModule,
-    FormsModule,
-    TranslateModule
-  ],
-  templateUrl: './list-partners.component.html',
-  styleUrl: './list-partners.component.scss'
+    selector: 'app-list-partners',
+    imports: [
+        ScrollerModule,
+        InputTextModule,
+        ButtonModule,
+        FormsModule,
+        TranslateModule
+    ],
+    templateUrl: './list-partners.component.html',
+    styleUrl: './list-partners.component.scss'
 })
 export class ListPartnersComponent {
   partnerSearch: string = '';

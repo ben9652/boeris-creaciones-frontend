@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-@import '../public/theme/boeris-theme';
+@use '../public/theme/boeris-theme';
 
 body {
     margin: 0;
-    background-color: $secondaryColor;
+    background-color: boeris-theme.$secondaryColor;
 }

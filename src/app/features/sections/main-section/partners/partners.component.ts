@@ -15,19 +15,18 @@ import { ButtonModule } from 'primeng/button';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-partners',
-  standalone: true,
-  imports: [
-    RolesComponent,
-    PartnerAdditionComponent,
-    ListPartnersComponent,
-    ToastModule,
-    DividerModule,
-    ButtonModule
-  ],
-  templateUrl: './partners.component.html',
-  styleUrl: './partners.component.scss',
-  providers: [MessageService]
+    selector: 'app-partners',
+    imports: [
+        RolesComponent,
+        PartnerAdditionComponent,
+        ListPartnersComponent,
+        ToastModule,
+        DividerModule,
+        ButtonModule
+    ],
+    templateUrl: './partners.component.html',
+    styleUrl: './partners.component.scss',
+    providers: [MessageService]
 })
 export class PartnersComponent {
   addMode: boolean = false;

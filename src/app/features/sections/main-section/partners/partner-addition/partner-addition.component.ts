@@ -14,19 +14,18 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-partner-addition',
-  standalone: true,
-  imports: [
-    InputTextModule,
-    ButtonModule,
-    FormsModule,
-    ToastModule,
-    ConfirmDialogModule,
-    TranslateModule
-  ],
-  templateUrl: './partner-addition.component.html',
-  styleUrl: './partner-addition.component.scss',
-  providers: [ConfirmationService, MessageService]
+    selector: 'app-partner-addition',
+    imports: [
+        InputTextModule,
+        ButtonModule,
+        FormsModule,
+        ToastModule,
+        ConfirmDialogModule,
+        TranslateModule
+    ],
+    templateUrl: './partner-addition.component.html',
+    styleUrl: './partner-addition.component.scss',
+    providers: [ConfirmationService, MessageService]
 })
 export class PartnerAdditionComponent {
   firstName: string = '';
@@ -124,5 +123,9 @@ export class PartnerAdditionComponent {
     if(event.key === 'Enter' && !this.isLoading) {
       this.createPartner();
     }
+  }
+
+  confirm() {
+    
   }
 }

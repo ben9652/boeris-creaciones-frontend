@@ -10,19 +10,18 @@ import { DeviceTypeService } from '../../../../../core/services/device-type/devi
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-providers-list',
-  standalone: true,
-  imports: [
-    ButtonModule,
-    TableModule,
-    SkeletonModule,
-    TranslateModule
-  ],
-  templateUrl: './providers-list.component.html',
-  styleUrl: './providers-list.component.scss',
-  providers: [
-    TranslateService
-  ]
+    selector: 'app-providers-list',
+    imports: [
+        ButtonModule,
+        TableModule,
+        SkeletonModule,
+        TranslateModule
+    ],
+    templateUrl: './providers-list.component.html',
+    styleUrl: './providers-list.component.scss',
+    providers: [
+        TranslateService
+    ]
 })
 export class ProvidersListComponent implements OnInit {
   providersMap: Map<number, ProviderRow> = new Map<number, ProviderRow>();

@@ -10,17 +10,16 @@ import { CommonModule } from '@angular/common';
 import { Locality } from '../../core/models/locality.entities';
 
 @Component({
-  selector: 'app-locality-modal',
-  standalone: true,
-  imports: [
-    TranslateModule,
-    ButtonModule,
-    InputTextModule,
-    FormsModule,
-    CommonModule
-  ],
-  templateUrl: './locality-modal.component.html',
-  styleUrl: './locality-modal.component.scss'
+    selector: 'app-locality-modal',
+    imports: [
+        TranslateModule,
+        ButtonModule,
+        InputTextModule,
+        FormsModule,
+        CommonModule
+    ],
+    templateUrl: './locality-modal.component.html',
+    styleUrl: './locality-modal.component.scss'
 })
 export class LocalityModalComponent {
   loading: boolean = false;

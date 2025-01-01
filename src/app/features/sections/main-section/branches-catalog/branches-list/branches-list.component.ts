@@ -11,12 +11,11 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { BranchesCatalogService } from '../branches-catalog.service';
 
 @Component({
-  selector: 'app-branches-list',
-  standalone: true,
-  imports: [ButtonModule, TableModule, TranslateModule, SkeletonModule],
-  templateUrl: './branches-list.component.html',
-  styleUrl: './branches-list.component.scss',
-  providers: [TranslateService]
+    selector: 'app-branches-list',
+    imports: [ButtonModule, TableModule, TranslateModule, SkeletonModule],
+    templateUrl: './branches-list.component.html',
+    styleUrl: './branches-list.component.scss',
+    providers: [TranslateService]
 })
 export class BranchesListComponent {
   branchesMap: Map<number, BranchRow> = new Map<number, BranchRow>();

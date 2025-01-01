@@ -5,11 +5,10 @@ import { DeviceTypeService } from '../../../../core/services/device-type/device-
 import { DividerModule } from 'primeng/divider';
 
 @Component({
-  selector: 'app-branches-catalog',
-  standalone: true,
-  imports: [BranchesListComponent, BranchDataFormComponent,DividerModule],
-  templateUrl: './branches-catalog.component.html',
-  styleUrl: './branches-catalog.component.scss'
+    selector: 'app-branches-catalog',
+    imports: [BranchesListComponent, BranchDataFormComponent, DividerModule],
+    templateUrl: './branches-catalog.component.html',
+    styleUrl: './branches-catalog.component.scss'
 })
 export class BranchesCatalogComponent {
 

@@ -11,16 +11,15 @@ import { LogIn } from '../../../core/models/login.entities';
 import { DataAccessService } from '../../../core/services/data-access/data-access.service';
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [
-    BannerComponent,
-    FormComponent,
-    ToastModule
-  ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
-  providers: [MessageService]
+    selector: 'app-login',
+    imports: [
+        BannerComponent,
+        FormComponent,
+        ToastModule
+    ],
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.scss',
+    providers: [MessageService]
 })
 export class LoginComponent {
   protected isLoading: WritableSignal<boolean> = signal(false);
