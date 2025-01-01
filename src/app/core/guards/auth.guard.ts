@@ -1,7 +1,8 @@
 import { ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../services/auth/auth.service';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { ActiveRouteService } from '../services/active-route/active-route.service';
 
 export const LoggedInGuard: CanActivateFn = (
   route: ActivatedRouteSnapshot,
@@ -9,10 +10,13 @@ export const LoggedInGuard: CanActivateFn = (
 ) => {
   const auth = inject(AuthService);
   const router = inject(Router);
+  const activeRoute = inject(ActiveRouteService);
 
   const isAuthenticated: boolean = auth.checkAuthentication();
+
   if(isAuthenticated) {
-    router.navigate(['/login']);
+    const route = activeRoute.route;
+    router.navigate([route]);
     return false;
   }
   

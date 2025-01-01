@@ -18,12 +18,13 @@ import { EditProfileComponent } from './features/user/edit-profile/edit-profile.
 import { mobileAccessGuard } from './core/guards/mobile-access.guard';
 import { RolesEditionComponent } from './features/sections/sub-sections/roles-edition/roles-edition.component';
 import { inject } from '@angular/core';
-import { ActiveRouteService } from './core/services/active-route.service';
+import { ActiveRouteService } from './core/services/active-route/active-route.service';
 import { MobilePartnerAdditionComponent } from './features/sections/sub-sections/mobile-partner-addition/mobile-partner-addition.component';
 import { MobileRawMaterialDataComponent } from './features/sections/sub-sections/mobile-raw-material-data/mobile-raw-material-data.component';
 import { MobileProductDataComponent } from './features/sections/sub-sections/mobile-product-data/mobile-product-data.component';
 import { MobileProviderDataComponent } from './features/sections/sub-sections/mobile-provider-data/mobile-provider-data.component';
 import { MobileBranchDataComponent } from './features/sections/sub-sections/mobile-branch-data/mobile-branch-data.component';
+import { ProductionsComponent } from './features/sections/main-section/productions/productions.component';
 
 export const routes: Routes = [
     {
@@ -89,6 +90,10 @@ export const routes: Routes = [
                 component: PurchasesComponent
             },
             {
+                path: 'productions',
+                component: ProductionsComponent
+            },
+            {
                 path: 'raw-materials-labour',
                 component: RawMaterialsLabourComponent
             },
@@ -126,34 +131,42 @@ export const routes: Routes = [
     },
     {
         path: 'raw-material-addition',
-        component: MobileRawMaterialDataComponent
+        component: MobileRawMaterialDataComponent,
+        canActivate: [mobileAccessGuard]
     },
     {
         path: 'raw-material-edition',
-        component: MobileRawMaterialDataComponent
+        component: MobileRawMaterialDataComponent,
+        canActivate: [mobileAccessGuard]
     },
     {
         path: 'product-addition',
-        component: MobileProductDataComponent
+        component: MobileProductDataComponent,
+        canActivate: [mobileAccessGuard]
     },
     {
         path: 'product-edition',
-        component: MobileProductDataComponent
+        component: MobileProductDataComponent,
+        canActivate: [mobileAccessGuard]
     },
     {
         path: 'provider-addition',
-        component: MobileProviderDataComponent
+        component: MobileProviderDataComponent,
+        canActivate: [mobileAccessGuard]
     },
     {
         path: 'provider-edition',
-        component: MobileProviderDataComponent
+        component: MobileProviderDataComponent,
+        canActivate: [mobileAccessGuard]
     },
     {
         path: 'branch-addition',
-        component: MobileBranchDataComponent
+        component: MobileBranchDataComponent,
+        canActivate: [mobileAccessGuard]
     },
     {
         path: 'branch-edition',
-        component: MobileBranchDataComponent
+        component: MobileBranchDataComponent,
+        canActivate: [mobileAccessGuard]
     }
 ];

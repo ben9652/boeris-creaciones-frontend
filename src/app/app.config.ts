@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
+import { APP_INITIALIZER, ApplicationConfig, importProvidersFrom, PLATFORM_ID, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, Router, withComponentInputBinding } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -8,7 +8,9 @@ import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-transla
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { RequestResponseInterceptor } from './core/interceptors/requests-response.interceptor';
-import { ActiveRouteService } from './core/services/active-route.service';
+import { ActiveRouteService } from './core/services/active-route/active-route.service';
+import { SESSION_STORAGE } from './tokens';
+import { isPlatformServer } from '@angular/common';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, '/i18n/', '.json');
@@ -50,6 +52,16 @@ export const appConfig: ApplicationConfig = {
     },
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes, withComponentInputBinding()),
-    provideClientHydration()
+    provideClientHydration(),
+    {
+      provide: SESSION_STORAGE,
+      useFactory: (platformId: object) => {
+        if(isPlatformServer(platformId)) {
+          return {};
+        }
+        return sessionStorage;
+      },
+      deps: [PLATFORM_ID]
+    }
   ]
 };

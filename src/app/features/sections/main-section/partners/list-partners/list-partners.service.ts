@@ -1,10 +1,10 @@
-import { HttpClient, HttpErrorResponse, HttpEvent, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { afterRender, Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, map, Observable, of, switchMap, throwError } from 'rxjs';
-import { AuthService } from '../../../../../core/services/auth.service';
 import { environment } from '../../../../../../environments/environment';
 import { Partner, PartnerRegister } from '../../../../../core/models/partner.entities';
 import { HttpOptions } from '../../../../../core/models/httpOptions.entities';
+import { DataAccessService } from '../../../../../core/services/data-access/data-access.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ export class ListPartnersService {
 
   private setPartners(): void {
     if(this.partnersSource.getValue().length === 0) {
-      this.httpOptions = new HttpOptions(this.authService.getToken());
+      this.httpOptions = new HttpOptions(this.dataAccessService.getToken());
       this.http.get<Partner[]>(this.urlBase, this.httpOptions).pipe(
         map((partners: Partner[]) => {
           this.partnersSource.next(partners);
@@ -40,12 +40,9 @@ export class ListPartnersService {
 
   constructor(
     private http: HttpClient,
-    private authService: AuthService,
+    private dataAccessService: DataAccessService
   ) {
     this.urlBase = environment.API_URL + 'Socios/';
-    // afterRender(() => {
-    //   this.httpOptions = new HttpOptions(authService.getToken());
-    // })
     this.setPartners();
   }
 

@@ -2,12 +2,13 @@ import { afterRender, AfterViewInit, ChangeDetectorRef, Component, DoCheck, OnIn
 import { BannerComponent } from './banner/banner.component';
 import { FormComponent } from './form/form.component';
 import { ToastModule } from 'primeng/toast';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { AuthService } from '../../../core/services/auth.service';
+import { AuthService } from '../../../core/services/auth/auth.service';
 import { User } from '../../../core/models/user.entities';
 import { ApiMessage } from '../../../core/models/apimessage.entities';
 import { LogIn } from '../../../core/models/login.entities';
+import { DataAccessService } from '../../../core/services/data-access/data-access.service';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +31,9 @@ export class LoginComponent {
     private authService: AuthService,
     private router: Router,
     private messageService: MessageService,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private dataAccessService: DataAccessService,
+    private activatedRoute: ActivatedRoute
   ) {
      afterRender(() => {
       if(sessionStorage.getItem('authenticated')) {
@@ -47,20 +50,19 @@ export class LoginComponent {
   }
 
   login(credentials: LogIn) {
-    this.authService.login(credentials).then((res: ApiMessage) => {
-      if(!res.error) {
+    this.authService.login(credentials).subscribe({
+      next: (res: ApiMessage) => {
         this.router.navigate(['sections']);
-      }
-      else {
+      },
+      error: (err: ApiMessage) => {
         this.messageService.add({
           severity: 'error',
-          // TODO: Agregar al translate estos mensajes y hacer uso de ellos
           summary: 'Inicio de sesión fallido',
-          detail: res.mensaje
+          detail: err.mensaje
         });
+        
+        this.isLoading.set(false);
       }
-
-      this.isLoading.set(false);
     });
   }
 }

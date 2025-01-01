@@ -1,10 +1,10 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable, signal, WritableSignal } from '@angular/core';
-import { AuthService } from '../../../../../core/services/auth.service';
 import { environment } from '../../../../../../environments/environment';
 import { Product } from '../../../../../core/models/product.entities';
 import { HttpOptions } from '../../../../../core/models/httpOptions.entities';
 import { catchError, map, Observable, of, switchMap, throwError } from 'rxjs';
+import { DataAccessService } from '../../../../../core/services/data-access/data-access.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class ProductsListService {
 
   constructor(
     private http: HttpClient,
-    private authService: AuthService
+    private dataAccessService: DataAccessService
   ) {
     this.urlBase = environment.API_URL + 'CatalogoProductos';
   }
@@ -40,7 +40,7 @@ export class ProductsListService {
     const products: Product[] | null = this.products();
 
     if(!products) {
-      this.httpOptions = new HttpOptions(this.authService.getToken());
+      this.httpOptions = new HttpOptions(this.dataAccessService.getToken());
       return this.http.get<Product[]>(this.urlBase, this.httpOptions);
     }
     

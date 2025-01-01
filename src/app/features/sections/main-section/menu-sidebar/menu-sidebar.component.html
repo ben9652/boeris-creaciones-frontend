@@ -1,0 +1,11 @@
+<p-sidebar [(visible)]="menuOpened">
+    <ng-template pTemplate="header">
+        <div></div>
+        <div class="icon-container">
+            <div class="icon"></div>
+        </div>
+    </ng-template>
+    <div class="sidebar">
+        <p-panelMenu [model]="sideMenu"></p-panelMenu>
+    </div>
+</p-sidebar>

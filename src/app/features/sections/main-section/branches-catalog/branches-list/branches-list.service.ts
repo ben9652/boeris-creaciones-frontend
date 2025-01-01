@@ -2,10 +2,11 @@ import { Injectable, signal, WritableSignal } from '@angular/core';
 import { HttpOptions } from '../../../../../core/models/httpOptions.entities';
 import { Branch } from '../../../../../core/models/branch.entities';
 import { HttpClient } from '@angular/common/http';
-import { AuthService } from '../../../../../core/services/auth.service';
+import { AuthService } from '../../../../../core/services/auth/auth.service';
 import { environment } from '../../../../../../environments/environment';
 import { Observable, of } from 'rxjs';
-import { DeviceTypeService } from '../../../../../core/services/device-type.service';
+import { DeviceTypeService } from '../../../../../core/services/device-type/device-type.service';
+import { DataAccessService } from '../../../../../core/services/data-access/data-access.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class BranchesListService {
 
   constructor(
     private http: HttpClient,
-    private authService: AuthService,
+    private dataAccessService: DataAccessService,
     private deviceTypeService: DeviceTypeService
   ) {
     this.urlBase = environment.API_URL + 'CatalogoSucursales';
@@ -42,7 +43,7 @@ export class BranchesListService {
     const branches: Branch[] | null = this.branches();
 
     if(!branches) {
-      this.httpOptions = new HttpOptions(this.authService.getToken());
+      this.httpOptions = new HttpOptions(this.dataAccessService.getToken());
       return this.http.get<Branch[]>(this.urlBase, this.httpOptions);
     }
     

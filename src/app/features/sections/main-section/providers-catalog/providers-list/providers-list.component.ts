@@ -6,7 +6,7 @@ import { TableModule } from 'primeng/table';
 import { areProvidersEqual, createNullProvider, createProviderRow, Provider, ProviderRow } from '../../../../../core/models/provider.entities';
 import { ProvidersCatalogService } from '../providers-catalog.service';
 import { ProvidersListService } from './providers-list.service';
-import { DeviceTypeService } from '../../../../../core/services/device-type.service';
+import { DeviceTypeService } from '../../../../../core/services/device-type/device-type.service';
 import { Router } from '@angular/router';
 
 @Component({

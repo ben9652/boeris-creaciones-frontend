@@ -1,10 +1,11 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import { HttpOptions } from '../../models/httpOptions.entities';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../auth/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { Observable, of } from 'rxjs';
 import { SelectItemGroup } from 'primeng/api';
+import { DataAccessService } from '../data-access/data-access.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class BranchesService {
   branches: WritableSignal<SelectItemGroup[] | null> = signal<SelectItemGroup[] | null>(null);
 
   constructor(
-    private authService: AuthService,
+    private dataAccessService: DataAccessService,
     private http: HttpClient
   ) {
     this.urlBase = environment.API_URL + 'CatalogoSucursales/Dropdown';
@@ -26,7 +27,7 @@ export class BranchesService {
     const branches: SelectItemGroup[] | null = this.branches();
 
     if(!branches) {
-      this.httpOptions = new HttpOptions(this.authService.getToken());
+      this.httpOptions = new HttpOptions(this.dataAccessService.getToken());
       return this.http.get<SelectItemGroup[]>(this.urlBase, this.httpOptions);
     }
     

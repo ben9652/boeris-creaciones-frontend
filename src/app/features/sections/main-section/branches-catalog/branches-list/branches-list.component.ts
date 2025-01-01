@@ -5,7 +5,7 @@ import { BranchesListService } from './branches-list.service';
 import { TableModule } from 'primeng/table';
 import { areBranchesEqual, Branch, BranchRow, createBranchRow, createNullBranch } from '../../../../../core/models/branch.entities';
 import { TranslateModule } from '@ngx-translate/core';
-import { DeviceTypeService } from '../../../../../core/services/device-type.service';
+import { DeviceTypeService } from '../../../../../core/services/device-type/device-type.service';
 import { Router } from '@angular/router';
 import { SkeletonModule } from 'primeng/skeleton';
 import { BranchesCatalogService } from '../branches-catalog.service';

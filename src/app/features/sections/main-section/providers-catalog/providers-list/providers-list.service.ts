@@ -1,10 +1,11 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import { HttpOptions } from '../../../../../core/models/httpOptions.entities';
 import { HttpClient } from '@angular/common/http';
-import { AuthService } from '../../../../../core/services/auth.service';
+import { AuthService } from '../../../../../core/services/auth/auth.service';
 import { environment } from '../../../../../../environments/environment';
 import { Observable, of } from 'rxjs';
 import { Provider } from '../../../../../core/models/provider.entities';
+import { DataAccessService } from '../../../../../core/services/data-access/data-access.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class ProvidersListService {
   
   constructor(
     private http: HttpClient,
-    private authService: AuthService
+    private dataAccessService: DataAccessService
   ) {
     this.urlBase = environment.API_URL + 'CatalogoProveedores';
   }
@@ -40,7 +41,7 @@ export class ProvidersListService {
     const providers: Provider[] | null = this.providers();
 
     if(!providers) {
-      this.httpOptions = new HttpOptions(this.authService.getToken());
+      this.httpOptions = new HttpOptions(this.dataAccessService.getToken());
       return this.http.get<Provider[]>(this.urlBase, this.httpOptions);
     }
 

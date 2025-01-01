@@ -13,7 +13,7 @@ import { ToastModule } from 'primeng/toast';
 import { Locality } from '../../core/models/locality.entities';
 import { LocalityManagerService } from './locality-manager.service';
 import { SkeletonModule } from 'primeng/skeleton';
-import { DeviceTypeService } from '../../core/services/device-type.service';
+import { DeviceTypeService } from '../../core/services/device-type/device-type.service';
 
 @Component({
   selector: 'app-locality-manager',

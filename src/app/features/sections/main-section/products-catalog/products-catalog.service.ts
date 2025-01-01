@@ -5,9 +5,9 @@ import { areProductsEqual, Product } from '../../../../core/models/product.entit
 import { areRawMaterialsEqual } from '../../../../core/models/rawMaterial.entities';
 import { catchError, Observable, of, switchMap, tap, throwError } from 'rxjs';
 import { getImageFileFromUrl } from '../../../../shared/multimedia.helpers';
-import { AuthService } from '../../../../core/services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { PatchObject } from '../../../../core/models/patchObj.entities';
+import { DataAccessService } from '../../../../core/services/data-access/data-access.service';
 
 @Injectable({
   providedIn: 'root'
@@ -29,11 +29,11 @@ export class ProductsCatalogService {
   patchData: PatchObject[] = [];
 
   constructor(
-    private authService: AuthService,
+    private dataAccessService: DataAccessService,
     private http: HttpClient
   ) {
     this.urlBase = environment.API_URL + 'CatalogoProductos';
-    this.httpOptions = new HttpOptions(authService.getToken());
+    this.httpOptions = new HttpOptions(dataAccessService.getToken());
   }
 
   updateSelectedProduct(property: keyof Product, value: any) {
@@ -50,7 +50,7 @@ export class ProductsCatalogService {
     const apiUrlToSavePicture: string = apiUrl + '/upload-image';
 
     if(this.httpOptions === undefined) {
-      this.httpOptions = new HttpOptions(this.authService.getToken());
+      this.httpOptions = new HttpOptions(this.dataAccessService.getToken());
     }
 
     if(this.selectedProduct()?.name && this.selectedProduct()?.price) {
@@ -62,7 +62,7 @@ export class ProductsCatalogService {
               formData.append('file', file);
             }
 
-            const httpOptionsToCreateImage: HttpOptions = new HttpOptions(this.authService.getToken(), true);
+            const httpOptionsToCreateImage: HttpOptions = new HttpOptions(this.dataAccessService.getToken(), true);
             return this.http.post<string>(apiUrlToSavePicture, formData, httpOptionsToCreateImage).pipe(
               switchMap((newPictureUrl: string) => {
                 if(newProduct !== null) {
@@ -108,7 +108,7 @@ export class ProductsCatalogService {
             formData.append('file', file);
           }
           
-          const httpOptionsForImageManaging: HttpOptions = new HttpOptions(this.authService.getToken(), true);
+          const httpOptionsForImageManaging: HttpOptions = new HttpOptions(this.dataAccessService.getToken(), true);
           return this.http.delete<boolean>(apiUrlToDeletePicture, httpOptionsForImageManaging).pipe(
             switchMap((deletedImage: boolean) => {
               return this.http.post<string>(apiUrlToSavePicture, formData, httpOptionsForImageManaging).pipe(

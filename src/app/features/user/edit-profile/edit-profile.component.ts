@@ -6,7 +6,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { MainBannerComponent } from '../../sections/main-section/main-banner/main-banner.component';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../../core/services/auth.service';
+import { AuthService } from '../../../core/services/auth/auth.service';
 import { EditProfileService } from './edit-profile.service';
 import { User } from '../../../core/models/user.entities';
 import { ToastModule } from 'primeng/toast';
@@ -16,6 +16,7 @@ import { ApiMessage } from '../../../core/models/apimessage.entities';
 import { CommonModule } from '@angular/common';
 import { catchError, map, Observable, of } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { DataAccessService } from '../../../core/services/data-access/data-access.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -41,7 +42,7 @@ export class EditProfileComponent {
   newPassword?: string;
   confirmedPassword?: string;
 
-  userData?: User;
+  userData: User | null = null;
 
   isLoading: boolean = false;
 
@@ -49,7 +50,7 @@ export class EditProfileComponent {
     public translateService: TranslateService,
     public editProfileService: EditProfileService,
     private messageService: MessageService,
-    private authService: AuthService
+    private dataAccessService: DataAccessService
   ) {
     
   }
@@ -57,7 +58,7 @@ export class EditProfileComponent {
   ngDoCheck(): void {
     //Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
     //Add 'implements DoCheck' to the class.
-    this.userData = this.authService.getUser();
+    this.userData = this.dataAccessService.getUser();
   }
 
   private updateAttributes(attributesToChange: PatchObject[]): Observable<boolean> {

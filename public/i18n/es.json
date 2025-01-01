@@ -281,7 +281,7 @@
                 "HOME": "Inicio",
                 "CATALOGS": "Catálogos",
                 "PARTNERS": "Socios",
-                "PURCHASES": "Compras",
+                "PROVISIONS": "Provisiones",
                 "MANUFACTURE": "Mano de obra",
                 "ACCOUNTING": "Contabilidad",
                 "STORE": "Almacén",
@@ -291,7 +291,9 @@
                 "RAW_MATERIALS": "Materias primas",
                 "PRODUCTS": "Productos",
                 "PROVIDERS": "Proveedores",
-                "BRANCHES": "Sucursales"
+                "BRANCHES": "Sucursales",
+                "PURCHASES": "Compras",
+                "PRODUCTIONS": "Producciones"
             }
         }
     },

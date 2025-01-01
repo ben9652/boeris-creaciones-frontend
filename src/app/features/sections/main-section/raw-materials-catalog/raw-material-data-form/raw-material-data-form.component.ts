@@ -14,7 +14,7 @@ import { DialogModule } from 'primeng/dialog';
 import { Category } from '../../../../../core/models/category.entities';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { RawMaterialsListService } from '../raw-materials-list/raw-materials-list.service';
-import { DeviceTypeService } from '../../../../../core/services/device-type.service';
+import { DeviceTypeService } from '../../../../../core/services/device-type/device-type.service';
 import { UnitsService } from '../units.service';
 import { CategoryManagerComponent } from '../../../../../shared/category-manager/category-manager.component';
 import { HttpErrorResponse } from '@angular/common/http';

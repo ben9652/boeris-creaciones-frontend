@@ -8,7 +8,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { ProvidersCatalogService } from '../providers-catalog.service';
 import { ProvidersListService } from '../providers-list/providers-list.service';
-import { DeviceTypeService } from '../../../../../core/services/device-type.service';
+import { DeviceTypeService } from '../../../../../core/services/device-type/device-type.service';
 import { Category } from '../../../../../core/models/category.entities';
 import { Provider } from '../../../../../core/models/provider.entities';
 import { InputNumberModule } from 'primeng/inputnumber';

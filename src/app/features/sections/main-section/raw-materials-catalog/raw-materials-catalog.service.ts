@@ -2,12 +2,12 @@ import { Injectable, signal, WritableSignal } from '@angular/core';
 import { HttpOptions } from '../../../../core/models/httpOptions.entities';
 import { areRawMaterialsEqual, RawMaterial } from '../../../../core/models/rawMaterial.entities';
 import { PatchObject } from '../../../../core/models/patchObj.entities';
-import { AuthService } from '../../../../core/services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
 import { catchError, Observable, of, switchMap, throwError } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { getImageFileFromUrl } from '../../../../shared/multimedia.helpers';
+import { DataAccessService } from '../../../../core/services/data-access/data-access.service';
 
 @Injectable({
   providedIn: 'root'
@@ -29,12 +29,12 @@ export class RawMaterialsCatalogService {
   patchData: PatchObject[] = [];
 
   constructor(
-    private authService: AuthService,
+    private dataAccessService: DataAccessService,
     private http: HttpClient,
     private translateService: TranslateService
   ) {
     this.urlBase = environment.API_URL + 'CatalogoMateriasPrimas';
-    this.httpOptions = new HttpOptions(authService.getToken());
+    this.httpOptions = new HttpOptions(dataAccessService.getToken());
   }
 
   updateSelectedRawMaterial(property: keyof RawMaterial, value: any) {
@@ -51,7 +51,7 @@ export class RawMaterialsCatalogService {
     const apiUrlToSavePicture: string = apiUrl + '/upload-image';
 
     if(this.httpOptions === undefined) {
-      this.httpOptions = new HttpOptions(this.authService.getToken());
+      this.httpOptions = new HttpOptions(this.dataAccessService.getToken());
     }
 
     if(this.selectedRawMaterial()?.name === null) {
@@ -71,7 +71,7 @@ export class RawMaterialsCatalogService {
               formData.append('file', file);
             }
 
-            const httpOptionsToCreateImage: HttpOptions = new HttpOptions(this.authService.getToken(), true);
+            const httpOptionsToCreateImage: HttpOptions = new HttpOptions(this.dataAccessService.getToken(), true);
             return this.http.post<string>(apiUrlToSavePicture, formData, httpOptionsToCreateImage).pipe(
               switchMap((newPictureUrl: string) => {
                 if(newRawMaterial !== null) {
@@ -117,7 +117,7 @@ export class RawMaterialsCatalogService {
             formData.append('file', file);
           }
           
-          const httpOptionsForImageManaging: HttpOptions = new HttpOptions(this.authService.getToken(), true);
+          const httpOptionsForImageManaging: HttpOptions = new HttpOptions(this.dataAccessService.getToken(), true);
           return this.http.delete<boolean>(apiUrlToDeletePicture, httpOptionsForImageManaging).pipe(
             switchMap((deletedImage: boolean) => {
               return this.http.post<string>(apiUrlToSavePicture, formData, httpOptionsForImageManaging).pipe(
