@@ -2,11 +2,11 @@ import { Injectable, signal, WritableSignal } from '@angular/core';
 import { HttpOptions } from '../../../../core/models/httpOptions.entities';
 import { areBranchesEqual, Branch } from '../../../../core/models/branch.entities';
 import { PatchObject } from '../../../../core/models/patchObj.entities';
-import { AuthService } from '../../../../core/services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
+import { DataAccessService } from '../../../../core/services/data-access/data-access.service';
 
 @Injectable({
   providedIn: 'root'
@@ -30,12 +30,12 @@ export class BranchesCatalogService {
   modalVisibility = false;
 
   constructor(
-    private authService: AuthService,
+    private dataAccessService: DataAccessService,
     private http: HttpClient,
     private translateService: TranslateService
   ) {
     this.urlBase = environment.API_URL + 'CatalogoSucursales';
-    this.httpOptions = new HttpOptions(authService.getToken());
+    this.httpOptions = new HttpOptions(dataAccessService.getToken());
   }
 
   updateSelectedBranch(property: keyof Branch, value: any){
@@ -51,7 +51,7 @@ export class BranchesCatalogService {
     const apiUrl: string = this.urlBase;
 
     if(this.httpOptions === undefined)
-      this.httpOptions = new HttpOptions(this.authService.getToken());
+      this.httpOptions = new HttpOptions(this.dataAccessService.getToken());
 
     if(this.selectedBranch()?.name === null)
       return throwError(() => new Error(this.translateService.instant('SECTIONS.CATALOGS.BRANCHES.ERRORS.FIELD_NAME_LACK')));

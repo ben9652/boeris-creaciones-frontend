@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, Location } from '@angular/common';
 import { MessageService } from 'primeng/api';
-import { DeviceTypeService } from '../../../../../core/services/device-type.service';
+import { DeviceTypeService } from '../../../../../core/services/device-type/device-type.service';
 import { Branch } from '../../../../../core/models/branch.entities';
 import { BranchesListService } from '../branches-list/branches-list.service';
 import { LocalityManagerComponent } from '../../../../../shared/locality-manager/locality-manager.component';

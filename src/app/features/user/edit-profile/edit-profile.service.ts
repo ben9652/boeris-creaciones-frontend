@@ -1,12 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { afterRender, Injectable } from '@angular/core';
-import { map, Observable, observeOn, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-import { AuthService } from '../../../core/services/auth.service';
 import { PatchObject } from '../../../core/models/patchObj.entities';
 import { ApiMessage } from '../../../core/models/apimessage.entities';
 import { User } from '../../../core/models/user.entities';
 import { HttpOptions } from '../../../core/models/httpOptions.entities';
+import { DataAccessService } from '../../../core/services/data-access/data-access.service';
+import { StorageService } from '../../../core/services/storage/storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +18,12 @@ export class EditProfileService {
 
   constructor(
     private http: HttpClient,
-    private authService: AuthService
+    private dataAccessService: DataAccessService,
+    private storageService: StorageService
   ) {
     this.urlBase = environment.API_URL + 'Usuarios/';
     afterRender(() => {
-      this.httpOptions = new HttpOptions(authService.getToken());
+      this.httpOptions = new HttpOptions(dataAccessService.getToken());
     });
   }
 
@@ -37,6 +39,6 @@ export class EditProfileService {
   }
 
   setUser(user: User) {
-    this.authService.ownSessionStorage?.setItem('user', JSON.stringify(user));
+    this.storageService.setItem('user', JSON.stringify(user));
   }
 }

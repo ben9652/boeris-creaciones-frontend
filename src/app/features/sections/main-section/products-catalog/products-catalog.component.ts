@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ProductsListComponent } from './products-list/products-list.component';
 import { ProductDataFormComponent } from './product-data-form/product-data-form.component';
 import { DividerModule } from 'primeng/divider';
-import { DeviceTypeService } from '../../../../core/services/device-type.service';
+import { DeviceTypeService } from '../../../../core/services/device-type/device-type.service';
 
 @Component({
   selector: 'app-products-catalog',

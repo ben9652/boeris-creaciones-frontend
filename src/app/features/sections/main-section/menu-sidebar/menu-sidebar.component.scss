@@ -1,0 +1,54 @@
+@import '../../../../../../public/theme/boeris-theme';
+
+.icon-container {
+    display: flex;
+    justify-content: center;
+}
+
+.icon {
+    background-image: url('../../../../../../public/icons/logo.png');
+    background-size: 5em;
+    background-repeat: no-repeat;
+    width: 5em;
+    height: 5em;
+}
+
+.sidebar {
+    background-color: $primaryColor;
+}
+
+::ng-deep .p-panelmenu .p-panelmenu-panel {
+    margin-bottom: 0px;
+}
+
+::ng-deep .p-panelmenu .p-panelmenu-content {
+    padding: 0;
+}
+
+::ng-deep .p-panelmenu .p-panelmenu-header .p-panelmenu-header-content .p-panelmenu-header-action {
+    padding: 0.7rem;
+}
+
+::ng-deep .p-panelmenu .p-menuitem-text {
+    white-space: nowrap;
+}
+
+::ng-deep .p-sidebar .p-sidebar-header {
+    display: grid;
+    grid-template-columns: 14% 72% 14%;
+    align-items: center;
+    background-color: $primaryColor;
+}
+
+::ng-deep .p-sidebar .p-sidebar-content {
+    background-color: $primaryColor;
+    padding: 0;
+}
+
+::ng-deep .p-sidebar-left {
+    width: 11rem;
+}
+
+::ng-deep .p-sidebar .p-sidebar-header .p-sidebar-close, .p-sidebar .p-sidebar-header .p-sidebar-icon {
+    color: $secondaryColor;
+}

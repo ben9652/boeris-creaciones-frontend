@@ -1,10 +1,13 @@
 import { afterRender, Component, Inject, PLATFORM_ID } from '@angular/core';
-import { NavigationEnd, NavigationError, Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, NavigationError, Router, RouterOutlet } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { environment } from '../environments/environment';
 import { isPlatformBrowser } from '@angular/common';
-import { DeviceTypeService } from './core/services/device-type.service';
+import { DeviceTypeService } from './core/services/device-type/device-type.service';
+import { ActiveRouteService } from './core/services/active-route/active-route.service';
+import { StorageService } from './core/services/storage/storage.service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -23,11 +26,15 @@ export class AppComponent {
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private router: Router,
-    private deviceTypeService: DeviceTypeService
+    private deviceTypeService: DeviceTypeService,
+    private storageService: StorageService,
+    private activeRouteService: ActiveRouteService,
+    private activatedRoute: ActivatedRoute
   ) {
     afterRender(() => {
       deviceTypeService.isMobile();
     });
+
   }
 
   ngOnInit() {
@@ -36,14 +43,12 @@ export class AppComponent {
         this.viewportHeight = window.innerHeight;
         console.log(window.innerHeight);
       }
-
-      if(typeof sessionStorage !== 'undefined') {
-        this.router.events.subscribe(event => {
-          if(event instanceof NavigationEnd) {
-            sessionStorage.setItem('currentRoute', event.urlAfterRedirects);
-          }
-        })
-      }
+      this.router.events.subscribe((event) => {
+        if(event instanceof NavigationEnd) {
+          this.activeRouteService.setRoute(event.url);
+        }
+      })
     }
+    
   }
 }

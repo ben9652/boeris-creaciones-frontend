@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpOptions } from '../../core/models/httpOptions.entities';
 import { TranslateService } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
-import { AuthService } from '../../core/services/auth.service';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { PatchObject } from '../../core/models/patchObj.entities';
 import { Locality } from '../../core/models/locality.entities';
+import { DataAccessService } from '../../core/services/data-access/data-access.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,14 +18,14 @@ export class LocalityManagerService {
   constructor(
     public translateService: TranslateService,
     private http: HttpClient,
-    private authService: AuthService
+    private dataAccessService: DataAccessService
   ) {
     this.urlBase = environment.API_URL + 'Localidades';
-    this.httpOptions = new HttpOptions(authService.getToken());
+    this.httpOptions = new HttpOptions(dataAccessService.getToken());
   }
 
   getLocalities(): Observable<Locality[]> {
-    this.httpOptions = new HttpOptions(this.authService.getToken());
+    this.httpOptions = new HttpOptions(this.dataAccessService.getToken());
     const apiUrl: string = this.urlBase;
     return this.http.get<Locality[]>(apiUrl, this.httpOptions);
   }

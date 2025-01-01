@@ -1,10 +1,10 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import { HttpOptions } from '../../../../../core/models/httpOptions.entities';
 import { RawMaterial } from '../../../../../core/models/rawMaterial.entities';
-import { AuthService } from '../../../../../core/services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../../environments/environment';
 import { Observable, of } from 'rxjs';
+import { DataAccessService } from '../../../../../core/services/data-access/data-access.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class RawMaterialsListService {
   rawMaterials: WritableSignal<RawMaterial[] | null> = signal<RawMaterial[] | null>(null);
 
   constructor(
-    private authService: AuthService,
+    private dataAccessService: DataAccessService,
     private http: HttpClient
   ) {
     this.urlBase = environment.API_URL + 'CatalogoMateriasPrimas';
@@ -40,7 +40,7 @@ export class RawMaterialsListService {
     const rawMaterials: RawMaterial[] | null = this.rawMaterials();
 
     if(!rawMaterials) {
-      this.httpOptions = new HttpOptions(this.authService.getToken());
+      this.httpOptions = new HttpOptions(this.dataAccessService.getToken());
       return this.http.get<RawMaterial[]>(this.urlBase, this.httpOptions);
     }
     

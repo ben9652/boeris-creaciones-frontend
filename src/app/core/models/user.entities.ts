@@ -6,3 +6,13 @@ export interface User {
     email: string;
     role: string;
 }
+
+export function createEmptyUser(): User {
+    return {
+        id_user: 0,
+        username: '',
+        firstName: '',
+        email: '',
+        role: ''
+    };
+}

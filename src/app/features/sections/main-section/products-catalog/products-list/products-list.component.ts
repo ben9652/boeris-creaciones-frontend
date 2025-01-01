@@ -5,7 +5,7 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { areProductsEqual, createNullProduct, createProductRow, Product, ProductRow } from '../../../../../core/models/product.entities';
 import { ProductsCatalogService } from '../products-catalog.service';
 import { ProductsListService } from './products-list.service';
-import { DeviceTypeService } from '../../../../../core/services/device-type.service';
+import { DeviceTypeService } from '../../../../../core/services/device-type/device-type.service';
 import { Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 

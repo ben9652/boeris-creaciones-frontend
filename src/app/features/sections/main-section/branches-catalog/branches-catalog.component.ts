@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BranchesListComponent } from "./branches-list/branches-list.component";
 import { BranchDataFormComponent } from './branch-data-form/branch-data-form.component';
-import { DeviceTypeService } from '../../../../core/services/device-type.service';
+import { DeviceTypeService } from '../../../../core/services/device-type/device-type.service';
 import { DividerModule } from 'primeng/divider';
 
 @Component({

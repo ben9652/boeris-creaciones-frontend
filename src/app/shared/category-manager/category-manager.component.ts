@@ -12,7 +12,7 @@ import { ToastModule } from 'primeng/toast';
 import { CategoryManagerService } from './category-manager.service';
 import { Category } from '../../core/models/category.entities';
 import { CategoryModalComponent } from '../category-modal/category-modal.component';
-import { DeviceTypeService } from '../../core/services/device-type.service';
+import { DeviceTypeService } from '../../core/services/device-type/device-type.service';
 import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({

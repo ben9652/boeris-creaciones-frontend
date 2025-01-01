@@ -11,7 +11,7 @@ import { createNullProduct, Product } from '../../../../../core/models/product.e
 import { ProductsCatalogService } from '../products-catalog.service';
 import { ProductsListService } from '../products-list/products-list.service';
 import { MessageService } from 'primeng/api';
-import { DeviceTypeService } from '../../../../../core/services/device-type.service';
+import { DeviceTypeService } from '../../../../../core/services/device-type/device-type.service';
 import { TranslateService } from '@ngx-translate/core';
 import { HttpErrorResponse } from '@angular/common/http';
 

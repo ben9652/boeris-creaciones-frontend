@@ -5,20 +5,9 @@
         ></app-main-banner>
     </div>
     <div class="bottom-section">
-        <p-sidebar [(visible)]="menuOpened">
-            <ng-template pTemplate="header">
-                <div></div>
-                <div class="icon-container">
-                    <div class="icon"></div>
-                </div>
-                <!-- <div class="header">
-                    <div class="icon"></div>
-                </div> -->
-            </ng-template>
-            <div class="sidebar">
-                <p-panelMenu [model]="sideMenu"/>
-            </div>
-        </p-sidebar>
+        <app-menu-sidebar
+        [(menuOpened)]="menuOpened"
+        ></app-menu-sidebar>
         <div class="main-section">
             @if (router.url === '/sections') {
                 <div class="without-menu-section">

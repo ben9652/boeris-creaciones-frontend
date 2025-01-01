@@ -3,8 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { Observable, of } from 'rxjs';
 import { HttpOptions } from '../../models/httpOptions.entities';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../auth/auth.service';
 import { Product } from '../../models/product.entities';
+import { DataAccessService } from '../data-access/data-access.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class ProductsService {
   products: WritableSignal<Product[] | null> = signal<Product[] | null>(null);
 
   constructor(
-    private authService: AuthService,
+    private dataAccessService: DataAccessService,
     private http: HttpClient
   ) {
     this.urlBase = environment.API_URL + 'CatalogoProductos';
@@ -26,7 +27,7 @@ export class ProductsService {
     const products: Product[] | null = this.products();
 
     if(!products) {
-      this.httpOptions = new HttpOptions(this.authService.getToken());
+      this.httpOptions = new HttpOptions(this.dataAccessService.getToken());
       return this.http.get<Product[]>(this.urlBase, this.httpOptions);
     }
     

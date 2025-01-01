@@ -1,12 +1,13 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { effect, Injectable, signal, WritableSignal } from '@angular/core';
-import { AuthService } from '../../../../../core/services/auth.service';
+import { AuthService } from '../../../../../core/services/auth/auth.service';
 import { BehaviorSubject, catchError, map, Observable, of, Subject, Subscription, switchMap, tap, throwError } from 'rxjs';
 import { Partner, PartnerType } from '../../../../../core/models/partner.entities';
 import { environment } from '../../../../../../environments/environment';
 import { HttpOptions } from '../../../../../core/models/httpOptions.entities';
 import { PartnersService } from '../partners.service';
 import { runInThisContext } from 'vm';
+import { DataAccessService } from '../../../../../core/services/data-access/data-access.service';
 
 @Injectable({
   providedIn: 'root'
@@ -30,13 +31,13 @@ export class RolesService {
   private activePartner?: Partner;
 
   private getRolesFromApi(): Observable<PartnerType[]> {
-    this.httpOptions = new HttpOptions(this.authService.getToken());
+    this.httpOptions = new HttpOptions(this.dataAccessService.getToken());
     return this.http.get<PartnerType[]>(this.urlBase, this.httpOptions);
   }
 
   constructor(
     private http: HttpClient,
-    private authService: AuthService,
+    private dataAccessService: DataAccessService,
     private partnersService: PartnersService
   ) {
     this.urlBase = environment.API_URL + 'RolesSocios/';
@@ -75,7 +76,7 @@ export class RolesService {
   set partner(partner: Partner) {
     this.activePartner = partner;
     this.mappedNonAssignedRoles.clear();
-    // console.log('Roles existentes mapeados: ', this.mappedRoles)
+    
     this.mappedRoles.forEach((role: PartnerType) => {
       this.mappedNonAssignedRoles.set(role.id, role);
     });

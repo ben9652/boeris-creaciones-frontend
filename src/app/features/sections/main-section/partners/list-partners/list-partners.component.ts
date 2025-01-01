@@ -7,7 +7,7 @@ import { catchError, map, Observable, of, Subscription } from 'rxjs';
 import { MessageService } from 'primeng/api';
 import { ListPartnersService } from './list-partners.service';
 import { InputTextModule } from 'primeng/inputtext';
-import { DeviceTypeService } from '../../../../../core/services/device-type.service';
+import { DeviceTypeService } from '../../../../../core/services/device-type/device-type.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PartnersService } from '../partners.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';

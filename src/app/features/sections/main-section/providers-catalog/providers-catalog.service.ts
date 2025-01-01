@@ -1,12 +1,12 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import { HttpOptions } from '../../../../core/models/httpOptions.entities';
 import { environment } from '../../../../../environments/environment';
-import { AuthService } from '../../../../core/services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { areProvidersEqual, Provider } from '../../../../core/models/provider.entities';
 import { PatchObject } from '../../../../core/models/patchObj.entities';
 import { Observable, throwError } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
+import { DataAccessService } from '../../../../core/services/data-access/data-access.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,12 +28,12 @@ export class ProvidersCatalogService {
   patchData: PatchObject[] = [];
   
   constructor(
-    private authService: AuthService,
+    private dataAccessService: DataAccessService,
     private http: HttpClient,
     private translateService: TranslateService
   ) {
     this.urlBase = environment.API_URL + 'CatalogoProveedores';
-    this.httpOptions = new HttpOptions(authService.getToken());
+    this.httpOptions = new HttpOptions(dataAccessService.getToken());
   }
 
   updateSelectedProvider(property: keyof Provider, value: any) {
@@ -49,7 +49,7 @@ export class ProvidersCatalogService {
     const apiUrl: string = this.urlBase;
     
     if(this.httpOptions === undefined)
-      this.httpOptions = new HttpOptions(this.authService.getToken());
+      this.httpOptions = new HttpOptions(this.dataAccessService.getToken());
 
     if(this.selectedProvider()?.name === null)
       return throwError(() => new Error(this.translateService.instant('SECTIONS.CATALOGS.PROVIDERS.ERRORS.FIELD_NAME_LACK')));

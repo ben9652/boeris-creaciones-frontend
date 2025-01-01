@@ -3,10 +3,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { HttpOptions } from '../../core/models/httpOptions.entities';
-import { AuthService } from '../../core/services/auth.service';
 import { environment } from '../../../environments/environment';
 import { Category } from '../../core/models/category.entities';
 import { PatchObject } from '../../core/models/patchObj.entities';
+import { DataAccessService } from '../../core/services/data-access/data-access.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,14 +18,14 @@ export class CategoryManagerService {
   constructor(
     public translateService: TranslateService,
     private http: HttpClient,
-    private authService: AuthService
+    private dataAccessService: DataAccessService
   ) {
     this.urlBase = environment.API_URL + 'RubrosMateriasPrimas';
-    this.httpOptions = new HttpOptions(authService.getToken());
+    this.httpOptions = new HttpOptions(dataAccessService.getToken());
   }
 
   getCategories(): Observable<Category[]> {
-    this.httpOptions = new HttpOptions(this.authService.getToken());
+    this.httpOptions = new HttpOptions(this.dataAccessService.getToken());
     const apiUrl: string = this.urlBase;
     return this.http.get<Category[]>(apiUrl, this.httpOptions);
   }

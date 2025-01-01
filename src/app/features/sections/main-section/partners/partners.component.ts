@@ -9,7 +9,7 @@ import { ListPartnersComponent } from './list-partners/list-partners.component';
 import { PartnerAdditionComponent } from './partner-addition/partner-addition.component';
 import { ListPartnersService } from './list-partners/list-partners.service';
 import { Subject, Subscription } from 'rxjs';
-import { DeviceTypeService } from '../../../../core/services/device-type.service';
+import { DeviceTypeService } from '../../../../core/services/device-type/device-type.service';
 import { PartnersService } from './partners.service';
 import { ButtonModule } from 'primeng/button';
 import { Router } from '@angular/router';

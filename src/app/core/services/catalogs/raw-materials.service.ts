@@ -3,8 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { Observable, of } from 'rxjs';
 import { HttpOptions } from '../../models/httpOptions.entities';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../auth/auth.service';
 import { SelectItemGroup } from 'primeng/api';
+import { DataAccessService } from '../data-access/data-access.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class RawMaterialsService {
   rawMaterials: WritableSignal<SelectItemGroup[] | null> = signal<SelectItemGroup[] | null>(null);
 
   constructor(
-    private authService: AuthService,
+    private dataAccessService: DataAccessService,
     private http: HttpClient
   ) {
     this.urlBase = environment.API_URL + 'CatalogoMateriasPrimas/Dropdown';
@@ -26,7 +27,7 @@ export class RawMaterialsService {
     const rawMaterials: SelectItemGroup[] | null = this.rawMaterials();
 
     if(!rawMaterials) {
-      this.httpOptions = new HttpOptions(this.authService.getToken());
+      this.httpOptions = new HttpOptions(this.dataAccessService.getToken());
       return this.http.get<SelectItemGroup[]>(this.urlBase, this.httpOptions);
     }
     
