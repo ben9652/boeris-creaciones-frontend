@@ -3,11 +3,10 @@ import { BannerSubsectionsComponent } from "../banner-subsections/banner-subsect
 import { RawMaterialDataFormComponent } from "../../main-section/raw-materials-catalog/raw-material-data-form/raw-material-data-form.component";
 
 @Component({
-  selector: 'app-mobile-raw-material-data',
-  standalone: true,
-  imports: [BannerSubsectionsComponent, RawMaterialDataFormComponent],
-  templateUrl: './mobile-raw-material-data.component.html',
-  styleUrl: './mobile-raw-material-data.component.scss'
+    selector: 'app-mobile-raw-material-data',
+    imports: [BannerSubsectionsComponent, RawMaterialDataFormComponent],
+    templateUrl: './mobile-raw-material-data.component.html',
+    styleUrl: './mobile-raw-material-data.component.scss'
 })
 export class MobileRawMaterialDataComponent {
 

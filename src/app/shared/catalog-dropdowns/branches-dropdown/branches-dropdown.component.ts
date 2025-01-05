@@ -1,21 +1,20 @@
 import { Component, output, OutputEmitterRef } from '@angular/core';
 import { BranchBase } from '../../../core/models/branch.entities';
 import { BranchesService } from '../../../core/services/catalogs/branches.service';
-import { DropdownChangeEvent, DropdownModule } from 'primeng/dropdown';
+import { SelectChangeEvent, SelectModule } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
 import { SkeletonModule } from 'primeng/skeleton';
 import { SelectItemGroup } from 'primeng/api';
 
 @Component({
-  selector: 'app-branches-dropdown',
-  standalone: true,
-  imports: [
-    DropdownModule,
-    FormsModule,
-    SkeletonModule
-  ],
-  templateUrl: './branches-dropdown.component.html',
-  styleUrl: './branches-dropdown.component.scss'
+    selector: 'app-branches-dropdown',
+    imports: [
+        SelectModule,
+        FormsModule,
+        SkeletonModule
+    ],
+    templateUrl: './branches-dropdown.component.html',
+    styleUrl: './branches-dropdown.component.scss'
 })
 export class BranchesDropdownComponent {
   groupedBranches: SelectItemGroup[] | null = null;
@@ -31,7 +30,7 @@ export class BranchesDropdownComponent {
     });
   }
 
-  onSelection(event: DropdownChangeEvent) {
+  onSelection(event: SelectChangeEvent) {
     this.getBranch.emit(event.value);
   }
 }

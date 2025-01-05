@@ -8,14 +8,7 @@ import { RolesService } from './roles/roles.service';
   providedIn: 'root'
 })
 export class PartnersService {
-  private _partner: WritableSignal<Partner> = signal<Partner>({
-    id_user: 0,
-    username: '',
-    firstName: '',
-    email: '',
-    role: '',
-    partnerRoles: []
-  });
+  private _partner: WritableSignal<Partner | null> = signal<Partner | null>(null);
 
   constructor(
     
@@ -23,7 +16,7 @@ export class PartnersService {
 
   }
 
-  get partner(): Partner {
+  get partner(): Partner | null {
     return this._partner();
   }
 

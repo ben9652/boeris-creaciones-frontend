@@ -5,15 +5,14 @@ import { DividerModule } from 'primeng/divider';
 import { DeviceTypeService } from '../../../../core/services/device-type/device-type.service';
 
 @Component({
-  selector: 'app-products-catalog',
-  standalone: true,
-  imports: [
-    ProductsListComponent,
-    ProductDataFormComponent,
-    DividerModule
-  ],
-  templateUrl: './products-catalog.component.html',
-  styleUrl: './products-catalog.component.scss'
+    selector: 'app-products-catalog',
+    imports: [
+        ProductsListComponent,
+        ProductDataFormComponent,
+        DividerModule
+    ],
+    templateUrl: './products-catalog.component.html',
+    styleUrl: './products-catalog.component.scss'
 })
 export class ProductsCatalogComponent {
 

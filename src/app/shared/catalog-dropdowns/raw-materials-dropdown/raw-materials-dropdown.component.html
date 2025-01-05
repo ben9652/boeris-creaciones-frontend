@@ -1,5 +1,5 @@
 @if (rawMaterials) {
-    <p-dropdown
+    <p-select
     [options]="rawMaterials"
     [style]="{ width: '16.5rem' }"
     [filter]="true"
@@ -15,7 +15,7 @@
                 <span>{{ group.label }}</span>
             </div>
         </ng-template>
-    </p-dropdown>
+    </p-select>
 }
 @else {
     <p-skeleton width="16.5rem" height="3rem" styleClass="mb-2"></p-skeleton>

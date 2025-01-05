@@ -1,23 +1,22 @@
 import { Component, output, OutputEmitterRef } from '@angular/core';
 import { RawMaterialsService } from '../../../core/services/catalogs/raw-materials.service';
 import { RawMaterial, RawMaterialBase } from '../../../core/models/rawMaterial.entities';
-import { DropdownChangeEvent, DropdownModule } from 'primeng/dropdown';
+import { SelectChangeEvent, SelectModule } from 'primeng/select';
 import { SkeletonModule } from 'primeng/skeleton';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SelectItemGroup } from 'primeng/api';
 
 @Component({
-  selector: 'app-raw-materials-dropdown',
-  standalone: true,
-  imports: [
-    DropdownModule,
-    SkeletonModule,
-    FormsModule,
-    CommonModule
-  ],
-  templateUrl: './raw-materials-dropdown.component.html',
-  styleUrl: './raw-materials-dropdown.component.scss'
+    selector: 'app-raw-materials-dropdown',
+    imports: [
+        SelectModule,
+        SkeletonModule,
+        FormsModule,
+        CommonModule
+    ],
+    templateUrl: './raw-materials-dropdown.component.html',
+    styleUrl: './raw-materials-dropdown.component.scss'
 })
 export class RawMaterialsDropdownComponent {
   rawMaterials: SelectItemGroup[] | null = null;
@@ -33,7 +32,7 @@ export class RawMaterialsDropdownComponent {
     })
   }
 
-  onSelection(event: DropdownChangeEvent) {
+  onSelection(event: SelectChangeEvent) {
     this.getRawMaterial.emit(event.value);
   }
 }

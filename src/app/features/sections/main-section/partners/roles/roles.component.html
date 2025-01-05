@@ -1,14 +1,14 @@
 <p-toast></p-toast>
 <div class="container">
     @if (rolesService.partner) {
+        @if (selectedPartner !== null) {
+            <h2>{{ selectedPartner.lastName }}, {{ selectedPartner.firstName }}</h2>
+        }
         <div class="asignacion-roles">
-            <p-pickList
+            <p-picklist
             [source]="availableRoles"
             [target]="assignedRoles"
-            [sourceHeader]="translateService.instant('SECTIONS.PARTNERS.ROLES.AVAILABLE_ROLES')"
             [targetHeader]="translateService.instant('SECTIONS.PARTNERS.ROLES.ASSIGNED_ROLES')"
-            [sourceStyle]="{ width: 'auto', height: '280px' }"
-            [targetStyle]="{ width: 'auto', height: '280px' }"
             [showSourceControls]="false"
             [showTargetControls]="false"
             breakpoint="300px"
@@ -16,26 +16,15 @@
             (onSourceSelect)="onSelectedRole($event)"
             (onTargetSelect)="onSelectedRole($event)"
             >
-                <ng-template let-item pTemplate="item">
+                <ng-template let-item #item>
                     <div>
                         <p>{{ item.role }}</p>
                     </div>
                 </ng-template>
-            </p-pickList>
-            <p-fieldset>
-                <ng-template pTemplate="header">
-                    <p class="m-0">
-                        {{ 'SECTIONS.PARTNERS.ROLES.ROLE_DESCRIPTION' | translate }} {{ selectedRole?.role }}
-                    </p>
-                </ng-template>
-                
-                <p class="m-0">
-                    {{ selectedRole?.explanation_role }}
-                </p>
-            </p-fieldset>
+            </p-picklist>
         </div>
         <div class="botones">
-            @if (!isLoading) {
+            @if (!isLoadingRoleChanges) {
                 <p-button
                 [label]="translateService.instant('SHARED.BUTTONS.APPLY')"
                 [disabled]="equalsRoles()"
@@ -44,16 +33,28 @@
             }
             @else {
                 <p-button
-                [disabled]="isLoading"
+                [disabled]="isLoadingRoleChanges"
                 >
                     <i class="pi pi-spin pi-spinner"></i>
                 </p-button>
             }
+            <p-button severity="info" icon="pi pi-info-circle" (onClick)="displayRoleExplanation = true" />
         </div>
     }
     @else {
-        @if (thereArePartners) {
+        @if (isLoadingPartner) {
+            <i class="pi pi-spin pi-spinner"></i>
+        }
+        @else if (thereArePartners) {
             <p class="mensaje-socio-no-seleccionado">{{ 'SECTIONS.PARTNERS.ROLES.SELECT_PARTNER' | translate }}</p>
         }
     }
 </div>
+
+<p-dialog header="Explicación de roles" [modal]="true" [dismissableMask]="true" [(visible)]="displayRoleExplanation" [style]="{ width: '80vw', height: '50vh' }">
+    @for (partnerRole of partnerRoles; track $index) {
+        <div class="role">
+            <b>Rol {{ partnerRole.role }}: </b> {{ partnerRole.explanation_role }}
+        </div>
+    }
+</p-dialog>

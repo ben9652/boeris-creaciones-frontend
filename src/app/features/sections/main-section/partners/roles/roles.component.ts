@@ -1,6 +1,6 @@
 import { Component, effect } from '@angular/core';
 import { equalsArraysRoles, Partner, PartnerType } from '../../../../../core/models/partner.entities';
-import { PickListModule, PickListMoveToSourceEvent, PickListMoveToTargetEvent, PickListSourceSelectEvent, PickListTargetSelectEvent } from 'primeng/picklist';
+import { PickListModule, PickListSourceSelectEvent, PickListTargetSelectEvent } from 'primeng/picklist';
 import { DragDropModule } from 'primeng/dragdrop';
 import { FieldsetModule } from 'primeng/fieldset';
 import { ButtonModule } from 'primeng/button';
@@ -10,28 +10,29 @@ import { RolesService } from './roles.service';
 import { Location } from '@angular/common';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
-import { catchError, of, Subscription, throwError } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { PartnersService } from '../partners.service';
+import { DialogModule } from 'primeng/dialog';
 
 @Component({
-  selector: 'app-roles',
-  standalone: true,
-  imports: [
-    PickListModule,
-    DragDropModule,
-    FieldsetModule,
-    ButtonModule,
-    ToastModule,
-    TranslateModule
-  ],
-  templateUrl: './roles.component.html',
-  styleUrl: './roles.component.scss',
-  providers: [MessageService]
+    selector: 'app-roles',
+    imports: [
+        PickListModule,
+        DragDropModule,
+        FieldsetModule,
+        ButtonModule,
+        ToastModule,
+        TranslateModule,
+        DialogModule
+    ],
+    templateUrl: './roles.component.html',
+    styleUrl: './roles.component.scss',
+    providers: [MessageService]
 })
 export class RolesComponent {
   selectedRole?: PartnerType;
-  thereArePartners: boolean = true;
+  selectedPartner: Partner | null = null;
+  thereArePartners: boolean = false;
 
   partnerRoles: PartnerType[] = [];
 
@@ -41,26 +42,41 @@ export class RolesComponent {
   // Para que el botón "Aplicar" de deshabilite cuando los roles asignados al socio sean iguales a los que tiene el socio actualmente
   assignedRolesEqualsToPartnerRoles: boolean = true;
 
-  isLoading: boolean = false;
+  isLoadingRoleChanges: boolean = false;
+  isLoadingPartner: boolean = false;
+
+  displayRoleExplanation: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private listPartnersService: ListPartnersService,
+    private partnersService: PartnersService,
     public rolesService: RolesService,
     private location: Location,
     private messageService: MessageService,
     public translateService: TranslateService
   ) {
-    listPartnersService.partners.subscribe((partners: Partner[]) => {
-      if(partners.length === 0) {
-        this.thereArePartners = false;
-      }
-    })
-
     effect(() => {
+      if(this.partnerRoles.length === 0) {
+        this.partnerRoles = [...this.rolesService.roles];
+      }
       this.assignedRoles = [...rolesService.assignedRoles];
       this.availableRoles = [...rolesService.nonAssignedRoles];
     });
+    effect(() => {
+      this.isLoadingPartner = true;
+
+      this.selectedPartner = partnersService.partner;
+
+      this.isLoadingPartner = false;
+    })
+    effect(() => {
+      const partners: Partner[] | null = listPartnersService.getPartners();
+
+      if(partners !== null && partners.length === 0) {
+        this.thereArePartners = false;
+      }
+    })
   }
 
   onSelectedRole(event: PickListTargetSelectEvent | PickListSourceSelectEvent) {
@@ -95,11 +111,11 @@ export class RolesComponent {
       detail: this.translateService.instant('SHARED.MESSAGES.DETAIL.MODIFIED_ROLES')
     });
     
-    this.isLoading = false;
+    this.isLoadingRoleChanges = false;
   }
 
   applyChanges() {
-    this.isLoading = true;
+    this.isLoadingRoleChanges = true;
     this.rolesService.assignRolesToPartner(this.assignedRoles).subscribe({
       next: () => {
         // Si se asignaron correctamente los roles, se actualiza el socio para que se

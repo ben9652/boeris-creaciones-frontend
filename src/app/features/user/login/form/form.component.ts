@@ -10,24 +10,24 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { LogIn } from '../../../../core/models/login.entities';
+import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
-  selector: 'app-form',
-  standalone: true,
-  imports: [
-    FormsModule,
-    TranslateModule,
-    CardModule,
-    ButtonModule,
-    InputTextModule,
-    PasswordModule,
-    FloatLabelModule,
-    InputGroupModule,
-    InputGroupAddonModule,
-    NgClass
-  ],
-  templateUrl: './form.component.html',
-  styleUrl: './form.component.scss'
+    selector: 'app-form',
+    imports: [
+        FormsModule,
+        TranslateModule,
+        CardModule,
+        ButtonModule,
+        InputTextModule,
+        PasswordModule,
+        FloatLabelModule,
+        InputGroupModule,
+        InputGroupAddonModule,
+        NgClass
+    ],
+    templateUrl: './form.component.html',
+    styleUrl: './form.component.scss'
 })
 export class FormComponent {
   username?: string;

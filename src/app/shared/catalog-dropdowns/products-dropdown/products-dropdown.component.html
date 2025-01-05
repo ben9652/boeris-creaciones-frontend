@@ -1,5 +1,5 @@
 @if (products) {
-    <p-dropdown
+    <p-select
     [options]="products"
     [style]="{ width: '15rem' }"
     optionLabel="name"
@@ -9,7 +9,7 @@
     [emptyFilterMessage]="'No hay resultados'"
     [placeholder]="'Selecciona un producto'"
     (onChange)="onSelection($event)"
-    ></p-dropdown>
+    ></p-select>
 }
 @else {
     <p-skeleton width="15rem" height="3rem" styleClass="mb-2"></p-skeleton>

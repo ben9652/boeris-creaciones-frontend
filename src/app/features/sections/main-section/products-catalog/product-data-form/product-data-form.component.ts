@@ -1,6 +1,6 @@
 import { Component, effect } from '@angular/core';
 import { ImageManagerComponent } from './image-manager/image-manager.component';
-import { InputTextareaModule } from 'primeng/inputtextarea';
+import { TextareaModule } from 'primeng/textarea';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { InputTextModule } from 'primeng/inputtext';
@@ -16,21 +16,20 @@ import { TranslateService } from '@ngx-translate/core';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'app-product-data-form',
-  standalone: true,
-  imports: [
-    ImageManagerComponent,
-    InputTextareaModule,
-    InputTextModule,
-    InputNumberModule,
-    FormsModule,
-    CommonModule,
-    ButtonModule,
-    ToastModule
-  ],
-  templateUrl: './product-data-form.component.html',
-  styleUrl: './product-data-form.component.scss',
-  providers: [MessageService, TranslateService]
+    selector: 'app-product-data-form',
+    imports: [
+        ImageManagerComponent,
+        TextareaModule,
+        InputTextModule,
+        InputNumberModule,
+        FormsModule,
+        CommonModule,
+        ButtonModule,
+        ToastModule
+    ],
+    templateUrl: './product-data-form.component.html',
+    styleUrl: './product-data-form.component.scss',
+    providers: [MessageService, TranslateService]
 })
 export class ProductDataFormComponent {
   loading: boolean = false;

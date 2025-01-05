@@ -5,15 +5,14 @@ import { ProviderDataFormComponent } from './provider-data-form/provider-data-fo
 import { DeviceTypeService } from '../../../../core/services/device-type/device-type.service';
 
 @Component({
-  selector: 'app-providers-catalog',
-  standalone: true,
-  imports: [
-    DividerModule,
-    ProvidersListComponent,
-    ProviderDataFormComponent
-  ],
-  templateUrl: './providers-catalog.component.html',
-  styleUrl: './providers-catalog.component.scss'
+    selector: 'app-providers-catalog',
+    imports: [
+        DividerModule,
+        ProvidersListComponent,
+        ProviderDataFormComponent
+    ],
+    templateUrl: './providers-catalog.component.html',
+    styleUrl: './providers-catalog.component.scss'
 })
 export class ProvidersCatalogComponent {
   constructor(public deviceTypeService: DeviceTypeService) {

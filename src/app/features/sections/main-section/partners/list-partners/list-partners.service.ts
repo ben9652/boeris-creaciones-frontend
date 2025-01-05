@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { afterRender, Injectable } from '@angular/core';
+import { afterRender, Injectable, signal, WritableSignal } from '@angular/core';
 import { BehaviorSubject, catchError, map, Observable, of, switchMap, throwError } from 'rxjs';
 import { environment } from '../../../../../../environments/environment';
 import { Partner, PartnerRegister } from '../../../../../core/models/partner.entities';
@@ -16,65 +16,46 @@ export class ListPartnersService {
   userAuthorized: boolean = true;
 
   // Observable para los socios existentes
-  private partnersSource: BehaviorSubject<Partner[]> = new BehaviorSubject<Partner[]>([]);
-  private partners$: Observable<Partner[]> = this.partnersSource.asObservable();
-
-  private setPartners(): void {
-    if(this.partnersSource.getValue().length === 0) {
-      this.httpOptions = new HttpOptions(this.dataAccessService.getToken());
-      this.http.get<Partner[]>(this.urlBase, this.httpOptions).pipe(
-        map((partners: Partner[]) => {
-          this.partnersSource.next(partners);
-        }),
-        catchError((err: HttpErrorResponse) => {
-          if(err.status === 401 || err.status === 403) {
-            return of<Partner[]>([]);
-          }
-          
-          return throwError(() => err);
-        })
-      )
-      .subscribe();
-    }
-  }
+  private _partners: WritableSignal<Partner[] | null> = signal<Partner[] | null>(null);
 
   constructor(
     private http: HttpClient,
     private dataAccessService: DataAccessService
   ) {
     this.urlBase = environment.API_URL + 'Socios/';
-    this.setPartners();
+  }
+
+  askForPartners(): Observable<Partner[]> {
+    this.httpOptions = new HttpOptions(this.dataAccessService.getToken());
+    return this.http.get<Partner[]>(this.urlBase, this.httpOptions);
   }
 
   addPartner(partner: Partner) {
-    this.partnersSource.next([...this.partnersSource.getValue(), partner])
+    const partners: Partner[] | null = this._partners();
+    if(partners !== null) {
+      this._partners.set([...partners, partner])
+    }
   }
 
-  get partners(): Observable<Partner[]> {
-    return this.partners$;
+  getPartners(): Partner[] | null {
+    const partners: Partner[] | null = this._partners();
+    return partners;
   }
 
-  getPartner(id: number): Observable<Partner | undefined> {
-    return this.partners$.pipe(
-      switchMap((partners: Partner[]) => {
-        if(partners.length !== 0) {
-          let partner: Partner | undefined = partners.find(partner => partner.id_user === id);
-          if(partner) {
-            return of(partner);
-          }
-          else {
-            throw new Error('No existe el socio');
-          }
-        }
-        return of(undefined);
-      })
-    );
+  setPartners(partners: Partner[]): void {
+    this._partners.set(partners);
   }
 
-  getFirstPartner(): Observable<Partner> {
-    return this.partners$.pipe(
-      switchMap((partners: Partner[]) => of(partners[0]))
-    )
+  getPartner(id: number): Partner | undefined {
+    return this._partners()?.find((partner: Partner) => partner.id_user === id);
+  }
+
+  getFirstPartner(): Partner | null {
+    const partners: Partner[] | null = this._partners();
+    if(partners === null) {
+      return null;
+    }
+    return partners[0];
   }
 
   registerPartner(registerPartnerData: PartnerRegister): Observable<Partner | null> {

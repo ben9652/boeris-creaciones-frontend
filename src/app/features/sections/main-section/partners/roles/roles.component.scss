@@ -1,4 +1,4 @@
-@import '../../../../../../../public/theme/boeris-theme';
+@use '../../../../../../../public/theme/boeris-theme';
 
 :host {
     width: 100%;
@@ -26,7 +26,13 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
     height: 100%;
+    user-select: none;
+}
+
+h2 {
+    color: boeris-theme.$primaryColor;
     user-select: none;
 }
 
@@ -36,6 +42,7 @@
     justify-content: space-evenly;
     align-items: center;
     height: 100%;
+    width: 100%;
 }
 
 p {
@@ -43,9 +50,10 @@ p {
 }
 
 .botones {
+    width: 100%;
     padding: 10px;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
 }
 
@@ -61,7 +69,7 @@ p {
     justify-content: center;
     align-items: center;
     font-size: xx-large;
-    color: $primaryColor;
+    color: boeris-theme.$primaryColor;
     height: 100%;
 }
 

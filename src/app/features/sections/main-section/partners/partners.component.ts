@@ -13,21 +13,24 @@ import { DeviceTypeService } from '../../../../core/services/device-type/device-
 import { PartnersService } from './partners.service';
 import { ButtonModule } from 'primeng/button';
 import { Router } from '@angular/router';
+import { SkeletonModule } from 'primeng/skeleton';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-partners',
-  standalone: true,
-  imports: [
-    RolesComponent,
-    PartnerAdditionComponent,
-    ListPartnersComponent,
-    ToastModule,
-    DividerModule,
-    ButtonModule
-  ],
-  templateUrl: './partners.component.html',
-  styleUrl: './partners.component.scss',
-  providers: [MessageService]
+    selector: 'app-partners',
+    imports: [
+        RolesComponent,
+        PartnerAdditionComponent,
+        ListPartnersComponent,
+        ToastModule,
+        DividerModule,
+        ButtonModule,
+        SkeletonModule,
+        TranslateModule
+    ],
+    templateUrl: './partners.component.html',
+    styleUrl: './partners.component.scss',
+    providers: [MessageService]
 })
 export class PartnersComponent {
   addMode: boolean = false;
@@ -45,9 +48,11 @@ export class PartnersComponent {
     private partnersService: PartnersService,
     private router: Router
   ) {
-    listPartnersService.partners;
+    // listPartnersService.partners;
     effect(() => {
-      this.selectedPartner = partnersService.partner;
+      if(partnersService.partner) {
+        this.selectedPartner = partnersService.partner;
+      }
     });
   }
   

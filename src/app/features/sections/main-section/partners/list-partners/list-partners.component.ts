@@ -1,9 +1,9 @@
-import { afterRender, Component, input, InputSignal, model, ModelSignal, output, OutputEmitterRef } from '@angular/core';
+import { afterRender, Component, effect, input, InputSignal, model, ModelSignal, output, OutputEmitterRef } from '@angular/core';
 import { Partner } from '../../../../../core/models/partner.entities';
 import { ButtonModule } from 'primeng/button';
 import { ScrollerModule } from 'primeng/scroller';
 import { FormsModule } from '@angular/forms';
-import { catchError, map, Observable, of, Subscription } from 'rxjs';
+import { catchError, map, Observable, of, shareReplay, Subscription } from 'rxjs';
 import { MessageService } from 'primeng/api';
 import { ListPartnersService } from './list-partners.service';
 import { InputTextModule } from 'primeng/inputtext';
@@ -11,19 +11,24 @@ import { DeviceTypeService } from '../../../../../core/services/device-type/devi
 import { ActivatedRoute, Router } from '@angular/router';
 import { PartnersService } from '../partners.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { SkeletonModule } from 'primeng/skeleton';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
-  selector: 'app-list-partners',
-  standalone: true,
-  imports: [
-    ScrollerModule,
-    InputTextModule,
-    ButtonModule,
-    FormsModule,
-    TranslateModule
-  ],
-  templateUrl: './list-partners.component.html',
-  styleUrl: './list-partners.component.scss'
+    selector: 'app-list-partners',
+    imports: [
+        ScrollerModule,
+        InputTextModule,
+        ButtonModule,
+        FormsModule,
+        TranslateModule,
+        SkeletonModule,
+        ToastModule
+    ],
+    templateUrl: './list-partners.component.html',
+    styleUrl: './list-partners.component.scss',
+    providers: [MessageService]
 })
 export class ListPartnersComponent {
   partnerSearch: string = '';
@@ -40,19 +45,31 @@ export class ListPartnersComponent {
     private partnersService: PartnersService,
     private deviceTypeService: DeviceTypeService,
     private router: Router,
-    public translateService: TranslateService
+    public translateService: TranslateService,
+    private messageService: MessageService
   ) {
-    
-  }
-  
-  ngOnInit(): void {
-    this.partnersSubscription = this.listPartnersService.partners.subscribe((partners: Partner[]) => {
-      this.existingPartners = partners;
-      this.visibleExistingPartners = this.existingPartners;
-      this.partnersService.partner = this.existingPartners[0];
-      this.isLoading = false;
-      this.searchPartner();
+    listPartnersService.askForPartners().subscribe({
+      next: (partners: Partner[]) => {
+        listPartnersService.setPartners(partners);
+      },
+      error: (error: HttpErrorResponse) => {
+        if(error.status === 401) {
+          this.messageService.add({severity: 'error', summary: 'Error', detail: 'No tenés permisos para ver los socios'});
+        }
+        else {
+          this.messageService.add({severity: 'error', summary: 'Error', detail: 'Ha ocurrido un error al cargar los socios'});
+        }
+        this.isLoading = false;
+      }
     });
+    effect(() => {
+      const partners: Partner[] | null = this.listPartnersService.getPartners();
+      if(partners !== null) {
+        this.existingPartners = partners;
+        this.visibleExistingPartners = partners;
+        this.isLoading = false;
+      }
+    })
   }
 
   ngOnDestroy(): void {

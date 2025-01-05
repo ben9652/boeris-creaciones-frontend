@@ -1,11 +1,11 @@
-@import '../../../../../../public/theme/boeris-theme';
+@use '../../../../../../public/theme/boeris-theme';
 
 .header {
     display: grid;
     grid-template-columns: 5% 90% 5%;
-    background-color: $primaryColor;
+    background-color: boeris-theme.$primaryColor;
     position: fixed;
-    color: $secondaryColor;
+    color: boeris-theme.$secondaryColor;
     width: 100%;
     height: 15vh;
 }
@@ -13,9 +13,9 @@
 .header-without-button {
     display: grid;
     grid-template-columns: 15% 85%;
-    background-color: $primaryColor;
+    background-color: boeris-theme.$primaryColor;
     position: fixed;
-    color: $secondaryColor;
+    color: boeris-theme.$secondaryColor;
     width: 100%;
     height: 10vh;
 }
@@ -61,8 +61,8 @@
     cursor: pointer;
 }
 
-::ng-deep .p-overlaypanel .p-overlaypanel-content {
-    padding: 0;
+::ng-deep .p-popover .p-popover-content {
+    padding: 5px;
 }
 
 .p-button {
@@ -70,23 +70,21 @@
     width: 100%;
 }
 
-// El overlayPanel tiene dos flechas (una encima de la otra). Elimino una de ellas y coloreo la otra.
-::ng-deep .p-overlaypanel {
-    transform: translateX(-1vw) !important;
+// El popover tiene dos flechas (una encima de la otra). Elimino una de ellas y coloreo la otra.
+::ng-deep .p-popover {
+    top: 10vh !important;
+    transform: translateX(-1.2vh) !important;
     
     &:before {
-        content: none;
-        // border-bottom-color: $secondaryColor;
+        // content: none !important;
+        border-bottom-color: boeris-theme.$secondaryColor !important;
+        left: 100px !important;
     }
     
     &:after {
-        // content: none;
-        border-bottom-color: $secondaryColor;
+        content: none !important;
+        // border-bottom-color: boeris-theme.$secondaryColor !important;
     }
-}
-
-::ng-deep .p-overlaypanel:after, .p-overlaypanel:before {
-    left: calc(88%);
 }
 
 @media screen and (max-width: 500px) {
@@ -97,5 +95,10 @@
     
     .header-text {
         font-size: 1.6rem;
+    }
+
+    ::ng-deep .p-popover {
+        top: 15vw !important;
+        transform: translateX(-1.5vh) !important;
     }
 }

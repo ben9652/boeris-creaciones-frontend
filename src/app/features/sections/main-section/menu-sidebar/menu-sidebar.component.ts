@@ -4,19 +4,18 @@ import { MenuItem } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
 import { StorageService } from '../../../../core/services/storage/storage.service';
 import { PanelMenuModule } from 'primeng/panelmenu';
-import { SidebarModule } from 'primeng/sidebar';
+import { DrawerModule } from 'primeng/drawer';
 import { AuthService } from '../../../../core/services/auth/auth.service';
 import { DataAccessService } from '../../../../core/services/data-access/data-access.service';
 
 @Component({
-  selector: 'app-menu-sidebar',
-  standalone: true,
-  imports: [
-    PanelMenuModule,
-    SidebarModule
-  ],
-  templateUrl: './menu-sidebar.component.html',
-  styleUrl: './menu-sidebar.component.scss'
+    selector: 'app-menu-sidebar',
+    imports: [
+        PanelMenuModule,
+        DrawerModule
+    ],
+    templateUrl: './menu-sidebar.component.html',
+    styleUrl: './menu-sidebar.component.scss'
 })
 export class MenuSidebarComponent implements OnInit, DoCheck {
   user: User | null | undefined;

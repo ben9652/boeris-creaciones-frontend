@@ -11,9 +11,13 @@
         <p-divider layout="vertical"/>
         <div class="vista-edicion">
             @if (!addMode) {
-                <h2>{{ selectedPartner?.firstName }} {{ selectedPartner?.lastName }}</h2>
-                <app-roles
-                ></app-roles>
+                @if (selectedPartner) {
+                    <app-roles
+                    ></app-roles>
+                }
+                @else {
+                    <p class="mensaje-socio-no-seleccionado">{{ 'SECTIONS.PARTNERS.ROLES.SELECT_PARTNER' | translate }}</p>
+                }
             }
             @else {
                 <app-partner-addition

@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, input, InputSignal, OnChanges, output, OutputEmitterRef, SimpleChanges } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
@@ -16,22 +16,21 @@ import { DeviceTypeService } from '../../core/services/device-type/device-type.s
 import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
-  selector: 'app-category-manager',
-  standalone: true,
-  imports: [
-    DropdownModule,
-    ButtonModule,
-    FormsModule,
-    CommonModule,
-    InputTextModule,
-    DialogModule,
-    TranslateModule,
-    ToastModule,
-    SkeletonModule
-  ],
-  templateUrl: './category-manager.component.html',
-  styleUrl: './category-manager.component.scss',
-  providers: [TranslateService, DialogService, MessageService]
+    selector: 'app-category-manager',
+    imports: [
+        SelectModule,
+        ButtonModule,
+        FormsModule,
+        CommonModule,
+        InputTextModule,
+        DialogModule,
+        TranslateModule,
+        ToastModule,
+        SkeletonModule
+    ],
+    templateUrl: './category-manager.component.html',
+    styleUrl: './category-manager.component.scss',
+    providers: [TranslateService, DialogService, MessageService]
 })
 export class CategoryManagerComponent {
   categories: Category[] | null = null;

@@ -1,7 +1,106 @@
 /* You can add global styles to this file, and also import other style files */
-@import '../public/theme/boeris-theme';
+@use '../public/theme/boeris-theme';
+@use '../public/fonts.scss';
 
 body {
     margin: 0;
-    background-color: $secondaryColor;
+    background-color: boeris-theme.$secondaryColor;
+}
+
+* {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.p-drawer .p-drawer-header {
+    padding: 0.7rem;
+}
+
+.p-drawer-left {
+    width: 11rem !important;
+}
+
+div {
+    .p-panelmenu-content {
+        background-color: boeris-theme.$secondaryColor;
+    }
+
+    .p-panelmenu-item:not(.p-disabled) > .p-panelmenu-item-content:hover {
+        background: boeris-theme.$secondaryLightColor;
+        color: var(--p-panelmenu-item-focus-color);
+    }
+
+    .p-panelmenu-header {
+        a.p-panelmenu-header-link {
+            color: boeris-theme.$secondaryColor;
+        }
+    }
+}
+
+.p-panelmenu-item:not(.p-disabled) > .p-panelmenu-item-content:hover .p-panelmenu-submenu-icon {
+    color: boeris-theme.$primaryColor !important;
+}
+
+p-panelmenu .p-panelmenu-panel .p-panelmenu-header .p-panelmenu-header-content .p-panelmenu-header-link .p-panelmenu-submenu-icon {
+    color: boeris-theme.$secondaryColor;
+}
+
+.p-panelmenu-panel {
+    margin-bottom: 0px;
+    border-color: boeris-theme.$primaryColor !important;
+}
+
+.p-panelmenu-content {
+    padding: 0;
+}
+
+a {
+    .p-panelmenu-submenu-icon {
+        color: boeris-theme.$primaryColor;
+    }
+    
+    .p-panelmenu-item-label {
+        color: boeris-theme.$primaryColor;
+    }
+    
+    .p-panelmenu-header-label {
+        color: boeris-theme.$secondaryColor;
+    }
+}
+
+span.filelabel {
+    content-visibility: hidden;
+}
+
+li.p-select-option {
+    color: boeris-theme.$primaryColor;
+    
+    &:hover {
+        background-color: boeris-theme.$secondaryColor;
+    }
+
+    &:active {
+        background-color: boeris-theme.$secondaryDarkColor;
+    }
+}
+
+li.p-select-option:not(.p-select-option-selected):not(.p-disabled).p-focus {
+    background: boeris-theme.$secondaryLighterColor;
+    color: boeris-theme.$primaryColor;
+
+    &:hover {
+        background: boeris-theme.$secondaryColor;
+    }
+
+    &:active {
+        background-color: boeris-theme.$secondaryDarkColor;
+    }
+}
+
+.p-picklist .p-listbox {
+    width: 120px;
+    height: 352px !important;
+}
+
+div.p-listbox-list-container {
+    max-height: 360px !important;
 }

@@ -1,4 +1,4 @@
-@import '../../../../../../public/theme/boeris-theme';
+@use '../../../../../../public/theme/boeris-theme';
 
 .container {
     display: flex;
@@ -6,6 +6,6 @@
     justify-content: center;
     align-items: center;
     padding-top: 2.5rem;
-    background-color: $secondaryLightColor;
+    background-color: boeris-theme.$secondaryLightColor;
     height: 100%;
 }

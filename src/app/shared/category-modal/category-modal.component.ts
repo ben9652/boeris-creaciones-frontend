@@ -10,18 +10,17 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { CategoryManagerService } from '../category-manager/category-manager.service';
 
 @Component({
-  selector: 'app-category-modal',
-  standalone: true,
-  imports: [
-    TranslateModule,
-    ButtonModule,
-    InputTextModule,
-    FormsModule,
-    CommonModule
-  ],
-  templateUrl: './category-modal.component.html',
-  styleUrl: './category-modal.component.scss',
-  providers: [TranslateService]
+    selector: 'app-category-modal',
+    imports: [
+        TranslateModule,
+        ButtonModule,
+        InputTextModule,
+        FormsModule,
+        CommonModule
+    ],
+    templateUrl: './category-modal.component.html',
+    styleUrl: './category-modal.component.scss',
+    providers: [TranslateService]
 })
 export class CategoryModalComponent {
   loading: boolean = false;

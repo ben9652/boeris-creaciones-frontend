@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, input, InputSignal, OnChanges, output, OutputEmitterRef, SimpleChanges } from '@angular/core';
-import { DropdownChangeEvent, DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
@@ -16,22 +16,21 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { DeviceTypeService } from '../../core/services/device-type/device-type.service';
 
 @Component({
-  selector: 'app-locality-manager',
-  standalone: true,
-  imports: [
-    DropdownModule,
-    ButtonModule,
-    FormsModule,
-    CommonModule,
-    InputTextModule,
-    DialogModule,
-    TranslateModule,
-    ToastModule,
-    SkeletonModule
-  ],
-  templateUrl: './locality-manager.component.html',
-  styleUrl: './locality-manager.component.scss',
-  providers: [TranslateService, DialogService, MessageService]
+    selector: 'app-locality-manager',
+    imports: [
+        SelectModule,
+        ButtonModule,
+        FormsModule,
+        CommonModule,
+        InputTextModule,
+        DialogModule,
+        TranslateModule,
+        ToastModule,
+        SkeletonModule
+    ],
+    templateUrl: './locality-manager.component.html',
+    styleUrl: './locality-manager.component.scss',
+    providers: [TranslateService, DialogService, MessageService]
 })
 export class LocalityManagerComponent implements OnChanges {
   localities: Locality[] | null = null;

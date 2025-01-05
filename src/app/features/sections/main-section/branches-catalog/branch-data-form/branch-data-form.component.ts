@@ -15,19 +15,18 @@ import { Locality } from '../../../../../core/models/locality.entities';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'app-branch-data-form',
-  standalone: true,
-  imports: [
-    LocalityManagerComponent,
-    InputTextModule,
-    FormsModule,
-    CommonModule,
-    ButtonModule,
-    ToastModule
-  ],
-  templateUrl: './branch-data-form.component.html',
-  styleUrl: './branch-data-form.component.scss',
-  providers: [MessageService, TranslateService]
+    selector: 'app-branch-data-form',
+    imports: [
+        LocalityManagerComponent,
+        InputTextModule,
+        FormsModule,
+        CommonModule,
+        ButtonModule,
+        ToastModule
+    ],
+    templateUrl: './branch-data-form.component.html',
+    styleUrl: './branch-data-form.component.scss',
+    providers: [MessageService, TranslateService]
 })
 export class BranchDataFormComponent {
   loading: boolean = false;

@@ -1,7 +1,7 @@
-@import '../../../../../../public/theme/boeris-theme';
+@use '../../../../../../public/theme/boeris-theme';
 
 h2 {
-    color: $primaryColor;
+    color: boeris-theme.$primaryColor;
     text-align: center;
 }
 
@@ -10,7 +10,7 @@ h2 {
     flex-direction: column;
     padding-top: 5rem;
     height: 100%;
-    background-color: $secondaryLightColor;
+    background-color: boeris-theme.$secondaryLightColor;
 }
 
 ::ng-deep app-banner-subsections app-main-banner .header-text {

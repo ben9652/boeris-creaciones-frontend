@@ -1,1 +1,17 @@
-@import 'vendor/themes/lara/lara-light/blue/theme.scss';
+$primaryColor: var(--p-primary-500);
+$primaryLightColor: var(--p-primary-400);
+$primaryDarkColor: var(--p-primary-600);
+$primaryDarkerColor: var(--p-primary-700);
+$primaryTextColor: var(--p-primary-100);
+
+$secondaryColor: var(--p-secondary-500);
+$secondaryLightColor: var(--p-secondary-400);
+$secondaryLighterColor: var(--p-secondary-300);
+$secondaryDarkColor: var(--p-secondary-600);
+$secondaryDarkerColor: var(--p-primary-300);
+$secondaryDarkerDarkerColor: var(--p-primary-400);
+$secondaryTextColor: $primaryColor;
+
+$highlightBg: $secondaryDarkColor;
+$highlightTextColor: $primaryDarkerColor;
+$highlightFocusBg: rgba($primaryColor, .5);
