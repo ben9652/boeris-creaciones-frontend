@@ -728,7 +728,7 @@ export const BoerisCreaciones = definePreset(Aura, {
             }
         },
         skeleton: {
-            background: "{secondary.color} !important"
+            background: "{primary.200} !important"
         },
         listbox: {
             background: "{secondary.color}",

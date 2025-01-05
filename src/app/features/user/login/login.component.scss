@@ -15,7 +15,7 @@ p {
     align-items: center;
     justify-content: center;
     height: 100%;
-    background-image: url('../../../../../public/pictures/flowers-3.png');
+    background-image: var(--background-image);
     background-size: cover;
     background-position: left;
     background-repeat: repeat-y;
