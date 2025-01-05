@@ -1,5 +1,7 @@
+<p-toast/>
+
 @if (!isLoading) {
-    <div class="lista">
+    <div class="contenedor">
         @if (existingPartners.length !== 0) {
             <div>
                 <input
@@ -10,25 +12,29 @@
                 [placeholder]="translateService.instant('SECTIONS.PARTNERS.LIST_PARTNERS.SEARCH_PARTNER')"
                 >
             </div>
-            <div>
-                <p-scroller
-                [items]="visibleExistingPartners"
-                [itemSize]="40"
-                scrollHeight="60vh"
-                [style]="{'width': '250px', 'height': '50vh'}"
-                >
-                    <ng-template pTemplate="item" let-item let-options="options">
-                        <div class="fila-lista" (click)="clickOnPartner(item)">
-                            @if (item.lastName) {
-                                {{ item.lastName }}, {{ item.firstName }}
-                            }
-                            @else {
-                                {{ item.firstName }}
-                            }
-                        </div>
-                    </ng-template>
-                </p-scroller>
-            </div>
+        }
+        @if (visibleExistingPartners.length !== 0) {
+            <p-scroller
+            class="lista"
+            [items]="visibleExistingPartners"
+            [itemSize]="40"
+            scrollHeight="60vh"
+            [style]="{'width': '250px', 'height': '50vh'}"
+            >
+                <ng-template pTemplate="item" let-item let-options="options">
+                    <div class="fila-lista" (click)="clickOnPartner(item)">
+                        @if (item.lastName) {
+                            {{ item.lastName }}, {{ item.firstName }}
+                        }
+                        @else {
+                            {{ item.firstName }}
+                        }
+                    </div>
+                </ng-template>
+            </p-scroller>
+        }
+        @else if (existingPartners.length !== 0) {
+            <h2>{{ 'SECTIONS.PARTNERS.LIST_PARTNERS.NO_PARTNERS_MATCH' | translate }}</h2>
         }
         @else {
             <h2>{{ 'SECTIONS.PARTNERS.LIST_PARTNERS.NO_PARTNERS' | translate }}</h2>
@@ -36,7 +42,14 @@
     </div>
 }
 @else {
-    <div class="loading-icon">
-        <i class="pi pi-spinner pi-spin" style="font-size: 5rem;"></i>
-    </div>
+    <p-skeleton class="w-12" styleClass="mb-2" />
+    <p-skeleton class="w-11" styleClass="mb-2" />
+    <p-skeleton class="w-10" styleClass="mb-2" />
+    <p-skeleton class="w-9" styleClass="mb-2" />
+    <p-skeleton class="w-8" styleClass="mb-2" />
+    <p-skeleton class="w-7" styleClass="mb-2" />
+    <p-skeleton class="w-6" styleClass="mb-2" />
+    <p-skeleton class="w-6" styleClass="mb-2" />
+    <p-skeleton class="w-6" styleClass="mb-2" />
+    <p-skeleton class="w-6" styleClass="mb-2" />
 }

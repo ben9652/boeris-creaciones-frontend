@@ -24,9 +24,7 @@ export function initializeApp(
   translateService: TranslateService,
   router: Router
 ) {
-  return () => {
-    router.navigate(['/login']);
-    
+  return () => {    
     translateService.setDefaultLang('es');
     return translateService.use('es');
   }

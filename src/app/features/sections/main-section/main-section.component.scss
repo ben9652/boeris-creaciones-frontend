@@ -1,4 +1,4 @@
-@import '../../../../../public/theme/boeris-theme';
+@use '../../../../../public/theme/boeris-theme';
 
 .main-container {
     display: flex;
@@ -14,7 +14,7 @@
 }
 
 .main-section {
-    background-color: $secondaryLightColor;
+    background-color: boeris-theme.$secondaryLightColor;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -22,7 +22,7 @@
 
     p {
         font-size: 72px;
-        color: $primaryColor;
+        color: boeris-theme.$primaryColor;
     }
 }
 

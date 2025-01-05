@@ -10,6 +10,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { LogIn } from '../../../../core/models/login.entities';
+import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
     selector: 'app-form',

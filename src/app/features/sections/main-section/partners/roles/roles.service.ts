@@ -56,7 +56,7 @@ export class RolesService {
           this.partner = partnersService.partner;
         }
       }
-    }, { allowSignalWrites: true })
+    })
   }
 
   // Convierto el mapa de roles a un arreglo de roles
@@ -73,18 +73,22 @@ export class RolesService {
   }
   
   // Actualizo el mapeo de los roles cuando se asigna un nuevo socio
-  set partner(partner: Partner) {
-    this.activePartner = partner;
+  set partner(partner: Partner | null) {
+    this.activePartner = partner ? partner: undefined;
     this.mappedNonAssignedRoles.clear();
     
     this.mappedRoles.forEach((role: PartnerType) => {
       this.mappedNonAssignedRoles.set(role.id, role);
     });
-    partner.partnerRoles.forEach((role: PartnerType) => {
+    partner?.partnerRoles.forEach((role: PartnerType) => {
       this.mappedNonAssignedRoles.delete(role.id);
     })
-    this._assignedRoles.set(partner.partnerRoles);
+    this._assignedRoles.set(partner ? partner.partnerRoles : []);
     this._nonAssignedRoles.set(Array.from(this.mappedNonAssignedRoles.values()));
+  }
+
+  get roles(): PartnerType[] {
+    return Array.from(this.mappedRoles.values());
   }
 
   assignRolesToPartner(roles: PartnerType[]): Observable<void> {

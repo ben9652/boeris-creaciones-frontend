@@ -24,7 +24,7 @@
             (ngModelChange)="updateRawMaterialName($event)"
             />
 
-            <p-dropdown
+            <p-select
             [options]="units"
             optionLabel="name"
             [placeholder]="translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.FIELDS.UNIT')"
@@ -35,7 +35,7 @@
             (ngModelChange)="updateRawMaterialUnit($event)"
             />
             
-            <p-dropdown
+            <p-select
             [options]="sources"
             optionLabel="value"
             [placeholder]="translateService.instant('SECTIONS.CATALOGS.RAW_MATERIALS.FIELDS.SOURCE')"

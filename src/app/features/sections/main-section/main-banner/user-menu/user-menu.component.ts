@@ -3,12 +3,14 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { AuthService } from '../../../../../core/services/auth/auth.service';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-user-menu',
     imports: [
         ButtonModule,
-        TranslateModule
+        TranslateModule,
+        CommonModule
     ],
     templateUrl: './user-menu.component.html',
     styleUrl: './user-menu.component.scss'

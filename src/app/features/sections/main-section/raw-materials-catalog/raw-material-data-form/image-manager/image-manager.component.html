@@ -18,7 +18,7 @@
             <i class="pi pi-spinner pi-spin"></i>
         }
     </div>
-    <p-fileUpload #fileUpload
+    <p-fileupload #fileUpload
     mode="basic"
     name="demo[]"
     [chooseLabel]="translateService.instant('SECTIONS.CATALOGS.BUTTONS.UPLOAD')"
@@ -29,6 +29,5 @@
     (onSelect)="onUploadHandler($event)"
     [disabled]="rawMaterialsCatalogService.selectedRawMaterial() === null || disabled()"
     [showCancelButton]="true"
-    >
-    </p-fileUpload>
+    />
 </div>

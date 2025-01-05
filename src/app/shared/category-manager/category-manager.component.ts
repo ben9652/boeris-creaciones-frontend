@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, input, InputSignal, OnChanges, output, OutputEmitterRef, SimpleChanges } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
@@ -18,7 +18,7 @@ import { SkeletonModule } from 'primeng/skeleton';
 @Component({
     selector: 'app-category-manager',
     imports: [
-        DropdownModule,
+        SelectModule,
         ButtonModule,
         FormsModule,
         CommonModule,

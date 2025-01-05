@@ -2,7 +2,7 @@ import { Component, effect } from '@angular/core';
 import { ImageManagerComponent } from "./image-manager/image-manager.component";
 import { InputTextModule } from 'primeng/inputtext';
 import { TextareaModule } from 'primeng/textarea';
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button'
@@ -26,7 +26,7 @@ import { HttpErrorResponse } from '@angular/common/http';
         CategoryManagerComponent,
         InputTextModule,
         TextareaModule,
-        DropdownModule,
+        SelectModule,
         CommonModule,
         FormsModule,
         ButtonModule,

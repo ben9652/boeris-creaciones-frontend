@@ -1,4 +1,4 @@
-@import '../../../../../../../public/theme/boeris-theme';
+@use '../../../../../../../public/theme/boeris-theme';
 
 :host {
     height: 100%;
@@ -7,7 +7,7 @@
 }
 
 p {
-    color: $primaryColor;
+    color: boeris-theme.$primaryColor;
 }
 
 .container {
@@ -23,7 +23,7 @@ p {
     font-size: x-large;
     margin-top: 1.5rem;
     margin-bottom: 0.5rem;
-    color: $primaryColor;
+    color: boeris-theme.$primaryColor;
 }
 
 .dialog {
@@ -32,7 +32,7 @@ p {
     align-items: center;
     padding: 2rem;
     border-radius: 6px;
-    background-color: $secondaryColor;
+    background-color: boeris-theme.$secondaryColor;
 }
 
 .vista-lista-socios {

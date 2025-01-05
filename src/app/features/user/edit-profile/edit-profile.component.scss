@@ -1,4 +1,4 @@
-@import '../../../../../public/theme/boeris-theme';
+@use '../../../../../public/theme/boeris-theme';
 
 .container {
     display: flex;
@@ -7,7 +7,7 @@
 }
 
 h2 {
-    color: $primaryColor;
+    color: boeris-theme.$primaryColor;
     margin: 0;
 }
 
@@ -15,7 +15,7 @@ h2 {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    background-color: $secondaryLightColor;
+    background-color: boeris-theme.$secondaryLightColor;
     margin-top: 15vh;
     padding: 1rem;
     height: 100%;

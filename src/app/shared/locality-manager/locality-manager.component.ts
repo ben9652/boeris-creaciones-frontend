@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, input, InputSignal, OnChanges, output, OutputEmitterRef, SimpleChanges } from '@angular/core';
-import { DropdownChangeEvent, DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
@@ -18,7 +18,7 @@ import { DeviceTypeService } from '../../core/services/device-type/device-type.s
 @Component({
     selector: 'app-locality-manager',
     imports: [
-        DropdownModule,
+        SelectModule,
         ButtonModule,
         FormsModule,
         CommonModule,

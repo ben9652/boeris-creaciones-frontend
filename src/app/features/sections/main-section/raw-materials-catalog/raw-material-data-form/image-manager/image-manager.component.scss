@@ -1,7 +1,7 @@
-@import '../../../../../../../../public/theme/boeris-theme';
+@use '../../../../../../../../public/theme/boeris-theme';
 
 h4 {
-    color: $primaryColor;
+    color: boeris-theme.$primaryColor;
     user-select: none;
 }
 
@@ -15,14 +15,14 @@ img {
 }
 
 i {
-    color: $primaryColor;
+    color: boeris-theme.$primaryColor;
 }
 
 .rawMaterial-img {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid $primaryColor;
+    border: 2px solid boeris-theme.$primaryColor;
     border-radius: 5px;
     margin-bottom: 1em;
     padding: 3em;

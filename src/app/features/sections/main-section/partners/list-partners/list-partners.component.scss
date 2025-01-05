@@ -1,25 +1,22 @@
-@import '../../../../../../../public/theme/boeris-theme';
+@use '../../../../../../../public/theme/boeris-theme';
 
 h2 {
-    color: $primaryColor;
+    color: boeris-theme.$primaryColor;
+}
+
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .lista {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
     height: 85%;
 }
 
-.loading-icon {
-    display: flex;
-    align-items: center;
-    height: 100%;
-}
-
 i {
-    color: $primaryColor;
+    color: boeris-theme.$primaryColor;
 }
 
 :host ::ng-deep .botones .p-button {
@@ -35,8 +32,8 @@ i {
 }
 
 .fila-lista {
-    color: $primaryColor;
-    background-color: $secondaryColor;
+    color: boeris-theme.$primaryColor;
+    background-color: boeris-theme.$secondaryColor;
     cursor: pointer;
     user-select: none;
 
@@ -45,10 +42,10 @@ i {
     padding: .5rem;
 
     &:hover {
-        background-color: $secondaryDarkColor;
+        background-color: boeris-theme.$secondaryDarkColor;
     }
 
     &:active {
-        background-color: $secondaryDarkerColor;
+        background-color: boeris-theme.$secondaryDarkerColor;
     }
 }

@@ -13,6 +13,8 @@ import { DeviceTypeService } from '../../../../core/services/device-type/device-
 import { PartnersService } from './partners.service';
 import { ButtonModule } from 'primeng/button';
 import { Router } from '@angular/router';
+import { SkeletonModule } from 'primeng/skeleton';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-partners',
@@ -22,7 +24,9 @@ import { Router } from '@angular/router';
         ListPartnersComponent,
         ToastModule,
         DividerModule,
-        ButtonModule
+        ButtonModule,
+        SkeletonModule,
+        TranslateModule
     ],
     templateUrl: './partners.component.html',
     styleUrl: './partners.component.scss',
@@ -44,9 +48,11 @@ export class PartnersComponent {
     private partnersService: PartnersService,
     private router: Router
   ) {
-    listPartnersService.partners;
+    // listPartnersService.partners;
     effect(() => {
-      this.selectedPartner = partnersService.partner;
+      if(partnersService.partner) {
+        this.selectedPartner = partnersService.partner;
+      }
     });
   }
   

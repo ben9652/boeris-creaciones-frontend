@@ -1,37 +1,34 @@
-import { afterRender, Injectable } from '@angular/core';
+import { afterRender, Injectable, signal, WritableSignal } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of } from 'rxjs';
+import { StorageService } from '../storage/storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ActiveRouteService {
-  private ownSessionStorage?: Storage;
-  
-  private _route: string | null = null;
+export class ActiveRouteService {  
+  private _route: WritableSignal<string | null> = signal(null);
 
   constructor(
-    private router: Router
+    private router: Router,
+    private storageService: StorageService
   ) {
     afterRender(() => {
-      this.ownSessionStorage = sessionStorage;
+      this._route.set(storageService.getItem('currentRoute'));
     })
   }
 
   setRoute(route: string) {
-    this._route = route;
-    if(this.ownSessionStorage) {
-      this.ownSessionStorage.setItem('currentRoute', route);
-    }
+    this._route.set(route);
+    this.storageService.setItem('currentRoute', route);
   }
 
   get route(): string | null {
-    if(this.ownSessionStorage) {
-      const route: string | null = this.ownSessionStorage.getItem('currentRoute');
-      if(route !== null) {
-        this._route = route;
-      }
+    if(this._route() === null) {
+      const route: string | null = this.storageService.getItem('currentRoute');
+      this._route.set(route);
     }
-    return this._route;
+    
+    return this._route();
   }
 }

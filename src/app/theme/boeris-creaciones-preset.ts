@@ -323,6 +323,19 @@ export const BoerisCreaciones = definePreset(Aura, {
             900: "#4d2818",
             950: "#30190f"
         },
+        secondary: {
+            50: "#fffdfc",
+            100: "#fff6f3",
+            200: "#fff0e9",
+            300: "#ffe9df",
+            400: "#ffe2d6",
+            500: "#ffdbcc",
+            600: "#fbd0bd",
+            700: "#fdbea4",
+            800: "#e19c7f",
+            900: "#df9373",
+            950: "#d78765"
+        },
         formField: {
             paddingX: "0.75rem",
             paddingY: "0.5rem",
@@ -422,15 +435,21 @@ export const BoerisCreaciones = definePreset(Aura, {
                 },
                 primary: {
                     color: "{primary.500}",
-                    contrastColor: "#ffffff",
+                    contrastColor: "{secondary.500}",
                     hoverColor: "{primary.600}",
                     activeColor: "{primary.700}"
                 },
+                secondary: {
+                    color: "{secondary.500}",
+                    contrastColor: "{primary.500}",
+                    hoverColor: "{secondary.400}",
+                    activeColor: "{secondary.700}"
+                },
                 highlight: {
-                    background: "{primary.50}",
-                    focusBackground: "{primary.100}",
+                    background: "{secondary.500}",
+                    focusBackground: "{secondary.600}",
                     color: "{primary.700}",
-                    focusColor: "{primary.800}"
+                    focusColor: "{primary.500}"
                 },
                 mask: {
                     background: "rgba(0,0,0,0.4)",
@@ -438,12 +457,12 @@ export const BoerisCreaciones = definePreset(Aura, {
                 },
                 formField: {
                     background: "{surface.0}",
-                    disabledBackground: "{surface.200}",
+                    disabledBackground: "{secondary.100}",
                     filledBackground: "{surface.50}",
                     filledHoverBackground: "{surface.50}",
                     filledFocusBackground: "{surface.50}",
-                    borderColor: "{surface.300}",
-                    hoverBorderColor: "{surface.400}",
+                    borderColor: "{secondary.500}",
+                    hoverBorderColor: "{secondary.600}",
                     focusBorderColor: "{primary.color}",
                     invalidBorderColor: "{red.400}",
                     color: "{surface.700}",
@@ -464,32 +483,32 @@ export const BoerisCreaciones = definePreset(Aura, {
                     hoverMutedColor: "{surface.600}"
                 },
                 content: {
-                    background: "{surface.0}",
-                    hoverBackground: "{surface.100}",
-                    borderColor: "{surface.200}",
-                    color: "{text.color}",
-                    hoverColor: "{text.hover.color}"
+                    background: "{primary.color}",
+                    hoverBackground: "{primary.hoverColor}",
+                    borderColor: "{secondary.color}",
+                    color: "{secondary.color}",
+                    hoverColor: "{secondary.activeColor}"
                 },
                 overlay: {
                     select: {
-                        background: "{surface.0}",
+                        background: "{secondary.300}",
                         borderColor: "{surface.200}",
                         color: "{text.color}"
                     },
                     popover: {
-                        background: "{surface.0}",
-                        borderColor: "{surface.200}",
+                        background: "{secondary.color}",
+                        borderColor: "{secondary.600}",
                         color: "{text.color}"
                     },
                     modal: {
-                        background: "{surface.0}",
-                        borderColor: "{surface.200}",
-                        color: "{text.color}"
+                        background: "{primary.color}",
+                        borderColor: "{primary.color}",
+                        color: "{secondary.color}"
                     }
                 },
                 list: {
                     option: {
-                        focusBackground: "{surface.100}",
+                        focusBackground: "{secondary.300}",
                         selectedBackground: "{highlight.background}",
                         selectedFocusBackground: "{highlight.focus.background}",
                         color: "{text.color}",
@@ -508,11 +527,11 @@ export const BoerisCreaciones = definePreset(Aura, {
                 },
                 navigation: {
                     item: {
-                        focusBackground: "{surface.100}",
-                        activeBackground: "{surface.100}",
-                        color: "{text.color}",
-                        focusColor: "{text.hover.color}",
-                        activeColor: "{text.hover.color}",
+                        focusBackground: "{primary.500}",
+                        activeBackground: "{primary.600}",
+                        color: "{secondary.color}",
+                        focusColor: "{secondary.hoverColor}",
+                        activeColor: "{secondary.activeColor}",
                         icon: {
                             color: "{surface.400}",
                             focusColor: "{surface.500}",
@@ -520,13 +539,13 @@ export const BoerisCreaciones = definePreset(Aura, {
                         }
                     },
                     submenuLabel: {
-                        background: "transparent",
-                        color: "{text.muted.color}"
+                        background: "{primary.color}",
+                        color: "{secondary.color}"
                     },
                     submenuIcon: {
-                        color: "{surface.400}",
-                        focusColor: "{surface.500}",
-                        activeColor: "{surface.500}"
+                        color: "{secondary.color}",
+                        focusColor: "{secondary.600}",
+                        activeColor: "{secondary.600}"
                     }
                 }
             },
@@ -655,6 +674,81 @@ export const BoerisCreaciones = definePreset(Aura, {
                     }
                 }
             }
+        }
+    },
+    components: {
+        button: {
+            secondary: {
+                color: "{secondary.contrastColor} !important",
+                background: "{secondary.color} !important",
+                borderColor: "{secondary.color} !important",
+                hover: {
+                    background: "{secondary.400} !important",
+                    color: "{secondary.contrastColor} !important",
+                    borderColor: "{secondary.400} !important"
+                },
+                active: {
+                    background: "{secondary.600} !important",
+                    color: "{secondary.contrastColor} !important",
+                    borderColor: "{secondary.600} !important"
+                } 
+            },
+            text: {
+                secondary: {
+                    color: "{secondary.color} !important",
+                    hover: {
+                        color: "{secondary.400} !important",
+                        background: "{primary.300} !important"
+                    },
+                    active: {
+                        color: "{secondary.600} !important",
+                        background: "{primary.200} !important"
+                    }
+                }
+            }
+        },
+        panelmenu: {
+            header: {
+                link: {
+                    color: "{secondary.color}"
+                }
+            },
+            panel: {
+                padding: "0px"
+            }
+        },
+        dialog: {
+            color: "{primary.color}",
+            borderColor: "{secondary.400}",
+            background: "{secondary.600}"
+        },
+        drawer: {
+            content: {
+                padding: "0px"
+            }
+        },
+        skeleton: {
+            background: "{secondary.color} !important"
+        },
+        listbox: {
+            background: "{secondary.color}",
+            option: {
+                focus: {
+                    color: "{secondary.contrastColor}",
+                    background: "{secondary.600}"
+                },
+                color: "{secondary.contrastColor}",
+                selected: {
+                    color: "{secondary.contrastColor}",
+                    background: "{secondary.700}",
+                    focus: {
+                        background: "{secondary.700}"
+                    }
+                }
+            }
+        },
+        fieldset: {
+            background: "{secondary.color}",
         }
     }
 });

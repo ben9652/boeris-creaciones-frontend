@@ -1,12 +1,16 @@
 <div class="panel">
     <p-button
+    class="edicion-perfil"
     [label]="translateService.instant('BANNER.EDIT_PROFILE')"
     severity="secondary"
+    [ngStyle]="{'border-radius': '5px 0px'}"
     (onClick)="navigateToProfile()"
     />
     <p-button
+    class="cierre-sesion"
     [label]="translateService.instant('BANNER.LOGOUT')"
     severity="primary"
+    [ngStyle]="{'border-radius': '0px 5px'}"
     (onClick)="authService.logout()"
     />
 </div>

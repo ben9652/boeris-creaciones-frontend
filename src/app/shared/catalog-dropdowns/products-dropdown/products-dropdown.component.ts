@@ -1,6 +1,6 @@
 import { Component, output, OutputEmitterRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DropdownChangeEvent, DropdownModule } from 'primeng/dropdown';
+import { SelectChangeEvent, SelectModule } from 'primeng/select';
 import { SkeletonModule } from 'primeng/skeleton';
 import { Product } from '../../../core/models/product.entities';
 import { ProductsService } from '../../../core/services/catalogs/products.service';
@@ -8,7 +8,7 @@ import { ProductsService } from '../../../core/services/catalogs/products.servic
 @Component({
     selector: 'app-products-dropdown',
     imports: [
-        DropdownModule,
+        SelectModule,
         FormsModule,
         SkeletonModule
     ],
@@ -29,7 +29,7 @@ export class ProductsDropdownComponent {
     })
   }
 
-  onSelection(event: DropdownChangeEvent) {
+  onSelection(event: SelectChangeEvent) {
     this.getProduct.emit(event.value);
   }
 }

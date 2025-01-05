@@ -38,6 +38,12 @@
                 "ON_CREATION": "Crear localidad",
                 "ON_EDITION": "Editar localidad"
             }
+        },
+        "DROPDOWN": {
+            "EMPTY_MESSAGES": {
+                "CATEGORIES": "No se encontraron rubros",
+                "LOCALITIES": "No se encontraron localidades"
+            }
         }
     },
     "SECTIONS": {
@@ -70,13 +76,14 @@
             },
             "LIST_PARTNERS": {
                 "SEARCH_PARTNER": "Buscar socio",
-                "NO_PARTNERS": "No existen socios"
+                "NO_PARTNERS": "No existen socios",
+                "NO_PARTNERS_MATCH": "No se encontraron socios que coincidan con la búsqueda"
             },
             "ROLES": {
                 "AVAILABLE_ROLES": "Disponibles",
                 "ASSIGNED_ROLES": "Asignados",
                 "ROLE_DESCRIPTION": "Descripción de rol",
-                "SELECT_PARTNER": "Seleccione un socio",
+                "SELECT_PARTNER": "Seleccioná un socio",
                 "MODIFIED_ROLES_MESSAGE": "Se modificaron los roles"
             },
             "PARTNER_ADDITION": {
@@ -135,7 +142,6 @@
                     "CATEGORY_UPDATED": "El rubro se editó correctamente"
                 },
                 "EMPTY_MESSAGES": {
-                    "CATEGORIES": "No se encontraron rubros",
                     "UNITS": "No se encontraron unidades",
                     "SOURCES": "No se encontraron orígenes"
                 },
@@ -202,9 +208,6 @@
                     "PHONE": "Teléfono",
                     "CVU_OR_ALIAS": "CVU o alias"
                 },
-                "EMPTY_MESSAGES": {
-                    "CATEGORIES": "No se encontraron rubros"
-                },
                 "SUCCESSES": {
                     "CREATED": "Proveedor creado con éxito",
                     "UPDATED": "Proveedor actualizado con éxito",
@@ -248,9 +251,6 @@
                     "NAME": "Nombre",
                     "LOCALITY": "Localidad",
                     "DOMICILE": "Domicilio"
-                },
-                "EMPTY_MESSAGES": {
-                    "LOCALITY": "No se encontraron localidades"
                 },
                 "SUCCESSES": {
                     "CREATED": "Sucursal creada con éxito",

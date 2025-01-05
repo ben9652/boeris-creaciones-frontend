@@ -99,13 +99,6 @@ export class PartnerAdditionComponent {
               this.location.back();
             }
             this.isLoading = false;
-          },
-          reject: () => {
-            this.onPartnerCreation.emit();
-            if(this.isMobile) {
-              this.location.back();
-            }
-            this.isLoading = false;
           }
         })
       })
@@ -125,7 +118,7 @@ export class PartnerAdditionComponent {
     }
   }
 
-  confirm() {
+  confirm(event: Event) {
     
   }
 }

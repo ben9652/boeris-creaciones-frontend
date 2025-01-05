@@ -2,7 +2,7 @@
 
 <div class="container">
     @if (categories !== null) {
-        <p-dropdown
+        <p-select
         [options]="categories"
         optionLabel="name"
         [placeholder]="translateService.instant('SECTIONS.CATALOGS.PROVIDERS.FIELDS.CATEGORY')"
@@ -11,10 +11,10 @@
         [disabled]="disabled()"
         [ngModel]="selectedCategory"
         (ngModelChange)="emitCategory($event)"
-        ></p-dropdown>
+        ></p-select>
     }
     @else {
-        <p-skeleton height="3rem" styleClass="mb-2"></p-skeleton>
+        <p-skeleton height="35px" styleClass="mb-2"></p-skeleton>
     }
     
     <div class="buttons">

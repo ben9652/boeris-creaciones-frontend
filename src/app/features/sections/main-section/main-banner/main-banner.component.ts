@@ -1,7 +1,7 @@
 import { Component, input, InputSignal, model, ModelSignal } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
-import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { PopoverModule } from 'primeng/popover';
 import { UserMenuComponent } from './user-menu/user-menu.component';
 import { CommonModule, Location } from '@angular/common';
 
@@ -10,7 +10,7 @@ import { CommonModule, Location } from '@angular/common';
     imports: [
         TranslateModule,
         ButtonModule,
-        OverlayPanelModule,
+        PopoverModule,
         UserMenuComponent,
         CommonModule
     ],
