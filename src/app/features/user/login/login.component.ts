@@ -26,15 +26,16 @@ export class LoginComponent {
 
   showForm: boolean = false;
 
+  selectedBackground: string;
+
   constructor(
     private authService: AuthService,
     private router: Router,
-    private messageService: MessageService,
-    private cdRef: ChangeDetectorRef,
-    private dataAccessService: DataAccessService,
-    private activatedRoute: ActivatedRoute
+    private messageService: MessageService
   ) {
-     afterRender(() => {
+    this.selectedBackground = this.setRandomBackground();
+    
+    afterRender(() => {
       if(sessionStorage.getItem('authenticated')) {
         router.navigate(['sections']);
       }
@@ -44,8 +45,6 @@ export class LoginComponent {
 
   renderForm(): void {
     this.showForm = true;
-
-    this.cdRef.detectChanges();
   }
 
   login(credentials: LogIn) {
@@ -63,5 +62,15 @@ export class LoginComponent {
         this.isLoading.set(false);
       }
     });
+  }
+
+  setRandomBackground(): string {
+    let image_name: string = `flowers-`;
+    // Genérame un número aleatorio entre 1 y 5
+    const random_number: number = Math.floor(Math.random() * 6) + 1;
+    // Concatena el número aleatorio con el nombre de la imagen
+    image_name += `${random_number}.png`;
+
+    return `url('pictures/${image_name}')`;
   }
 }

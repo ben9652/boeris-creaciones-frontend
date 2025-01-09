@@ -1,7 +1,7 @@
 <p-toast></p-toast>
 <div class="container">
     <app-banner></app-banner>
-    <div class="login-container">
+    <div class="login-container" [style.--background-image]="selectedBackground">
         <app-form
         (enterClicked)="login($event)"
         [(loginLoading)]="isLoading"

@@ -17,7 +17,7 @@ import { RawMaterialDataFormComponent } from './raw-material-data-form/raw-mater
 export class RawMaterialsCatalogComponent {
 
   constructor(public deviceTypeService: DeviceTypeService) {
-
+    console.log('RawMaterialsCatalogComponent');
   }
 
 }
