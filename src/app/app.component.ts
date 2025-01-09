@@ -6,6 +6,8 @@ import { ActiveRouteService } from './core/services/active-route/active-route.se
 import { StorageService } from './core/services/storage/storage.service';
 import { ButtonModule } from 'primeng/button';
 import { SkeletonModule } from 'primeng/skeleton';
+import { DataAccessService } from './core/services/data-access/data-access.service';
+import { LoginComponent } from './features/user/login/login.component';
 
 @Component({
     selector: 'app-root',
@@ -13,7 +15,8 @@ import { SkeletonModule } from 'primeng/skeleton';
       CommonModule,
       RouterOutlet,
       ButtonModule,
-      SkeletonModule
+      SkeletonModule,
+      LoginComponent
     ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'
@@ -26,10 +29,8 @@ export class AppComponent {
     @Inject(PLATFORM_ID) private platformId: Object,
     @Inject(Router) private router: Router,
     private deviceTypeService: DeviceTypeService,
-    private storageService: StorageService,
     private activeRouteService: ActiveRouteService,
-    private cdr: ChangeDetectorRef,
-    @Inject(ActivatedRoute) private activatedRoute: ActivatedRoute
+    private dataAccessService: DataAccessService
   ) {
     afterRender(() => {
       deviceTypeService.isMobile();
@@ -56,5 +57,9 @@ export class AppComponent {
 
   private waitForComponentLoad(): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, 1000));
+  }
+
+  public isLoggedIn(): boolean {
+    return this.dataAccessService.getToken() !== null;
   }
 }

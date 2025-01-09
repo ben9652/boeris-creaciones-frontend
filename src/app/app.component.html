@@ -1,8 +1,6 @@
 <div class="container" [style.height]="viewportHeight + 'px'">
-    @if (isLoading) {
+    <div *ngIf="isLoading" class="skeleton-overlay">
         <p-skeleton width="100%" height="100%" />
-    }
-    @else {
-        <router-outlet/>
-    }
+    </div>
+    <router-outlet/>
 </div>
