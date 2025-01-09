@@ -1,11 +1,10 @@
 import { Routes } from '@angular/router';
 import { AuthGuard, LoggedInGuard } from './core/guards/auth.guard';
-import { LoginComponent } from './features/user/login/login.component';
-import { MainSectionComponent } from './features/sections/main-section/main-section.component';
-import { HomeComponent } from './features/sections/main-section/home/home.component';
 import { mobileAccessGuard } from './core/guards/mobile-access.guard';
 import { inject } from '@angular/core';
 import { ActiveRouteService } from './core/services/active-route/active-route.service';
+import { adminPermissionsGuard, logisticPermissionsGuard, makerPermissionsGuard, provisionerPermissionsGuard, sellerPermissionsGuard } from './core/guards/role-permissions.guard';
+import { LoginComponent } from './features/user/login/login.component';
 
 export const routes: Routes = [
     {
@@ -22,7 +21,7 @@ export const routes: Routes = [
     {
         path: 'sections',
         canActivate: [AuthGuard],
-        component: MainSectionComponent,
+        loadComponent: () => import('./features/sections/main-section/main-section.component').then(m => m.MainSectionComponent),
         children: [
             {
                 path: '',
@@ -44,43 +43,52 @@ export const routes: Routes = [
             },
             {
                 path: 'home',
-                component: HomeComponent
+                loadComponent: () => import('./features/sections/main-section/home/home.component').then(m => m.HomeComponent)
             },
             {
                 path: 'raw-materials-catalog',
-                loadComponent: () => import('./features/sections/main-section/raw-materials-catalog/raw-materials-catalog.component').then(m => m.RawMaterialsCatalogComponent)
+                loadComponent: () => import('./features/sections/main-section/raw-materials-catalog/raw-materials-catalog.component').then(m => m.RawMaterialsCatalogComponent),
+                canActivate: [adminPermissionsGuard]
             },
             {
                 path: 'products-catalog',
-                loadComponent: () => import('./features/sections/main-section/products-catalog/products-catalog.component').then(m => m.ProductsCatalogComponent)
+                loadComponent: () => import('./features/sections/main-section/products-catalog/products-catalog.component').then(m => m.ProductsCatalogComponent),
+                canActivate: [adminPermissionsGuard]
             },
             {
                 path: 'providers-catalog',
-                loadComponent: () => import('./features/sections/main-section/providers-catalog/providers-catalog.component').then(m => m.ProvidersCatalogComponent)
+                loadComponent: () => import('./features/sections/main-section/providers-catalog/providers-catalog.component').then(m => m.ProvidersCatalogComponent),
+                canActivate: [adminPermissionsGuard]
             },
             {
                 path: 'branches-catalog',
-                loadComponent: () => import('./features/sections/main-section/branches-catalog/branches-catalog.component').then(m => m.BranchesCatalogComponent)
+                loadComponent: () => import('./features/sections/main-section/branches-catalog/branches-catalog.component').then(m => m.BranchesCatalogComponent),
+                canActivate: [adminPermissionsGuard]
             },
             {
                 path: 'partners',
-                loadComponent: () => import('./features/sections/main-section/partners/partners.component').then(m => m.PartnersComponent)
+                loadComponent: () => import('./features/sections/main-section/partners/partners.component').then(m => m.PartnersComponent),
+                canActivate: [adminPermissionsGuard]
             },
             {
                 path: 'purchases',
-                loadComponent: () => import('./features/sections/main-section/purchases/purchases.component').then(m => m.PurchasesComponent)
+                loadComponent: () => import('./features/sections/main-section/purchases/purchases.component').then(m => m.PurchasesComponent),
+                canActivate: [provisionerPermissionsGuard]
             },
             {
                 path: 'productions',
-                loadComponent: () => import('./features/sections/main-section/productions/productions.component').then(m => m.ProductionsComponent)
+                loadComponent: () => import('./features/sections/main-section/productions/productions.component').then(m => m.ProductionsComponent),
+                canActivate: [provisionerPermissionsGuard]
             },
             {
                 path: 'raw-materials-labour',
-                loadComponent: () => import('./features/sections/main-section/raw-materials-labour/raw-materials-labour.component').then(m => m.RawMaterialsLabourComponent)
+                loadComponent: () => import('./features/sections/main-section/raw-materials-labour/raw-materials-labour.component').then(m => m.RawMaterialsLabourComponent),
+                canActivate: [makerPermissionsGuard]
             },
             {
                 path: 'products-labour',
-                loadComponent: () => import('./features/sections/main-section/products-labour/products-labour.component').then(m => m.ProductsLabourComponent)
+                loadComponent: () => import('./features/sections/main-section/products-labour/products-labour.component').then(m => m.ProductsLabourComponent),
+                canActivate: [makerPermissionsGuard]
             },
             {
                 path: 'accounting-book',
@@ -88,11 +96,13 @@ export const routes: Routes = [
             },
             {
                 path: 'storage',
-                loadComponent: () => import('./features/sections/main-section/storage/storage.component').then(m => m.StorageComponent)
+                loadComponent: () => import('./features/sections/main-section/storage/storage.component').then(m => m.StorageComponent),
+                canActivate: [logisticPermissionsGuard]
             },
             {
                 path: 'sales',
-                loadComponent: () => import('./features/sections/main-section/sales/sales.component').then(m => m.SalesComponent)
+                loadComponent: () => import('./features/sections/main-section/sales/sales.component').then(m => m.SalesComponent),
+                canActivate: [sellerPermissionsGuard]
             }
         ],
     },
@@ -103,51 +113,51 @@ export const routes: Routes = [
     {
         path: 'roles-edition',
         loadComponent: () => import('./features/sections/sub-sections/roles-edition/roles-edition.component').then(m => m.RolesEditionComponent),
-        canActivate: [mobileAccessGuard]
+        canActivate: [mobileAccessGuard, adminPermissionsGuard]
     },
     {
         path: 'partner-addition',
         loadComponent: () => import('./features/sections/sub-sections/mobile-partner-addition/mobile-partner-addition.component').then(m => m.MobilePartnerAdditionComponent),
-        canActivate: [mobileAccessGuard]
+        canActivate: [mobileAccessGuard, adminPermissionsGuard]
     },
     {
         path: 'raw-material-addition',
         loadComponent: () => import('./features/sections/sub-sections/mobile-raw-material-data/mobile-raw-material-data.component').then(m => m.MobileRawMaterialDataComponent),
-        canActivate: [mobileAccessGuard]
+        canActivate: [mobileAccessGuard, adminPermissionsGuard]
     },
     {
         path: 'raw-material-edition',
         loadComponent: () => import('./features/sections/sub-sections/mobile-raw-material-data/mobile-raw-material-data.component').then(m => m.MobileRawMaterialDataComponent),
-        canActivate: [mobileAccessGuard]
+        canActivate: [mobileAccessGuard, adminPermissionsGuard]
     },
     {
         path: 'product-addition',
         loadComponent: () => import('./features/sections/sub-sections/mobile-product-data/mobile-product-data.component').then(m => m.MobileProductDataComponent),
-        canActivate: [mobileAccessGuard]
+        canActivate: [mobileAccessGuard, adminPermissionsGuard]
     },
     {
         path: 'product-edition',
         loadComponent: () => import('./features/sections/sub-sections/mobile-product-data/mobile-product-data.component').then(m => m.MobileProductDataComponent),
-        canActivate: [mobileAccessGuard]
+        canActivate: [mobileAccessGuard, adminPermissionsGuard]
     },
     {
         path: 'provider-addition',
         loadComponent: () => import('./features/sections/sub-sections/mobile-provider-data/mobile-provider-data.component').then(m => m.MobileProviderDataComponent),
-        canActivate: [mobileAccessGuard]
+        canActivate: [mobileAccessGuard, adminPermissionsGuard]
     },
     {
         path: 'provider-edition',
         loadComponent: () => import('./features/sections/sub-sections/mobile-provider-data/mobile-provider-data.component').then(m => m.MobileProviderDataComponent),
-        canActivate: [mobileAccessGuard]
+        canActivate: [mobileAccessGuard, adminPermissionsGuard]
     },
     {
         path: 'branch-addition',
         loadComponent: () => import('./features/sections/sub-sections/mobile-branch-data/mobile-branch-data.component').then(m => m.MobileBranchDataComponent),
-        canActivate: [mobileAccessGuard]
+        canActivate: [mobileAccessGuard, adminPermissionsGuard]
     },
     {
         path: 'branch-edition',
         loadComponent: () => import('./features/sections/sub-sections/mobile-branch-data/mobile-branch-data.component').then(m => m.MobileBranchDataComponent),
-        canActivate: [mobileAccessGuard]
+        canActivate: [mobileAccessGuard, adminPermissionsGuard]
     }
 ];

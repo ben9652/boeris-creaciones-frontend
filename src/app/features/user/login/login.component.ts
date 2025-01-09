@@ -31,10 +31,7 @@ export class LoginComponent {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private messageService: MessageService,
-    private cdRef: ChangeDetectorRef,
-    private dataAccessService: DataAccessService,
-    private activatedRoute: ActivatedRoute
+    private messageService: MessageService
   ) {
     this.selectedBackground = this.setRandomBackground();
     
@@ -48,8 +45,6 @@ export class LoginComponent {
 
   renderForm(): void {
     this.showForm = true;
-
-    this.cdRef.detectChanges();
   }
 
   login(credentials: LogIn) {
