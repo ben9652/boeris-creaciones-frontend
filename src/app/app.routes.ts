@@ -4,13 +4,12 @@ import { mobileAccessGuard } from './core/guards/mobile-access.guard';
 import { inject } from '@angular/core';
 import { ActiveRouteService } from './core/services/active-route/active-route.service';
 import { adminPermissionsGuard, logisticPermissionsGuard, makerPermissionsGuard, provisionerPermissionsGuard, sellerPermissionsGuard } from './core/guards/role-permissions.guard';
-import { LoginComponent } from './features/user/login/login.component';
 
 export const routes: Routes = [
     {
         path: 'login',
         canActivate: [LoggedInGuard],
-        component: LoginComponent,
+        loadComponent: () => import('./features/user/login/login.component').then(m => m.LoginComponent),
         pathMatch: 'full'
     },
     {

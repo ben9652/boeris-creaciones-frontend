@@ -1,14 +1,12 @@
-import { afterRender, AfterViewInit, ChangeDetectorRef, Component, DoCheck, OnInit, signal, SimpleChanges, WritableSignal } from '@angular/core';
+import { afterRender, Component, signal, WritableSignal } from '@angular/core';
 import { BannerComponent } from './banner/banner.component';
 import { FormComponent } from './form/form.component';
 import { ToastModule } from 'primeng/toast';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { AuthService } from '../../../core/services/auth/auth.service';
-import { User } from '../../../core/models/user.entities';
 import { ApiMessage } from '../../../core/models/apimessage.entities';
 import { LogIn } from '../../../core/models/login.entities';
-import { DataAccessService } from '../../../core/services/data-access/data-access.service';
 
 @Component({
     selector: 'app-login',

@@ -6,6 +6,15 @@ body {
     margin-top: 15vh;
 }
 
+.skeleton-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+}
+
 @media screen and (max-width: 500px) {
     .section {
         margin-top: 10vh;
