@@ -1,0 +1,26 @@
+<p-table [value]="purchased_raw_materials().items" [tableStyle]="{ 'min-width': '50%', 'width': '100%' }">
+    <ng-template #header>
+        <tr>
+            <th>{{ 'SECTIONS.PROVISIONS.PURCHASES.SUMMARY.RAW_MATERIAL' | translate }}</th>
+            <th>{{ 'SECTIONS.PROVISIONS.PURCHASES.SUMMARY.QUANTITY' | translate }}</th>
+            <th>{{ 'SECTIONS.PROVISIONS.PURCHASES.SUMMARY.UNIT_PRICE' | translate }}</th>
+            <th>{{ 'SECTIONS.PROVISIONS.PURCHASES.SUMMARY.SUBTOTAL' | translate }}</th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-raw_material>
+        <tr>
+            <td>{{ raw_material.name }}</td>
+            <td class="qnty-field">{{ raw_material.quantity }}</td>
+            <td class="money-field">$ {{ raw_material.unit_price }}</td>
+            <td class="money-field">$ {{ raw_material.total }}</td>
+        </tr>
+    </ng-template>
+    <ng-template #footer>
+        <tr>
+            <td class="without-background"></td>
+            <td class="without-background"></td>
+            <td class="subtotal">{{ 'SECTIONS.PROVISIONS.PURCHASES.SUMMARY.SUBTOTAL' | translate }}</td>
+            <td class="money-field" style="background-color: var(--p-secondary-700);">$ {{ purchased_raw_materials().total }}</td>
+        </tr>
+    </ng-template>
+</p-table>
