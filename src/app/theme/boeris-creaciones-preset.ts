@@ -483,11 +483,11 @@ export const BoerisCreaciones = definePreset(Aura, {
                     hoverMutedColor: "{surface.600}"
                 },
                 content: {
-                    background: "{primary.color}",
-                    hoverBackground: "{primary.hoverColor}",
-                    borderColor: "{secondary.color}",
-                    color: "{secondary.color}",
-                    hoverColor: "{secondary.activeColor}"
+                    background: "{secondary.color}",
+                    hoverBackground: "{secondary.hoverColor}",
+                    borderColor: "{primary.color}",
+                    color: "{primary.color}",
+                    hoverColor: "{primary.activeColor}"
                 },
                 overlay: {
                     select: {
@@ -714,7 +714,12 @@ export const BoerisCreaciones = definePreset(Aura, {
                 }
             },
             panel: {
-                padding: "0px"
+                padding: "0px",
+                background: "{primary.color}",
+                itemFocusBackground: "{primary.hoverColor}",
+                itemFocusColor: "{secondary.color}",
+                borderColor: "{secondary.color}",
+                color: "{secondary.color}"
             }
         },
         dialog: {
@@ -749,6 +754,14 @@ export const BoerisCreaciones = definePreset(Aura, {
         },
         fieldset: {
             background: "{secondary.color}",
+        },
+        datatable: {
+            header: {
+                cell: {
+                    background: "{primary.color} !important",
+                    color: "{secondary.color} !important"
+                }
+            }
         }
     }
 });

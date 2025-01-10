@@ -276,6 +276,18 @@
                 "UPLOAD": "Subir archivo"
             }
         },
+        "PROVISIONS": {
+            "PURCHASES": {
+                "SUMMARY": {
+                    "TITLE": "Resumen de compras",
+                    "RAW_MATERIAL": "Materia prima",
+                    "QUANTITY": "Cantidad",
+                    "UNIT_PRICE": "Precio unitario",
+                    "SUBTOTAL": "Subtotal",
+                    "TOTAL": "Total"
+                }
+            }
+        },
         "SIDEBAR": {
             "ROOT": {
                 "HOME": "Inicio",
