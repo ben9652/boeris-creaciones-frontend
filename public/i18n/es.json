@@ -4,7 +4,8 @@
         "BUTTONS": {
             "CANCEL": "Cancelar",
             "APPLY": "Aplicar",
-            "CONFIRM": "Confirmar"
+            "CONFIRM": "Confirmar",
+            "ACCEPT": "Aceptar"
         },
         "MESSAGES": {
             "SUMMARY": {
@@ -285,6 +286,20 @@
                     "UNIT_PRICE": "Precio unitario",
                     "SUBTOTAL": "Subtotal",
                     "TOTAL": "Total"
+                },
+                "RECEPTION": {
+                    "TITLE": "Recepción de compra",
+                    "FIELDS": {
+                        "BRANCH": "Sucursal de recepción",
+                        "INVOICE": {
+                            "LOAD": "Cargar factura",
+                            "SUBLABEL": "Opcional"
+                        },
+                        "ERROR": {
+                            "BRANCH": "Debe seleccionar una sucursal",
+                            "INVOICE": "Debe cargar una factura"
+                        }
+                    }
                 }
             }
         },

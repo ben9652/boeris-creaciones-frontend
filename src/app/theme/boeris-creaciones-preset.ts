@@ -522,7 +522,7 @@ export const BoerisCreaciones = definePreset(Aura, {
                     },
                     optionGroup: {
                         background: "transparent",
-                        color: "{text.muted.color}"
+                        color: "{primary.color}"
                     }
                 },
                 navigation: {

@@ -1,0 +1,46 @@
+<div class="fields">
+    <div>
+        <app-branches-dropdown
+        (getBranch)="onBranchSelected($event)"
+        style="justify-content: left;"
+        ></app-branches-dropdown>
+
+        @if (fieldsLack) {
+            <p class="error-message">
+                {{ 'SECTIONS.PROVISIONS.PURCHASES.RECEPTION.FIELDS.ERROR.BRANCH' | translate }}
+            </p>
+        }
+        @else {
+            <p> </p>
+        }
+    </div>
+    
+    <div class="upload-file">
+        <p-fileupload #fileUpload
+        mode="basic"
+        name="demo[]"
+        [chooseLabel]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.RECEPTION.FIELDS.INVOICE.LOAD')"
+        chooseIcon="fas fa-upload"
+        uploadIcon="fas fa-upload"
+        [customUpload]="true"
+        [accept]="'.png,.jpg,.jpeg,.pdf'"
+        (onSelect)="onInvoiceLoading($event)"
+        [showCancelButton]="true"
+        />
+        <p class="optional-message">
+            ({{ 'SECTIONS.PROVISIONS.PURCHASES.RECEPTION.FIELDS.INVOICE.SUBLABEL' | translate }})
+        </p>
+    </div>
+    
+    <footer class="buttons">
+        <p-button
+        severity="secondary"
+        [label]="translateService.instant('SHARED.BUTTONS.CANCEL')"
+        (onClick)="onCancel()"
+        ></p-button>
+        <p-button
+        [label]="translateService.instant('SHARED.BUTTONS.ACCEPT')"
+        (onClick)="onAccept()"
+        ></p-button>
+    </footer>
+</div>

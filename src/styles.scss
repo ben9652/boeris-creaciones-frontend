@@ -104,3 +104,7 @@ li.p-select-option:not(.p-select-option-selected):not(.p-disabled).p-focus {
 div.p-listbox-list-container {
     max-height: 360px !important;
 }
+
+.p-dialog-title {
+    user-select: none;
+}
