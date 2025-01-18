@@ -1,0 +1,50 @@
+.status {
+
+}
+
+.fields {
+    display: flex;
+    flex-direction: row;
+}
+
+.field-icon {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.left-panel {
+    display: flex;
+    flex-direction: column;
+}
+
+.right-panel {
+    display: flex;
+    flex-direction: row;
+}
+
+.vertical-fields {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.id-provider {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}

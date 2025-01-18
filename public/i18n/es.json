@@ -300,6 +300,29 @@
                             "INVOICE": "Debe cargar una factura"
                         }
                     }
+                },
+                "CARD": {
+                    "STATUS": {
+                        "REQUESTED": "Pedido",
+                        "RECEIVED": "Recibido"
+                    },
+                    "FIELDS": {
+                        "ID": "ID",
+                        "DESCRIPTION": "Descripción",
+                        "PROVIDER": "Proveedor",
+                        "PARTNER": "Socio",
+                        "PRICE": "Monto",
+                        "REQUEST_DATE": "Fecha de pedido",
+                        "RECEPTION_DATE": "Fecha de recepción",
+                        "CANCELATION_DATE": "Fecha de cancelación",
+                        "RECEPTION_MODE": "Modo de recepción",
+                        "BRANCH": "Sucursal"
+                    },
+                    "BUTTONS": {
+                        "VIEW_SUMMARY": "Ver resumen",
+                        "RECEIVE": "Recibir",
+                        "CANCEL": "Cancelar"
+                    }
                 }
             }
         },
