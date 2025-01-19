@@ -1,5 +1,5 @@
 import { Component, input, InputSignal } from '@angular/core';
-import { PurchaseSummary } from '../../../../../core/models/purchaseSummary';
+import { PurchaseSummary } from '../../../../../core/models/purchaseSummary.entities';
 import { TableModule } from 'primeng/table';
 import { TranslateModule } from '@ngx-translate/core';
 

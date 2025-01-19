@@ -1,5 +1,9 @@
 @use '../../../../../../public/theme/boeris-theme';
 
+:host ::ng-deep .p-button-text.p-button-secondary {
+    color: boeris-theme.$secondaryColor !important;
+}
+
 .icon-container {
     display: flex;
     justify-content: center;

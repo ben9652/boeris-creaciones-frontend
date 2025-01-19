@@ -1,0 +1,96 @@
+p-card.medium-card {
+    width: 100%;
+}
+
+.cards {
+    display: flex;
+    margin: 5px;
+}
+
+.status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.left-card {
+    border-radius: var(--p-card-border-radius) 0px 0px var(--p-card-border-radius);
+    
+    ::ng-deep .p-card {
+        border-radius: var(--p-card-border-radius) 0px 0px var(--p-card-border-radius);
+    }
+}
+
+.left-card.status-pending {
+    ::ng-deep .p-card {
+        background-color: rgba($color: yellow, $alpha: 0.4);
+    }
+
+    .status {
+        i {
+            color: rgb(218, 218, 0);
+        }
+    }
+}
+
+.left-card.status-received {
+    ::ng-deep .p-card {
+        background-color: rgba($color: green, $alpha: 0.4);
+    }
+
+    .status {
+        i {
+            color: green;
+        }
+    }
+}
+
+.left-card.status-canceled {
+    ::ng-deep .p-card {
+        background-color: rgba($color: red, $alpha: 0.5);
+    }
+
+    .status {
+        i {
+            color: red;
+        }
+    }
+}
+
+.medium-card {
+    border-radius: 0px;
+    
+    ::ng-deep .p-card {
+        border-radius: 0px;
+    }
+}
+
+.right-card {
+    border-radius: 0px var(--p-card-border-radius) var(--p-card-border-radius) 0px;
+    
+    ::ng-deep .p-card {
+        border-radius: 0px var(--p-card-border-radius) var(--p-card-border-radius) 0px;
+    }
+}
+
+.custom-card {
+    overflow: hidden;
+    position: relative;
+}
+
+.content {
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-items: center;
+    height: 100%;
+}

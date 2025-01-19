@@ -1,0 +1,67 @@
+<div class="cards">
+    <p-card class="left-card" [ngClass]="{
+        'status-pending': purchase().status === 'P',
+        'status-received': purchase().status === 'R',
+        'status-canceled': purchase().status === 'C'
+    }">
+        <div class="status">
+            @if (purchase().status === 'P') {
+                <i class="fas fa-clock fa-2xl"></i>
+            }
+            @else if (purchase().status === 'R') {
+                <i class="fas fa-circle-check fa-2xl"></i>
+            }
+            @else if (purchase().status === 'C') {
+                <i class="fas fa-circle-xmark fa-2xl"></i>
+            }
+        </div>
+    </p-card>
+    <p-card class="medium-card" styleClass="custom-card">
+        <div class="content">
+            <app-purchase-card-fields
+            [purchase]="purchase()"
+            ></app-purchase-card-fields>
+        </div>
+    </p-card>
+    <p-card class="right-card">
+        <div class="buttons">
+            <p-button
+            [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.BUTTONS.VIEW_SUMMARY')"
+            tooltipPosition="left"
+            icon="fas fa-eye"
+            (onClick)="showSummary = true"
+            ></p-button>
+
+            @if(purchase().status === 'P') {
+                <p-button
+                severity="success"
+                [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.BUTTONS.RECEIVE')"
+                tooltipPosition="left"
+                icon="fas fa-hand-holding"
+                (onClick)="showReception = true"
+                ></p-button>
+                <p-button
+                severity="danger"
+                [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.BUTTONS.CANCEL')"
+                tooltipPosition="left"
+                icon="fas fa-xmark"
+                (onClick)="cancelPurchase($event)"
+                ></p-button>
+                <p-toast />
+                <p-confirmdialog />
+            }
+        </div>
+    </p-card>
+</div>
+
+<p-dialog [header]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.SUMMARY.TITLE')" [modal]="true" [dismissableMask]="true" [(visible)]="showSummary">
+    <app-purchase-summary
+    [purchased_raw_materials]="purchaseSummary"
+    ></app-purchase-summary>
+</p-dialog>
+
+<p-dialog [header]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.RECEPTION.TITLE')" [modal]="true" [dismissableMask]="true" [(visible)]="showReception">
+    <app-purchase-reception
+    (onAcceptEvent)="receivePurchase($event)"
+    ></app-purchase-reception>
+</p-dialog>
