@@ -316,7 +316,7 @@
                         "RECEPTION_DATE": "Fecha de recepción",
                         "CANCELATION_DATE": "Fecha de cancelación",
                         "RECEPTION_MODE": "Modo de recepción",
-                        "BRANCH": "Sucursal"
+                        "BRANCH": "Sucursal de recepción"
                     },
                     "BUTTONS": {
                         "VIEW_SUMMARY": "Ver resumen",

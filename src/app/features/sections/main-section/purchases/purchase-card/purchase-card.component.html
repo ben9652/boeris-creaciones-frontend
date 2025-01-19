@@ -1,10 +1,29 @@
-<p-card styleClass="custom-card">
-    <div class="content">
-        <app-purchase-card-fields
-        [purchase]="purchase()"
-        ></app-purchase-card-fields>
-        <div class="buttons">
-    
+<div class="cards">
+    <p-card class="left-card" [ngClass]="{
+        'status-pending': purchase().status === 'P',
+        'status-received': purchase().status === 'R',
+        'status-canceled': purchase().status === 'C'
+    }">
+        <div class="status">
+            @if (purchase().status === 'P') {
+                <i class="fas fa-clock fa-2xl"></i>
+            }
+            @else if (purchase().status === 'R') {
+                <i class="fas fa-circle-check fa-2xl"></i>
+            }
+            @else if (purchase().status === 'C') {
+                <i class="fas fa-circle-xmark fa-2xl"></i>
+            }
         </div>
-    </div>
-</p-card>
+    </p-card>
+    <p-card class="right-card" styleClass="custom-card">
+        <div class="content">
+            <app-purchase-card-fields
+            [purchase]="purchase()"
+            ></app-purchase-card-fields>
+            <div class="buttons">
+        
+            </div>
+        </div>
+    </p-card>
+</div>

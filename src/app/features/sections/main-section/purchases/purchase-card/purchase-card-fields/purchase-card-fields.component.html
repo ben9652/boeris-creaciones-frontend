@@ -1,9 +1,4 @@
-<!-- @if (!deviceTypeService.isMobile()) { -->
-    <!-- <div class="status">
-        @if (purchase().status === 'P') {
-            <i class="fas fa-clock fa-2xl"></i>
-        }
-    </div> -->
+@if (!deviceTypeService.isMobile()) {
     <div #fields class="fields">
         <div class="left-panel">
             <div #idContainer class="id-provider">
@@ -42,7 +37,7 @@
                     </p>
                 </div>
                 <div class="field-icon">
-                    <i class="fas fa-money-checker-dollar"></i>
+                    <i class="fas fa-money-check-dollar"></i>
                     <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.PRICE')" tooltipPosition="top">
                         $ {{ purchase().price }}
                     </p>
@@ -59,28 +54,30 @@
                     </div>
                 </div>
                 @if (purchase().status === 'R') {
-                    <div class="row-fields">
+                    <div class="row-fields align-items-start">
                         <div class="field-icon">
                             <i class="fas fa-calendar-check"></i>
                             <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.RECEPTION_DATE')" tooltipPosition="top">
                                 {{ purchase().reception_date | date: 'dd/MM/yyyy' }}
                             </p>
                         </div>
-                        <div class="field-icon">
-                            <i class="fas fa-truck"></i>
-                            <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.RECEPTION_MODE')" tooltipPosition="top">
-                                {{ purchase().reception_mode }}
-                            </p>
-                        </div>
-                        <div class="field-icon">
+                        <div class="received-fields">
+                            <div class="field-icon">
+                                <i class="fas fa-truck"></i>
+                                <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.RECEPTION_MODE')" tooltipPosition="top">
+                                    {{ purchase().reception_mode }}
+                                </p>
+                            </div>
+                            <div class="field-icon">
                             <i class="fas fa-store"></i>
-                            <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.BRANCH')" tooltipPosition="top">
-                                {{ purchase().reception_branch?.name }}
-                            </p>
+                            <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.BRANCH')">
+                                    {{ purchase().reception_branch?.name }}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 }
-    
+
                 @if(purchase().status === 'C') {
                     <div class="row-fields">
                         <div class="field-icon">
@@ -94,7 +91,7 @@
             </div>
         </div>
     </div>
-<!-- }
+}
 @else {
     
-} -->
+}

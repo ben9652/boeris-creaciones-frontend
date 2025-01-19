@@ -13,6 +13,7 @@ import { Purchase } from '../../../../core/models/purchase.entities';
 export class PurchasesComponent {
     purchase1: Purchase;
     purchase2: Purchase;
+    purchase3: Purchase;
 
     constructor() {
         const purchase1: Purchase = {
@@ -131,7 +132,60 @@ export class PurchasesComponent {
             invoice: "INV-2025-0002",
         };
 
+        const purchaseCanceled: Purchase = {
+            id: 3,
+            description: "Compra de artículos de oficina",
+            requester_partner: {
+                id_user: 103,
+                username: "carlos_garcia",
+                firstName: "Carlos",
+                lastName: "Garcia",
+                email: "cgarcia@example.com",
+                role: "Admin",
+            },
+            provider: {
+                id: 203,
+                name: "Office Supplies S.A.",
+                residence: "Córdoba, Argentina",
+                phone: 3519876543,
+                cvu_or_alias: "office_supplies",
+                category: {
+                    id: 3,
+                    name: "Oficina",
+                },
+            },
+            raw_materials: [
+                {
+                    raw_material_id: 501,
+                    category: { id: 3, name: "Oficina" },
+                    name: "Resmas de papel",
+                    quantity: 20,
+                    unit_price: 1200,
+                    total: 24000,
+                },
+                {
+                    raw_material_id: 502,
+                    category: { id: 3, name: "Oficina" },
+                    name: "Lápices",
+                    quantity: 100,
+                    unit_price: 50,
+                    total: 5000,
+                },
+            ],
+            order_date: new Date("2025-01-05"),
+            reception_date: null,
+            canceled_date: new Date("2025-01-07"),
+            currency: "ARS",
+            payment_type: "Efectivo",
+            reception_mode: "Envio",
+            reception_branch: null,
+            status: 'C',
+            price: 29000,
+            invoice: null,
+        };
+
         this.purchase1 = purchase1;
         this.purchase2 = purchase2;
+        this.purchase3 = purchaseCanceled;
     }
 }
