@@ -762,6 +762,14 @@ export const BoerisCreaciones = definePreset(Aura, {
                     color: "{secondary.color} !important"
                 }
             }
+        },
+        tooltip: {
+            background: "{secondary.600} !important",
+            color: "{primary.color} !important",
+            borderColor: "{secondary.600} !important"
+        },
+        popover: {
+            color: "{primary.color}"
         }
     }
 });
