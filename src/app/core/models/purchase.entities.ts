@@ -1,6 +1,6 @@
 import { Branch } from "./branch.entities";
 import { Provider } from "./provider.entities";
-import { ItemPurchaseSummary } from "./purchaseSummary";
+import { ItemPurchaseSummary } from "./purchaseSummary.entities";
 import { User } from "./user.entities";
 
 export interface Purchase {

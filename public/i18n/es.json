@@ -322,6 +322,21 @@
                         "VIEW_SUMMARY": "Ver resumen",
                         "RECEIVE": "Recibir",
                         "CANCEL": "Cancelar"
+                    },
+                    "MESSAGES": {
+                        "RECEIVED": "Compra recibida",
+                        "CANCELED": "Compra cancelada",
+                        "HEADER_CANCEL": "Confirmación de cancelación",
+                        "CONFIRM_CANCEL": "¿Estás seguro de que querés cancelar la compra?"
+                    },
+                    "TOAST": {
+                        "RECEIVED": {
+                            
+                        },
+                        "CANCELED": {
+                            "HEADER": "Confirmado",
+                            "DETAIL": "La compra ha sido cancelada"
+                        }
                     }
                 }
             }

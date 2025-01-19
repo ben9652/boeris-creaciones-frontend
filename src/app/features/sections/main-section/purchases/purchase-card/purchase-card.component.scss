@@ -1,4 +1,4 @@
-p-card.right-card {
+p-card.medium-card {
     width: 100%;
 }
 
@@ -58,6 +58,14 @@ p-card.right-card {
     }
 }
 
+.medium-card {
+    border-radius: 0px;
+    
+    ::ng-deep .p-card {
+        border-radius: 0px;
+    }
+}
+
 .right-card {
     border-radius: 0px var(--p-card-border-radius) var(--p-card-border-radius) 0px;
     
@@ -76,4 +84,13 @@ p-card.right-card {
     height: 100%;
 
     overflow: hidden;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-items: center;
+    height: 100%;
 }

@@ -9,6 +9,7 @@
     [placeholder]="'Selecciona un proveedor'"
     [group]="true"
     (onChange)="onSelection($event)"
+    appendTo="body"
     >
         <ng-template let-group pTemplate="group">
             <div class="flex align-items-center">
