@@ -1,16 +1,21 @@
 @if (products) {
-    <p-select
-    [options]="products"
-    [style]="{ width: '15rem' }"
-    optionLabel="name"
-    [filter]="true"
-    filterBy="name"
-    [emptyMessage]="'No se encontraron elementos'"
-    [emptyFilterMessage]="'No hay resultados'"
-    [placeholder]="'Selecciona un producto'"
-    (onChange)="onSelection($event)"
-    ></p-select>
-}
-@else {
-    <p-skeleton width="15rem" height="3rem" styleClass="mb-2"></p-skeleton>
+<p-select
+  [options]="products"
+  [style]="{ width: '15rem' }"
+  optionLabel="name"
+  [filter]="true"
+  filterBy="name"
+  [emptyMessage]="
+    translateService.instant('SECTIONS.CATALOGS.DROPDOWNS.EMPTY_MESSAGE')
+  "
+  [emptyFilterMessage]="
+    translateService.instant('SECTIONS.CATALOGS.DROPDOWNS.EMPTY_FILTER_MESSAGE')
+  "
+  [placeholder]="
+    translateService.instant('SECTIONS.CATALOGS.PRODUCTS.DROPDOWNS')
+  "
+  (onChange)="onSelection($event)"
+></p-select>
+} @else {
+<p-skeleton width="15rem" height="3rem" styleClass="mb-2"></p-skeleton>
 }

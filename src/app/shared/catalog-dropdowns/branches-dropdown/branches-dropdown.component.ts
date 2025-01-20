@@ -20,6 +20,7 @@ export class BranchesDropdownComponent {
   groupedBranches: SelectItemGroup[] | null = null;
   
   getBranch: OutputEmitterRef<BranchBase> = output<BranchBase>();
+translateService: any;
 
   constructor(
     private branchesService: BranchesService

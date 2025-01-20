@@ -22,6 +22,7 @@ export class RawMaterialsDropdownComponent {
   rawMaterials: SelectItemGroup[] | null = null;
 
   getRawMaterial: OutputEmitterRef<RawMaterialBase> = output<RawMaterialBase>();
+translateService: any;
 
   constructor(
     private rawMaterialsService: RawMaterialsService

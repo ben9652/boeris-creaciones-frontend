@@ -19,6 +19,7 @@ export class ProductsDropdownComponent {
   products: Product[] | null = null;
   
   getProduct: OutputEmitterRef<Product> = output<Product>();
+translateService: any;
 
   constructor(
     private productsService: ProductsService

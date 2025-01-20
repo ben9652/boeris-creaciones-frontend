@@ -20,6 +20,7 @@ export class ProvidersDropdownComponent {
   groupedProviders: SelectItemGroup[] | null = null;
 
   getProvider: OutputEmitterRef<ProviderBase> = output<ProviderBase>();
+translateService: any;
 
   constructor(
     private providersService: ProvidersService

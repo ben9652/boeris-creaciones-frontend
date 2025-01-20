@@ -1,22 +1,27 @@
 @if (groupedProviders) {
-    <p-select
-    [options]="groupedProviders"
-    [style]="{ width: '15rem' }"
-    [filter]="true"
-    filterBy="label"
-    [emptyMessage]="'No se encontraron elementos'"
-    [emptyFilterMessage]="'No hay resultados'"
-    [placeholder]="'Selecciona un proveedor'"
-    [group]="true"
-    (onChange)="onSelection($event)"
-    >
-        <ng-template let-group pTemplate="group">
-            <div class="flex align-items-center">
-                <span>{{ group.label }}</span>
-            </div>
-        </ng-template>
-    </p-select>
-}
-@else {
-    <p-skeleton width="15rem" height="3rem" styleClass="mb-2"></p-skeleton>
+<p-select
+  [options]="groupedProviders"
+  [style]="{ width: '15rem' }"
+  [filter]="true"
+  filterBy="label"
+  [emptyMessage]="
+    translateService.instant('SECTIONS.CATALOGS.DROPDOWNS.EMPTY_MESSAGE')
+  "
+  [emptyFilterMessage]="
+    translateService.instant('SECTIONS.CATALOGS.DROPDOWNS.EMPTY_FILTER_MESSAGE')
+  "
+  [placeholder]="
+    translateService.instant('SECTIONS.CATALOGS.PROVIDERS.DROPDOWNS')
+  "
+  [group]="true"
+  (onChange)="onSelection($event)"
+>
+  <ng-template let-group pTemplate="group">
+    <div class="flex align-items-center">
+      <span>{{ group.label }}</span>
+    </div>
+  </ng-template>
+</p-select>
+} @else {
+<p-skeleton width="15rem" height="3rem" styleClass="mb-2"></p-skeleton>
 }
