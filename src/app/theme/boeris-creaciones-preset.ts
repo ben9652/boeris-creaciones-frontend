@@ -691,11 +691,34 @@ export const BoerisCreaciones = definePreset(Aura, {
                     background: "{secondary.600} !important",
                     color: "{secondary.contrastColor} !important",
                     borderColor: "{secondary.600} !important"
-                } 
+                },
+                focus: {
+                    ring: {
+                        color: "{primary.color} !important"
+                    }
+                }
+            },
+            success: {
+                color: "{green.700} !important",
+                active: {
+                    color: "{green.600} !important"
+                },
+                hover: {
+                    color: "{green.400} !important"
+                }
+            },
+            danger: {
+                color: "{red.700} !important",
+                active: {
+                    color: "{red.600} !important"
+                },
+                hover: {
+                    color: "{red.400} !important"
+                }
             },
             text: {
                 secondary: {
-                    color: "{secondary.color} !important",
+                    color: "{secondary.contrastColor} !important",
                     hover: {
                         color: "{secondary.400} !important",
                         background: "{primary.300} !important"
@@ -761,6 +784,19 @@ export const BoerisCreaciones = definePreset(Aura, {
                     background: "{primary.color} !important",
                     color: "{secondary.color} !important"
                 }
+            }
+        },
+        tooltip: {
+            background: "{secondary.600} !important",
+            color: "{primary.color} !important",
+            borderColor: "{secondary.600} !important"
+        },
+        popover: {
+            color: "{primary.color}"
+        },
+        confirmdialog: {
+            icon: {
+                color: "{primary.color}"
             }
         }
     }

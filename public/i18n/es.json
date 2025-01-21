@@ -308,6 +308,44 @@
               "INVOICE": "Debe cargar una factura"
             }
           }
+                },
+                "CARD": {
+                    "STATUS": {
+                        "REQUESTED": "Pedido",
+                        "RECEIVED": "Recibido"
+                    },
+                    "FIELDS": {
+                        "ID": "ID",
+                        "DESCRIPTION": "Descripción",
+                        "PROVIDER": "Proveedor",
+                        "PARTNER": "Socio",
+                        "PRICE": "Monto",
+                        "REQUEST_DATE": "Fecha de pedido",
+                        "RECEPTION_DATE": "Fecha de recepción",
+                        "CANCELATION_DATE": "Fecha de cancelación",
+                        "RECEPTION_MODE": "Modo de recepción",
+                        "BRANCH": "Sucursal de recepción"
+                    },
+                    "BUTTONS": {
+                        "VIEW_SUMMARY": "Ver resumen",
+                        "RECEIVE": "Recibir",
+                        "CANCEL": "Cancelar"
+                    },
+                    "MESSAGES": {
+                        "RECEIVED": "Compra recibida",
+                        "CANCELED": "Compra cancelada",
+                        "HEADER_CANCEL": "Confirmación de cancelación",
+                        "CONFIRM_CANCEL": "¿Estás seguro de que querés cancelar la compra?"
+                    },
+                    "TOAST": {
+                        "RECEIVED": {
+                            
+                        },
+                        "CANCELED": {
+                            "HEADER": "Confirmado",
+                            "DETAIL": "La compra ha sido cancelada"
+                        }
+                    }
         }
       }
     },

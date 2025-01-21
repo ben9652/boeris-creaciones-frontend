@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node ./set-env.js && nx serve",
-    "build": "node ./set-env.js && nx build",
-    "watch": "nx build --watch --configuration development",
-    "test": "nx test",
+    "start": "node ./set-env.js && ng serve",
+    "build": "node ./set-env.js && ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
     "serve:ssr:boeris-creaciones-frontend": "node dist/boeris-creaciones-frontend/server/server.mjs"
   },
   "private": true,
@@ -40,8 +40,6 @@
     "@angular-devkit/schematics": "^19.0.6",
     "@angular/cli": "^19.0.6",
     "@angular/compiler-cli": "^19.0.5",
-    "@nx/angular": "20.3.0",
-    "@nx/workspace": "20.3.0",
     "@schematics/angular": "^19.0.6",
     "@types/express": "^4.17.17",
     "@types/jasmine": "~5.1.0",
@@ -54,7 +52,6 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "nx": "20.3.0",
     "typescript": "~5.6.3"
   }
 }
