@@ -1,23 +1,28 @@
 @if (groupedBranches) {
-    <p-select
-    [options]="groupedBranches"
-    [style]="{ width: '15rem' }"
-    [filter]="true"
-    filterBy="label"
-    [emptyMessage]="'No se encontraron elementos'"
-    [emptyFilterMessage]="'No hay resultados'"
-    [placeholder]="'Selecciona una sucursal'"
-    [group]="true"
-    (onChange)="onSelection($event)"
-    appendTo="body"
-    >
-        <ng-template let-group pTemplate="group">
-            <div class="flex align-items-center">
-                <span>{{ group.label }}</span>
-            </div>
-        </ng-template>
-    </p-select>
-}
-@else {
-    <p-skeleton width="15rem" height="3rem" styleClass="mb-2"></p-skeleton>
+<p-select
+  [options]="groupedBranches"
+  [style]="{ width: '15rem' }"
+  [filter]="true"
+  filterBy="label"
+  [emptyMessage]="
+    translateService.instant('SHARED.DROPDOWN.EMPTY_MESSAGES.BRANCHES')
+  "
+  [emptyFilterMessage]="
+    translateService.instant('SHARED.DROPDOWN.EMPTY_FILTER_MESSAGE')
+  "
+  [placeholder]="
+    translateService.instant('SHARED.DROPDOWN.SELECTION_MESSAGE.BRANCH')
+  "
+  [group]="true"
+  (onChange)="onSelection($event)"
+  appendTo="body"
+>
+  <ng-template let-group pTemplate="group">
+    <div class="flex align-items-center">
+      <span>{{ group.label }}</span>
+    </div>
+  </ng-template>
+</p-select>
+} @else {
+<p-skeleton width="15rem" height="3rem" styleClass="mb-2"></p-skeleton>
 }

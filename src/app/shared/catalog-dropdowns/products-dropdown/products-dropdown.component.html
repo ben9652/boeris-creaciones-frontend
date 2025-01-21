@@ -1,17 +1,22 @@
 @if (products) {
-    <p-select
-    [options]="products"
-    [style]="{ width: '15rem' }"
-    optionLabel="name"
-    [filter]="true"
-    filterBy="name"
-    [emptyMessage]="'No se encontraron elementos'"
-    [emptyFilterMessage]="'No hay resultados'"
-    [placeholder]="'Selecciona un producto'"
-    (onChange)="onSelection($event)"
-    appendTo="body"
-    ></p-select>
-}
-@else {
-    <p-skeleton width="15rem" height="3rem" styleClass="mb-2"></p-skeleton>
+<p-select
+  [options]="products"
+  [style]="{ width: '15rem' }"
+  optionLabel="name"
+  [filter]="true"
+  filterBy="name"
+  [emptyMessage]="
+    translateService.instant('SHARED.DROPDOWN.EMPTY_MESSAGES.PRODUCTS')
+  "
+  [emptyFilterMessage]="
+    translateService.instant('SHARED.DROPDOWN.EMPTY_FILTER_MESSAGE')
+  "
+  [placeholder]="
+    translateService.instant('SHARED.DROPDOWN.SELECTION_MESSAGE.PRODUCT')
+  "
+  (onChange)="onSelection($event)"
+  appendTo="body"
+></p-select>
+} @else {
+<p-skeleton width="15rem" height="3rem" styleClass="mb-2"></p-skeleton>
 }

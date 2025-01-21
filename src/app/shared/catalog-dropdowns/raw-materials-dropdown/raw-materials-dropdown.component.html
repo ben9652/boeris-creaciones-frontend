@@ -1,23 +1,28 @@
 @if (rawMaterials) {
-    <p-select
-    [options]="rawMaterials"
-    [style]="{ width: '16.5rem' }"
-    [filter]="true"
-    filterBy="name"
-    [emptyMessage]="'No se encontraron elementos'"
-    [emptyFilterMessage]="'No hay resultados'"
-    [placeholder]="'Selecciona una materia prima'"
-    [group]="true"
-    (onChange)="onSelection($event)"
-    appendTo="body"
-    >
-        <ng-template let-group pTemplate="group">
-            <div class="flex align-items-center">
-                <span>{{ group.label }}</span>
-            </div>
-        </ng-template>
-    </p-select>
-}
-@else {
-    <p-skeleton width="16.5rem" height="3rem" styleClass="mb-2"></p-skeleton>
+<p-select
+  [options]="rawMaterials"
+  [style]="{ width: '16.5rem' }"
+  [filter]="true"
+  filterBy="name"
+  [emptyMessage]="
+    translateService.instant('SHARED.DROPDOWN.EMPTY_MESSAGE.RAW_MATERIALS')
+  "
+  [emptyFilterMessage]="
+    translateService.instant('SHARED.DROPDOWN.EMPTY_FILTER_MESSAGE')
+  "
+  [placeholder]="
+    translateService.instant('SHARED.DROPDOWN.SELECTION_MESSAGE.RAW_MATERIAL')
+  "
+  [group]="true"
+  (onChange)="onSelection($event)"
+  appendTo="body"
+>
+  <ng-template let-group pTemplate="group">
+    <div class="flex align-items-center">
+      <span>{{ group.label }}</span>
+    </div>
+  </ng-template>
+</p-select>
+} @else {
+<p-skeleton width="16.5rem" height="3rem" styleClass="mb-2"></p-skeleton>
 }

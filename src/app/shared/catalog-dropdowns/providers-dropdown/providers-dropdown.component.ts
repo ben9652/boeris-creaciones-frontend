@@ -5,16 +5,14 @@ import { ProvidersService } from '../../../core/services/catalogs/providers.serv
 import { SelectChangeEvent, SelectModule } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
 import { SkeletonModule } from 'primeng/skeleton';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-    selector: 'app-providers-dropdown',
-    imports: [
-        SelectModule,
-        FormsModule,
-        SkeletonModule
-    ],
-    templateUrl: './providers-dropdown.component.html',
-    styleUrl: './providers-dropdown.component.scss'
+  selector: 'app-providers-dropdown',
+  imports: [SelectModule, FormsModule, SkeletonModule],
+  templateUrl: './providers-dropdown.component.html',
+  styleUrl: './providers-dropdown.component.scss',
+  providers: [TranslateService],
 })
 export class ProvidersDropdownComponent {
   groupedProviders: SelectItemGroup[] | null = null;
@@ -22,12 +20,15 @@ export class ProvidersDropdownComponent {
   getProvider: OutputEmitterRef<ProviderBase> = output<ProviderBase>();
 
   constructor(
-    private providersService: ProvidersService
+    private providersService: ProvidersService,
+    public translateService: TranslateService
   ) {
-    providersService.getProvidersFromDatabase().subscribe((providers: SelectItemGroup[]) => {
-      providersService.providers.set(providers);
-      this.groupedProviders = providers;
-    });
+    providersService
+      .getProvidersFromDatabase()
+      .subscribe((providers: SelectItemGroup[]) => {
+        providersService.providers.set(providers);
+        this.groupedProviders = providers;
+      });
   }
 
   onSelection(event: SelectChangeEvent) {

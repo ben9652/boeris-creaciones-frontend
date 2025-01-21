@@ -1,369 +1,378 @@
 {
-    "TITLE": "Boeri's Creaciones",
-    "SHARED": {
-        "BUTTONS": {
-            "CANCEL": "Cancelar",
-            "APPLY": "Aplicar",
-            "CONFIRM": "Confirmar",
-            "ACCEPT": "Aceptar"
-        },
-        "MESSAGES": {
-            "SUMMARY": {
-                "SUCCESS": "Éxito",
-                "FAILED": "Error",
-                "WARNING": "Advertencia"
-            },
-            "DETAIL": {
-                "MODIFIED_ROLES": "Se modificaron los roles",
-                "CREATED_PARTNER": "Se creó un nuevo socio"
-            }
-        },
-        "CATEGORIES": {
-            "MESSAGES": {
-                "FAILED": "Algo falló en la creación de un rubro",
-                "CREATED": "El rubro se creó correctamente",
-                "UPDATED": "El rubro se modificó correctamente"
-            },
-            "TITLE": {
-                "ON_CREATION": "Crear rubro",
-                "ON_EDITION": "Editar rubro"
-            }
-        },
-        "LOCALITIES": {
-            "MESSAGES": {
-                "FAILED": "Algo falló en la creación de una localidad",
-                "CREATED": "La localidad se creó correctamente",
-                "UPDATED": "La localidad se modificó correctamente"
-            },
-            "TITLE": {
-                "ON_CREATION": "Crear localidad",
-                "ON_EDITION": "Editar localidad"
-            }
-        },
-        "DROPDOWN": {
-            "EMPTY_MESSAGES": {
-                "CATEGORIES": "No se encontraron rubros",
-                "LOCALITIES": "No se encontraron localidades"
-            }
-        }
+  "TITLE": "Boeri's Creaciones",
+  "SHARED": {
+    "BUTTONS": {
+      "CANCEL": "Cancelar",
+      "APPLY": "Aplicar",
+      "CONFIRM": "Confirmar",
+      "ACCEPT": "Aceptar"
     },
-    "SECTIONS": {
-        "LOGIN": {
-            "TITLE": "Inicio de sesión",
-            "FIELDS": {
-                "USERNAME": "Usuario",
-                "PASSWORD": "Contraseña"
-            },
-            "BUTTON": "Entrar"
-        },
-        "PROFILE": {
-            "TITLE": "Perfil",
-            "LABELS": {
-                "CHANGE_USER": "Cambiar usuario",
-                "CHANGE_PASSWORD": "Cambiar contraseña"
-            },
-            "FIELDS_PLACEHOLDERS": {
-                "CURRENT_PASSWORD": "Contraseña actual",
-                "NEW_PASSWORD": "Nueva contraseña",
-                "CONFIRM_PASSWORD": "Confirmar contraseña"
-            },
-            "BUTTONS": {
-                "CONFIRM_UPDATES": "Confirmar cambios"
-            }
-        },
-        "PARTNERS": {
-            "ROOT": {
-                "ADD_PARTNER": "Agregar socio"
-            },
-            "LIST_PARTNERS": {
-                "SEARCH_PARTNER": "Buscar socio",
-                "NO_PARTNERS": "No existen socios",
-                "NO_PARTNERS_MATCH": "No se encontraron socios que coincidan con la búsqueda"
-            },
-            "ROLES": {
-                "AVAILABLE_ROLES": "Disponibles",
-                "ASSIGNED_ROLES": "Asignados",
-                "ROLE_DESCRIPTION": "Descripción de rol",
-                "SELECT_PARTNER": "Seleccioná un socio",
-                "MODIFIED_ROLES_MESSAGE": "Se modificaron los roles"
-            },
-            "PARTNER_ADDITION": {
-                "FORM": {
-                    "FIRST_NAME": "Nombre",
-                    "LAST_NAME": "Apellido",
-                    "EMAIL": "E-mail"
-                },
-                "CREATE_BUTTON": "Crear socio",
-                "CONFIRMATION": {
-                    "HEADER": "Datos del nuevo socio",
-                    "USERNAME": "Nombre de usuario",
-                    "PASSWORD": "Contraseña"
-                }
-            }
-        },
-        "CATALOGS": {
-            "RAW_MATERIALS": {
-                "LIST": {
-                    "HEADER": {
-                        "ID": "ID",
-                        "NAME": "NOMBRE",
-                        "STOCK": "STOCK"
-                    }
-                },
-                "FIELDS": {
-                    "CATEGORY": "Rubro",
-                    "NAME": "Nombre",
-                    "UNIT": "Unidad",
-                    "SOURCE": "Origen",
-                    "COMMENT": "Comentario",
-                    "PICTURE": "Imagen"
-                },
-                "PICTURE": {
-                    "DEFAULT": "pictures/leaf-solid.svg",
-                    "ALT": "Imagen de materia prima"
-                },
-                "ERRORS": {
-                    "FIELDS_LACK": "Debe completar todos los campos obligatorios",
-                    "UPDATE": "Error al actualizar",
-                    "CATEGORY_CREATION": "Error al crear el rubro",
-                    "CATEGORY_UPDATING": "Error al editar el rubro"
-                },
-                "WARNINGS": {
-                    "FIELDS_LACK": {
-                        "CATEGORY": "Debe elegirse un rubro",
-                        "NAME": "Debe llenarse el campo de nombre",
-                        "UNIT": "Debe asignársele una unidad a la materia prima",
-                        "SOURCE": "Debe elegirse un origen de materia prima"
-                    }
-                },
-                "SUCCESSES": {
-                    "CREATED": "Materia prima creada con éxito",
-                    "UPDATED": "Materia prima actualizada con éxito",
-                    "CATEGORY_CREATED": "Rubro creado con éxito",
-                    "CATEGORY_UPDATED": "El rubro se editó correctamente"
-                },
-                "EMPTY_MESSAGES": {
-                    "UNITS": "No se encontraron unidades",
-                    "SOURCES": "No se encontraron orígenes"
-                },
-                "CATEGORY_MODAL": {
-                    "CREATION": {
-                        "TITLE": "Nuevo"
-                    },
-                    "UPDATING": {
-                        "TITLE": "Editar"
-                    },
-                    "WARNINGS": {
-                        "MUST_SELECT_CATEGORY": "Debe seleccionar un rubro para editar"
-                    }
-                }
-            },
-            "PRODUCTS": {
-                "LIST": {
-                    "HEADER": {
-                        "ID": "ID",
-                        "NAME": "NOMBRE",
-                        "STOCK": "STOCK"
-                    }
-                },
-                "FIELDS": {
-                    "NAME": "Nombre",
-                    "PRICE": "Precio",
-                    "COMMENT": "Comentario",
-                    "PICTURE": "Imagen"
-                },
-                "PICTURE": {
-                    "DEFAULT": "pictures/cube-solid.svg",
-                    "ALT": "Imagen de producto"
-                },
-                "ERRORS": {
-                    "FIELDS_LACK": "Debe completar todos los campos obligatorios",
-                    "UPDATE": "Error al actualizar",
-                    "NAME_LACK": "El nombre no puede ser vacío",
-                    "PICTURE_ADDING": "No se pudo agregar una imagen",
-                    "PICTURE_DELETING": "No se pudo eliminar la imagen anterior"
-                },
-                "WARNINGS": {
-                    "FIELDS_LACK": {
-                        "NAME": "Debe llenarse el campo de nombre",
-                        "PRICE": "Debe asignársele un precio al producto"
-                    }
-                },
-                "SUCCESSES": {
-                    "CREATED": "Producto creado con éxito",
-                    "UPDATED": "Producto actualizado con éxito"
-                }
-            },
-            "PROVIDERS": {
-                "LIST": {
-                    "HEADER": {
-                        "ID": "ID",
-                        "NAME": "NOMBRE",
-                        "CATEGORY": "RUBRO"
-                    }
-                },
-                "FIELDS": {
-                    "CATEGORY": "Rubro",
-                    "NAME": "Nombre",
-                    "RESIDENCE": "Domicilio",
-                    "PHONE": "Teléfono",
-                    "CVU_OR_ALIAS": "CVU o alias"
-                },
-                "SUCCESSES": {
-                    "CREATED": "Proveedor creado con éxito",
-                    "UPDATED": "Proveedor actualizado con éxito",
-                    "CATEGORY_CREATED": "Rubro creado con éxito",
-                    "CATEGORY_UPDATED": "El rubro se editó correctamente"
-                },
-                "WARNINGS": {
-                    "FIELDS_LACK": {
-                        "CATEGORY": "Debe elegirse un rubro",
-                        "NAME": "Debe llenarse el campo de nombre"
-                    }
-                },
-                "ERRORS": {
-                    "FIELDS_LACK": "Debe completar todos los campos obligatorios",
-                    "FIELD_NAME_LACK": "Debe llenarse el campo de nombre",
-                    "UPDATE": "Error al actualizar",
-                    "CATEGORY_CREATION": "Error al crear el rubro",
-                    "CATEGORY_UPDATING": "Error al editar el rubro"
-                },
-                "CATEGORY_MODAL": {
-                    "CREATION": {
-                        "TITLE": "Nuevo"
-                    },
-                    "UPDATING": {
-                        "TITLE": "Editar"
-                    },
-                    "WARNINGS": {
-                        "MUST_SELECT_CATEGORY": "Debe seleccionar un rubro"
-                    }
-                }
-            },
-            "BRANCHES": {
-                "LIST": {
-                    "HEADER": {
-                        "ID": "ID",
-                        "NAME": "NOMBRE",
-                        "LOCALITY": "LOCALIDAD"
-                    }
-                },
-                "FIELDS": {
-                    "NAME": "Nombre",
-                    "LOCALITY": "Localidad",
-                    "DOMICILE": "Domicilio"
-                },
-                "SUCCESSES": {
-                    "CREATED": "Sucursal creada con éxito",
-                    "UPDATED": "Sucursal actualizada con éxito"
-                },
-                "WARNINGS": {
-                    "FIELDS_LACK": {
-                        "LOCALITY": "Debe elegirse una localidad",
-                        "NAME": "Debe llenarse el campo de nombre"
-                    }
-                },
-                "ERRORS": {
-                    "FIELDS_LACK": "Debe completar todos los campos obligatorios",
-                    "UPDATE": "Error al actualizar",
-                    "NAME_LACK": "El nombre no puede ser vacío"
-                },
-                "LOCALITY_MODAL": {
-                    "TITLE": "Nueva localidad"
-                }
-            },
-            "BUTTONS": {
-                "ADD": "Agregar",
-                "UPLOAD": "Subir archivo"
-            }
-        },
-        "PROVISIONS": {
-            "PURCHASES": {
-                "SUMMARY": {
-                    "TITLE": "Resumen de compras",
-                    "RAW_MATERIAL": "Materia prima",
-                    "QUANTITY": "Cantidad",
-                    "UNIT_PRICE": "Precio unitario",
-                    "SUBTOTAL": "Subtotal",
-                    "TOTAL": "Total"
-                },
-                "RECEPTION": {
-                    "TITLE": "Recepción de compra",
-                    "FIELDS": {
-                        "BRANCH": "Sucursal de recepción",
-                        "INVOICE": {
-                            "LOAD": "Cargar factura",
-                            "SUBLABEL": "Opcional"
-                        },
-                        "ERROR": {
-                            "BRANCH": "Debe seleccionar una sucursal",
-                            "INVOICE": "Debe cargar una factura"
-                        }
-                    }
-                },
-                "CARD": {
-                    "STATUS": {
-                        "REQUESTED": "Pedido",
-                        "RECEIVED": "Recibido"
-                    },
-                    "FIELDS": {
-                        "ID": "ID",
-                        "DESCRIPTION": "Descripción",
-                        "PROVIDER": "Proveedor",
-                        "PARTNER": "Socio",
-                        "PRICE": "Monto",
-                        "REQUEST_DATE": "Fecha de pedido",
-                        "RECEPTION_DATE": "Fecha de recepción",
-                        "CANCELATION_DATE": "Fecha de cancelación",
-                        "RECEPTION_MODE": "Modo de recepción",
-                        "BRANCH": "Sucursal de recepción"
-                    },
-                    "BUTTONS": {
-                        "VIEW_SUMMARY": "Ver resumen",
-                        "RECEIVE": "Recibir",
-                        "CANCEL": "Cancelar"
-                    },
-                    "MESSAGES": {
-                        "RECEIVED": "Compra recibida",
-                        "CANCELED": "Compra cancelada",
-                        "HEADER_CANCEL": "Confirmación de cancelación",
-                        "CONFIRM_CANCEL": "¿Estás seguro de que querés cancelar la compra?"
-                    },
-                    "TOAST": {
-                        "RECEIVED": {
-                            
-                        },
-                        "CANCELED": {
-                            "HEADER": "Confirmado",
-                            "DETAIL": "La compra ha sido cancelada"
-                        }
-                    }
-                }
-            }
-        },
-        "SIDEBAR": {
-            "ROOT": {
-                "HOME": "Inicio",
-                "CATALOGS": "Catálogos",
-                "PARTNERS": "Socios",
-                "PROVISIONS": "Provisiones",
-                "MANUFACTURE": "Mano de obra",
-                "ACCOUNTING": "Contabilidad",
-                "STORE": "Almacén",
-                "SALES": "Ventas"
-            },
-            "LEVEL1": {
-                "RAW_MATERIALS": "Materias primas",
-                "PRODUCTS": "Productos",
-                "PROVIDERS": "Proveedores",
-                "BRANCHES": "Sucursales",
-                "PURCHASES": "Compras",
-                "PRODUCTIONS": "Producciones"
-            }
-        }
+    "MESSAGES": {
+      "SUMMARY": {
+        "SUCCESS": "Éxito",
+        "FAILED": "Error",
+        "WARNING": "Advertencia"
+      },
+      "DETAIL": {
+        "MODIFIED_ROLES": "Se modificaron los roles",
+        "CREATED_PARTNER": "Se creó un nuevo socio"
+      }
     },
-    "BANNER": {
-        "EDIT_PROFILE": "Editar perfil",
-        "LOGOUT": "Cerrar sesión"
+    "CATEGORIES": {
+      "MESSAGES": {
+        "FAILED": "Algo falló en la creación de un rubro",
+        "CREATED": "El rubro se creó correctamente",
+        "UPDATED": "El rubro se modificó correctamente"
+      },
+      "TITLE": {
+        "ON_CREATION": "Crear rubro",
+        "ON_EDITION": "Editar rubro"
+      }
+    },
+    "LOCALITIES": {
+      "MESSAGES": {
+        "FAILED": "Algo falló en la creación de una localidad",
+        "CREATED": "La localidad se creó correctamente",
+        "UPDATED": "La localidad se modificó correctamente"
+      },
+      "TITLE": {
+        "ON_CREATION": "Crear localidad",
+        "ON_EDITION": "Editar localidad"
+      }
+    },
+    "DROPDOWN": {
+      "EMPTY_MESSAGES": {
+        "CATEGORIES": "No se encontraron rubros",
+        "LOCALITIES": "No se encontraron localidades",
+        "RAW_MATERIALS": "No se encontraron materias primas",
+        "PRODUCTS": "No se encontraron productos",
+        "PROVIDERS": "No se encontraron proveedores",
+        "BRANCHES": "No se encontraron sucursales"
+      },
+      "EMPTY_FILTER_MESSAGE": "No hay resultados",
+      "SELECTION_MESSAGE": {
+        "RAW_MATERIAL": "Selecciona una materia prima",
+        "PRODUCT": "Selecciona un producto",
+        "PROVIDER": "Selecciona un proveedor",
+        "BRANCH": "Selecciona una sucursal"
+      }
     }
+  },
+  "SECTIONS": {
+    "LOGIN": {
+      "TITLE": "Inicio de sesión",
+      "FIELDS": {
+        "USERNAME": "Usuario",
+        "PASSWORD": "Contraseña"
+      },
+      "BUTTON": "Entrar"
+    },
+    "PROFILE": {
+      "TITLE": "Perfil",
+      "LABELS": {
+        "CHANGE_USER": "Cambiar usuario",
+        "CHANGE_PASSWORD": "Cambiar contraseña"
+      },
+      "FIELDS_PLACEHOLDERS": {
+        "CURRENT_PASSWORD": "Contraseña actual",
+        "NEW_PASSWORD": "Nueva contraseña",
+        "CONFIRM_PASSWORD": "Confirmar contraseña"
+      },
+      "BUTTONS": {
+        "CONFIRM_UPDATES": "Confirmar cambios"
+      }
+    },
+    "PARTNERS": {
+      "ROOT": {
+        "ADD_PARTNER": "Agregar socio"
+      },
+      "LIST_PARTNERS": {
+        "SEARCH_PARTNER": "Buscar socio",
+        "NO_PARTNERS": "No existen socios",
+        "NO_PARTNERS_MATCH": "No se encontraron socios que coincidan con la búsqueda"
+      },
+      "ROLES": {
+        "AVAILABLE_ROLES": "Disponibles",
+        "ASSIGNED_ROLES": "Asignados",
+        "ROLE_DESCRIPTION": "Descripción de rol",
+        "SELECT_PARTNER": "Seleccioná un socio",
+        "MODIFIED_ROLES_MESSAGE": "Se modificaron los roles"
+      },
+      "PARTNER_ADDITION": {
+        "FORM": {
+          "FIRST_NAME": "Nombre",
+          "LAST_NAME": "Apellido",
+          "EMAIL": "E-mail"
+        },
+        "CREATE_BUTTON": "Crear socio",
+        "CONFIRMATION": {
+          "HEADER": "Datos del nuevo socio",
+          "USERNAME": "Nombre de usuario",
+          "PASSWORD": "Contraseña"
+        }
+      }
+    },
+    "CATALOGS": {
+      "RAW_MATERIALS": {
+        "LIST": {
+          "HEADER": {
+            "ID": "ID",
+            "NAME": "NOMBRE",
+            "STOCK": "STOCK"
+          }
+        },
+        "FIELDS": {
+          "CATEGORY": "Rubro",
+          "NAME": "Nombre",
+          "UNIT": "Unidad",
+          "SOURCE": "Origen",
+          "COMMENT": "Comentario",
+          "PICTURE": "Imagen"
+        },
+        "PICTURE": {
+          "DEFAULT": "pictures/leaf-solid.svg",
+          "ALT": "Imagen de materia prima"
+        },
+        "ERRORS": {
+          "FIELDS_LACK": "Debe completar todos los campos obligatorios",
+          "UPDATE": "Error al actualizar",
+          "CATEGORY_CREATION": "Error al crear el rubro",
+          "CATEGORY_UPDATING": "Error al editar el rubro"
+        },
+        "WARNINGS": {
+          "FIELDS_LACK": {
+            "CATEGORY": "Debe elegirse un rubro",
+            "NAME": "Debe llenarse el campo de nombre",
+            "UNIT": "Debe asignársele una unidad a la materia prima",
+            "SOURCE": "Debe elegirse un origen de materia prima"
+          }
+        },
+        "SUCCESSES": {
+          "CREATED": "Materia prima creada con éxito",
+          "UPDATED": "Materia prima actualizada con éxito",
+          "CATEGORY_CREATED": "Rubro creado con éxito",
+          "CATEGORY_UPDATED": "El rubro se editó correctamente"
+        },
+        "EMPTY_MESSAGES": {
+          "UNITS": "No se encontraron unidades",
+          "SOURCES": "No se encontraron orígenes"
+        },
+        "CATEGORY_MODAL": {
+          "CREATION": {
+            "TITLE": "Nuevo"
+          },
+          "UPDATING": {
+            "TITLE": "Editar"
+          },
+          "WARNINGS": {
+            "MUST_SELECT_CATEGORY": "Debe seleccionar un rubro para editar"
+          }
+        }
+      },
+      "PRODUCTS": {
+        "LIST": {
+          "HEADER": {
+            "ID": "ID",
+            "NAME": "NOMBRE",
+            "STOCK": "STOCK"
+          }
+        },
+        "FIELDS": {
+          "NAME": "Nombre",
+          "PRICE": "Precio",
+          "COMMENT": "Comentario",
+          "PICTURE": "Imagen"
+        },
+        "PICTURE": {
+          "DEFAULT": "pictures/cube-solid.svg",
+          "ALT": "Imagen de producto"
+        },
+        "ERRORS": {
+          "FIELDS_LACK": "Debe completar todos los campos obligatorios",
+          "UPDATE": "Error al actualizar",
+          "NAME_LACK": "El nombre no puede ser vacío",
+          "PICTURE_ADDING": "No se pudo agregar una imagen",
+          "PICTURE_DELETING": "No se pudo eliminar la imagen anterior"
+        },
+        "WARNINGS": {
+          "FIELDS_LACK": {
+            "NAME": "Debe llenarse el campo de nombre",
+            "PRICE": "Debe asignársele un precio al producto"
+          }
+        },
+        "SUCCESSES": {
+          "CREATED": "Producto creado con éxito",
+          "UPDATED": "Producto actualizado con éxito"
+        }
+      },
+      "PROVIDERS": {
+        "LIST": {
+          "HEADER": {
+            "ID": "ID",
+            "NAME": "NOMBRE",
+            "CATEGORY": "RUBRO"
+          }
+        },
+        "FIELDS": {
+          "CATEGORY": "Rubro",
+          "NAME": "Nombre",
+          "RESIDENCE": "Domicilio",
+          "PHONE": "Teléfono",
+          "CVU_OR_ALIAS": "CVU o alias"
+        },
+        "SUCCESSES": {
+          "CREATED": "Proveedor creado con éxito",
+          "UPDATED": "Proveedor actualizado con éxito",
+          "CATEGORY_CREATED": "Rubro creado con éxito",
+          "CATEGORY_UPDATED": "El rubro se editó correctamente"
+        },
+        "WARNINGS": {
+          "FIELDS_LACK": {
+            "CATEGORY": "Debe elegirse un rubro",
+            "NAME": "Debe llenarse el campo de nombre"
+          }
+        },
+        "ERRORS": {
+          "FIELDS_LACK": "Debe completar todos los campos obligatorios",
+          "FIELD_NAME_LACK": "Debe llenarse el campo de nombre",
+          "UPDATE": "Error al actualizar",
+          "CATEGORY_CREATION": "Error al crear el rubro",
+          "CATEGORY_UPDATING": "Error al editar el rubro"
+        },
+        "CATEGORY_MODAL": {
+          "CREATION": {
+            "TITLE": "Nuevo"
+          },
+          "UPDATING": {
+            "TITLE": "Editar"
+          },
+          "WARNINGS": {
+            "MUST_SELECT_CATEGORY": "Debe seleccionar un rubro"
+          }
+        }
+      },
+      "BRANCHES": {
+        "LIST": {
+          "HEADER": {
+            "ID": "ID",
+            "NAME": "NOMBRE",
+            "LOCALITY": "LOCALIDAD"
+          }
+        },
+        "FIELDS": {
+          "NAME": "Nombre",
+          "LOCALITY": "Localidad",
+          "DOMICILE": "Domicilio"
+        },
+        "SUCCESSES": {
+          "CREATED": "Sucursal creada con éxito",
+          "UPDATED": "Sucursal actualizada con éxito"
+        },
+        "WARNINGS": {
+          "FIELDS_LACK": {
+            "LOCALITY": "Debe elegirse una localidad",
+            "NAME": "Debe llenarse el campo de nombre"
+          }
+        },
+        "ERRORS": {
+          "FIELDS_LACK": "Debe completar todos los campos obligatorios",
+          "UPDATE": "Error al actualizar",
+          "NAME_LACK": "El nombre no puede ser vacío"
+        },
+        "LOCALITY_MODAL": {
+          "TITLE": "Nueva localidad"
+        }
+      },
+      "BUTTONS": {
+        "ADD": "Agregar",
+        "UPLOAD": "Subir archivo"
+      }
+    },
+    "PROVISIONS": {
+      "PURCHASES": {
+        "SUMMARY": {
+          "TITLE": "Resumen de compras",
+          "RAW_MATERIAL": "Materia prima",
+          "QUANTITY": "Cantidad",
+          "UNIT_PRICE": "Precio unitario",
+          "SUBTOTAL": "Subtotal",
+          "TOTAL": "Total"
+        },
+        "RECEPTION": {
+          "TITLE": "Recepción de compra",
+          "FIELDS": {
+            "BRANCH": "Sucursal de recepción",
+            "INVOICE": {
+              "LOAD": "Cargar factura",
+              "SUBLABEL": "Opcional"
+            },
+            "ERROR": {
+              "BRANCH": "Debe seleccionar una sucursal",
+              "INVOICE": "Debe cargar una factura"
+            }
+          }
+        },
+        "CARD": {
+          "STATUS": {
+            "REQUESTED": "Pedido",
+            "RECEIVED": "Recibido"
+          },
+          "FIELDS": {
+            "ID": "ID",
+            "DESCRIPTION": "Descripción",
+            "PROVIDER": "Proveedor",
+            "PARTNER": "Socio",
+            "PRICE": "Monto",
+            "REQUEST_DATE": "Fecha de pedido",
+            "RECEPTION_DATE": "Fecha de recepción",
+            "CANCELATION_DATE": "Fecha de cancelación",
+            "RECEPTION_MODE": "Modo de recepción",
+            "BRANCH": "Sucursal de recepción"
+          },
+          "BUTTONS": {
+            "VIEW_SUMMARY": "Ver resumen",
+            "RECEIVE": "Recibir",
+            "CANCEL": "Cancelar"
+          },
+          "MESSAGES": {
+            "RECEIVED": "Compra recibida",
+            "CANCELED": "Compra cancelada",
+            "HEADER_CANCEL": "Confirmación de cancelación",
+            "CONFIRM_CANCEL": "¿Estás seguro de que querés cancelar la compra?"
+          },
+          "TOAST": {
+            "RECEIVED": {},
+            "CANCELED": {
+              "HEADER": "Confirmado",
+              "DETAIL": "La compra ha sido cancelada"
+            }
+          }
+        }
+      }
+    },
+    "SIDEBAR": {
+      "ROOT": {
+        "HOME": "Inicio",
+        "CATALOGS": "Catálogos",
+        "PARTNERS": "Socios",
+        "PROVISIONS": "Provisiones",
+        "MANUFACTURE": "Mano de obra",
+        "ACCOUNTING": "Contabilidad",
+        "STORE": "Almacén",
+        "SALES": "Ventas"
+      },
+      "LEVEL1": {
+        "RAW_MATERIALS": "Materias primas",
+        "PRODUCTS": "Productos",
+        "PROVIDERS": "Proveedores",
+        "BRANCHES": "Sucursales",
+        "PURCHASES": "Compras",
+        "PRODUCTIONS": "Producciones"
+      }
+    }
+  },
+  "BANNER": {
+    "EDIT_PROFILE": "Editar perfil",
+    "LOGOUT": "Cerrar sesión"
+  }
 }
