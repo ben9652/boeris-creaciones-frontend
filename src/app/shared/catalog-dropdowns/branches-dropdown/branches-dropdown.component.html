@@ -5,17 +5,17 @@
   [filter]="true"
   filterBy="label"
   [emptyMessage]="
-    translateService.instant('SECTIONS.CATALOGS.DROPDOWNS.EMPTY_MESSAGE')
+    translateService.instant('SHARED.DROPDOWN.EMPTY_MESSAGES.BRANCHES')
   "
   [emptyFilterMessage]="
-    translateService.instant('SECTIONS.CATALOGS.DROPDOWNS.EMPTY_FILTER_MESSAGE')
+    translateService.instant('SHARED.DROPDOWN.EMPTY_FILTER_MESSAGE')
   "
   [placeholder]="
-    translateService.instant('SECTIONS.CATALOGS.BRANCHES.DROPDOWNS')
+    translateService.instant('SHARED.DROPDOWN.SELECTION_MESSAGE.BRANCH')
   "
   [group]="true"
   (onChange)="onSelection($event)"
-    appendTo="body"
+  appendTo="body"
 >
   <ng-template let-group pTemplate="group">
     <div class="flex align-items-center">

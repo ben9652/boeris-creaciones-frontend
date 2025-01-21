@@ -53,6 +53,12 @@ p {
     justify-content: space-between;
 }
 
+.column-fields {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .partner-price {
     display: flex;
     flex-direction: row;
@@ -68,7 +74,7 @@ p {
 }
 
 .empty {
-    height: 15px;
+    height: 19px;
 }
 
 .id-provider {
@@ -101,7 +107,7 @@ p {
     background-color: boeris-theme.$secondaryDarkerColor;
 }
 
-::ng-deep {
+:host ::ng-deep {
     .p-card.p-component {
         height: 135px;
     }
@@ -112,5 +118,16 @@ p {
 
     .p-card-content {
         height: calc(135px - 40px);
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .fields {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        height: 100%;
+        width: 100%;
+        align-items: baseline;
     }
 }

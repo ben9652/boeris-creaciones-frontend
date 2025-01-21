@@ -22,6 +22,15 @@ p-card.medium-card {
     }
 }
 
+::ng-deep .p-card-body {
+    justify-content: center;
+    height: 142px;
+}
+
+::ng-deep .p-card-content {
+    height: 100%;
+}
+
 .left-card.status-pending {
     ::ng-deep .p-card {
         background-color: rgba($color: yellow, $alpha: 0.4);
@@ -93,4 +102,106 @@ p-card.medium-card {
     flex-wrap: nowrap;
     align-items: center;
     height: 100%;
+}
+
+@media screen and (max-width: 500px) {
+    .cards {
+        flex-direction: column;
+    }
+
+    .status {
+        justify-content: flex-start;
+
+        i {
+            font-size: medium;
+        }
+    }
+
+    :host ::ng-deep .p-card-body {
+        height: 100%;
+    }
+
+    p-button {
+        display: flex;
+        justify-content: center;
+    }
+
+    :host ::ng-deep {
+        .left-card .p-card {
+            height: 40px;
+        }
+        
+        .left-card .p-card-body {
+            display: flex;
+            padding: 10px;
+            height: 100%;
+        }
+    
+        .left-card .p-card-content {
+            height: inherit;
+        }
+    }
+
+    .left-card {
+        border-radius: var(--p-card-border-radius) var(--p-card-border-radius) 0px 0px;
+        
+        ::ng-deep .p-card {
+            border-radius: var(--p-card-border-radius) var(--p-card-border-radius) 0px 0px;
+        }
+    }
+
+    .left-card.status-pending {
+        .status {
+            i {
+                color: rgb(255, 255, 0);
+            }
+        }
+    }
+
+    .left-card.status-received {
+        .status {
+            i {
+                color: green;
+            }
+        }
+    }
+
+    .left-card.status-canceled {
+        .status {
+            i {
+                color: red;
+            }
+        }
+    }
+
+    .status-pending {
+        ::ng-deep .p-card {
+            background-color: rgba($color: rgba(255, 255, 0, 0.5), $alpha: 0.1) !important;
+        }
+    }
+
+    .status-received {
+        ::ng-deep .p-card {
+            background-color: rgba($color: rgba(0, 255, 0, 0.5), $alpha: 0.1) !important;
+        }
+    }
+
+    .status-canceled {
+        ::ng-deep .p-card {
+            background-color: rgba($color: rgba(255, 0, 0, 0.5), $alpha: 0.1) !important;
+        }
+    }
+
+    .right-card {
+        border-radius: 0px 0px var(--p-card-border-radius) var(--p-card-border-radius);
+        
+        ::ng-deep .p-card {
+            border-radius: 0px 0px var(--p-card-border-radius) var(--p-card-border-radius);
+        }
+    }
+
+    .buttons {
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
 }

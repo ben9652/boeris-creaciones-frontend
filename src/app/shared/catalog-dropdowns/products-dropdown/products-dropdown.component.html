@@ -6,16 +6,16 @@
   [filter]="true"
   filterBy="name"
   [emptyMessage]="
-    translateService.instant('SECTIONS.CATALOGS.DROPDOWNS.EMPTY_MESSAGE')
+    translateService.instant('SHARED.DROPDOWN.EMPTY_MESSAGES.PRODUCTS')
   "
   [emptyFilterMessage]="
-    translateService.instant('SECTIONS.CATALOGS.DROPDOWNS.EMPTY_FILTER_MESSAGE')
+    translateService.instant('SHARED.DROPDOWN.EMPTY_FILTER_MESSAGE')
   "
   [placeholder]="
-    translateService.instant('SECTIONS.CATALOGS.PRODUCTS.DROPDOWNS')
+    translateService.instant('SHARED.DROPDOWN.SELECTION_MESSAGE.PRODUCT')
   "
   (onChange)="onSelection($event)"
-    appendTo="body"
+  appendTo="body"
 ></p-select>
 } @else {
 <p-skeleton width="15rem" height="3rem" styleClass="mb-2"></p-skeleton>

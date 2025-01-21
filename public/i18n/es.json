@@ -43,7 +43,18 @@
     "DROPDOWN": {
       "EMPTY_MESSAGES": {
         "CATEGORIES": "No se encontraron rubros",
-        "LOCALITIES": "No se encontraron localidades"
+        "LOCALITIES": "No se encontraron localidades",
+        "RAW_MATERIALS": "No se encontraron materias primas",
+        "PRODUCTS": "No se encontraron productos",
+        "PROVIDERS": "No se encontraron proveedores",
+        "BRANCHES": "No se encontraron sucursales"
+      },
+      "EMPTY_FILTER_MESSAGE": "No hay resultados",
+      "SELECTION_MESSAGE": {
+        "RAW_MATERIAL": "Selecciona una materia prima",
+        "PRODUCT": "Selecciona un producto",
+        "PROVIDER": "Selecciona un proveedor",
+        "BRANCH": "Selecciona una sucursal"
       }
     }
   },
@@ -102,12 +113,7 @@
       }
     },
     "CATALOGS": {
-      "DROPDOWNS": {
-        "EMPTY_MESSAGE": "No se encontraron elementos",
-        "EMPTY_FILTER_MESSAGE": "No hay resultados"
-      },
       "RAW_MATERIALS": {
-        "DROPDOWNS": "Selecciona una materia prima",
         "LIST": {
           "HEADER": {
             "ID": "ID",
@@ -164,7 +170,6 @@
         }
       },
       "PRODUCTS": {
-        "DROPDOWNS": "Selecciona un producto",
         "LIST": {
           "HEADER": {
             "ID": "ID",
@@ -201,7 +206,6 @@
         }
       },
       "PROVIDERS": {
-        "DROPDOWNS": "Selecciona un proveedor",
         "LIST": {
           "HEADER": {
             "ID": "ID",
@@ -248,7 +252,6 @@
         }
       },
       "BRANCHES": {
-        "DROPDOWNS": "Selecciona una sucursal",
         "LIST": {
           "HEADER": {
             "ID": "ID",
@@ -308,44 +311,42 @@
               "INVOICE": "Debe cargar una factura"
             }
           }
-                },
-                "CARD": {
-                    "STATUS": {
-                        "REQUESTED": "Pedido",
-                        "RECEIVED": "Recibido"
-                    },
-                    "FIELDS": {
-                        "ID": "ID",
-                        "DESCRIPTION": "Descripción",
-                        "PROVIDER": "Proveedor",
-                        "PARTNER": "Socio",
-                        "PRICE": "Monto",
-                        "REQUEST_DATE": "Fecha de pedido",
-                        "RECEPTION_DATE": "Fecha de recepción",
-                        "CANCELATION_DATE": "Fecha de cancelación",
-                        "RECEPTION_MODE": "Modo de recepción",
-                        "BRANCH": "Sucursal de recepción"
-                    },
-                    "BUTTONS": {
-                        "VIEW_SUMMARY": "Ver resumen",
-                        "RECEIVE": "Recibir",
-                        "CANCEL": "Cancelar"
-                    },
-                    "MESSAGES": {
-                        "RECEIVED": "Compra recibida",
-                        "CANCELED": "Compra cancelada",
-                        "HEADER_CANCEL": "Confirmación de cancelación",
-                        "CONFIRM_CANCEL": "¿Estás seguro de que querés cancelar la compra?"
-                    },
-                    "TOAST": {
-                        "RECEIVED": {
-                            
-                        },
-                        "CANCELED": {
-                            "HEADER": "Confirmado",
-                            "DETAIL": "La compra ha sido cancelada"
-                        }
-                    }
+        },
+        "CARD": {
+          "STATUS": {
+            "REQUESTED": "Pedido",
+            "RECEIVED": "Recibido"
+          },
+          "FIELDS": {
+            "ID": "ID",
+            "DESCRIPTION": "Descripción",
+            "PROVIDER": "Proveedor",
+            "PARTNER": "Socio",
+            "PRICE": "Monto",
+            "REQUEST_DATE": "Fecha de pedido",
+            "RECEPTION_DATE": "Fecha de recepción",
+            "CANCELATION_DATE": "Fecha de cancelación",
+            "RECEPTION_MODE": "Modo de recepción",
+            "BRANCH": "Sucursal de recepción"
+          },
+          "BUTTONS": {
+            "VIEW_SUMMARY": "Ver resumen",
+            "RECEIVE": "Recibir",
+            "CANCEL": "Cancelar"
+          },
+          "MESSAGES": {
+            "RECEIVED": "Compra recibida",
+            "CANCELED": "Compra cancelada",
+            "HEADER_CANCEL": "Confirmación de cancelación",
+            "CONFIRM_CANCEL": "¿Estás seguro de que querés cancelar la compra?"
+          },
+          "TOAST": {
+            "RECEIVED": {},
+            "CANCELED": {
+              "HEADER": "Confirmado",
+              "DETAIL": "La compra ha sido cancelada"
+            }
+          }
         }
       }
     },
