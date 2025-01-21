@@ -93,5 +93,71 @@
     </div>
 }
 @else {
+    <div #fields class="fields">
+        <div class="column-fields">
+            <div class="field-icon">
+                <i class="fas fa-barcode"></i>
+                <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.ID')" tooltipPosition="top">
+                    {{ purchase().id.toString().padStart(7, '0') }}
+                </p>
+            </div>
+            <div class="field-icon">
+                <i class="fas fa-user-pen"></i>
+                <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.PARTNER')" tooltipPosition="top">
+                    {{ purchase().requester_partner.firstName }} {{ purchase().requester_partner.lastName }}
+                </p>
+            </div>
+            <div class="field-icon">
+                <i class="fas fa-user-tie"></i>
+                <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.PROVIDER')" tooltipPosition="top">
+                    {{ purchase().provider.name }}
+                </p>
+            </div>
+            <div class="field-icon">
+                <i class="fas fa-calendar-plus"></i>
+                <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.REQUEST_DATE')" tooltipPosition="top">
+                    {{ purchase().order_date | date: 'dd/MM/yyyy' }}
+                </p>
+            </div>
+            @if (purchase().status === 'R') {
+                <div class="field-icon">
+                    <i class="fas fa-calendar-check"></i>
+                    <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.RECEPTION_DATE')" tooltipPosition="top">
+                        {{ purchase().reception_date | date: 'dd/MM/yyyy' }}
+                    </p>
+                </div>
+                <div class="field-icon">
+                    <i class="fas fa-truck"></i>
+                    <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.RECEPTION_MODE')" tooltipPosition="top">
+                        {{ purchase().reception_mode }}
+                    </p>
+                </div>
+                <div class="field-icon">
+                    <i class="fas fa-store"></i>
+                    <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.BRANCH')">
+                        {{ purchase().reception_branch?.name }}
+                    </p>
+                </div>
+            }
     
+            @if (purchase().status === 'C') {
+                <div class="field-icon">
+                    <i class="fas fa-calendar-xmark"></i>
+                    <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.CANCELATION_DATE')" tooltipPosition="top">
+                        {{ purchase().canceled_date | date: 'dd/MM/yyyy' }}
+                    </p>
+                </div>
+            }
+        </div>
+        <div class="column-fields align-items-end w-6">
+            <div class="field-icon">
+                <i class="fas fa-money-check-dollar"></i>
+                <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.PRICE')" tooltipPosition="top">
+                    $ {{ purchase().price }}
+                </p>
+            </div>
+            <b><p>{{ 'SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.DESCRIPTION' | translate }}</p></b>
+            <p class="text-right">{{ purchase().description }}</p>
+        </div>
+    </div>
 }
