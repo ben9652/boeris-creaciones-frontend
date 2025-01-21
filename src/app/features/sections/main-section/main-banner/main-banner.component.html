@@ -1,4 +1,4 @@
-<div [ngClass]="user_edition() ? 'header' : 'header-without-button'">
+<div [ngClass]="user_edition() ? 'header' : 'header-without-button'" style="z-index: 50;">
     <div class="menu-button" (click)="onClickLeftBanner()">
         <div class="menu-icon">
             @if (isDeployableMenu()) {

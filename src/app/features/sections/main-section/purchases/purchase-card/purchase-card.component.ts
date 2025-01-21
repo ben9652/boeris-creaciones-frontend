@@ -87,7 +87,6 @@ export class PurchaseCardComponent implements AfterViewInit {
 
   cancelPurchase(event: Event) {
     const estimatedGender: string = this.user().firstName[this.user().firstName.length - 1] === 'a' ? 'f' : 'm';
-    console.log(estimatedGender);
 
     let confirmationMessage: string = this.translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.MESSAGES.CONFIRM_CANCEL');
 
