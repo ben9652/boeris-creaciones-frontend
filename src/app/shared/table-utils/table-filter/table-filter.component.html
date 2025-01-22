@@ -1,0 +1,24 @@
+<div
+style="display: flex;"
+[ngStyle]="{
+    'flex-direction': vertical() ? 'column' : 'row',
+    'gap': gap()
+}">
+    @for (filter of filters(); track $index) {
+        @if(filter.name !== null) {
+            <app-checkbox-template
+            [key]="filter.key"
+            [name]="filter.name"
+            [color]="filter.color"
+            (onCheckboxChange)="onCheckboxChanges($event)"
+            ></app-checkbox-template>
+        }
+        @else {
+            <app-checkbox-template
+            [key]="filter.key"
+            [color]="filter.color"
+            (onCheckboxChange)="onCheckboxChanges($event)"
+            ></app-checkbox-template>
+        }
+    }
+</div>
