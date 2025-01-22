@@ -1,0 +1,20 @@
+<div
+style="display: flex;"
+[ngStyle]="{
+    'flex-direction': vertical() ? 'column' : 'row',
+    'gap': gap()
+}"
+>
+    @for (filter of filters(); track $index) {
+        <div class="flex flex-col">
+            <p-radiobutton
+            [inputId]="filter.name"
+            name="filter"
+            [value]="filter.key"
+            (onClick)="onFilterChange($event)"
+            [(ngModel)]="selectedFilter"
+            ></p-radiobutton>
+            <label [for]="filter.name" class="ml-2">{{ filter.name }}</label>
+        </div>
+    }
+</div>

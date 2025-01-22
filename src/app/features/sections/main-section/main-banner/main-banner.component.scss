@@ -61,7 +61,7 @@
     cursor: pointer;
 }
 
-::ng-deep .p-popover .p-popover-content {
+:host ::ng-deep .p-popover .p-popover-content {
     padding: 5px;
 }
 
@@ -71,9 +71,10 @@
 }
 
 // El popover tiene dos flechas (una encima de la otra). Elimino una de ellas y coloreo la otra.
-::ng-deep .p-popover {
-    top: 10vh !important;
-    transform: translateX(-1.2vh) !important;
+:host ::ng-deep .p-popover {
+    top: 10vh;
+    right: 1vw;
+    z-index: 60;
     
     &:before {
         // content: none !important;
@@ -97,7 +98,7 @@
         font-size: 1.6rem;
     }
 
-    ::ng-deep .p-popover {
+    :host ::ng-deep .p-popover {
         top: 15vw !important;
         transform: translateX(-1.5vh) !important;
     }

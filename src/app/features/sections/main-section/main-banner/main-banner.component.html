@@ -15,9 +15,9 @@
             <div class="user-icon" (click)="op.toggle($event)">
                 <i class="fas fa-user fa-xl"></i>
             </div>
-            <p-popover #op>
-                <app-user-menu></app-user-menu>
-            </p-popover>
         </div>
     }
 </div>
+<p-popover #op appendTo="target">
+    <app-user-menu></app-user-menu>
+</p-popover>

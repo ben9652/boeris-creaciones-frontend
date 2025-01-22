@@ -1,0 +1,20 @@
+<p-floatlabel>
+    <input id="field" pInputText [autocomplete]="false" (keydown)="onWrite($event)" />
+    <label for="field">{{ 'SHARED.TABLE.SEARCH' | translate }}</label>
+</p-floatlabel>
+
+<p-button
+severity="secondary"
+icon="fas fa-filter"
+[rounded]="true"
+[text]="true"
+(onClick)="op.toggle($event)"
+></p-button>
+
+<p-popover #op>
+    <app-search-filter
+    [filters]="filters()"
+    (onFilterSelect)="onFilterChange($event)"
+    gap="5px"
+    ></app-search-filter>
+</p-popover>
