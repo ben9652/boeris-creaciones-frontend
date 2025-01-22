@@ -1,0 +1,16 @@
+:host {
+    --p-checkbox-checked-background: var(--p-primary-color);
+    --p-checkbox-checked-border-color: color-mix(in srgb, var(--p-checkbox-checked-background), black 1%);
+    --p-checkbox-checked-hover-background: color-mix(in srgb, var(--p-checkbox-checked-background), black 10%);
+    --p-checkbox-checked-hover-border-color: color-mix(in srgb, var(--p-checkbox-checked-background), black 2%);
+    --p-checkbox-icon-checked-color: color-mix(in srgb, var(--p-checkbox-checked-background), black 40%);
+    --p-checkbox-icon-checked-hover-color: color-mix(in srgb, var(--p-checkbox-checked-background), black 40%);
+
+    --p-checkbox-border-color: color-mix(in srgb, var(--p-checkbox-checked-background), black 10%);
+    --p-checkbox-hover-border-color: color-mix(in srgb, var(--p-checkbox-checked-background), white 50%);
+}
+
+label {
+    color: var(--p-checkbox-checked-hover-background);
+    user-select: none;
+}

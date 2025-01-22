@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ActiveRouteService } from '../../../../core/services/active-route/active-route.service';
 
 @Component({
     selector: 'app-home',
