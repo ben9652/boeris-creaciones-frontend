@@ -56,6 +56,12 @@
         "PROVIDER": "Selecciona un proveedor",
         "BRANCH": "Selecciona una sucursal"
       }
+    },
+    "TABLE": {
+      "SEARCH": "Buscar",
+      "NO_DATA": "No hay datos",
+      "FILTER": "Filtrar",
+      "SORTING": "Ordenar"
     }
   },
   "SECTIONS": {
