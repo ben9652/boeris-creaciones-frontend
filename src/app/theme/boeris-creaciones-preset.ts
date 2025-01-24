@@ -798,6 +798,28 @@ export const BoerisCreaciones = definePreset(Aura, {
             icon: {
                 color: "{primary.color}"
             }
+        },
+        tree: {
+            node: {
+                color: "{primary.color}",
+                toggle: {
+                    button: {
+                        color: "{primary.color} !important",
+                        hover: {
+                            color: "{primary.400} !important"
+                        }
+                    }
+                },
+                hover: {
+                    color: "{primary.400}"
+                },
+                icon: {
+                    color: "{primary.color} !important",
+                    hover: {
+                        color: "{primary.400} !important"
+                    }
+                }
+            }
         }
     }
 });
