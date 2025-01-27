@@ -1,4 +1,9 @@
 @if (purchases() !== undefined) {
+    <p
+    class="flex justify-content-end m-0"
+    >
+        {{ 'SECTIONS.PROVISIONS.PURCHASES.LIST.LISTED_PURCHASES' | translate }}: {{ purchases()?.length }}
+    </p>
     <p-virtualscroller
     [items]="purchases()"
     [itemSize]="180"

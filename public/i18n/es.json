@@ -357,6 +357,10 @@
               "DETAIL": "La compra ha sido cancelada"
             }
           }
+        },
+        "LIST": {
+          "NO_PURCHASES": "No existen compras",
+          "LISTED_PURCHASES": "Compras listadas"
         }
       }
     },

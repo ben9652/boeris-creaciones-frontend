@@ -5,13 +5,15 @@ import { PurchaseCardComponent } from '../purchase-card/purchase-card.component'
 import { User } from '../../../../../core/models/user.entities';
 import { SkeletonModule } from 'primeng/skeleton';
 import { DeviceTypeService } from '../../../../../core/services/device-type/device-type.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-purchases-list',
   imports: [
     ScrollerModule,
     PurchaseCardComponent,
-    SkeletonModule
+    SkeletonModule,
+    TranslateModule
   ],
   templateUrl: './purchases-list.component.html',
   styleUrl: './purchases-list.component.scss'
