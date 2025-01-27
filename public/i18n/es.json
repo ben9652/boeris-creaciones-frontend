@@ -16,7 +16,8 @@
       "DETAIL": {
         "MODIFIED_ROLES": "Se modificaron los roles",
         "CREATED_PARTNER": "Se creó un nuevo socio"
-      }
+      },
+      "OPTIONAL": "Opcional"
     },
     "CATEGORIES": {
       "MESSAGES": {
@@ -308,9 +309,10 @@
           "TITLE": "Recepción de compra",
           "FIELDS": {
             "BRANCH": "Sucursal de recepción",
+            "ADDITIONAL_AMOUNT": "Precio final",
+            "ADDITIONAL_AMOUNT_REASON": "Motivo de la cantidad adicional",
             "INVOICE": {
-              "LOAD": "Cargar factura",
-              "SUBLABEL": "Opcional"
+              "LOAD": "Cargar factura"
             },
             "ERROR": {
               "BRANCH": "Debe seleccionar una sucursal",
@@ -321,14 +323,16 @@
         "CARD": {
           "STATUS": {
             "REQUESTED": "Pedido",
-            "RECEIVED": "Recibido"
+            "RECEIVED": "Recibido",
+            "CANCELED": "Cancelado"
           },
           "FIELDS": {
             "ID": "ID",
             "DESCRIPTION": "Descripción",
             "PROVIDER": "Proveedor",
             "PARTNER": "Socio",
-            "PRICE": "Monto",
+            "BUDGET": "Presupuesto",
+            "FINAL_PRICE": "Monto final",
             "REQUEST_DATE": "Fecha de pedido",
             "RECEPTION_DATE": "Fecha de recepción",
             "CANCELATION_DATE": "Fecha de cancelación",

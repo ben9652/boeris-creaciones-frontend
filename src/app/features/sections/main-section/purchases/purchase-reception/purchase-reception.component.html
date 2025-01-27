@@ -1,9 +1,12 @@
 <div class="fields">
     <div>
-        <app-branches-dropdown
-        (getBranch)="onBranchSelected($event)"
-        style="justify-content: left;"
-        ></app-branches-dropdown>
+        <div class="flex flex-column gap-2">
+            <p>{{ 'SECTIONS.PROVISIONS.PURCHASES.RECEPTION.FIELDS.BRANCH' | translate }}</p>
+            <app-branches-dropdown
+            (getBranch)="onBranchSelected($event)"
+            style="justify-content: left;"
+            ></app-branches-dropdown>
+        </div>
 
         @if (fieldsLack) {
             <p class="error-message">
@@ -13,6 +16,31 @@
         @else {
             <p> </p>
         }
+    </div>
+
+    <div class="input-amount">
+        <div class="flex gap-2 align-items-center">
+            <p-inputnumber
+            [(ngModel)]="additionalAmount"
+            inputId="locale-germany"
+            mode="decimal"
+            locale="de-DE"
+            [minFractionDigits]="2"
+            [maxFractionDigits]="2"
+            />
+            <p>{{ 'SECTIONS.PROVISIONS.PURCHASES.RECEPTION.FIELDS.ADDITIONAL_AMOUNT' | translate }}</p>
+        </div>
+        <br>
+        <input
+        style="width: 100%;"
+        pInputText
+        maxlength="50"
+        [placeholder]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.RECEPTION.FIELDS.ADDITIONAL_AMOUNT_REASON')"
+        [(ngModel)]="additionalAmountReason"
+        />
+        <p class="optional-message">
+            ({{ 'SHARED.MESSAGES.OPTIONAL' | translate }})
+        </p>
     </div>
     
     <div class="upload-file">
@@ -28,7 +56,7 @@
         [showCancelButton]="true"
         />
         <p class="optional-message">
-            ({{ 'SECTIONS.PROVISIONS.PURCHASES.RECEPTION.FIELDS.INVOICE.SUBLABEL' | translate }})
+            ({{ 'SHARED.MESSAGES.OPTIONAL' | translate }})
         </p>
     </div>
     

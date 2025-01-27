@@ -2,7 +2,6 @@ import { Injectable, signal, WritableSignal } from '@angular/core';
 import { HttpOptions } from '../../../../core/models/httpOptions.entities';
 import { environment } from '../../../../../environments/environment';
 import { areProductsEqual, Product } from '../../../../core/models/product.entities';
-import { areRawMaterialsEqual } from '../../../../core/models/rawMaterial.entities';
 import { catchError, Observable, of, switchMap, tap, throwError } from 'rxjs';
 import { getImageFileFromUrl } from '../../../../shared/multimedia.helpers';
 import { HttpClient } from '@angular/common/http';

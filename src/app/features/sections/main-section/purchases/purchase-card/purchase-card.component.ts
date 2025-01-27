@@ -13,9 +13,10 @@ import { User } from '../../../../../core/models/user.entities';
 import { ToastModule } from 'primeng/toast';
 import { PurchaseSummaryComponent } from '../purchase-summary/purchase-summary.component';
 import { DialogModule } from 'primeng/dialog';
-import { PurchaseSummary } from '../../../../../core/models/purchaseSummary.entities';
+import { ItemPurchaseSummary, PurchaseSummary } from '../../../../../core/models/purchaseSummary.entities';
 import { PurchaseReceptionComponent } from '../purchase-reception/purchase-reception.component';
 import { ReceptionObject } from '../../../../../core/models/receptionObject.entities';
+import { BranchBase } from '../../../../../core/models/branch.entities';
 
 @Component({
   selector: 'app-purchase-card',
@@ -38,6 +39,8 @@ import { ReceptionObject } from '../../../../../core/models/receptionObject.enti
 export class PurchaseCardComponent implements AfterViewInit {
   purchase: InputSignal<Purchase> = input.required<Purchase>();
   user: InputSignal<User> = input.required<User>();
+
+  statusTooltip: string = 'Pedida';
   
   purchaseSummary: PurchaseSummary;
 
@@ -59,27 +62,34 @@ export class PurchaseCardComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    const totalPrice: number = this.purchase().raw_materials.reduce((acc, item) => acc + item.total, 0);
+    const totalPrice: number = this.purchase().raw_materials.reduce((acc, item) => acc + (item.unit_price * item.quantity), 0);
     this.purchaseSummary = {
       id_purchase: this.purchase().id,
       date: this.purchase().order_date,
       items: this.purchase().raw_materials,
       total: totalPrice
     }
+
+    if(this.purchase().state === 'R') {
+      this.statusTooltip = 'Recibida';
+    }
+    else if(this.purchase().state === 'C') {
+      this.statusTooltip = 'Cancelada';
+    }
   }
 
-  receivePurchase(event: ReceptionObject) {
+  receivePurchase(event: { reception: ReceptionObject, branch: BranchBase, invoice: File | null }) {
     this.purchase().reception_branch = {
       id: event.branch.id,
       name: event.branch.name,
       domicile: event.branch.domicile,
-      locality: {id: 1, name: 'San Miguel', province: {id: 1, name: 'Tucumán'}},
+      locality: {id: 1, name: 'San Miguel de Tucumán', province: {id: 1, name: 'Tucumán'}},
     };
 
-    this.purchase().status = 'R';
+    this.purchase().state = 'R';
     this.purchase().reception_date = new Date();
     if(event.invoice !== null) {
-      this.purchase().invoice = event.invoice.name;
+      // this.purchase().invoice = event.invoice;
     }
 
     this.showReception = false;
@@ -113,8 +123,8 @@ export class PurchaseCardComponent implements AfterViewInit {
         label: this.translateService.instant('SHARED.BUTTONS.CONFIRM')
       },
       accept: () => {
-        this.purchase().status = 'C';
-        this.purchase().canceled_date = new Date();
+        this.purchase().state = 'C';
+        this.purchase().cancel_date = new Date();
         
         this.messageService.add({ severity: 'info', summary: toastSummary, detail: toastDetail });
       },

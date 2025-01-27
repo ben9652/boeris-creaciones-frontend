@@ -6,7 +6,6 @@ export interface ItemPurchaseSummary {
     name: string;
     quantity: number;
     unit_price: number;
-    total: number;
 }
 
 export interface PurchaseSummary {

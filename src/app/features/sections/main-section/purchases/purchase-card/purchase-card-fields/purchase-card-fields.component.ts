@@ -19,7 +19,7 @@ import { DialogModule } from 'primeng/dialog';
   templateUrl: './purchase-card-fields.component.html',
   styleUrl: './purchase-card-fields.component.scss'
 })
-export class PurchaseCardFieldsComponent implements AfterViewInit {
+export class PurchaseCardFieldsComponent {
   purchase: InputSignal<Purchase> = input.required<Purchase>();
 
   @ViewChild('fields') fieldsCont!: ElementRef;
@@ -32,51 +32,14 @@ export class PurchaseCardFieldsComponent implements AfterViewInit {
   isTextOverflowed: boolean = false;
 
   displayDescription: boolean = false;
+
+  description: string = 'kaefkognjopiamepoñjfopwesmoeosjfopwmsowrjsogjsroijovsrnjvlksekñkñclaweoñatlkeajfo e  nlkrws klg jlsrng rnklg eltkdn jotdngjklb dtklb jkldt lbkjdnkjltgnt ddtkjl dt';
   
   constructor(
     public translateService: TranslateService,
     public deviceTypeService: DeviceTypeService
   ) {
     
-  }
-
-  ngAfterViewInit(): void {
-      setTimeout(() => {
-        const containerHeight = this.fieldsCont.nativeElement.clientHeight;
-        const idContHeight = this.idCont.nativeElement.clientHeight;
-        const titleContHeight = this.textTitleCont.nativeElement.clientHeight;
-        const textHeight = this.text.nativeElement.clientHeight;
-
-        // Medición de la altura de un caracter
-        const span = document.createElement('span');
-        span.style.visibility = 'hidden';
-
-        // Un solo caracter como ejemplo
-        span.textContent = 'a';
-        this.text.nativeElement.appendChild(span);
-
-        const charHeight = span.offsetHeight;
-
-        this.text.nativeElement.removeChild(span);
-        ///////////////////////////////////////
-
-        const topPaddingP = 20;
-
-        const textContHeight = containerHeight - titleContHeight - idContHeight;
-        let linesThatFit = textContHeight / charHeight;
-        
-        linesThatFit = Math.trunc(linesThatFit);
-
-        const finalTextHeight = charHeight * linesThatFit;
-        const finalTitleHeight = titleContHeight;
-        const finalTextContainerHeight = (finalTextHeight + finalTitleHeight).toString(10) + 'px';
-
-        this.textCont.nativeElement.style.height = finalTextContainerHeight;
-        this.text.nativeElement.style.height = finalTextHeight.toString(10) + 'px';
-        
-        if(textHeight > finalTextHeight)
-          this.isTextOverflowed = true;
-      }, 0)
   }
   
   showDescription($event: MouseEvent) {

@@ -1,0 +1,24 @@
+@if (purchases() !== undefined) {
+    <p-virtualscroller
+    [items]="purchases()"
+    [itemSize]="180"
+    styleClass="border border-surface"
+    [style]="{ width: '80vw', height: '70vh' }"
+    >
+        <ng-template #item let-item let-options="options">
+            <div class="flex items-center p-2" style="height: 100%;">
+                <app-purchase-card
+                [purchase]="item"
+                [user]="user()"
+                ></app-purchase-card>
+            </div>
+        </ng-template>
+    </p-virtualscroller>
+}
+@else {
+    <p-skeleton width="80vw" [height]="skeletonsHeight"></p-skeleton>
+    <br>
+    <p-skeleton width="80vw" [height]="skeletonsHeight"></p-skeleton>
+    <br>
+    <p-skeleton width="80vw" [height]="skeletonsHeight"></p-skeleton>
+}
