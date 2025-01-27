@@ -1,25 +1,30 @@
 <div class="cards">
-    <p-card class="left-card" [ngClass]="{
-        'status-pending': purchase().status === 'P',
-        'status-received': purchase().status === 'R',
-        'status-canceled': purchase().status === 'C'
-    }">
+    <p-card
+    class="left-card"
+    [pTooltip]="statusTooltip"
+    tooltipPosition="left"
+    [ngClass]="{
+        'status-pending': purchase().state === 'P',
+        'status-received': purchase().state === 'R',
+        'status-canceled': purchase().state === 'C'
+    }"
+    >
         <div class="status">
-            @if (purchase().status === 'P') {
+            @if (purchase().state === 'P') {
                 <i class="fas fa-clock fa-2xl"></i>
             }
-            @else if (purchase().status === 'R') {
+            @else if (purchase().state === 'R') {
                 <i class="fas fa-circle-check fa-2xl"></i>
             }
-            @else if (purchase().status === 'C') {
+            @else if (purchase().state === 'C') {
                 <i class="fas fa-circle-xmark fa-2xl"></i>
             }
         </div>
     </p-card>
     <p-card class="medium-card" styleClass="custom-card" [ngClass]="{
-        'status-pending': purchase().status === 'P',
-        'status-received': purchase().status === 'R',
-        'status-canceled': purchase().status === 'C'
+        'status-pending': purchase().state === 'P',
+        'status-received': purchase().state === 'R',
+        'status-canceled': purchase().state === 'C'
     }">
         <div class="content">
             <app-purchase-card-fields
@@ -28,9 +33,9 @@
         </div>
     </p-card>
     <p-card class="right-card" [ngClass]="{
-        'status-pending': purchase().status === 'P',
-        'status-received': purchase().status === 'R',
-        'status-canceled': purchase().status === 'C'
+        'status-pending': purchase().state === 'P',
+        'status-received': purchase().state === 'R',
+        'status-canceled': purchase().state === 'C'
     }">
         <div class="buttons">
             <p-button
@@ -40,7 +45,7 @@
             (onClick)="showSummary = true"
             ></p-button>
 
-            @if(purchase().status === 'P') {
+            @if(purchase().state === 'P') {
                 <p-button
                 severity="success"
                 [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.BUTTONS.RECEIVE')"
@@ -62,14 +67,31 @@
 <p-toast />
 <p-confirmdialog />
 
-<p-dialog [header]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.SUMMARY.TITLE')" [modal]="true" [dismissableMask]="true" [(visible)]="showSummary">
+<p-dialog
+[header]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.SUMMARY.TITLE')"
+[modal]="true"
+[dismissableMask]="true"
+[(visible)]="showSummary"
+[draggable]="false"
+appendTo="body"
+>
     <app-purchase-summary
     [purchased_raw_materials]="purchaseSummary"
     ></app-purchase-summary>
 </p-dialog>
 
-<p-dialog [header]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.RECEPTION.TITLE')" [modal]="true" [dismissableMask]="true" [(visible)]="showReception">
+<p-dialog
+[header]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.RECEPTION.TITLE')"
+[modal]="true"
+[dismissableMask]="true"
+[(visible)]="showReception"
+[draggable]="false"
+appendTo="body"
+[style]="{ width: '310px' }"
+>
     <app-purchase-reception
+    [finalPrice]="purchase().budget"
     (onAcceptEvent)="receivePurchase($event)"
+    (onCancelEvent)="showReception = false"
     ></app-purchase-reception>
 </p-dialog>

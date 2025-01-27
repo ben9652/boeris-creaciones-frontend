@@ -108,3 +108,13 @@ div.p-listbox-list-container {
 .p-dialog-title {
     user-select: none;
 }
+
+.p-datatable-table-container {
+    scrollbar-width: thin;
+    scrollbar-color: var(--p-primary-color) var(--p-secondary-600);
+}
+
+.p-virtualscroller {
+    scrollbar-width: thin;
+    scrollbar-color: var(--p-primary-color) var(--p-secondary-600);
+}

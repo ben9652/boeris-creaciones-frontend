@@ -12,7 +12,7 @@
             <td>{{ raw_material.name }}</td>
             <td class="qnty-field">{{ raw_material.quantity }}</td>
             <td class="money-field">$ {{ raw_material.unit_price }}</td>
-            <td class="money-field">$ {{ raw_material.total }}</td>
+            <td class="money-field">$ {{ raw_material.quantity * raw_material.unit_price }}</td>
         </tr>
     </ng-template>
     <ng-template #footer>

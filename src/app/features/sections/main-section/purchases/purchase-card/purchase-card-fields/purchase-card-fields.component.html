@@ -16,6 +16,7 @@
                 </div>
             </div>
             <div #textDescriptionContainer class="description">
+                <br>
                 <b><p #textContainerTitle>{{ 'SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.DESCRIPTION' | translate }}</p></b>
                 <p-dialog [modal]="true" [dismissableMask]="true" [(visible)]="displayDescription" [style]="{ width: '80vw', height: '50vh' }">
                     <p>{{ purchase().description }}</p>
@@ -38,9 +39,16 @@
                 </div>
                 <div class="field-icon">
                     <i class="fas fa-money-check-dollar"></i>
-                    <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.PRICE')" tooltipPosition="top">
-                        $ {{ purchase().price }}
-                    </p>
+                    @if (purchase().state === 'P' || purchase().state === 'C') {
+                        <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.BUDGET')" tooltipPosition="top">
+                            $ {{ purchase().budget }}
+                        </p>
+                    }
+                    @if (purchase().state === 'R') {
+                        <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.FINAL_PRICE')" tooltipPosition="top">
+                            $ {{ purchase().final_price }}
+                        </p>
+                    }
                 </div>
             </div>
             <div class="row-fields empty"></div>
@@ -53,7 +61,7 @@
                         </p>
                     </div>
                 </div>
-                @if (purchase().status === 'R') {
+                @if (purchase().state === 'R') {
                     <div class="row-fields align-items-start">
                         <div class="field-icon">
                             <i class="fas fa-calendar-check"></i>
@@ -78,12 +86,12 @@
                     </div>
                 }
 
-                @if(purchase().status === 'C') {
+                @if(purchase().state === 'C') {
                     <div class="row-fields">
                         <div class="field-icon">
                             <i class="fas fa-calendar-xmark"></i>
                             <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.CANCELATION_DATE')" tooltipPosition="top">
-                                {{ purchase().canceled_date | date: 'dd/MM/yyyy' }}
+                                {{ purchase().cancel_date | date: 'dd/MM/yyyy' }}
                             </p>
                         </div>
                     </div>
@@ -119,7 +127,7 @@
                     {{ purchase().order_date | date: 'dd/MM/yyyy' }}
                 </p>
             </div>
-            @if (purchase().status === 'R') {
+            @if (purchase().state === 'R') {
                 <div class="field-icon">
                     <i class="fas fa-calendar-check"></i>
                     <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.RECEPTION_DATE')" tooltipPosition="top">
@@ -140,11 +148,11 @@
                 </div>
             }
     
-            @if (purchase().status === 'C') {
+            @if (purchase().state === 'C') {
                 <div class="field-icon">
                     <i class="fas fa-calendar-xmark"></i>
                     <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.CANCELATION_DATE')" tooltipPosition="top">
-                        {{ purchase().canceled_date | date: 'dd/MM/yyyy' }}
+                        {{ purchase().cancel_date | date: 'dd/MM/yyyy' }}
                     </p>
                 </div>
             }
@@ -152,9 +160,16 @@
         <div class="column-fields align-items-end w-6">
             <div class="field-icon">
                 <i class="fas fa-money-check-dollar"></i>
-                <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.PRICE')" tooltipPosition="top">
-                    $ {{ purchase().price }}
-                </p>
+                @if (purchase().state === 'P' || purchase().state === 'C') {
+                    <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.BUDGET')" tooltipPosition="top">
+                        $ {{ purchase().budget }}
+                    </p>
+                }
+                @if (purchase().state === 'R') {
+                    <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.FINAL_PRICE')" tooltipPosition="top">
+                        $ {{ purchase().final_price }}
+                    </p>
+                }
             </div>
             <b><p>{{ 'SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.DESCRIPTION' | translate }}</p></b>
             <p class="text-right">{{ purchase().description }}</p>

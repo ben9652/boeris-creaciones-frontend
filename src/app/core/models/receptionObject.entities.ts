@@ -1,6 +1,6 @@
-import { BranchBase } from "./branch.entities";
-
 export interface ReceptionObject {
-    branch: BranchBase;
-    invoice: File | null;
+    id_branch_reception: number;
+    invoice: string | null;
+    additional_amount: number;
+    additional_amount_reason: string | null;
 }
