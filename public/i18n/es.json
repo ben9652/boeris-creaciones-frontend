@@ -373,6 +373,19 @@
         "LIST": {
           "NO_PURCHASES": "No existen compras",
           "LISTED_PURCHASES": "Compras listadas"
+        },
+        "NEW_PURCHASE": {
+          "TITLE": "Nueva compra",
+          "STEP_ONE": {
+            "DESCRIPTION": "Descripción",
+            "PROVIDER": {
+              "TITLE": "Proveedor",
+              "NAME": "Nombre",
+              "DOMICILE": "Domicilio",
+              "PHONE": "Teléfono",
+              "CVU_OR_ALIAS": "CVU o alias"
+            }
+          }
         }
       }
     },

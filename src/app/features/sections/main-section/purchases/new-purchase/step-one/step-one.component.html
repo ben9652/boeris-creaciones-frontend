@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="left-panel">
+        <div class="card flex justify-center">
+            <p-floatlabel>
+                <textarea
+                pTextarea
+                id="over_label"
+                rows="2"
+                cols="24"
+                [(ngModel)]="description"
+                maxlength="50"
+                ></textarea>
+                <label for="over_label">{{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_ONE.DESCRIPTION' | translate }}</label>
+            </p-floatlabel>
+        </div>
+
+        <app-providers-dropdown
+        (getProvider)="onSelectedProvider($event)"
+        ></app-providers-dropdown>
+    </div>
+    <p-divider [layout]="dividerLayout" />
+    <div class="right-panel">
+        <p>
+            {{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_ONE.PROVIDER.NAME' | translate }}:
+            <span>{{ provider()?.name }}</span>
+        </p>
+        <p>
+            {{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_ONE.PROVIDER.DOMICILE' | translate}}:
+            <span>{{ provider()?.residence }}</span>
+        </p>
+        <p>
+            {{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_ONE.PROVIDER.PHONE' | translate }}:
+            <span>{{ provider()?.phone }}</span>
+        </p>
+        <p>
+            {{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_ONE.PROVIDER.CVU_OR_ALIAS' | translate }}:
+            <span>{{ provider()?.cvu_or_alias }}</span>
+        </p>
+    </div>
+</div>

@@ -1,4 +1,8 @@
 <p-toast position="top-right" />
+<p-button
+label="Nueva compra"
+(onClick)="goToNewPurchase()"
+></p-button>
 <div class="table-container">
     <app-purchases-list
     [purchases]="purchases"
