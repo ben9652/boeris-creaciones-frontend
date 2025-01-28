@@ -64,7 +64,7 @@
         </div>
     </p-card>
 </div>
-<p-toast />
+
 <p-confirmdialog />
 
 <p-dialog
@@ -78,12 +78,52 @@ appendTo="body"
     <app-purchase-summary
     [purchased_raw_materials]="purchaseSummary"
     ></app-purchase-summary>
+
+    @let final_price = purchase().final_price;
+    @if (purchase().state === 'R' && final_price !== null && final_price > purchase().budget) {
+        <div class="flex flex-rows">
+            <span class="mr-2">{{ 'SECTIONS.PROVISIONS.PURCHASES.SUMMARY.ADDITIONAL_AMOUNT' | translate }}:</span>
+            <span>$ {{ final_price - purchase().budget }}</span>
+        </div>
+        @if (purchase().additional_amount_reason !== null) {
+            <div class="flex flex-rows">
+                <p class="mr-2">{{ 'SECTIONS.PROVISIONS.PURCHASES.SUMMARY.ADDITIONAL_AMOUNT_REASON' | translate }}:</p>
+                <p>{{ purchase().additional_amount_reason }}</p>
+            </div>
+        }
+        @else {
+            <p>{{ 'SECTIONS.PROVISIONS.PURCHASES.SUMMARY.NO_REASON' | translate }}</p>
+        }
+    }
+
+    @let invoice = purchase().invoice;
+    @if (invoice !== null) {
+        <b><p>{{ 'SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.INVOICE' | translate }}</p></b>
+        @if (invoice.includes('.pdf')) {
+            <pdf-viewer
+            [src]="invoice"
+            [render-text]="true"
+            [original-size]="false"
+            style="width: 100%; height: 500px;"
+            ></pdf-viewer>
+        }
+        @else {
+            <div class="flex justify-content-center">
+                <p-image
+                [src]="invoice"
+                alt="factura"
+                width="400"
+                />
+            </div>
+        }
+    }
 </p-dialog>
 
 <p-dialog
 [header]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.RECEPTION.TITLE')"
 [modal]="true"
-[dismissableMask]="true"
+[closable]="!receivingPurchase"
+[dismissableMask]="!receivingPurchase"
 [(visible)]="showReception"
 [draggable]="false"
 appendTo="body"
@@ -91,6 +131,7 @@ appendTo="body"
 >
     <app-purchase-reception
     [finalPrice]="purchase().budget"
+    [(isLoading)]="receivingPurchase"
     (onAcceptEvent)="receivePurchase($event)"
     (onCancelEvent)="showReception = false"
     ></app-purchase-reception>

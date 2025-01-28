@@ -6,7 +6,7 @@
     </p>
     <p-virtualscroller
     [items]="purchases()"
-    [itemSize]="180"
+    [itemSize]="cardHeight"
     styleClass="border border-surface"
     [style]="{ width: '80vw', height: '70vh' }"
     >
@@ -15,12 +15,17 @@
                 <app-purchase-card
                 [purchase]="item"
                 [user]="user()"
+                (onReceivedPurchase)="onPurchaseReceive($event)"
+                (onCancelPurchase)="onPurchaseCancel($event)"
+                (onError)="onCardError($event)"
                 ></app-purchase-card>
             </div>
         </ng-template>
     </p-virtualscroller>
 }
 @else {
+    <p-skeleton class="flex justify-content-end" width="200px"></p-skeleton>
+    <br>
     <p-skeleton width="80vw" [height]="skeletonsHeight"></p-skeleton>
     <br>
     <p-skeleton width="80vw" [height]="skeletonsHeight"></p-skeleton>

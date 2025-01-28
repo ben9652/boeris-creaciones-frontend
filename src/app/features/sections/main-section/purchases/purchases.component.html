@@ -1,6 +1,10 @@
+<p-toast position="top-right" />
 <div class="table-container">
     <app-purchases-list
     [purchases]="purchases"
     [user]="user"
+    (onPurchaseReceiving)="onPurchaseReceiving($event)"
+    (onPurchaseCanceling)="onPurchaseCanceling($event)"
+    (onError)="onError($event)"
     ></app-purchases-list>
 </div>

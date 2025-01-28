@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, input, InputSignal } from '@angular/core';
+import { AfterViewInit, Component, input, InputSignal, OnInit, output, OutputEmitterRef } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { DeviceTypeService } from '../../../../../core/services/device-type/device-type.service';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Purchase } from '../../../../../core/models/purchase.entities';
 import { PurchaseCardFieldsComponent } from './purchase-card-fields/purchase-card-fields.component';
 import { CommonModule } from '@angular/common';
@@ -10,13 +10,16 @@ import { TooltipModule } from 'primeng/tooltip';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { User } from '../../../../../core/models/user.entities';
-import { ToastModule } from 'primeng/toast';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { PurchaseSummaryComponent } from '../purchase-summary/purchase-summary.component';
 import { DialogModule } from 'primeng/dialog';
-import { ItemPurchaseSummary, PurchaseSummary } from '../../../../../core/models/purchaseSummary.entities';
+import { PurchaseSummary } from '../../../../../core/models/purchaseSummary.entities';
 import { PurchaseReceptionComponent } from '../purchase-reception/purchase-reception.component';
 import { ReceptionObject } from '../../../../../core/models/receptionObject.entities';
-import { BranchBase } from '../../../../../core/models/branch.entities';
+import { Branch } from '../../../../../core/models/branch.entities';
+import { PurchasesService } from '../purchases.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Image } from 'primeng/image';
 
 @Component({
   selector: 'app-purchase-card',
@@ -27,16 +30,18 @@ import { BranchBase } from '../../../../../core/models/branch.entities';
     ButtonModule,
     TooltipModule,
     ConfirmDialogModule,
-    ToastModule,
     PurchaseSummaryComponent,
     PurchaseReceptionComponent,
-    DialogModule
+    DialogModule,
+    TranslateModule,
+    PdfViewerModule,
+    Image
   ],
   templateUrl: './purchase-card.component.html',
   styleUrl: './purchase-card.component.scss',
-  providers: [TranslateService, ConfirmationService, MessageService]
+  providers: [TranslateService, ConfirmationService]
 })
-export class PurchaseCardComponent implements AfterViewInit {
+export class PurchaseCardComponent implements OnInit {
   purchase: InputSignal<Purchase> = input.required<Purchase>();
   user: InputSignal<User> = input.required<User>();
 
@@ -46,12 +51,18 @@ export class PurchaseCardComponent implements AfterViewInit {
 
   showSummary: boolean = false;
   showReception: boolean = false;
+
+  receivingPurchase: boolean = false;
+  
+  onReceivedPurchase: OutputEmitterRef<Purchase> = output<Purchase>();
+  onCancelPurchase: OutputEmitterRef<Purchase> = output<Purchase>();
+  onError: OutputEmitterRef<HttpErrorResponse> = output<HttpErrorResponse>();
   
   constructor(
     public deviceTypeService: DeviceTypeService,
     public translateService: TranslateService,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
+    private purchasesService: PurchasesService
   ) {
     this.purchaseSummary = {
       id_purchase: 0,
@@ -60,8 +71,8 @@ export class PurchaseCardComponent implements AfterViewInit {
       total: 0
     }
   }
-
-  ngAfterViewInit(): void {
+  
+  ngOnInit(): void {
     const totalPrice: number = this.purchase().raw_materials.reduce((acc, item) => acc + (item.unit_price * item.quantity), 0);
     this.purchaseSummary = {
       id_purchase: this.purchase().id,
@@ -78,21 +89,70 @@ export class PurchaseCardComponent implements AfterViewInit {
     }
   }
 
-  receivePurchase(event: { reception: ReceptionObject, branch: BranchBase, invoice: File | null }) {
-    this.purchase().reception_branch = {
-      id: event.branch.id,
-      name: event.branch.name,
-      domicile: event.branch.domicile,
-      locality: {id: 1, name: 'San Miguel de Tucumán', province: {id: 1, name: 'Tucumán'}},
-    };
+  setPurchase(purchase: Purchase) {
+    this.purchase().id = purchase.id;
+    this.purchase().requester_partner = purchase.requester_partner;
+    this.purchase().provider = purchase.provider;
+    this.purchase().description = purchase.description;
+    this.purchase().raw_materials = { ...purchase.raw_materials };
+    this.purchase().order_date = purchase.order_date;
+    this.purchase().reception_date = purchase.reception_date;
+    this.purchase().cancel_date = purchase.cancel_date;
+    this.purchase().currency = purchase.currency;
+    this.purchase().payment_type = purchase.payment_type;
+    this.purchase().reception_mode = purchase.reception_mode;
+    this.purchase().budget = purchase.budget;
+    this.purchase().state = purchase.state;
+    this.purchase().final_price = purchase.final_price;
+    this.purchase().additional_amount_reason = purchase.additional_amount_reason;
+    this.purchase().reception_branch = purchase.reception_branch;
+    this.purchase().invoice = purchase.invoice;
+  }
 
-    this.purchase().state = 'R';
-    this.purchase().reception_date = new Date();
+  receivePurchase(event: { reception: ReceptionObject, branch: Branch, invoice: File | null }) {
+    this.receivingPurchase = true;
+    event.reception.additional_amount -= this.purchase().budget;
     if(event.invoice !== null) {
-      // this.purchase().invoice = event.invoice;
+      this.purchasesService.uploadInvoice(event.invoice).subscribe({
+        next: (invoiceUrl: string) => {
+          this.purchase().invoice = invoiceUrl;
+          event.reception.invoice = invoiceUrl;
+          this.purchasesService.receivePurchase(this.purchase().id, this.user().id_user, event.reception).subscribe({
+            next: (purchase: Purchase) => {
+              this.onReceivedPurchase.emit(purchase);
+              this.setPurchase(purchase);
+              this.showReception = false;
+              this.receivingPurchase = false;
+            },
+            error: (err: HttpErrorResponse) => {
+              this.onError.emit(err);
+              this.showReception = false;
+              this.receivingPurchase = false;
+            }
+          });
+        },
+        error: (error: HttpErrorResponse) => {
+          this.onError.emit(error);
+          this.showReception = false;
+          this.receivingPurchase = false;
+        }
+      });
     }
-
-    this.showReception = false;
+    else {
+      this.purchasesService.receivePurchase(this.purchase().id, this.user().id_user, event.reception).subscribe({
+        next: (purchase: Purchase) => {
+          this.onReceivedPurchase.emit(purchase);
+          this.setPurchase(purchase);
+          this.showReception = false;
+          this.receivingPurchase = false;
+        },
+        error: (error: HttpErrorResponse) => {
+          this.onError.emit(error);
+          this.showReception = false;
+          this.receivingPurchase = false;
+        }
+      });
+    }
   }
 
   cancelPurchase(event: Event) {
@@ -105,8 +165,6 @@ export class PurchaseCardComponent implements AfterViewInit {
     }
 
     const headerLabel: string = this.translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.MESSAGES.HEADER_CANCEL');
-    const toastSummary: string = this.translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.TOAST.CANCELED.HEADER');
-    const toastDetail: string = this.translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.TOAST.CANCELED.DETAIL');
 
     this.confirmationService.confirm({
       target: event.target as EventTarget,
@@ -123,10 +181,15 @@ export class PurchaseCardComponent implements AfterViewInit {
         label: this.translateService.instant('SHARED.BUTTONS.CONFIRM')
       },
       accept: () => {
-        this.purchase().state = 'C';
-        this.purchase().cancel_date = new Date();
-        
-        this.messageService.add({ severity: 'info', summary: toastSummary, detail: toastDetail });
+        this.purchasesService.cancelPurchase(this.purchase().id, this.user().id_user).subscribe({
+          next: (purchase: Purchase) => {
+            this.onCancelPurchase.emit(purchase);
+            this.setPurchase(purchase);
+          },
+          error: (error: HttpErrorResponse) => {
+            this.onError.emit(error);
+          }
+        });
       },
       reject: () => {}
     });

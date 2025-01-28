@@ -38,20 +38,28 @@
                     </p>
                 </div>
                 <div class="field-icon">
-                    <i class="fas fa-money-check-dollar"></i>
+                    <i class="far fa-credit-card"></i>
+                    <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.PAYMENT_METHOD')" tooltipPosition="top">
+                        {{ purchase().payment_type | paymentMethodParse }}
+                    </p>
+                </div>
+                <div class="field-icon">
+                    <i class="fas fa-dollar-sign"></i>
                     @if (purchase().state === 'P' || purchase().state === 'C') {
                         <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.BUDGET')" tooltipPosition="top">
-                            $ {{ purchase().budget }}
+                            {{ purchase().budget }}
                         </p>
                     }
                     @if (purchase().state === 'R') {
                         <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.FINAL_PRICE')" tooltipPosition="top">
-                            $ {{ purchase().final_price }}
+                            {{ purchase().final_price }}
                         </p>
                     }
                 </div>
             </div>
-            <div class="row-fields empty"></div>
+            <div class="row-fields empty">
+                
+            </div>
             <div class="dates">
                 <div class="row-fields">
                     <div class="field-icon">
@@ -59,6 +67,12 @@
                         <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.REQUEST_DATE')" tooltipPosition="top">
                             {{ purchase().order_date | date: 'dd/MM/yyyy' }}
                         </p>
+                    </div>
+                    <div class="field-right-icon">
+                        <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.RECEPTION_MODE')" tooltipPosition="top">
+                            {{ purchase().reception_mode | receptionModeParse }}
+                        </p>
+                        <i class="fas fa-truck"></i>
                     </div>
                 </div>
                 @if (purchase().state === 'R') {
@@ -70,17 +84,11 @@
                             </p>
                         </div>
                         <div class="received-fields">
-                            <div class="field-icon">
-                                <i class="fas fa-truck"></i>
-                                <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.RECEPTION_MODE')" tooltipPosition="top">
-                                    {{ purchase().reception_mode }}
-                                </p>
-                            </div>
-                            <div class="field-icon">
-                            <i class="fas fa-store"></i>
-                            <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.BRANCH')">
+                            <div class="field-right-icon">
+                                <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.BRANCH')">
                                     {{ purchase().reception_branch?.name }}
                                 </p>
+                                <i class="fas fa-store"></i>
                             </div>
                         </div>
                     </div>
@@ -137,7 +145,7 @@
                 <div class="field-icon">
                     <i class="fas fa-truck"></i>
                     <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.RECEPTION_MODE')" tooltipPosition="top">
-                        {{ purchase().reception_mode }}
+                        {{ purchase().reception_mode | receptionModeParse }}
                     </p>
                 </div>
                 <div class="field-icon">
@@ -159,18 +167,25 @@
         </div>
         <div class="column-fields align-items-end w-6">
             <div class="field-icon">
-                <i class="fas fa-money-check-dollar"></i>
+                <i class="fas fa-dollar-sign"></i>
                 @if (purchase().state === 'P' || purchase().state === 'C') {
                     <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.BUDGET')" tooltipPosition="top">
-                        $ {{ purchase().budget }}
+                        {{ purchase().budget }}
                     </p>
                 }
                 @if (purchase().state === 'R') {
                     <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.FINAL_PRICE')" tooltipPosition="top">
-                        $ {{ purchase().final_price }}
+                        {{ purchase().final_price }}
                     </p>
                 }
             </div>
+            <div class="field-icon">
+                <i class="far fa-credit-card"></i>
+                <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.PAYMENT_METHOD')" tooltipPosition="top">
+                    {{ purchase().payment_type | paymentMethodParse }}
+                </p>
+            </div>
+            <br>
             <b><p>{{ 'SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.DESCRIPTION' | translate }}</p></b>
             <p class="text-right">{{ purchase().description }}</p>
         </div>

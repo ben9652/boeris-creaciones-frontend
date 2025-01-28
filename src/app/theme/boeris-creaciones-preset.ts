@@ -820,6 +820,11 @@ export const BoerisCreaciones = definePreset(Aura, {
                     }
                 }
             }
+        },
+        card: {
+            body: {
+                padding: "1.2rem"
+            }
         }
     }
 });

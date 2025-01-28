@@ -1,5 +1,5 @@
-import { Component, output, OutputEmitterRef } from '@angular/core';
-import { BranchBase } from '../../../core/models/branch.entities';
+import { Component, input, InputSignal, output, OutputEmitterRef } from '@angular/core';
+import { Branch } from '../../../core/models/branch.entities';
 import { BranchesService } from '../../../core/services/catalogs/branches.service';
 import { SelectChangeEvent, SelectModule } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
@@ -17,7 +17,9 @@ import { TranslateService } from '@ngx-translate/core';
 export class BranchesDropdownComponent {
   groupedBranches: SelectItemGroup[] | null = null;
 
-  getBranch: OutputEmitterRef<BranchBase> = output<BranchBase>();
+  getBranch: OutputEmitterRef<Branch> = output<Branch>();
+
+  disabled: InputSignal<boolean> = input<boolean>(false);
 
   constructor(
     private branchesService: BranchesService,

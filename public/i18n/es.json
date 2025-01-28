@@ -15,7 +15,8 @@
       },
       "DETAIL": {
         "MODIFIED_ROLES": "Se modificaron los roles",
-        "CREATED_PARTNER": "Se creó un nuevo socio"
+        "CREATED_PARTNER": "Se creó un nuevo socio",
+        "FORBIDDEN": "No tenés permitido realizar esta acción"
       },
       "OPTIONAL": "Opcional"
     },
@@ -303,7 +304,10 @@
           "QUANTITY": "Cantidad",
           "UNIT_PRICE": "Precio unitario",
           "SUBTOTAL": "Subtotal",
-          "TOTAL": "Total"
+          "TOTAL": "Total",
+          "ADDITIONAL_AMOUNT": "Monto adicional",
+          "ADDITIONAL_AMOUNT_REASON": "Motivo de la cantidad adicional",
+          "NO_REASON": "No se especificó un motivo del adicional"
         },
         "RECEPTION": {
           "TITLE": "Recepción de compra",
@@ -330,14 +334,16 @@
             "ID": "ID",
             "DESCRIPTION": "Descripción",
             "PROVIDER": "Proveedor",
-            "PARTNER": "Socio",
+            "PARTNER": "Socio que hizo el pedido",
             "BUDGET": "Presupuesto",
             "FINAL_PRICE": "Monto final",
             "REQUEST_DATE": "Fecha de pedido",
             "RECEPTION_DATE": "Fecha de recepción",
             "CANCELATION_DATE": "Fecha de cancelación",
             "RECEPTION_MODE": "Modo de recepción",
-            "BRANCH": "Sucursal de recepción"
+            "PAYMENT_METHOD": "Método de pago",
+            "BRANCH": "Sucursal de recepción",
+            "INVOICE": "Factura"
           },
           "BUTTONS": {
             "VIEW_SUMMARY": "Ver resumen",
@@ -345,8 +351,14 @@
             "CANCEL": "Cancelar"
           },
           "MESSAGES": {
-            "RECEIVED": "Compra recibida",
-            "CANCELED": "Compra cancelada",
+            "RECEIVED": {
+              "HEADER": "Compra recibida",
+              "DETAIL": "La compra ha sido recibida exitosamente"
+            },
+            "CANCELED": {
+              "HEADER": "Compra cancelada",
+              "DETAIL": "La compra ha sido cancelada"
+            },
             "HEADER_CANCEL": "Confirmación de cancelación",
             "CONFIRM_CANCEL": "¿Estás seguro de que querés cancelar la compra?"
           },
