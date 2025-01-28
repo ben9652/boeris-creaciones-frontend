@@ -1,6 +1,6 @@
-import { Component, output, OutputEmitterRef } from '@angular/core';
+import { Component, input, InputSignal, output, OutputEmitterRef } from '@angular/core';
 import { SelectItemGroup } from 'primeng/api';
-import { ProviderBase } from '../../../core/models/provider.entities';
+import { Provider } from '../../../core/models/provider.entities';
 import { ProvidersService } from '../../../core/services/catalogs/providers.service';
 import { SelectChangeEvent, SelectModule } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
@@ -17,7 +17,9 @@ import { TranslateService } from '@ngx-translate/core';
 export class ProvidersDropdownComponent {
   groupedProviders: SelectItemGroup[] | null = null;
 
-  getProvider: OutputEmitterRef<ProviderBase> = output<ProviderBase>();
+  getProvider: OutputEmitterRef<Provider> = output<Provider>();
+
+  disabled: InputSignal<boolean> = input<boolean>(false);
 
   constructor(
     private providersService: ProvidersService,

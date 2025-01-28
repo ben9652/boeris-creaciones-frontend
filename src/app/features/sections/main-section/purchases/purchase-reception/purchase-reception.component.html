@@ -4,6 +4,7 @@
             <p>{{ 'SECTIONS.PROVISIONS.PURCHASES.RECEPTION.FIELDS.BRANCH' | translate }}</p>
             <app-branches-dropdown
             (getBranch)="onBranchSelected($event)"
+            [disabled]="isLoading()"
             style="justify-content: left;"
             ></app-branches-dropdown>
         </div>
@@ -25,6 +26,8 @@
             inputId="locale-germany"
             mode="decimal"
             locale="de-DE"
+            [disabled]="isLoading()"
+            [min]="finalPrice()"
             [minFractionDigits]="2"
             [maxFractionDigits]="2"
             />
@@ -35,6 +38,7 @@
         style="width: 100%;"
         pInputText
         maxlength="50"
+        [disabled]="isLoading()"
         [placeholder]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.RECEPTION.FIELDS.ADDITIONAL_AMOUNT_REASON')"
         [(ngModel)]="additionalAmountReason"
         />
@@ -52,6 +56,7 @@
         uploadIcon="fas fa-upload"
         [customUpload]="true"
         [accept]="'.png,.jpg,.jpeg,.pdf'"
+        [disabled]="isLoading()"
         (onSelect)="onInvoiceLoading($event)"
         [showCancelButton]="true"
         />
@@ -63,12 +68,22 @@
     <footer class="buttons">
         <p-button
         severity="secondary"
+        class="buttons-section"
+        [disabled]="isLoading()"
         [label]="translateService.instant('SHARED.BUTTONS.CANCEL')"
         (onClick)="onCancel()"
         ></p-button>
-        <p-button
-        [label]="translateService.instant('SHARED.BUTTONS.ACCEPT')"
-        (onClick)="onAccept()"
-        ></p-button>
+        @if (isLoading()) {
+            <p-button class="buttons-section" [disabled]="true">
+                <i class="pi pi-spinner pi-spin"></i>
+            </p-button>
+        }
+        @else {
+            <p-button
+            class="buttons-section"
+            [label]="translateService.instant('SHARED.BUTTONS.ACCEPT')"
+            (onClick)="onAccept()"
+            ></p-button>
+        }
     </footer>
 </div>

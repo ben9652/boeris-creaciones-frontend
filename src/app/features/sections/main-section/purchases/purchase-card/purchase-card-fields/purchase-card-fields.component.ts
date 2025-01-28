@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TooltipModule } from 'primeng/tooltip';
 import { DialogModule } from 'primeng/dialog';
+import { PaymentMethodParsePipe, ReceptionModeParsePipe } from './purchase-card-fields.pipes';
 
 @Component({
   selector: 'app-purchase-card-fields',
@@ -14,7 +15,9 @@ import { DialogModule } from 'primeng/dialog';
     CommonModule,
     FormsModule,
     TooltipModule,
-    DialogModule
+    DialogModule,
+    ReceptionModeParsePipe,
+    PaymentMethodParsePipe
   ],
   templateUrl: './purchase-card-fields.component.html',
   styleUrl: './purchase-card-fields.component.scss'
@@ -32,8 +35,6 @@ export class PurchaseCardFieldsComponent {
   isTextOverflowed: boolean = false;
 
   displayDescription: boolean = false;
-
-  description: string = 'kaefkognjopiamepoñjfopwesmoeosjfopwmsowrjsogjsroijovsrnjvlksekñkñclaweoñatlkeajfo e  nlkrws klg jlsrng rnklg eltkdn jotdngjklb dtklb jkldt lbkjdnkjltgnt ddtkjl dt';
   
   constructor(
     public translateService: TranslateService,

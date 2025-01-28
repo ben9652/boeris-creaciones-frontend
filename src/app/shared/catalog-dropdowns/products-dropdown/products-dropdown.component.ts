@@ -1,4 +1,4 @@
-import { Component, output, OutputEmitterRef } from '@angular/core';
+import { Component, input, InputSignal, output, OutputEmitterRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { SelectChangeEvent, SelectModule } from 'primeng/select';
 import { SkeletonModule } from 'primeng/skeleton';
@@ -17,6 +17,8 @@ export class ProductsDropdownComponent {
   products: Product[] | null = null;
 
   getProduct: OutputEmitterRef<Product> = output<Product>();
+  
+  disabled: InputSignal<boolean> = input<boolean>(false);
 
   constructor(
     private productsService: ProductsService,

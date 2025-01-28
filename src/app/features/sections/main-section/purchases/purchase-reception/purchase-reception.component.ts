@@ -1,8 +1,8 @@
-import { AfterViewInit, Component, input, InputSignal, OnInit, output, OutputEmitterRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, input, InputSignal, model, ModelSignal, OnInit, output, OutputEmitterRef, ViewChild } from '@angular/core';
 import { BranchesDropdownComponent } from '../../../../../shared/catalog-dropdowns/branches-dropdown/branches-dropdown.component';
 import { ButtonModule } from 'primeng/button';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { BranchBase } from '../../../../../core/models/branch.entities';
+import { Branch } from '../../../../../core/models/branch.entities';
 import { FileUpload, FileUploadModule } from 'primeng/fileupload';
 import { ReceptionObject } from '../../../../../core/models/receptionObject.entities';
 import { InputTextModule } from 'primeng/inputtext';
@@ -27,14 +27,16 @@ import { InputNumber } from 'primeng/inputnumber';
 export class PurchaseReceptionComponent implements OnInit {
   finalPrice: InputSignal<number> = input.required<number>();
   
-  selectedBranch: BranchBase | null = null;
+  selectedBranch: Branch | null = null;
   additionalAmount: number = 0;
 
   additionalAmountReason: string | null = null;
   invoice: File | null = null;
 
+  isLoading: ModelSignal<boolean> = model.required<boolean>();
+
   onCancelEvent: OutputEmitterRef<void> = output<void>();
-  onAcceptEvent: OutputEmitterRef<{ reception: ReceptionObject, invoice: File | null, branch: BranchBase }> = output<{ reception: ReceptionObject, invoice: File | null, branch: BranchBase }>();
+  onAcceptEvent: OutputEmitterRef<{ reception: ReceptionObject, invoice: File | null, branch: Branch }> = output<{ reception: ReceptionObject, invoice: File | null, branch: Branch }>();
   
   fieldsLack: boolean = false;
 
@@ -50,7 +52,7 @@ export class PurchaseReceptionComponent implements OnInit {
       this.additionalAmount = this.finalPrice();
   }
   
-  onBranchSelected(branch: BranchBase) {
+  onBranchSelected(branch: Branch) {
     this.selectedBranch = branch;
   }
 
@@ -85,7 +87,5 @@ export class PurchaseReceptionComponent implements OnInit {
     else {
       this.fieldsLack = true;
     }
-
-    console.log('Objeto de recepción: ', receptionObject);
   }
 }

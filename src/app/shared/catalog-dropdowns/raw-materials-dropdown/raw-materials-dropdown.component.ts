@@ -1,9 +1,6 @@
-import { Component, output, OutputEmitterRef } from '@angular/core';
+import { Component, input, InputSignal, output, OutputEmitterRef } from '@angular/core';
 import { RawMaterialsService } from '../../../core/services/catalogs/raw-materials.service';
-import {
-  RawMaterial,
-  RawMaterialBase,
-} from '../../../core/models/rawMaterial.entities';
+import { RawMaterial } from '../../../core/models/rawMaterial.entities';
 import { SelectChangeEvent, SelectModule } from 'primeng/select';
 import { SkeletonModule } from 'primeng/skeleton';
 import { FormsModule } from '@angular/forms';
@@ -21,7 +18,9 @@ import { TranslateService } from '@ngx-translate/core';
 export class RawMaterialsDropdownComponent {
   rawMaterials: SelectItemGroup[] | null = null;
 
-  getRawMaterial: OutputEmitterRef<RawMaterialBase> = output<RawMaterialBase>();
+  getRawMaterial: OutputEmitterRef<RawMaterial> = output<RawMaterial>();
+
+  disabled: InputSignal<boolean> = input<boolean>(false);
 
   constructor(
     private rawMaterialsService: RawMaterialsService,
