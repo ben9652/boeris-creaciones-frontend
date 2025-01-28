@@ -825,6 +825,11 @@ export const BoerisCreaciones = definePreset(Aura, {
             body: {
                 padding: "1.2rem"
             }
+        },
+        divider: {
+            border: {
+                color: "{secondary.700}"
+            }
         }
     }
 });

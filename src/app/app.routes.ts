@@ -158,5 +158,10 @@ export const routes: Routes = [
         path: 'branch-edition',
         loadComponent: () => import('./features/sections/sub-sections/mobile-branch-data/mobile-branch-data.component').then(m => m.MobileBranchDataComponent),
         canActivate: [mobileAccessGuard, adminPermissionsGuard]
-    }
+    },
+    {
+        path: 'new-purchase',
+        loadComponent: () => import('./features/sections/main-section/purchases/new-purchase/new-purchase.component').then(m => m.NewPurchaseComponent),
+        canActivate: [provisionerPermissionsGuard]
+    },
 ];

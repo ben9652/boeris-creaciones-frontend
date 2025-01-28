@@ -7,12 +7,15 @@ import { MessageService } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastModule } from 'primeng/toast';
+import { ButtonModule } from 'primeng/button';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-purchases',
     imports: [
         PurchasesListComponent,
-        ToastModule
+        ToastModule,
+        ButtonModule
     ],
     templateUrl: './purchases.component.html',
     styleUrl: './purchases.component.scss',
@@ -25,7 +28,8 @@ export class PurchasesComponent {
     constructor(
         private purchasesService: PurchasesService,
         private messageService: MessageService,
-        private translateService: TranslateService
+        private translateService: TranslateService,
+        private router: Router
     ) {
         this.user = purchasesService.getUser();
         purchasesService.getPurchases(this.user.id_user).subscribe({
@@ -69,5 +73,9 @@ export class PurchasesComponent {
               detail: error.error.message
             });
         }
+    }
+
+    goToNewPurchase(): void {
+        this.router.navigate(['new-purchase']);
     }
 }
