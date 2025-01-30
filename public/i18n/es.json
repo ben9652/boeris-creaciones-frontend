@@ -377,6 +377,7 @@
         "NEW_PURCHASE": {
           "TITLE": "Nueva compra",
           "STEP_ONE": {
+            "TITLE": "Descripción y proveedor",
             "DESCRIPTION": "Descripción",
             "PROVIDER": {
               "TITLE": "Proveedor",
@@ -385,6 +386,13 @@
               "PHONE": "Teléfono",
               "CVU_OR_ALIAS": "CVU o alias"
             }
+          },
+          "STEP_TWO": {
+            "TITLE": "Materias primas",
+            "RAW_MATERIAL": "Materia prima",
+            "QUANTITY": "Cantidad",
+            "UNIT_PRICE": "Precio unitario",
+            "NON_COUNTABLE": "No contable"
           }
         }
       }
