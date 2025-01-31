@@ -1,0 +1,13 @@
+:host {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-left: 0.5rem;
+    color: var(--p-primary-color);
+}
+
+p {
+    color: var(--p-primary-color);
+}

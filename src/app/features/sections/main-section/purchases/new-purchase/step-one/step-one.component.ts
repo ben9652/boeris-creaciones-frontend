@@ -7,7 +7,7 @@ import { DividerModule } from 'primeng/divider';
 import { TextareaModule } from 'primeng/textarea';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { DeviceTypeService } from '../../../../../../core/services/device-type/device-type.service';
-import { NewPurchaseStepOne } from '../../../../../../core/models/stepsObjects.entities';
+import { NewPurchaseStepOne } from '../../../../../../core/models/purchaseStepsObjects.entities';
 
 @Component({
   selector: 'app-step-one',
