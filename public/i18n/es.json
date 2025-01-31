@@ -20,6 +20,10 @@
       },
       "OPTIONAL": "Opcional"
     },
+    "CURRENCY": {
+      "USD": "U$S",
+      "ARS": "AR$"
+    },
     "CATEGORIES": {
       "MESSAGES": {
         "FAILED": "Algo falló en la creación de un rubro",
@@ -397,6 +401,19 @@
               "FIRST_PARAGRAPH": "Si la materia prima a comprar es algo que no se cuenta por unidades, marcar esta casilla.",
               "SECOND_PARAGRAPH": "Por ejemplo, si estamos hablando de follaje, este no se va contando por 1, 2, 3, etc., sino por si HAY o NO HAY.",
               "THIRD_PARAGRAPH": "Así que en el caso de que se estén comprando ramos de follaje, marcar esta casilla."
+            }
+          },
+          "STEP_THREE": {
+            "CURRENCY": "Moneda",
+            "PAYMENT_METHOD": {
+              "TITLE": "Método de pago",
+              "CASH": "Efectivo",
+              "TRANSFER": "Transferencia"
+            },
+            "RECEPTION_MODE": {
+              "TITLE": "Modo de recepción",
+              "DELIVERY": "Envío a domicilio",
+              "BRANCH": "Retiro en domicilio de proveedor"
             }
           }
         }

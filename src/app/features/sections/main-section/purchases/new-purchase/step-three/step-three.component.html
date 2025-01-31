@@ -1,0 +1,81 @@
+<div class="flex justify-content-evenly">
+    <div class="flex flex-column">
+        <p>{{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_THREE.CURRENCY' | translate }}</p>
+        <div class="flex flex-column">
+            <div class="flex items-center">
+                <p-radiobutton
+                name="currency"
+                value="ARS"
+                inputId="currency-ars"
+                (onClick)="onFieldsChanges($event)"
+                [(ngModel)]="currency"
+                ></p-radiobutton>
+                <label for="currency-ars">{{ 'SHARED.CURRENCY.ARS' | translate }}</label>
+            </div>
+            <div class="flex items-center">
+                <p-radiobutton
+                name="currency"
+                value="USD"
+                inputId="currency-usd"
+                (onClick)="onFieldsChanges($event)"
+                [(ngModel)]="currency"
+                ></p-radiobutton>
+                <label for="currency-usd">{{ 'SHARED.CURRENCY.USD' | translate }}</label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="flex flex-column">
+        <p>{{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_THREE.PAYMENT_METHOD.TITLE' | translate }}</p>
+        <div class="flex flex-column">
+            <div class="flex items-center">
+                <p-radiobutton
+                name="payment-method"
+                value="T"
+                inputId="payment-method-transfer"
+                (onClick)="onFieldsChanges($event)"
+                [(ngModel)]="paymentMethod"
+                ></p-radiobutton>
+                <label for="payment-method-transfer">{{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_THREE.PAYMENT_METHOD.TRANSFER' | translate }}</label>
+            </div>
+            <div class="flex items-center">
+                <p-radiobutton
+                name="payment-method"
+                value="E"
+                inputId="payment-method-cash"
+                (onClick)="onFieldsChanges($event)"
+                [(ngModel)]="paymentMethod"
+                ></p-radiobutton>
+                <label for="payment-method-cash">{{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_THREE.PAYMENT_METHOD.CASH' | translate }}</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="flex justify-content-center">
+    <div class="flex flex-column">
+        <p>{{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_THREE.RECEPTION_MODE.TITLE' | translate }}</p>
+        <div class="flex flex-column">
+            <div class="flex items-center">
+                <p-radiobutton
+                name="reception-mode"
+                value="B"
+                inputId="reception-mode-branch"
+                (onClick)="onFieldsChanges($event)"
+                [(ngModel)]="receptionMode"
+                ></p-radiobutton>
+                <label for="reception-mode-branch">{{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_THREE.RECEPTION_MODE.BRANCH' | translate }}</label>
+            </div>
+            <div class="flex items-center">
+                <p-radiobutton
+                name="reception-mode"
+                value="E"
+                inputId="reception-mode-delivery"
+                (onClick)="onFieldsChanges($event)"
+                [(ngModel)]="receptionMode"
+                ></p-radiobutton>
+                <label for="reception-mode-delivery">{{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_THREE.RECEPTION_MODE.DELIVERY' | translate }}</label>
+            </div>
+        </div>
+    </div>
+</div>
