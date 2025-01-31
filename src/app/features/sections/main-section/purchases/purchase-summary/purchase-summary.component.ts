@@ -13,7 +13,7 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrl: './purchase-summary.component.scss'
 })
 export class PurchaseSummaryComponent {
-  purchased_raw_materials: InputSignal<PurchaseSummary> = input.required<PurchaseSummary>();
+  purchaseSummary: InputSignal<PurchaseSummary> = input.required<PurchaseSummary>();
 
   constructor () {
 

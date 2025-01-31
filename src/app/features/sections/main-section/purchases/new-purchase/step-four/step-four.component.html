@@ -1,0 +1,11 @@
+<div class="flex align-items-center gap-2">
+    <p>{{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_FOUR.PROVIDER' | translate }}: </p>
+    <p>{{ provider().name }}</p>
+</div>
+
+<p>{{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_FOUR.SUMMARY' | translate }}</p>
+@if (purchaseSummary) {
+    <app-purchase-summary
+    [purchaseSummary]="purchaseSummary"
+    ></app-purchase-summary>
+}

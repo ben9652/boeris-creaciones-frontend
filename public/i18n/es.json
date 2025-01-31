@@ -415,6 +415,10 @@
               "DELIVERY": "Envío a domicilio",
               "BRANCH": "Retiro en domicilio de proveedor"
             }
+          },
+          "STEP_FOUR": {
+            "PROVIDER": "Proveedor",
+            "SUMMARY": "Resumen"
           }
         }
       }
