@@ -1,4 +1,4 @@
-import { Component, input, InputSignal, output, OutputEmitterRef } from '@angular/core';
+import { Component, input, InputSignal, output, OutputEmitterRef, ViewChild } from '@angular/core';
 import { ItemPurchaseSummary } from '../../../../../../core/models/purchaseSummary.entities';
 import { RawMaterialsDropdownComponent } from '../../../../../../shared/catalog-dropdowns/raw-materials-dropdown/raw-materials-dropdown.component';
 import { InputNumberInputEvent, InputNumberModule } from 'primeng/inputnumber';
@@ -8,6 +8,9 @@ import { TranslateModule } from '@ngx-translate/core';
 import { RawMaterial } from '../../../../../../core/models/rawMaterial.entities';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
+import { OverlayModule } from 'primeng/overlay';
+import { Popover } from 'primeng/popover';
+import { DialogModule } from 'primeng/dialog';
 
 interface FieldRow {
   raw_material: RawMaterial | null;
@@ -24,14 +27,17 @@ interface FieldRow {
     CheckboxModule,
     TableModule,
     ButtonModule,
+    DialogModule,
     TranslateModule,
     FormsModule
   ],
   templateUrl: './step-two.component.html',
   styleUrl: './step-two.component.scss'
 })
-export class StepTwoComponent {  
+export class StepTwoComponent {
   fieldsRow: FieldRow[] = [];
+
+  displayHelp: boolean = false;
   
   onChanges: OutputEmitterRef<(ItemPurchaseSummary | null)[]> = output<(ItemPurchaseSummary | null)[]>();
   
@@ -46,6 +52,10 @@ export class StepTwoComponent {
   removeLastRow() {
     this.fieldsRow.pop();
     this.onChanges.emit(this.updatedList());
+  }
+
+  toggleHelp(event: any) {
+    this.displayHelp = !this.displayHelp;
   }
 
   updatedList(): (ItemPurchaseSummary | null)[] {
