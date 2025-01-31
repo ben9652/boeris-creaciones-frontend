@@ -7,6 +7,7 @@
                 id="over_label"
                 rows="2"
                 cols="24"
+                (ngModelChange)="updateDescription($event)"
                 [(ngModel)]="description"
                 maxlength="50"
                 ></textarea>
@@ -15,26 +16,26 @@
         </div>
 
         <app-providers-dropdown
-        (getProvider)="onSelectedProvider($event)"
+        (getProvider)="updateProvider($event)"
         ></app-providers-dropdown>
     </div>
     <p-divider [layout]="dividerLayout" />
     <div class="right-panel">
         <p>
             {{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_ONE.PROVIDER.NAME' | translate }}:
-            <span>{{ provider()?.name }}</span>
+            <span>{{ provider?.name }}</span>
         </p>
         <p>
-            {{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_ONE.PROVIDER.DOMICILE' | translate}}:
-            <span>{{ provider()?.residence }}</span>
+            {{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_ONE.PROVIDER.DOMICILE' | translate }}:
+            <span>{{ provider?.residence }}</span>
         </p>
         <p>
             {{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_ONE.PROVIDER.PHONE' | translate }}:
-            <span>{{ provider()?.phone }}</span>
+            <span>{{ provider?.phone }}</span>
         </p>
         <p>
             {{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_ONE.PROVIDER.CVU_OR_ALIAS' | translate }}:
-            <span>{{ provider()?.cvu_or_alias }}</span>
+            <span>{{ provider?.cvu_or_alias }}</span>
         </p>
     </div>
 </div>

@@ -1,0 +1,75 @@
+<p-table [value]="fieldsRow" [tableStyle]="{ 'min-width': '50%', 'width': '100%' }">
+    <ng-template #header>
+        <tr>
+            <th>{{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_TWO.RAW_MATERIAL' | translate }}</th>
+            <th>{{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_TWO.QUANTITY' | translate }}</th>
+            <th>{{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_TWO.UNIT_PRICE' | translate }}</th>
+            <th>
+                <div class="flex align-items-center gap-1">
+                    <span>
+                        {{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_TWO.NON_COUNTABLE' | translate }}
+                    </span>
+                    <p-button label="[?]" [rounded]="true" [text]="true" (onClick)="toggleHelp($event)"></p-button>
+                </div>
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-row>
+        <tr>
+            <td>
+                <app-raw-materials-dropdown
+                (getRawMaterial)="updateRawMaterial($event, row)"
+                ></app-raw-materials-dropdown>
+            </td>
+            <td>
+                <p-inputnumber
+                inputId="integeronly"
+                locale="de-DE"
+                [disabled]="row.non_countable"
+                (onInput)="updateQuantity($event, row)"
+                [min]="0"
+                ></p-inputnumber>
+            </td>
+            <td>
+                <i class="fas fa-dollar-sign mr-2"></i>
+                <p-inputNumber
+                inputId="minmaxfraction"
+                mode="decimal"
+                [minFractionDigits]="2"
+                [maxFractionDigits]="2"
+                [min]="0"
+                (onInput)="updatePrice($event, row)"
+                ></p-inputNumber>
+            </td>
+            <td>
+                <div class="flex justify-content-center">
+                    <p-checkbox (onChange)="updateNonCountable($event, row)" [binary]="true" />
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-dialog [modal]="true" [dismissableMask]="true" [(visible)]="displayHelp" (onHide)="displayHelp = false">
+    <ng-template #headless>
+        <div class="p-4">
+            <p>{{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_TWO.CHECKBOX_HELP.FIRST_PARAGRAPH' | translate }}</p>
+            <p>{{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_TWO.CHECKBOX_HELP.SECOND_PARAGRAPH' | translate }}</p>
+            <p>{{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_TWO.CHECKBOX_HELP.THIRD_PARAGRAPH' | translate }}</p>
+        </div>
+    </ng-template>
+</p-dialog>
+
+<div class="flex justify-content-evenly w-full mt-2">
+    <p-button
+    icon="fas fa-plus"
+    [rounded]="true"
+    (onClick)="addRow()"
+    ></p-button>
+    <p-button
+    icon="fas fa-minus"
+    [rounded]="true"
+    [disabled]="fieldsRow.length === 1"
+    (onClick)="removeLastRow()"
+    ></p-button>
+</div>

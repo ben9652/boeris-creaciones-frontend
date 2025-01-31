@@ -717,6 +717,17 @@ export const BoerisCreaciones = definePreset(Aura, {
                 }
             },
             text: {
+                primary: {
+                    color: "{primary.contrastColor} !important",
+                    hover: {
+                        color: "{primary.400} !important",
+                        background: "{primary.300} !important"
+                    },
+                    active: {
+                        color: "{primary.600} !important",
+                        background: "{primary.200} !important"
+                    }
+                },
                 secondary: {
                     color: "{secondary.contrastColor} !important",
                     hover: {

@@ -377,6 +377,7 @@
         "NEW_PURCHASE": {
           "TITLE": "Nueva compra",
           "STEP_ONE": {
+            "TITLE": "Descripción y proveedor",
             "DESCRIPTION": "Descripción",
             "PROVIDER": {
               "TITLE": "Proveedor",
@@ -384,6 +385,18 @@
               "DOMICILE": "Domicilio",
               "PHONE": "Teléfono",
               "CVU_OR_ALIAS": "CVU o alias"
+            }
+          },
+          "STEP_TWO": {
+            "TITLE": "Materias primas",
+            "RAW_MATERIAL": "Materia prima",
+            "QUANTITY": "Cantidad",
+            "UNIT_PRICE": "Precio unitario",
+            "NON_COUNTABLE": "No contable",
+            "CHECKBOX_HELP": {
+              "FIRST_PARAGRAPH": "Si la materia prima a comprar es algo que no se cuenta por unidades, marcar esta casilla.",
+              "SECOND_PARAGRAPH": "Por ejemplo, si estamos hablando de follaje, este no se va contando por 1, 2, 3, etc., sino por si HAY o NO HAY.",
+              "THIRD_PARAGRAPH": "Así que en el caso de que se estén comprando ramos de follaje, marcar esta casilla."
             }
           }
         }

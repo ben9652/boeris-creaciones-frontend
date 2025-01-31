@@ -1,4 +1,4 @@
-import { Provider } from "@angular/core";
+import { Provider } from "./provider.entities";
 
 export class NewPurchaseStepOne {
     private _description: string;
