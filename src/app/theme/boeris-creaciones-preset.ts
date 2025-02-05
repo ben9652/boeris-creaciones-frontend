@@ -841,6 +841,13 @@ export const BoerisCreaciones = definePreset(Aura, {
             border: {
                 color: "{secondary.700}"
             }
+        },
+        stepper: {
+            step: {
+                number: {
+                    borderColor: "{gray.400} !important"
+                }
+            }
         }
     }
 });

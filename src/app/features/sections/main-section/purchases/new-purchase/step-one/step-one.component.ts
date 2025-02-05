@@ -1,4 +1,4 @@
-import { Component, output, OutputEmitterRef } from '@angular/core';
+import { Component, model, ModelSignal, output, OutputEmitterRef } from '@angular/core';
 import { ProvidersDropdownComponent } from '../../../../../../shared/catalog-dropdowns/providers-dropdown/providers-dropdown.component';
 import { Provider } from '../../../../../../core/models/provider.entities';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -24,8 +24,8 @@ import { NewPurchaseStepOne } from '../../../../../../core/models/purchaseStepsO
   providers: [TranslateService]
 })
 export class StepOneComponent {
-  description: string = '';
-  provider: Provider | null = null;
+  description: ModelSignal<string> = model.required<string>();
+  provider: ModelSignal<Provider | null> = model.required<Provider | null>();
 
   dividerLayout: "vertical" | "horizontal" = "vertical";
 
@@ -39,16 +39,18 @@ export class StepOneComponent {
   }
   
   updateDescription(event: string) {
-    this.description = event;
-    if(this.provider) {
-      this.onChanges.emit(new NewPurchaseStepOne(this.description, this.provider));
+    this.description.set(event);
+    const provider: Provider | null = this.provider();
+    if(provider) {
+      this.onChanges.emit(new NewPurchaseStepOne(this.description(), provider));
     }
   }
 
-  updateProvider(provider: Provider) {
-    this.provider = provider;
-    if(this.provider) {
-      this.onChanges.emit(new NewPurchaseStepOne(this.description, this.provider));
+  updateProvider(event: Provider) {
+    this.provider.set(event);
+    const provider: Provider | null = this.provider();
+    if(provider) {
+      this.onChanges.emit(new NewPurchaseStepOne(this.description(), provider));
     }
   }
 }

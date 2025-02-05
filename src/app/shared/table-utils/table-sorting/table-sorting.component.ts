@@ -41,12 +41,11 @@ export class TableSortingComponent implements OnInit {
       // Si el nodo seleccionado tiene de tipo el número 2, signfica que es un nodo de ordenación por fecha
       // Si el nodo seleccionado tiene de tipo el número 3, signfica que es un nodo de ordenación por una magnitud numérica
       const parentType = this.selectedNode.parent.type;
-      console.log(this.selectedNode);
+      
       if(parentType == '1') {
         this.sortDirectionIcon = this.ascendingSort ? 'fas fa-arrow-down-a-z fa-xl' : 'fas fa-arrow-up-a-z fa-xl';        
       }
       else if(parentType == '3') {
-        console.log('Hola')
         this.sortDirectionIcon = this.ascendingSort ? 'fas fa-arrow-down-1-9 fa-xl' : 'fas fa-arrow-up-1-9 fa-xl';
       }
     }
@@ -58,7 +57,7 @@ export class TableSortingComponent implements OnInit {
     const secondIndex: number = parseInt(indexes[1]);
 
     const firstFilter: TreeNode<string> = this.possibleFilters()[firstIndex];
-    console.log(firstFilter)
+    
     this.selectedNode = firstFilter.children ? firstFilter.children[secondIndex] : null;
     
     this.iconSelection();

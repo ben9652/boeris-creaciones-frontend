@@ -1,6 +1,6 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import { HttpOptions } from '../../../../core/models/httpOptions.entities';
-import { Purchase } from '../../../../core/models/purchase.entities';
+import { NewPurchase, Purchase } from '../../../../core/models/purchase.entities';
 import { environment } from '../../../../../environments/environment';
 import { DataAccessService } from '../../../../core/services/data-access/data-access.service';
 import { HttpClient } from '@angular/common/http';
@@ -41,6 +41,16 @@ export class PurchasesService {
       return user;
     }
     return createEmptyUser();
+  }
+
+  addPurchase(purchase: Purchase): void {
+    const purchases: Purchase[] = this.purchases();
+    purchases.push(purchase);
+    this.purchases.set(purchases);
+  }
+
+  createPurchase(purchase: NewPurchase): Observable<Purchase> {
+    return this.http.post<Purchase>(this.urlBase, purchase, this.httpOptions);
   }
 
   receivePurchase(purchase_id: number, userId: number, reception: ReceptionObject): Observable<Purchase> {

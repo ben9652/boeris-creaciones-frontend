@@ -1,4 +1,4 @@
-<p-table [value]="fieldsRow" [tableStyle]="{ 'min-width': '50%', 'width': '100%' }">
+<p-table [value]="fieldsRow()" [tableStyle]="{ 'min-width': '50%', 'width': '100%' }">
     <ng-template #header>
         <tr>
             <th>{{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_TWO.RAW_MATERIAL' | translate }}</th>
@@ -18,6 +18,8 @@
         <tr>
             <td>
                 <app-raw-materials-dropdown
+                [initialSelection]="row.raw_material"
+                [categoriesIds]="[raw_material_category()]"
                 (getRawMaterial)="updateRawMaterial($event, row)"
                 ></app-raw-materials-dropdown>
             </td>
@@ -25,6 +27,7 @@
                 <p-inputnumber
                 inputId="integeronly"
                 locale="de-DE"
+                [(ngModel)]="row.quantity"
                 [disabled]="row.non_countable"
                 (onInput)="updateQuantity($event, row)"
                 [min]="0"
@@ -38,6 +41,7 @@
                 [minFractionDigits]="2"
                 [maxFractionDigits]="2"
                 [min]="0"
+                [(ngModel)]="row.price"
                 (onInput)="updatePrice($event, row)"
                 ></p-inputNumber>
             </td>

@@ -1,4 +1,4 @@
-import { Component, input, InputSignal, output, OutputEmitterRef, ViewChild } from '@angular/core';
+import { Component, input, InputSignal, model, ModelSignal, output, OutputEmitterRef } from '@angular/core';
 import { ItemPurchaseSummary } from '../../../../../../core/models/purchaseSummary.entities';
 import { RawMaterialsDropdownComponent } from '../../../../../../shared/catalog-dropdowns/raw-materials-dropdown/raw-materials-dropdown.component';
 import { InputNumberInputEvent, InputNumberModule } from 'primeng/inputnumber';
@@ -8,11 +8,9 @@ import { TranslateModule } from '@ngx-translate/core';
 import { RawMaterial } from '../../../../../../core/models/rawMaterial.entities';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-import { OverlayModule } from 'primeng/overlay';
-import { Popover } from 'primeng/popover';
 import { DialogModule } from 'primeng/dialog';
 
-interface FieldRow {
+export interface FieldRow {
   raw_material: RawMaterial | null;
   quantity: number;
   price: number;
@@ -35,22 +33,25 @@ interface FieldRow {
   styleUrl: './step-two.component.scss'
 })
 export class StepTwoComponent {
-  fieldsRow: FieldRow[] = [];
+  fieldsRow: ModelSignal<FieldRow[]> = model.required<FieldRow[]>();
 
   displayHelp: boolean = false;
+
+  raw_material_category: InputSignal<number> = input.required<number>();
   
   onChanges: OutputEmitterRef<(ItemPurchaseSummary | null)[]> = output<(ItemPurchaseSummary | null)[]>();
   
   constructor() {
-    this.fieldsRow.push({ raw_material: null, quantity: 0, price: 0, non_countable: false });
+    
   }
 
   addRow() {
-    this.fieldsRow.push({ raw_material: null, quantity: 0, price: 0, non_countable: false });
+    this.fieldsRow().push({ raw_material: null, quantity: 0, price: 0, non_countable: false });
+    this.onChanges.emit(this.updatedList());
   }
   
   removeLastRow() {
-    this.fieldsRow.pop();
+    this.fieldsRow().pop();
     this.onChanges.emit(this.updatedList());
   }
 
@@ -59,7 +60,7 @@ export class StepTwoComponent {
   }
 
   updatedList(): (ItemPurchaseSummary | null)[] {
-    return this.fieldsRow.map((field: FieldRow) => {
+    return this.fieldsRow().map((field: FieldRow) => {
       let itemPurchaseSummary: ItemPurchaseSummary | null;
       if(
         (field.raw_material && field.raw_material.category && field.raw_material.name) &&
@@ -101,6 +102,8 @@ export class StepTwoComponent {
   updatePrice(event: InputNumberInputEvent, row: FieldRow) {
     if(event.value !== null && typeof event.value === 'number')
       row.price = event.value;
+    else
+      row.price = 0;
 
     this.onChanges.emit(this.updatedList());
   }

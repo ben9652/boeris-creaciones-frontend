@@ -5,7 +5,10 @@
       "CANCEL": "Cancelar",
       "APPLY": "Aplicar",
       "CONFIRM": "Confirmar",
-      "ACCEPT": "Aceptar"
+      "ACCEPT": "Aceptar",
+      "NEXT": "Siguiente",
+      "BACK": "Atrás",
+      "FINALIZE": "Finalizar"
     },
     "MESSAGES": {
       "SUMMARY": {
@@ -388,7 +391,8 @@
               "NAME": "Nombre",
               "DOMICILE": "Domicilio",
               "PHONE": "Teléfono",
-              "CVU_OR_ALIAS": "CVU o alias"
+              "CVU_OR_ALIAS": "CVU o alias",
+              "WITHOUT_CVU_OR_ALIAS": "No se especificó un CVU o alias"
             }
           },
           "STEP_TWO": {
@@ -404,6 +408,7 @@
             }
           },
           "STEP_THREE": {
+            "TITLE": "Remito",
             "CURRENCY": "Moneda",
             "PAYMENT_METHOD": {
               "TITLE": "Método de pago",
@@ -417,6 +422,7 @@
             }
           },
           "STEP_FOUR": {
+            "TITLE": "Resumen",
             "PROVIDER": "Proveedor",
             "SUMMARY": "Resumen"
           }

@@ -23,11 +23,17 @@ export class ProvidersService {
     this.urlBase = environment.API_URL + 'CatalogoProveedores/Dropdown';
   }
 
-  getProvidersFromDatabase(): Observable<SelectItemGroup[]> {
+  getProvidersFromDatabase(categoriesIds: number[]): Observable<SelectItemGroup[]> {
     const providers: SelectItemGroup[] | null = this.providers();
 
     if(!providers) {
       this.httpOptions = new HttpOptions(this.dataAccessService.getToken());
+
+      if (categoriesIds.length > 0) {
+        const url = this.urlBase + '/' + categoriesIds.join('-');
+        return this.http.get<SelectItemGroup[]>(url, this.httpOptions);
+      }
+      
       return this.http.get<SelectItemGroup[]>(this.urlBase, this.httpOptions);
     }
     

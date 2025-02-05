@@ -15,6 +15,7 @@
     translateService.instant('SHARED.DROPDOWN.SELECTION_MESSAGE.PROVIDER')
   "
   [group]="true"
+  [(ngModel)]="selectedProvider"
   (onChange)="onSelection($event)"
 >
   <ng-template let-group pTemplate="group">
