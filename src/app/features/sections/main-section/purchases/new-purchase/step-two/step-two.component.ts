@@ -14,8 +14,8 @@ import { DividerModule } from 'primeng/divider';
 
 export interface FieldRow {
   raw_material: RawMaterial | null;
-  quantity: number;
-  price: number;
+  quantity: number | null;
+  price: number | null;
   non_countable: boolean;
 }
 
@@ -51,7 +51,7 @@ export class StepTwoComponent {
   }
 
   addRow() {
-    this.fieldsRow().push({ raw_material: null, quantity: 0, price: 0, non_countable: false });
+    this.fieldsRow().push({ raw_material: null, quantity: null, price: null, non_countable: false });
     this.onChanges.emit(this.updatedList());
   }
   
@@ -69,7 +69,10 @@ export class StepTwoComponent {
       let itemPurchaseSummary: ItemPurchaseSummary | null;
       if(
         (field.raw_material && field.raw_material.category && field.raw_material.name) &&
-        field.price > 0
+        field.price &&
+        field.price > 0 &&
+        field.quantity &&
+        field.quantity > 0
       ) {
         if (field.quantity === 0 && !field.non_countable)
           return null;

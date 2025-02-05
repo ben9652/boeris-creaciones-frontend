@@ -44,7 +44,7 @@ export class NewPurchaseComponent {
 
   // Campos del segundo paso
   fieldsRows: FieldRow[] = [
-    { raw_material: null, quantity: 0, price: 0, non_countable: false }
+    { raw_material: null, quantity: null, price: null, non_countable: false }
   ];
   raw_materials: (ItemPurchaseSummary | null)[] = [];
 
@@ -78,7 +78,7 @@ export class NewPurchaseComponent {
     const providersEqual: boolean = areProvidersEqual(this.previousProvider, stepOne.provider);
     if (!providersEqual) {
       if (this.previousProvider.category?.id !== stepOne.provider.category?.id) {
-        this.fieldsRows = [ { raw_material: null, quantity: 0, price: 0, non_countable: false } ];
+        this.fieldsRows = [ { raw_material: null, quantity: null, price: null, non_countable: false } ];
       }
 
       this.previousProvider = stepOne.provider;
