@@ -1,5 +1,8 @@
+<app-banner-subsections
+[title]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.TITLE')"
+></app-banner-subsections>
 <p-toast />
-<div>
+<div class="container">
     <p-stepper [value]="1" class="basis-[50rem]" [linear]="true">
         <p-step-list>
             <p-step [value]="1">{{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_ONE.TITLE' | translate }}</p-step>

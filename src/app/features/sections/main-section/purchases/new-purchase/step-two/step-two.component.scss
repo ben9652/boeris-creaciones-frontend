@@ -1,3 +1,14 @@
 :host ::ng-deep .p-dialog {
     width: 50%;
 }
+
+.container {
+    height: 50vh;
+    overflow-y: auto;
+}
+
+@media screen and (max-width: 500px) {
+    :host ::ng-deep .p-dialog {
+        width: 98%;
+    }
+}

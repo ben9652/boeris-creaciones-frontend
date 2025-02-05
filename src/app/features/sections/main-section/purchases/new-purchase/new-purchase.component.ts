@@ -16,10 +16,12 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { Location } from '@angular/common';
+import { BannerSubsectionsComponent } from '../../../sub-sections/banner-subsections/banner-subsections.component';
 
 @Component({
   selector: 'app-new-purchase',
   imports: [
+    BannerSubsectionsComponent,
     StepperModule,
     ButtonModule,
     TranslateModule,

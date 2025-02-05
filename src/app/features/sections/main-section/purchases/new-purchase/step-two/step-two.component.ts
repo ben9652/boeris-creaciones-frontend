@@ -9,6 +9,8 @@ import { RawMaterial } from '../../../../../../core/models/rawMaterial.entities'
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
+import { DeviceTypeService } from '../../../../../../core/services/device-type/device-type.service';
+import { DividerModule } from 'primeng/divider';
 
 export interface FieldRow {
   raw_material: RawMaterial | null;
@@ -26,6 +28,7 @@ export interface FieldRow {
     TableModule,
     ButtonModule,
     DialogModule,
+    DividerModule,
     TranslateModule,
     FormsModule
   ],
@@ -41,7 +44,9 @@ export class StepTwoComponent {
   
   onChanges: OutputEmitterRef<(ItemPurchaseSummary | null)[]> = output<(ItemPurchaseSummary | null)[]>();
   
-  constructor() {
+  constructor(
+    public deviceTypeService: DeviceTypeService
+  ) {
     
   }
 
