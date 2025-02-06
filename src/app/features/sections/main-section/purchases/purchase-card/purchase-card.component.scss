@@ -99,15 +99,6 @@ p-card.medium-card {
     overflow: hidden;
 }
 
-.buttons {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    flex-wrap: nowrap;
-    align-items: center;
-    height: 100%;
-}
-
 @media screen and (max-width: 500px) {
     .cards {
         flex-direction: column;

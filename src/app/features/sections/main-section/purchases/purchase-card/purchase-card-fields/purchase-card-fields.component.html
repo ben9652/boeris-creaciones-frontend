@@ -47,12 +47,12 @@
                     <i class="fas fa-dollar-sign"></i>
                     @if (purchase().state === 'P' || purchase().state === 'C') {
                         <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.BUDGET')" tooltipPosition="top">
-                            {{ purchase().budget }}
+                            {{ purchase().budget | fixedTwoDecimals }}
                         </p>
                     }
                     @if (purchase().state === 'R') {
                         <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.FINAL_PRICE')" tooltipPosition="top">
-                            {{ purchase().final_price }}
+                            {{ purchase().final_price ? purchase().final_price : 0 | fixedTwoDecimals }}
                         </p>
                     }
                 </div>
@@ -170,12 +170,12 @@
                 <i class="fas fa-dollar-sign"></i>
                 @if (purchase().state === 'P' || purchase().state === 'C') {
                     <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.BUDGET')" tooltipPosition="top">
-                        {{ purchase().budget }}
+                        {{ purchase().budget | fixedTwoDecimals }}
                     </p>
                 }
                 @if (purchase().state === 'R') {
                     <p [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.FIELDS.FINAL_PRICE')" tooltipPosition="top">
-                        {{ purchase().final_price }}
+                        {{ purchase().final_price ? purchase().final_price : 0 | fixedTwoDecimals }}
                     </p>
                 }
             </div>

@@ -11,6 +11,7 @@ import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { DeviceTypeService } from '../../../../../../core/services/device-type/device-type.service';
 import { DividerModule } from 'primeng/divider';
+import { Category } from '../../../../../../core/models/category.entities';
 
 export interface FieldRow {
   raw_material: RawMaterial | null;
@@ -67,26 +68,37 @@ export class StepTwoComponent {
   updatedList(): (ItemPurchaseSummary | null)[] {
     return this.fieldsRow().map((field: FieldRow) => {
       let itemPurchaseSummary: ItemPurchaseSummary | null;
-      if(
-        (field.raw_material && field.raw_material.category && field.raw_material.name) &&
-        field.price &&
-        field.price > 0 &&
-        field.quantity &&
-        field.quantity > 0
-      ) {
-        if (field.quantity === 0 && !field.non_countable)
-          return null;
-        
-        itemPurchaseSummary = {
-          raw_material_id: field.raw_material.id,
-          category: field.raw_material.category,
-          name: field.raw_material.name,
-          quantity: field.non_countable ? 1 : field.quantity,
-          unit_price: field.price
-        }
-      }
-      else {
-        itemPurchaseSummary = null;
+
+      const raw_material: RawMaterial | null = field.raw_material;
+      const raw_material_category: Category | null = raw_material ? raw_material.category : null;
+      const raw_material_name: string | null = raw_material ? raw_material.name : null;
+      const price: number | null = field.price;
+      const quantity: number | null = field.quantity;
+
+      if (raw_material === null)
+        return null;
+
+      if (raw_material_category === null)
+        return null;
+
+      if (raw_material_name === null)
+        return null;
+
+      if (price === null || price <= 0)
+        return null;
+
+      if (quantity === null && !field.non_countable)
+        return null;
+      
+      if (quantity === 0 && !field.non_countable)
+        return null;
+      
+      itemPurchaseSummary = {
+        raw_material_id: raw_material.id,
+        category: raw_material_category,
+        name: raw_material_name,
+        quantity: field.non_countable ? 0 : (quantity ? quantity : 0),   // Mandando 0 de cantidad será la señal de que es una materia prima no contable
+        unit_price: price
       }
 
       return itemPurchaseSummary;

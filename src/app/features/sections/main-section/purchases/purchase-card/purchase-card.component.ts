@@ -20,6 +20,7 @@ import { Branch } from '../../../../../core/models/branch.entities';
 import { PurchasesService } from '../purchases.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Image } from 'primeng/image';
+import { PurchaseCardButtonsComponent } from './purchase-card-buttons/purchase-card-buttons.component';
 
 @Component({
   selector: 'app-purchase-card',
@@ -32,6 +33,7 @@ import { Image } from 'primeng/image';
     ConfirmDialogModule,
     PurchaseSummaryComponent,
     PurchaseReceptionComponent,
+    PurchaseCardButtonsComponent,
     DialogModule,
     TranslateModule,
     PdfViewerModule,

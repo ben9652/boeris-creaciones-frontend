@@ -314,7 +314,8 @@
           "TOTAL": "Total",
           "ADDITIONAL_AMOUNT": "Monto adicional",
           "ADDITIONAL_AMOUNT_REASON": "Motivo de la cantidad adicional",
-          "NO_REASON": "No se especificó un motivo del adicional"
+          "NO_REASON": "No se especificó un motivo del adicional",
+          "NON_COUNTABLE": "No contable"
         },
         "RECEPTION": {
           "TITLE": "Recepción de compra",

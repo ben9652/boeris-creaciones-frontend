@@ -27,7 +27,6 @@
                 <td>
                     <p-inputnumber
                     inputId="integeronly"
-                    locale="de-DE"
                     [(ngModel)]="row.quantity"
                     [disabled]="row.non_countable"
                     (onInput)="updateQuantity($event, row)"
@@ -39,6 +38,7 @@
                     <p-inputNumber
                     inputId="minmaxfraction"
                     mode="decimal"
+                    locale="fr-FR"
                     [minFractionDigits]="2"
                     [maxFractionDigits]="2"
                     [min]="0"
@@ -72,7 +72,7 @@
                     <label>{{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_TWO.QUANTITY' | translate }}</label>
                     <p-inputnumber
                     inputId="integeronly"
-                    locale="de-DE"
+                    locale="fr-FR"
                     [(ngModel)]="row.quantity"
                     [disabled]="row.non_countable"
                     (onInput)="updateQuantity($event, row)"
@@ -87,6 +87,7 @@
                         <p-inputNumber
                         inputId="minmaxfraction"
                         mode="decimal"
+                        locale="fr-FR"
                         [minFractionDigits]="2"
                         [maxFractionDigits]="2"
                         [min]="0"

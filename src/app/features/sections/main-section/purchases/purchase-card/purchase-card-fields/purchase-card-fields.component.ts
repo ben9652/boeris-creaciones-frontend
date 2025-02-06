@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { TooltipModule } from 'primeng/tooltip';
 import { DialogModule } from 'primeng/dialog';
 import { PaymentMethodParsePipe, ReceptionModeParsePipe } from './purchase-card-fields.pipes';
+import { FixedTwoDecimalsPipe } from '../../../../../../core/pipes/fixed-two-decimals.pipe';
 
 @Component({
   selector: 'app-purchase-card-fields',
@@ -17,7 +18,8 @@ import { PaymentMethodParsePipe, ReceptionModeParsePipe } from './purchase-card-
     TooltipModule,
     DialogModule,
     ReceptionModeParsePipe,
-    PaymentMethodParsePipe
+    PaymentMethodParsePipe,
+    FixedTwoDecimalsPipe
   ],
   templateUrl: './purchase-card-fields.component.html',
   styleUrl: './purchase-card-fields.component.scss'

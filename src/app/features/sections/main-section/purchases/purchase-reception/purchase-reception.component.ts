@@ -7,7 +7,7 @@ import { FileUpload, FileUploadModule } from 'primeng/fileupload';
 import { ReceptionObject } from '../../../../../core/models/receptionObject.entities';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
-import { InputNumber } from 'primeng/inputnumber';
+import { InputNumber, InputNumberInputEvent } from 'primeng/inputnumber';
 
 @Component({
   selector: 'app-purchase-reception',
@@ -49,7 +49,7 @@ export class PurchaseReceptionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.additionalAmount = this.finalPrice();
+    this.additionalAmount = this.finalPrice();
   }
   
   onBranchSelected(branch: Branch) {
