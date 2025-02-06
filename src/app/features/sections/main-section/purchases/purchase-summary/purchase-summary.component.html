@@ -10,9 +10,9 @@
     <ng-template #body let-raw_material>
         <tr>
             <td>{{ raw_material.name }}</td>
-            <td class="qnty-field">{{ raw_material.quantity }}</td>
-            <td class="money-field">$ {{ raw_material.unit_price }}</td>
-            <td class="money-field">$ {{ raw_material.quantity * raw_material.unit_price }}</td>
+            <td class="qnty-field">{{ raw_material.quantity === 0 ? ('SECTIONS.PROVISIONS.PURCHASES.SUMMARY.NON_COUNTABLE' | translate) : raw_material.quantity }}</td>
+            <td class="money-field">$ {{ raw_material.unit_price | fixedTwoDecimals }}</td>
+            <td class="money-field">$ {{ (raw_material.quantity ? raw_material.quantity * raw_material.unit_price : raw_material.unit_price) | fixedTwoDecimals }}</td>
         </tr>
     </ng-template>
     <ng-template #footer>
@@ -20,7 +20,7 @@
             <td class="without-background"></td>
             <td class="without-background"></td>
             <td class="subtotal">{{ 'SECTIONS.PROVISIONS.PURCHASES.SUMMARY.TOTAL' | translate }}</td>
-            <td class="money-field" style="background-color: var(--p-secondary-700);">$ {{ purchaseSummary().total }}</td>
+            <td class="money-field" style="background-color: var(--p-secondary-700);">$ {{ purchaseSummary().total | fixedTwoDecimals }}</td>
         </tr>
     </ng-template>
 </p-table>

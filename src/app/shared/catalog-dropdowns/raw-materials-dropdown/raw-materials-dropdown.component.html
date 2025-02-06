@@ -1,6 +1,6 @@
-@if (rawMaterials) {
+@if (groupedRawMaterials) {
 <p-select
-  [options]="rawMaterials"
+  [options]="groupedRawMaterials"
   [style]="{ width: '16.5rem' }"
   [filter]="true"
   filterBy="name"
@@ -15,6 +15,7 @@
     translateService.instant('SHARED.DROPDOWN.SELECTION_MESSAGE.RAW_MATERIAL')
   "
   [group]="true"
+  [(ngModel)]="selectedRawMaterial"
   (onChange)="onSelection($event)"
   appendTo="body"
 >

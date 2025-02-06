@@ -16,6 +16,7 @@
         </div>
 
         <app-providers-dropdown
+        [initialSelection]="provider()"
         (getProvider)="updateProvider($event)"
         ></app-providers-dropdown>
     </div>
@@ -23,19 +24,24 @@
     <div class="right-panel">
         <p>
             {{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_ONE.PROVIDER.NAME' | translate }}:
-            <span>{{ provider?.name }}</span>
+            <span>{{ provider()?.name }}</span>
         </p>
         <p>
             {{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_ONE.PROVIDER.DOMICILE' | translate }}:
-            <span>{{ provider?.residence }}</span>
+            <span>{{ provider()?.residence }}</span>
         </p>
         <p>
             {{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_ONE.PROVIDER.PHONE' | translate }}:
-            <span>{{ provider?.phone }}</span>
+            <span>{{ provider()?.phone }}</span>
         </p>
         <p>
             {{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_ONE.PROVIDER.CVU_OR_ALIAS' | translate }}:
-            <span>{{ provider?.cvu_or_alias }}</span>
+            @if (provider()?.cvu_or_alias) {
+                <span>{{ provider()?.cvu_or_alias }}</span>
+            }
+            @else {
+                <span>{{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_ONE.PROVIDER.WITHOUT_CVU_OR_ALIAS' | translate }}</span>
+            }
         </p>
     </div>
 </div>

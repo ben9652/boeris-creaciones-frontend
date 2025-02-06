@@ -12,7 +12,7 @@
 
 .header-without-button {
     display: grid;
-    grid-template-columns: 15% 85%;
+    grid-template-columns: 5% 95%;
     background-color: boeris-theme.$primaryColor;
     position: fixed;
     color: boeris-theme.$secondaryColor;
@@ -96,6 +96,10 @@
     
     .header-text {
         font-size: 1.6rem;
+    }
+
+    .header-without-button {
+        grid-template-columns: 15% 85%;
     }
 
     :host ::ng-deep .p-popover {

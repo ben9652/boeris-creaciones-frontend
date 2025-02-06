@@ -28,7 +28,7 @@ export class StepFourComponent implements OnInit {
       id_purchase: 0,
       date: new Date(),
       items: this.purchased_raw_materials(),
-      total: this.purchased_raw_materials().reduce((acc, item) => acc + item.quantity * item.unit_price, 0)
+      total: this.purchased_raw_materials().reduce((acc, item) => acc + (item.quantity !== 0 ? (item.quantity * item.unit_price) : item.unit_price), 0)
     }
   }
 }

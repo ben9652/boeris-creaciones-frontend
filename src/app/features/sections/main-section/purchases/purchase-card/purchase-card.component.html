@@ -37,31 +37,12 @@
         'status-received': purchase().state === 'R',
         'status-canceled': purchase().state === 'C'
     }">
-        <div class="buttons">
-            <p-button
-            [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.BUTTONS.VIEW_SUMMARY')"
-            tooltipPosition="left"
-            icon="fas fa-eye"
-            (onClick)="showSummary = true"
-            ></p-button>
-
-            @if(purchase().state === 'P') {
-                <p-button
-                severity="success"
-                [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.BUTTONS.RECEIVE')"
-                tooltipPosition="left"
-                icon="fas fa-hand-holding"
-                (onClick)="showReception = true"
-                ></p-button>
-                <p-button
-                severity="danger"
-                [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.BUTTONS.CANCEL')"
-                tooltipPosition="left"
-                icon="fas fa-xmark"
-                (onClick)="cancelPurchase($event)"
-                ></p-button>
-            }
-        </div>
+        <app-purchase-card-buttons
+        [purchase]="purchase()"
+        (onShowSummary)="showSummary = true"
+        (onShowReception)="showReception = true"
+        (onCancelation)="cancelPurchase($event)"
+        ></app-purchase-card-buttons>
     </p-card>
 </div>
 
@@ -119,20 +100,22 @@ appendTo="body"
     }
 </p-dialog>
 
-<p-dialog
-[header]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.RECEPTION.TITLE')"
-[modal]="true"
-[closable]="!receivingPurchase"
-[dismissableMask]="!receivingPurchase"
-[(visible)]="showReception"
-[draggable]="false"
-appendTo="body"
-[style]="{ width: '310px' }"
->
-    <app-purchase-reception
-    [finalPrice]="purchase().budget"
-    [(isLoading)]="receivingPurchase"
-    (onAcceptEvent)="receivePurchase($event)"
-    (onCancelEvent)="showReception = false"
-    ></app-purchase-reception>
-</p-dialog>
+@if (showReception) {
+    <p-dialog
+    [header]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.RECEPTION.TITLE')"
+    [modal]="true"
+    [closable]="!receivingPurchase"
+    [dismissableMask]="!receivingPurchase"
+    [(visible)]="showReception"
+    [draggable]="false"
+    appendTo="body"
+    [style]="{ width: '310px' }"
+    >
+        <app-purchase-reception
+        [finalPrice]="purchase().budget"
+        [(isLoading)]="receivingPurchase"
+        (onAcceptEvent)="receivePurchase($event)"
+        (onCancelEvent)="showReception = false"
+        ></app-purchase-reception>
+    </p-dialog>
+}

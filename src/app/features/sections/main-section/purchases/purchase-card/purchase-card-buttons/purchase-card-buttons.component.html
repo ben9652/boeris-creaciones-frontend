@@ -1,1 +1,25 @@
-<p>purchase-card-buttons works!</p>
+<div class="buttons">
+    <p-button
+    [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.BUTTONS.VIEW_SUMMARY')"
+    tooltipPosition="left"
+    icon="fas fa-eye"
+    (onClick)="onShowSummary.emit()"
+    ></p-button>
+
+    @if(purchase().state === 'P') {
+        <p-button
+        severity="success"
+        [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.BUTTONS.RECEIVE')"
+        tooltipPosition="left"
+        icon="fas fa-hand-holding"
+        (onClick)="onShowReception.emit()"
+        ></p-button>
+        <p-button
+        severity="danger"
+        [pTooltip]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.CARD.BUTTONS.CANCEL')"
+        tooltipPosition="left"
+        icon="fas fa-xmark"
+        (onClick)="onCancelation.emit($event)"
+        ></p-button>
+    }
+</div>

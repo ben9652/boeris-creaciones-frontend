@@ -1,1 +1,124 @@
-<p>new-purchase works!</p>
+<app-banner-subsections
+[title]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.TITLE')"
+></app-banner-subsections>
+<p-toast />
+<div class="container">
+    <p-stepper [value]="1" class="basis-[50rem]" [linear]="true">
+        <p-step-list>
+            <p-step [value]="1">{{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_ONE.TITLE' | translate }}</p-step>
+            <p-step [value]="2">{{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_TWO.TITLE' | translate }}</p-step>
+            <p-step [value]="3">{{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_THREE.TITLE' | translate }}</p-step>
+            <p-step [value]="4">{{ 'SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.STEP_FOUR.TITLE' | translate }}</p-step>
+        </p-step-list>
+        <p-step-panels>
+            <div class="p-2">
+                <p-step-panel [value]="1">
+                    <ng-template #content let-activateCallback="activateCallback">
+                        <div class="flex flex-column h-30rem">
+                            <app-step-one
+                            [(description)]="description"
+                            [(provider)]="provider"
+                            (onChanges)="receiveStepOne($event)"
+                            ></app-step-one>
+                            <div class="flex pt-6 justify-content-end">
+                                <p-button
+                                [label]="translateService.instant('SHARED.BUTTONS.NEXT')"
+                                icon="pi pi-arrow-right"
+                                iconPos="right"
+                                [disabled]="disableStep2"
+                                (onClick)="activateCallback(2)"
+                                ></p-button>
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-step-panel>
+    
+                <p-step-panel [value]="2">
+                    <ng-template #content let-activateCallback="activateCallback">
+                        <div class="flex flex-column h-30rem">
+                            @if (provider.category) {
+                                <app-step-two
+                                [(fieldsRow)]="fieldsRows"
+                                [raw_material_category]="provider.category.id"
+                                (onChanges)="receiveStepTwo($event)"
+                                ></app-step-two>
+                            }
+                            <div class="flex pt-6 justify-content-end">
+                                <p-button
+                                [label]="translateService.instant('SHARED.BUTTONS.BACK')"
+                                icon="pi pi-arrow-left"
+                                (onClick)="activateCallback(1)"
+                                ></p-button>
+                                &nbsp;
+                                <p-button
+                                [label]="translateService.instant('SHARED.BUTTONS.NEXT')"
+                                icon="pi pi-arrow-right"
+                                iconPos="right"
+                                [disabled]="disableStep3"
+                                (onClick)="activateCallback(3)"
+                                ></p-button>
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-step-panel>
+    
+                <p-step-panel [value]="3">
+                    <ng-template #content let-activateCallback="activateCallback">
+                        <div class="flex flex-column h-30rem">
+                            <app-step-three
+                            (onChange)="receiveStepThree($event)"
+                            ></app-step-three>
+                            <div class="flex pt-6 justify-content-end">
+                                <p-button
+                                [label]="translateService.instant('SHARED.BUTTONS.BACK')"
+                                icon="pi pi-arrow-left"
+                                (onClick)="activateCallback(2)"
+                                ></p-button>
+                                &nbsp;
+                                <p-button
+                                [label]="translateService.instant('SHARED.BUTTONS.NEXT')"
+                                icon="pi pi-arrow-right"
+                                iconPos="right"
+                                (onClick)="activateCallback(4)"
+                                ></p-button>
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-step-panel>
+    
+                <p-step-panel [value]="4">
+                    <ng-template #content let-activateCallback="activateCallback">
+                        <div class="flex flex-column h-30rem">
+                            <app-step-four
+                            [provider]="provider"
+                            [purchased_raw_materials]="purchased_raw_materials"
+                            ></app-step-four>
+                            <div class="flex pt-6 justify-content-end">
+                                <p-button
+                                [label]="translateService.instant('SHARED.BUTTONS.BACK')"
+                                icon="pi pi-arrow-left"
+                                [disabled]="loading"
+                                (onClick)="activateCallback(3)"
+                                ></p-button>
+                                &nbsp;
+                                @if (loading) {
+                                    <p-button [disabled]="true">
+                                        <i class="pi pi-spin pi-spinner"></i>
+                                    </p-button>
+                                }
+                                @else {
+                                    <p-button
+                                    [label]="translateService.instant('SHARED.BUTTONS.FINALIZE')"
+                                    icon="pi pi-save"
+                                    iconPos="right"
+                                    (onClick)="savePurchase()"
+                                    ></p-button>
+                                }
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-step-panel>
+            </div>
+        </p-step-panels>
+    </p-stepper>
+</div>

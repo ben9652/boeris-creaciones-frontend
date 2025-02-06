@@ -1,3 +1,21 @@
 :host ::ng-deep .p-dialog {
     width: 50%;
 }
+
+.container {
+    height: 50vh;
+    overflow-y: auto;
+}
+
+.card {
+    background-color: var(--p-secondary-400);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin: 0.5rem 0 0.5rem 0;
+}
+
+@media screen and (max-width: 500px) {
+    :host ::ng-deep .p-dialog {
+        width: 98%;
+    }
+}

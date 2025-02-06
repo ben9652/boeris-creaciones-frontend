@@ -1,4 +1,4 @@
-import { Component, input, InputSignal, output, OutputEmitterRef } from '@angular/core';
+import { Component, input, InputSignal, OnInit, output, OutputEmitterRef } from '@angular/core';
 import { SelectItemGroup } from 'primeng/api';
 import { Provider } from '../../../core/models/provider.entities';
 import { ProvidersService } from '../../../core/services/catalogs/providers.service';
@@ -14,23 +14,42 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrl: './providers-dropdown.component.scss',
   providers: [TranslateService],
 })
-export class ProvidersDropdownComponent {
-  groupedProviders: SelectItemGroup[] | null = null;
+export class ProvidersDropdownComponent implements OnInit {
+  groupedProviders: SelectItemGroup<Provider>[] | null = null;
+  selectedProvider: Provider | null = null;
 
   getProvider: OutputEmitterRef<Provider> = output<Provider>();
 
   disabled: InputSignal<boolean> = input<boolean>(false);
 
+  categoriesIds: InputSignal<number[]> = input<number[]>([]);
+
+  initialSelection: InputSignal<Provider | null> = input<Provider | null>(null);
+
   constructor(
     private providersService: ProvidersService,
     public translateService: TranslateService
   ) {
-    providersService
-      .getProvidersFromDatabase()
-      .subscribe((providers: SelectItemGroup[]) => {
-        providersService.providers.set(providers);
-        this.groupedProviders = providers;
-      });
+  }
+  
+  ngOnInit(): void {
+    this.providersService.getProvidersFromDatabase(this.categoriesIds()).subscribe((providers: SelectItemGroup<Provider>[]) => {
+      this.providersService.providers.set(providers);
+      this.groupedProviders = providers;
+      
+      const initialSelection: Provider | null = this.initialSelection();
+      if (initialSelection) {
+        this.groupedProviders = this.groupedProviders.map((group: SelectItemGroup<Provider>) => {
+          group.items = group.items.map((item) => {
+            if (item.value === initialSelection) {
+              this.selectedProvider = initialSelection;
+            }
+            return item;
+          });
+          return group;
+        });
+      }
+    });
   }
 
   onSelection(event: SelectChangeEvent) {

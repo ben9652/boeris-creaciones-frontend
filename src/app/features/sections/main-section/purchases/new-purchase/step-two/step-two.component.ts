@@ -1,4 +1,4 @@
-import { Component, input, InputSignal, output, OutputEmitterRef, ViewChild } from '@angular/core';
+import { Component, input, InputSignal, model, ModelSignal, output, OutputEmitterRef } from '@angular/core';
 import { ItemPurchaseSummary } from '../../../../../../core/models/purchaseSummary.entities';
 import { RawMaterialsDropdownComponent } from '../../../../../../shared/catalog-dropdowns/raw-materials-dropdown/raw-materials-dropdown.component';
 import { InputNumberInputEvent, InputNumberModule } from 'primeng/inputnumber';
@@ -8,14 +8,15 @@ import { TranslateModule } from '@ngx-translate/core';
 import { RawMaterial } from '../../../../../../core/models/rawMaterial.entities';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-import { OverlayModule } from 'primeng/overlay';
-import { Popover } from 'primeng/popover';
 import { DialogModule } from 'primeng/dialog';
+import { DeviceTypeService } from '../../../../../../core/services/device-type/device-type.service';
+import { DividerModule } from 'primeng/divider';
+import { Category } from '../../../../../../core/models/category.entities';
 
-interface FieldRow {
+export interface FieldRow {
   raw_material: RawMaterial | null;
-  quantity: number;
-  price: number;
+  quantity: number | null;
+  price: number | null;
   non_countable: boolean;
 }
 
@@ -28,6 +29,7 @@ interface FieldRow {
     TableModule,
     ButtonModule,
     DialogModule,
+    DividerModule,
     TranslateModule,
     FormsModule
   ],
@@ -35,22 +37,27 @@ interface FieldRow {
   styleUrl: './step-two.component.scss'
 })
 export class StepTwoComponent {
-  fieldsRow: FieldRow[] = [];
+  fieldsRow: ModelSignal<FieldRow[]> = model.required<FieldRow[]>();
 
   displayHelp: boolean = false;
+
+  raw_material_category: InputSignal<number> = input.required<number>();
   
   onChanges: OutputEmitterRef<(ItemPurchaseSummary | null)[]> = output<(ItemPurchaseSummary | null)[]>();
   
-  constructor() {
-    this.fieldsRow.push({ raw_material: null, quantity: 0, price: 0, non_countable: false });
+  constructor(
+    public deviceTypeService: DeviceTypeService
+  ) {
+    
   }
 
   addRow() {
-    this.fieldsRow.push({ raw_material: null, quantity: 0, price: 0, non_countable: false });
+    this.fieldsRow().push({ raw_material: null, quantity: null, price: null, non_countable: false });
+    this.onChanges.emit(this.updatedList());
   }
   
   removeLastRow() {
-    this.fieldsRow.pop();
+    this.fieldsRow().pop();
     this.onChanges.emit(this.updatedList());
   }
 
@@ -59,25 +66,39 @@ export class StepTwoComponent {
   }
 
   updatedList(): (ItemPurchaseSummary | null)[] {
-    return this.fieldsRow.map((field: FieldRow) => {
+    return this.fieldsRow().map((field: FieldRow) => {
       let itemPurchaseSummary: ItemPurchaseSummary | null;
-      if(
-        (field.raw_material && field.raw_material.category && field.raw_material.name) &&
-        field.price > 0
-      ) {
-        if (field.quantity === 0 && !field.non_countable)
-          return null;
-        
-        itemPurchaseSummary = {
-          raw_material_id: field.raw_material.id,
-          category: field.raw_material.category,
-          name: field.raw_material.name,
-          quantity: field.non_countable ? 1 : field.quantity,
-          unit_price: field.price
-        }
-      }
-      else {
-        itemPurchaseSummary = null;
+
+      const raw_material: RawMaterial | null = field.raw_material;
+      const raw_material_category: Category | null = raw_material ? raw_material.category : null;
+      const raw_material_name: string | null = raw_material ? raw_material.name : null;
+      const price: number | null = field.price;
+      const quantity: number | null = field.quantity;
+
+      if (raw_material === null)
+        return null;
+
+      if (raw_material_category === null)
+        return null;
+
+      if (raw_material_name === null)
+        return null;
+
+      if (price === null || price <= 0)
+        return null;
+
+      if (quantity === null && !field.non_countable)
+        return null;
+      
+      if (quantity === 0 && !field.non_countable)
+        return null;
+      
+      itemPurchaseSummary = {
+        raw_material_id: raw_material.id,
+        category: raw_material_category,
+        name: raw_material_name,
+        quantity: field.non_countable ? 0 : (quantity ? quantity : 0),   // Mandando 0 de cantidad será la señal de que es una materia prima no contable
+        unit_price: price
       }
 
       return itemPurchaseSummary;
@@ -101,6 +122,8 @@ export class StepTwoComponent {
   updatePrice(event: InputNumberInputEvent, row: FieldRow) {
     if(event.value !== null && typeof event.value === 'number')
       row.price = event.value;
+    else
+      row.price = 0;
 
     this.onChanges.emit(this.updatedList());
   }
