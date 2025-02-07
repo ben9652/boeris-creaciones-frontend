@@ -38,7 +38,7 @@ export class PurchasesListComponent {
     const isMobile: boolean = deviceTypeService.isMobile();
     if (isMobile) {
       this.skeletonsHeight = '257px';
-      this.cardHeight = 310;
+      this.cardHeight = 300;
     }
   }
 

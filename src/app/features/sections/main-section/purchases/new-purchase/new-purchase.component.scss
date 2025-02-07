@@ -4,6 +4,14 @@
     width: 100%;
 }
 
+:host ::ng-deep {
+    .finish-button {
+        .p-button {
+            width: 103px;
+        }
+    }
+}
+
 ::ng-deep {
     .p-steppanel-content {
         width: 100%;

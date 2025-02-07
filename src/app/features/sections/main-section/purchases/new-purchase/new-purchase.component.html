@@ -102,12 +102,13 @@
                                 ></p-button>
                                 &nbsp;
                                 @if (loading) {
-                                    <p-button [disabled]="true">
+                                    <p-button class="finish-button" [disabled]="true">
                                         <i class="pi pi-spin pi-spinner"></i>
                                     </p-button>
                                 }
                                 @else {
                                     <p-button
+                                    class="finish-button"
                                     [label]="translateService.instant('SHARED.BUTTONS.FINALIZE')"
                                     icon="pi pi-save"
                                     iconPos="right"
