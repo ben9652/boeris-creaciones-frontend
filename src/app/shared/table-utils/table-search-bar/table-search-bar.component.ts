@@ -1,8 +1,6 @@
 import { AfterViewInit, Component, input, InputSignal, output, OutputEmitterRef, ViewChild } from '@angular/core';
 import { SearchObject } from '../../../core/models/searchObj.entities';
 import { RadioButton } from 'primeng/radiobutton';
-import { FormsModule } from '@angular/forms';
-import { CommonModule, NgStyle } from '@angular/common';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { Popover, PopoverModule } from 'primeng/popover';
 import { InputTextModule } from 'primeng/inputtext';
