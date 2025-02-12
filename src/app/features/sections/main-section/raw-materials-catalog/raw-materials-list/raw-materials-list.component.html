@@ -1,32 +1,54 @@
 <div class="rawMaterials-list-view">
-    <div class="rawMaterial-list-buttons">
-        <p-button [label]="translateService.instant('SECTIONS.CATALOGS.BUTTONS.ADD')" icon="fas fa-plus" (click)="clickOnAddNewRawMaterial()"></p-button>
-    </div>
-    <div class="rawMaterial-list">
-        @if (rawMaterialsListService.rawMaterials() !== null) {
-            <p-table [value]="getRawMaterialsList()" [scrollable]="true" scrollHeight="60vh" selectionMode="single">
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th>{{ 'SECTIONS.CATALOGS.RAW_MATERIALS.LIST.HEADER.ID' | translate }}</th>
-                        <th>{{ 'SECTIONS.CATALOGS.RAW_MATERIALS.LIST.HEADER.NAME' | translate }}</th>
-                        <th>{{ 'SECTIONS.CATALOGS.RAW_MATERIALS.LIST.HEADER.STOCK' | translate }}</th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-rawMaterialRow>
-                    <tr class="rowMaterial" [pSelectableRow]="youAreAdding()" (click)="clickOnRawMaterial(rawMaterialRow)">
-                        <td>{{ rawMaterialRow.nonModified.id }}</td>
-                        <td>{{ rawMaterialRow.nonModified.name }} [{{ rawMaterialRow.nonModified.unit.name }}]</td>
-                        <td>{{ rawMaterialRow.nonModified.stock }}</td>
-                    </tr>
-                </ng-template>
-            </p-table>
-        }
-        @else {
-            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
-            <p-skeleton styleClass="mb-2"></p-skeleton>
-            <p-skeleton styleClass="mb-2"></p-skeleton>
-            <p-skeleton styleClass="mb-2"></p-skeleton>
-            <p-skeleton styleClass="mb-2"></p-skeleton>
-        }
-    </div>
+  <div class="rawMaterial-list-buttons">
+    <p-button
+      [label]="translateService.instant('SECTIONS.CATALOGS.BUTTONS.ADD')"
+      icon="fas fa-plus"
+      (click)="clickOnAddNewRawMaterial()"
+    ></p-button>
+  </div>
+  <div class="rawMaterial-list">
+    @if (rawMaterialsListService.rawMaterials()?.length) {
+    <p-table
+      [value]="getRawMaterialsList()"
+      [scrollable]="true"
+      scrollHeight="60vh"
+      selectionMode="single"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>
+            {{ "SECTIONS.CATALOGS.RAW_MATERIALS.LIST.HEADER.ID" | translate }}
+          </th>
+          <th>
+            {{ "SECTIONS.CATALOGS.RAW_MATERIALS.LIST.HEADER.NAME" | translate }}
+          </th>
+          <th>
+            {{
+              "SECTIONS.CATALOGS.RAW_MATERIALS.LIST.HEADER.STOCK" | translate
+            }}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rawMaterialRow>
+        <tr
+          class="rowMaterial"
+          [pSelectableRow]="youAreAdding()"
+          (click)="clickOnRawMaterial(rawMaterialRow)"
+        >
+          <td>{{ rawMaterialRow.nonModified.id }}</td>
+          <td>
+            {{ rawMaterialRow.nonModified.name }} [{{
+              rawMaterialRow.nonModified.unit.name
+            }}]
+          </td>
+          <td>{{ rawMaterialRow.nonModified.stock }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+    } @else {
+    <p class="message-no-raw-materials">
+      {{ "SHARED.DROPDOWN.EMPTY_MESSAGES.RAW_MATERIALS" | translate }}
+    </p>
+    }
+  </div>
 </div>
