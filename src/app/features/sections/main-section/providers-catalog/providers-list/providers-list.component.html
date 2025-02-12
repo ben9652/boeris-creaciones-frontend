@@ -1,41 +1,48 @@
 <div class="providers-list-view">
-    <div class="provider-list-buttons">
-        <p-button
-        [label]="translateService.instant('SECTIONS.CATALOGS.BUTTONS.ADD')"
-        icon="fas fa-plus"
-        (onClick)="clickOnAddNewProvider()"
-        ></p-button>
-    </div>
-    <div class="providers-list">
-        @if (providersListService.providers() !== null) {
-            <p-table
-            [value]="getProvidersList()"
-            [scrollable]="true"
-            scrollHeight="60vh"
-            selectionMode="single"
-            >
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th>{{ 'SECTIONS.CATALOGS.PROVIDERS.LIST.HEADER.ID' | translate }}</th>
-                        <th>{{ 'SECTIONS.CATALOGS.PROVIDERS.LIST.HEADER.NAME' | translate }}</th>
-                        <th>{{ 'SECTIONS.CATALOGS.PROVIDERS.LIST.HEADER.CATEGORY' | translate }}</th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-providerRow>
-                    <tr class="provider" [pSelectableRow]="youAreAdding()" (click)="clickOnProvider(providerRow)">
-                        <td>{{ providerRow.nonModified.id }}</td>
-                        <td>{{ providerRow.nonModified.name }}</td>
-                        <td>{{ providerRow.nonModified.category.name }}</td>
-                    </tr>
-                </ng-template>
-            </p-table>
-        }
-        @else {
-            <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
-            <p-skeleton styleClass="mb-2"></p-skeleton>
-            <p-skeleton styleClass="mb-2"></p-skeleton>
-            <p-skeleton styleClass="mb-2"></p-skeleton>
-            <p-skeleton styleClass="mb-2"></p-skeleton>
-        }
-    </div>
+  <div class="provider-list-buttons">
+    <p-button
+      [label]="translateService.instant('SECTIONS.CATALOGS.BUTTONS.ADD')"
+      icon="fas fa-plus"
+      (onClick)="clickOnAddNewProvider()"
+    ></p-button>
+  </div>
+  <div class="providers-list">
+    @if (providersListService.providers()?.length) {
+    <p-table
+      [value]="getProvidersList()"
+      [scrollable]="true"
+      scrollHeight="60vh"
+      selectionMode="single"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>
+            {{ "SECTIONS.CATALOGS.PROVIDERS.LIST.HEADER.ID" | translate }}
+          </th>
+          <th>
+            {{ "SECTIONS.CATALOGS.PROVIDERS.LIST.HEADER.NAME" | translate }}
+          </th>
+          <th>
+            {{ "SECTIONS.CATALOGS.PROVIDERS.LIST.HEADER.CATEGORY" | translate }}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-providerRow>
+        <tr
+          class="provider"
+          [pSelectableRow]="youAreAdding()"
+          (click)="clickOnProvider(providerRow)"
+        >
+          <td>{{ providerRow.nonModified.id }}</td>
+          <td>{{ providerRow.nonModified.name }}</td>
+          <td>{{ providerRow.nonModified.category.name }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+    } @else {
+    <p class="message-no-providers">
+      {{ "SHARED.DROPDOWN.EMPTY_MESSAGES.PROVIDERS" | translate }}
+    </p>
+    }
+  </div>
 </div>
