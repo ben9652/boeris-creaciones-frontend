@@ -75,4 +75,16 @@ export class PurchasesService {
     const httpOptionsToCreateFile: HttpOptions = new HttpOptions(this.dataAccessService.getToken(), true);
     return this.http.post<string>(apiUrl, formData, httpOptionsToCreateFile);
   }
+
+  filterPurchases(filters: string[]): Purchase[] {
+    const purchases: Purchase[] = this.purchases();
+    if(filters.length === 0) {
+      return purchases;
+    }
+    
+    return purchases.filter((purchase: Purchase) => {
+      console.log(purchase);
+      return filters.includes(purchase.state);
+    });
+  }
 }

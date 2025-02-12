@@ -379,7 +379,7 @@
           }
         },
         "LIST": {
-          "NO_PURCHASES": "No existen compras",
+          "NO_PURCHASES": "No hay compras",
           "LISTED_PURCHASES": "Compras listadas"
         },
         "NEW_PURCHASE": {

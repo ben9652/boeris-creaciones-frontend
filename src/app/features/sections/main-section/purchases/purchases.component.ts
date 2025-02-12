@@ -9,10 +9,12 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { Router } from '@angular/router';
+import { PurchasesHeaderComponent } from './purchases-header/purchases-header.component';
 
 @Component({
     selector: 'app-purchases',
     imports: [
+        PurchasesHeaderComponent,
         PurchasesListComponent,
         ToastModule,
         ButtonModule
@@ -22,7 +24,7 @@ import { Router } from '@angular/router';
     providers: [MessageService, TranslateService]
 })
 export class PurchasesComponent {
-    purchases: Purchase[] | undefined;
+    visiblePurchases: Purchase[] | undefined;
     user: User;
     
     constructor(
@@ -34,7 +36,8 @@ export class PurchasesComponent {
         this.user = purchasesService.getUser();
         purchasesService.getPurchases(this.user.id_user).subscribe({
             next: (purchases: Purchase[]) => {
-                this.purchases = purchases;
+                this.visiblePurchases = purchases;
+                purchasesService.purchases.set(purchases);
             },
             error: (error: any) => {
                 console.error(error);
@@ -77,5 +80,9 @@ export class PurchasesComponent {
 
     goToNewPurchase(): void {
         this.router.navigate(['new-purchase']);
+    }
+
+    onFilterChangesHandler(filters: string[]): void {
+        this.visiblePurchases = this.purchasesService.filterPurchases(filters);
     }
 }

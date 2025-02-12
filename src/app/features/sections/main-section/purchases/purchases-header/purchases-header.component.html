@@ -1,0 +1,25 @@
+@let isMobile = deviceTypeService.isMobile();
+@if (!filtersLoading) {
+    <app-table-filter
+    [filters]="filters"
+    [vertical]="isMobile"
+    gap="10px"
+    (onFilterChanges)="onFilterChangesHandler($event)"
+    ></app-table-filter>
+}
+@else {
+    <div class="flex gap-2">
+        <div class="flex gap-1 align-items-end">
+            <p-skeleton size="2rem" styleClass="mr-2" />
+            <p-skeleton width="5rem" styleClass="mb-2" />
+        </div>
+        <div class="flex gap-1 align-items-end">
+            <p-skeleton size="2rem" styleClass="mr-2" />
+            <p-skeleton width="5rem" styleClass="mb-2" />
+        </div>
+        <div class="flex gap-1 align-items-end">
+            <p-skeleton size="2rem" styleClass="mr-2" />
+            <p-skeleton width="5rem" styleClass="mb-2" />
+        </div>
+    </div>
+}

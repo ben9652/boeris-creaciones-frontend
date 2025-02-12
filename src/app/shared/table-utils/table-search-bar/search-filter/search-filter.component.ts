@@ -28,7 +28,7 @@ export class SearchFilterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.selectedFilter = this.filters()[0].key;
+    this.selectedFilter = this.filters()[0].getKey();
   }
 
   onFilterChange(event: RadioButtonClickEvent): void {

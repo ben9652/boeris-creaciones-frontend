@@ -1,23 +1,17 @@
 export class SearchObject {
-    private _key: string;
-    private _name: string;
+    private key: string;
+    private name: string;
 
     constructor(key: string, name: string) {
-        this._key = key;
-        this._name = name;
+        this.key = key;
+        this.name = name;
     }
 
-    public get key(): string {
-        return this._key;
-    }
-    public set key(value: string) {
-        this._key = value;
+    public getKey(): string {
+        return this.key;
     }
 
-    public get name(): string {
-        return this._name;
-    }
-    public set name(value: string) {
-        this._name = value;
+    public getName(): string {
+        return this.name;
     }
 }
