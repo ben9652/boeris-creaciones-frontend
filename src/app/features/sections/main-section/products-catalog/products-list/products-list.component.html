@@ -7,9 +7,21 @@
     ></p-button>
   </div>
   <div class="products-list">
-    @if (productsListService.products()?.length) {
+    @if (existingProducts.length!==0) {
+    <div>
+      <input
+        pInputText
+        type="text"
+        [(ngModel)]="productSearch"
+        (keyup)="searchProduct()"
+        [placeholder]="
+          translateService.instant('SHARED.DROPDOWN.SEARCH.PRODUCT')
+        "
+      />
+    </div>
+    } @if(visibleExistingProducts.length>0){
     <p-table
-      [value]="getProductsList()"
+      [value]="visibleExistingProducts"
       [scrollable]="true"
       scrollHeight="60vh"
       selectionMode="single"
@@ -37,7 +49,7 @@
         </tr>
       </ng-template>
     </p-table>
-    } @else {
+    }@else {
     <p class="message-no-products">
       {{ "SHARED.DROPDOWN.EMPTY_MESSAGES.PRODUCTS" | translate }}
     </p>

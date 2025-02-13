@@ -18,6 +18,10 @@ th {
 }
 
 .products-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
   padding-top: 2rem;
   padding-bottom: 2rem;
   width: 100%;
@@ -37,6 +41,12 @@ th {
   color: boeris-theme.$primaryColor;
   user-select: none;
   font-size: xx-large;
+}
+
+:host ::ng-deep {
+  input {
+    margin-bottom: 10%;
+  }
 }
 @media screen and (max-width: 500px) {
   :host {
