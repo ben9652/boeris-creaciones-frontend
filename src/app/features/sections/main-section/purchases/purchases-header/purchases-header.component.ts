@@ -6,6 +6,7 @@ import { DeviceTypeService } from '../../../../../core/services/device-type/devi
 import { FilterObject } from '../../../../../core/models/filterObj.entities';
 import { PurchasesHeaderService } from './purchases-header.service';
 import { SkeletonModule } from 'primeng/skeleton';
+import { SearchObject } from '../../../../../core/models/searchObj.entities';
 
 @Component({
   selector: 'app-purchases-header',
@@ -23,6 +24,12 @@ export class PurchasesHeaderComponent {
   filtersLoading: boolean = true;
   onFilterChanges: OutputEmitterRef<string[]> = output<string[]>();
 
+  searchInput: string = '';
+  searchSelectedFilter: string = '';
+  searchFilters: SearchObject[] = [];
+  searchFiltersLoading: boolean = true;
+  onSearchChanges: OutputEmitterRef<SearchObject> = output<SearchObject>();
+
   constructor(
     public deviceTypeService: DeviceTypeService,
     private purchasesHeaderService: PurchasesHeaderService
@@ -34,9 +41,29 @@ export class PurchasesHeaderComponent {
       
       this.filtersLoading = false;
     })
+
+    purchasesHeaderService.getSearchFilters().subscribe((searchFilters: SearchObject[]) => {
+      searchFilters.forEach((searchFilter: SearchObject) => {
+        this.searchFilters.push(searchFilter);
+      });
+
+      this.searchFiltersLoading = false;
+      this.searchSelectedFilter = this.searchFilters[0].key;
+      this.onSearchChanges.emit(this.searchFilters[0]);
+    });
   }
 
   onFilterChangesHandler(selectedFilters: string[]): void {
     this.onFilterChanges.emit(selectedFilters);
+  }
+
+  onSearchInputHandler(searchInput: string) {
+    this.searchInput = searchInput;
+    this.onSearchChanges.emit(new SearchObject(this.searchSelectedFilter, searchInput));
+  }
+
+  onSearchFilterChangeHandler(key: string) {
+    this.searchSelectedFilter = key;
+    this.onSearchChanges.emit(new SearchObject(key, this.searchInput));
   }
 }

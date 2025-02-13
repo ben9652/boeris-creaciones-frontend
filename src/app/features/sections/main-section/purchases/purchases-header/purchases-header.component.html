@@ -23,3 +23,10 @@
         </div>
     </div>
 }
+
+<app-table-search-bar
+[filters]="searchFilters"
+[initialFilter]="searchFilters[0].key"
+(onKeyDown)="onSearchInputHandler($event)"
+(onFilterSelect)="onSearchFilterChangeHandler($event)"
+></app-table-search-bar>

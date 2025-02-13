@@ -32,7 +32,7 @@ export class PurchasesHeaderService implements OnInit {
   }
 
   getSearchFilters(): Observable<SearchObject[]> {
-    const apiUrl: string = `${this.urlBase}/filtrosBusqueda`;
+    const apiUrl: string = `${this.urlBase}/filtros-busqueda`;
     return this.http.get<SearchObject[]>(apiUrl, this.httpOptions);
   }
 

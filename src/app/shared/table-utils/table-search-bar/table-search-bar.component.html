@@ -14,6 +14,7 @@ icon="fas fa-filter"
 <p-popover #op>
     <app-search-filter
     [filters]="filters()"
+    [initialKey]="initialFilter()"
     (onFilterSelect)="onFilterChange($event)"
     gap="5px"
     ></app-search-filter>

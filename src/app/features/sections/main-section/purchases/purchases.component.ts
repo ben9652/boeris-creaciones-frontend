@@ -10,6 +10,7 @@ import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { Router } from '@angular/router';
 import { PurchasesHeaderComponent } from './purchases-header/purchases-header.component';
+import { SearchObject } from '../../../../core/models/searchObj.entities';
 
 @Component({
     selector: 'app-purchases',
@@ -84,5 +85,9 @@ export class PurchasesComponent {
 
     onFilterChangesHandler(filters: string[]): void {
         this.visiblePurchases = this.purchasesService.filterPurchases(filters);
+    }
+
+    onSearchInputHandler(search: SearchObject): void {
+        this.visiblePurchases = this.purchasesService.searchPurchases(search);
     }
 }

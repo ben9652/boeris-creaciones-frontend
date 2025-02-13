@@ -24,6 +24,7 @@ import { SearchFilterComponent } from './search-filter/search-filter.component';
 })
 export class TableSearchBarComponent {
   filters: InputSignal<SearchObject[]> = input.required<SearchObject[]>();
+  initialFilter: InputSignal<string> = input.required<string>();
 
   onKeyDown: OutputEmitterRef<string> = output<string>();
   onFilterSelect: OutputEmitterRef<string> = output<string>();
@@ -35,7 +36,7 @@ export class TableSearchBarComponent {
   }
 
   onWrite(event: KeyboardEvent): void {
-    if(event.key.length === 1 && !event.ctrlKey && !event.metaKey && !event.altKey && !event.shiftKey && !event.isComposing) {
+    if((event.key.length === 1 || event.key === 'Backspace') && !event.ctrlKey && !event.metaKey && !event.altKey && !event.shiftKey && !event.isComposing) {
       this.onKeyDown.emit(event.key);
     }
   }

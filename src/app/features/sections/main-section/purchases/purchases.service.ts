@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { createEmptyUser, User } from '../../../../core/models/user.entities';
 import { Observable } from 'rxjs';
 import { ReceptionObject } from '../../../../core/models/receptionObject.entities';
+import { SearchObject } from '../../../../core/models/searchObj.entities';
 
 @Injectable({
   providedIn: 'root'
@@ -85,6 +86,25 @@ export class PurchasesService {
     return purchases.filter((purchase: Purchase) => {
       console.log(purchase);
       return filters.includes(purchase.state);
+    });
+  }
+
+  searchPurchases(search: SearchObject): Purchase[] {
+    const purchases: Purchase[] = this.purchases();
+    if(search.name === '') {
+      return purchases;
+    }
+
+    return purchases.filter((purchase: Purchase) => {
+      const searchValue: string = search.name.toLowerCase();
+      // Conseguir el nombre de la propiedad de Purchase, que sería `search.getKey()`
+      const purchaseAttribute = search.key as keyof Purchase;
+      const purchaseValue = purchase[purchaseAttribute];
+      if (purchaseValue) {
+        return purchaseValue.toString().toLowerCase().includes(searchValue);
+      }
+      
+      return false;
     });
   }
 }
