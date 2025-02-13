@@ -7,9 +7,21 @@
     ></p-button>
   </div>
   <div class="providers-list">
-    @if (providersListService.providers()?.length) {
+    @if (existingProviders.length!==0) {
+    <div>
+      <input
+        pInputText
+        type="text"
+        [(ngModel)]="providerSearch"
+        (keyup)="searchProvider()"
+        [placeholder]="
+          translateService.instant('SHARED.DROPDOWN.SEARCH.PROVIDER')
+        "
+      />
+    </div>
+    } @if(visibleExistingProviders.length>0){
     <p-table
-      [value]="getProvidersList()"
+      [value]="visibleExistingProviders"
       [scrollable]="true"
       scrollHeight="60vh"
       selectionMode="single"

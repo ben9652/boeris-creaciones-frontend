@@ -7,9 +7,21 @@
     ></p-button>
   </div>
   <div class="rawMaterial-list">
-    @if (rawMaterialsListService.rawMaterials()?.length) {
+    @if (existingRawMaterials.length!==0){
+    <div>
+      <input
+        pInputText
+        type="text"
+        [(ngModel)]="rawMaterialSearch"
+        (keyup)="searchRawMaterial()"
+        [placeholder]="
+          translateService.instant('SHARED.DROPDOWN.SEARCH.RAW_MATERIAL')
+        "
+      />
+    </div>
+    } @if(visibleExistingRawMaterials.length>0){
     <p-table
-      [value]="getRawMaterialsList()"
+      [value]="visibleExistingRawMaterials"
       [scrollable]="true"
       scrollHeight="60vh"
       selectionMode="single"

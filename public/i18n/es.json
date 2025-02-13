@@ -64,6 +64,12 @@
         "PRODUCT": "Selecciona un producto",
         "PROVIDER": "Selecciona un proveedor",
         "BRANCH": "Selecciona una sucursal"
+      },
+      "SEARCH": {
+        "RAW_MATERIAL": "Buscar matera prima",
+        "PRODUCT": "Buscar producto",
+        "PROVIDER": "Buscar proveedor",
+        "BRANCH": "Buscar sucursal"
       }
     },
     "TABLE": {

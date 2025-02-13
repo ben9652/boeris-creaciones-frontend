@@ -7,9 +7,21 @@
     ></p-button>
   </div>
   <div class="branches-list">
-    @if (branchesListService.branches()?.length) {
+    @if (existingBranches.length!==0) {
+    <div>
+      <input
+        pInputText
+        type="text"
+        [(ngModel)]="branchSearch"
+        (keyup)="searchBranch()"
+        [placeholder]="
+          translateService.instant('SHARED.DROPDOWN.SEARCH.BRANCH')
+        "
+      />
+    </div>
+    } @if(visibleExistingBranches.length>0){
     <p-table
-      [value]="getBranchesList()"
+      [value]="visibleExistingBranches"
       [scrollable]="true"
       scrollHeight="60vh"
       selectionMode="single"
