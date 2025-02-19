@@ -1,0 +1,49 @@
+<div class="fields">
+    <div class="flex flex-column gap-2">
+        <p>{{ 'SHARED.OBJECTS.DISCARDER.FIELDS.REASON_LABEL' | translate }}</p>
+        <div class="pt-2">
+            <p-radiobutton name="reason" value="Rotura" [(ngModel)]="reason" inputId="break" />
+            <label for="break" class="ml-2">{{ 'SHARED.OBJECTS.DISCARDER.FIELDS.REASONS.BREAK' | translate }}</label>
+        </div>
+        <div>
+            <p-radiobutton name="reason" value="Perdida" [(ngModel)]="reason" inputId="loss" />
+            <label for="loss" class="ml-2">{{ 'SHARED.OBJECTS.DISCARDER.FIELDS.REASONS.LOSS' | translate }}</label>
+        </div>
+        <div>
+            <p-radiobutton name="reason" value="ErrorDeStock" [(ngModel)]="reason" inputId="mistake" />
+            <label for="mistake" class="ml-2">{{ 'SHARED.OBJECTS.DISCARDER.FIELDS.REASONS.MISTAKE' | translate }}</label>
+        </div>
+        @if (reasonsLack) {
+            <p class="error-message">
+                {{ 'SHARED.OBJECTS.DISCARDER.FIELDS.ERROR.REASON' | translate }}
+            </p>
+        }
+    </div>
+    <div class="flex justify-content-between align-items-baseline pt-2">
+        <p>{{ 'SHARED.OBJECTS.DISCARDER.FIELDS.QUANTITY' | translate }}</p>
+        <p-inputnumber 
+        [(ngModel)]="quantity" 
+        mode="decimal" [showButtons]="true" inputId="minmax-buttons" [min]="0" [max]="500" />
+    </div>
+    @if (quantityCero) {
+        <p class="error-message">
+            {{ 'SHARED.OBJECTS.DISCARDER.FIELDS.ERROR.QUANTITY' | translate }}
+        </p>
+    }
+    @else if (quantityExceeds) {
+        <p class="error-message">
+            {{ 'SHARED.OBJECTS.DISCARDER.FIELDS.ERROR.STOCK' | translate }}
+        </p>
+    }
+    <footer class="buttons">
+        <p-button severity="secondary" class="buttons-section" [label]="translateService.instant('SHARED.BUTTONS.CANCEL')" (onClick)="onCancel()"></p-button>
+        @if (isLoading()) {
+            <p-button class="buttons-section" [disabled]="true">
+                <i class="pi pi-spinner pi-spin"></i>
+            </p-button>
+        }
+        @else{
+            <p-button class="buttons-section" [label]="translateService.instant('SHARED.BUTTONS.ACCEPT')" (onClick)="onAccept()"></p-button>
+        }
+    </footer>
+</div>
