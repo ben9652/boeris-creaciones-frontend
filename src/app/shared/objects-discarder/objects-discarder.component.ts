@@ -28,13 +28,22 @@ export class ObjectsDiscarderComponent {
 
   reasonsLack: boolean = false;
   quantityCero: boolean = false;
-  quantityExceeds: boolean = false; 
+  quantityExceeds: boolean = false;
 
   onCancelEvent: OutputEmitterRef<void> = output<void>();
-  onAcceptEvent: OutputEmitterRef<{ discard: DiscardObject }> = output<{ discard: DiscardObject}>();
+  onAcceptEvent: OutputEmitterRef<DiscardObject> = output<DiscardObject>();
 
   constructor(public translateService: TranslateService) {
 
+  }
+
+  onReasonChange(){
+    this.reasonsLack = false;
+  }
+
+  onQuantityChange(){
+    this.quantityCero = false;
+    this.quantityExceeds = false;
   }
 
   onCancel() {
@@ -43,21 +52,15 @@ export class ObjectsDiscarderComponent {
 
   onAccept() {
     let discardObject: DiscardObject | null = null;
-    if(this.reason === "" || this.reason === null){
+    if (this.reason === "" || this.reason === null) {
       this.reasonsLack = true;
-    } else if(this.quantity === 0){
+    } else if (this.quantity === 0) {
       this.quantityCero = true;
+    } else if (this.stock() < this.quantity) {
+      this.quantityExceeds = true;
     } else {
-      if(this.stock() < this.quantity){
-        this.quantityExceeds = true;
-      } else {
-        discardObject = {
-          reason: this.reason,
-          quantity: this.quantity
-        };
-        this.onAcceptEvent.emit({discard: discardObject});
-      }
+      discardObject = new DiscardObject(this.reason, this.quantity);
+      this.onAcceptEvent.emit(discardObject);
     }
   }
-
 }
