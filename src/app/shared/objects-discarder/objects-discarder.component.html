@@ -22,8 +22,7 @@
     </div>
     <div class="flex flex-column gap-2">
         <p>{{ 'SHARED.OBJECTS.DISCARDER.FIELDS.QUANTITY' | translate }}</p>
-        <p-inputnumber [(ngModel)]="quantity" mode="decimal" [showButtons]="true" inputId="minmax-buttons" [min]="0"
-            [max]="stock" (ngModelChange)="onQuantityChange()"/>
+        <p-inputnumber [(ngModel)]="quantity" mode="decimal" [showButtons]="true" inputId="minmax-buttons" [min]="0" (ngModelChange)="onQuantityChange()"/>
 
         <p class="error-message">
             @if (quantityCero) {
