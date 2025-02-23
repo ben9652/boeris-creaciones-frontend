@@ -2,12 +2,12 @@ import { BranchBase } from "./branch.entities";
 import { areProvincesEqual, Province } from "./province.entities";
 
 export interface LocalityBase{
-    id: number
-    name: string
+    id: number;
+    name: string;
 }
 
 export interface Locality extends LocalityBase {
-    province: Province
+    province: Province;
 }
 
 export function areLocalitiesEqual(obj1: Locality | null, obj2: Locality | null) {

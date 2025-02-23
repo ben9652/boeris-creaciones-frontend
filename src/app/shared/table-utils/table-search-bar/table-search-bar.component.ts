@@ -36,8 +36,10 @@ export class TableSearchBarComponent {
   }
 
   onWrite(event: KeyboardEvent): void {
-    if((event.key.length === 1 || event.key === 'Backspace') && !event.ctrlKey && !event.metaKey && !event.altKey && !event.shiftKey && !event.isComposing) {
-      this.onKeyDown.emit(event.key);
+    if((event.key.length === 1 || event.key === 'Backspace') && !event.ctrlKey && !event.metaKey && !event.altKey && !event.isComposing) {
+      if (event.key !== 'Shift') {
+        this.onKeyDown.emit(event.key);
+      }
     }
   }
 

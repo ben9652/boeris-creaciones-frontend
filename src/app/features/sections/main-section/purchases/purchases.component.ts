@@ -88,6 +88,12 @@ export class PurchasesComponent {
     }
 
     onSearchInputHandler(search: SearchObject): void {
-        this.visiblePurchases = this.purchasesService.searchPurchases(search);
+        const purchases: Purchase[] = this.purchasesService.searchPurchases(search);
+        
+        this.visiblePurchases = purchases;
+    }
+
+    onSortHandler(sort: string[], ascendingSort: boolean): void {
+        
     }
 }

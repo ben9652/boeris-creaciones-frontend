@@ -35,7 +35,6 @@ export class SearchFilterComponent implements OnInit {
   }
 
   onFilterChange(event: RadioButtonClickEvent): void {
-    console.log(event);
     this.selectedFilter = event.value;
     this.onFilterSelect.emit(event.value);
   }

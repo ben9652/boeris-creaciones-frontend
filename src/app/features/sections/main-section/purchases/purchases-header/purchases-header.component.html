@@ -24,9 +24,30 @@
     </div>
 }
 
-<app-table-search-bar
-[filters]="searchFilters"
-[initialFilter]="searchFilters[0].key"
-(onKeyDown)="onSearchInputHandler($event)"
-(onFilterSelect)="onSearchFilterChangeHandler($event)"
-></app-table-search-bar>
+@if (searchFilters.length > 0) {
+    <app-table-search-bar
+    [filters]="searchFilters"
+    [initialFilter]="searchFilters[0].key"
+    (onKeyDown)="onSearchInputHandler($event)"
+    (onFilterSelect)="onSearchFilterChangeHandler($event)"
+    ></app-table-search-bar>
+}
+@else {
+    <div class="flex gap-1 align-items-end">
+        <p-skeleton width="5rem" styleClass="mb-2" />
+    </div>|
+}
+
+@if (possibleFilters.length > 0) {
+    <app-table-sorting
+    initialFilter="1-0"
+    [possibleFilters]="possibleFilters"
+    (onSelectedFilter)="onSortChangesHandler($event)"
+    (onSortDirectionChange)="onSortDirectionChangeHandler($event)"
+    ></app-table-sorting>
+}
+@else {
+    <div class="flex gap-1 align-items-end">
+        <p-skeleton width="5rem" styleClass="mb-2" />
+    </div>
+}

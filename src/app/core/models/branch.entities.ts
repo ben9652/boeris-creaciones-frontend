@@ -2,13 +2,13 @@ import { areLocalitiesEqual, Locality } from "./locality.entities";
 import { RowList } from "./rowList.entities";
 
 export interface BranchBase {
-    id: number
-    name: string | null
-    domicile: string | null
+    id: number;
+    name: string | null;
+    domicile: string | null;
 }
 
 export interface Branch extends BranchBase {
-    locality: Locality | null
+    locality: Locality | null;
 }
 
 export interface BranchRow extends RowList<Branch> {

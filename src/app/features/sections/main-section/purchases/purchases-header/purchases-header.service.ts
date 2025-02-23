@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { DataAccessService } from '../../../../../core/services/data-access/data-access.service';
 import { SearchObject } from '../../../../../core/models/searchObj.entities';
 import { TreeNode } from 'primeng/api';
+import { SortingTreeObject } from '../../../../../core/models/sortingTreeObject';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +37,7 @@ export class PurchasesHeaderService implements OnInit {
     return this.http.get<SearchObject[]>(apiUrl, this.httpOptions);
   }
 
-  getSortFilters(): Observable<TreeNode<string>[]> {
-    return this.http.get<TreeNode<string>[]>(`${this.urlBase}/ordenamiento`, this.httpOptions);
+  getSortFilters(): Observable<SortingTreeObject> {
+    return this.http.get<SortingTreeObject>(`${this.urlBase}/ordenamiento`, this.httpOptions);
   }
 }

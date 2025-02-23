@@ -2,8 +2,8 @@ import { areCategoriesEqual, Category } from "./category.entities"
 import { RowList } from "./rowList.entities";
 
 export interface Unit {
-    id: number,
-    name: string
+    id: number;
+    name: string;
 }
 
 export class Source {
@@ -17,17 +17,17 @@ export class Source {
 }
 
 export interface RawMaterialBase {
-    id: number
-    unit: Unit | null
-    name: string | null
-    source: string | null
-    stock: number | null
-    picture: string | null
-    comment?: string | null
+    id: number;
+    unit: Unit | null;
+    name: string | null;
+    source: string | null;
+    stock: number | null;
+    picture: string | null;
+    comment?: string | null;
 }
 
 export interface RawMaterial extends RawMaterialBase {
-    category: Category | null
+    category: Category | null;
 }
 
 export interface RawMaterialRow extends RowList<RawMaterial> {
