@@ -2,15 +2,15 @@
     <div class="flex flex-column gap-2">
         <p>{{ 'SHARED.OBJECTS.DISCARDER.FIELDS.REASON_LABEL' | translate }}</p>
         <div class="pt-2">
-            <p-radiobutton name="reason" value="{{ 'SHARED.OBJECTS.DISCARDER.FIELDS.REASONS.BREAK' | translate }}" [(ngModel)]="reason" inputId="break" (ngModelChange)="onReasonChange()"/>
+            <p-radiobutton name="reason" [value]="translateService.instant('SHARED.OBJECTS.DISCARDER.FIELDS.REASONS.BREAK')" [(ngModel)]="reason" inputId="break" (ngModelChange)="onReasonChange()"/>
             <label for="break" class="ml-2">{{ 'SHARED.OBJECTS.DISCARDER.FIELDS.REASONS.BREAK' | translate }}</label>
         </div>
         <div>
-            <p-radiobutton name="reason" value="{{ 'SHARED.OBJECTS.DISCARDER.FIELDS.REASONS.LOSS' | translate }}" [(ngModel)]="reason" inputId="loss" (ngModelChange)="onReasonChange()"/>
+            <p-radiobutton name="reason" [value]="translateService.instant('SHARED.OBJECTS.DISCARDER.FIELDS.REASONS.LOSS')" [(ngModel)]="reason" inputId="loss" (ngModelChange)="onReasonChange()"/>
             <label for="loss" class="ml-2">{{ 'SHARED.OBJECTS.DISCARDER.FIELDS.REASONS.LOSS' | translate }}</label>
         </div>
         <div>
-            <p-radiobutton name="reason" value="{{ 'SHARED.OBJECTS.DISCARDER.FIELDS.REASONS.MISTAKE' | translate }}" [(ngModel)]="reason" inputId="mistake" (ngModelChange)="onReasonChange()"/>
+            <p-radiobutton name="reason" [value]="translateService.instant('SHARED.OBJECTS.DISCARDER.FIELDS.REASONS.MISTAKE')" [(ngModel)]="reason" inputId="mistake" (ngModelChange)="onReasonChange()"/>
             <label for="mistake" class="ml-2">{{ 'SHARED.OBJECTS.DISCARDER.FIELDS.REASONS.MISTAKE' | translate
                 }}</label>
         </div>
