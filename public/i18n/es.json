@@ -77,6 +77,25 @@
       "NO_DATA": "No hay datos",
       "FILTER": "Filtrar",
       "SORTING": "Ordenar"
+    },
+    "OBJECTS": {
+      "DISCARDER": {
+        "TITLE": "Descartar Objeto",
+        "FIELDS": {
+          "REASON_LABEL": "Razón",
+          "REASONS": {
+            "BREAK": "Rotura",
+            "LOSS": "Pérdida",
+            "MISTAKE": "Error de stock"
+          },
+          "QUANTITY": "Cantidad",
+          "ERROR": {
+            "REASON": "Debe seleccionar una razón",
+            "QUANTITY": "La cantidad no puede ser cero",
+            "STOCK": "La cantidad no puede ser mayor al stock"
+          }
+        }
+      }
     }
   },
   "SECTIONS": {
