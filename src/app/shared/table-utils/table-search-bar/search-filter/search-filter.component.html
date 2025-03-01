@@ -8,13 +8,13 @@ style="display: flex;"
     @for (filter of filters(); track $index) {
         <div class="flex flex-col">
             <p-radiobutton
-            [inputId]="filter.name"
+            [inputId]="filter.key"
             name="filter"
             [value]="filter.key"
             (onClick)="onFilterChange($event)"
             [(ngModel)]="selectedFilter"
             ></p-radiobutton>
-            <label [for]="filter.name" class="ml-2">{{ filter.name }}</label>
+            <label [for]="filter.key" class="ml-2">{{ filter.name }}</label>
         </div>
     }
 </div>

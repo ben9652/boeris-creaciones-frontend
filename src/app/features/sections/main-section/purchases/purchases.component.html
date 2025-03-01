@@ -1,11 +1,21 @@
 <p-toast position="top-right" />
+
+<div class="flex gap-2 p-2">
+    <app-purchases-header
+    (onFilterChanges)="onFilterChangesHandler($event)"
+    (onSearchChanges)="onSearchInputHandler($event)"
+    (onSortChanges)="onSortHandler($event)"
+    (onSortDirectionChange)="onSortDirectionHandler($event)"
+    ></app-purchases-header>
+</div>
+
 <p-button
-label="Nueva compra"
+[label]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.TITLE')"
 (onClick)="goToNewPurchase()"
 ></p-button>
 <div class="table-container">
     <app-purchases-list
-    [purchases]="purchases"
+    [purchases]="visiblePurchases"
     [user]="user"
     (onPurchaseReceiving)="onPurchaseReceiving($event)"
     (onPurchaseCanceling)="onPurchaseCanceling($event)"

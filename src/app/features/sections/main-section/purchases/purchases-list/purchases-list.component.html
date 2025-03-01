@@ -4,24 +4,31 @@
     >
         {{ 'SECTIONS.PROVISIONS.PURCHASES.LIST.LISTED_PURCHASES' | translate }}: {{ purchases()?.length }}
     </p>
-    <p-virtualscroller
-    [items]="purchases()"
-    [itemSize]="cardHeight"
-    styleClass="border border-surface"
-    [style]="{ width: '80vw', height: '70vh' }"
-    >
-        <ng-template #item let-item let-options="options">
-            <div class="flex items-center p-2" style="height: 100%;">
-                <app-purchase-card
-                [purchase]="item"
-                [user]="user()"
-                (onReceivedPurchase)="onPurchaseReceive($event)"
-                (onCancelPurchase)="onPurchaseCancel($event)"
-                (onError)="onCardError($event)"
-                ></app-purchase-card>
-            </div>
-        </ng-template>
-    </p-virtualscroller>
+    @if (purchases()?.length !== 0) {
+        <p-virtualscroller
+        [items]="purchases()"
+        [itemSize]="cardHeight"
+        styleClass="border border-surface"
+        [style]="{ width: '80vw', height: '69vh' }"
+        >
+            <ng-template #item let-item let-options="options">
+                <div class="flex items-center p-2" style="height: 100%;">
+                    <app-purchase-card
+                    [purchase]="item"
+                    [user]="user()"
+                    (onReceivedPurchase)="onPurchaseReceive($event)"
+                    (onCancelPurchase)="onPurchaseCancel($event)"
+                    (onError)="onCardError($event)"
+                    ></app-purchase-card>
+                </div>
+            </ng-template>
+        </p-virtualscroller>
+    }
+    @else {
+        <div class="flex justify-content-center align-items-center">
+            <p>{{ 'SECTIONS.PROVISIONS.PURCHASES.LIST.NO_PURCHASES' | translate }}</p>
+        </div>
+    }
 }
 @else {
     <p-skeleton class="flex justify-content-end" width="200px"></p-skeleton>

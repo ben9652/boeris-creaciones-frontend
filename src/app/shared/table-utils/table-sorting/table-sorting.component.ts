@@ -1,16 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component, input, InputSignal, OnInit, output, OutputEmitterRef } from '@angular/core';
+import { Component, input, InputSignal, ModelSignal, model, OnInit, output, OutputEmitterRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TreeNode } from 'primeng/api';
 import { TreeNodeSelectEvent } from 'primeng/tree';
 import { TreeSelect } from 'primeng/treeselect';
+import { SortDirectionComponent } from './sort-direction/sort-direction.component';
 
 @Component({
   selector: 'app-table-sorting',
   imports: [
     TreeSelect,
     FormsModule,
-    CommonModule
+    CommonModule,
+    SortDirectionComponent
   ],
   templateUrl: './table-sorting.component.html',
   styleUrl: './table-sorting.component.scss'
@@ -19,17 +21,19 @@ export class TableSortingComponent implements OnInit {
   // Si se quiere encapsular las entradas de este componente, ayudarse con la interfaz SortingTreeObject
   possibleFilters: InputSignal<TreeNode<string>[]> = input.required<TreeNode<string>[]>();
   initialFilter: InputSignal<string> = input<string>('0-0');
+
+  ascendingSort: InputSignal<ModelSignal<boolean>> = input.required<ModelSignal<boolean>>();
   
   selectedNode: TreeNode<string> | null = null;
 
   // Aquí se guardará el icono de la dirección de la ordenación
-  sortDirectionIcon?: string;
+  sortDirectionIcon: string = "";
 
-  ascendingSort: boolean = true;
-  changingDirection: boolean = false;
+  // Este es el tipo de nodo padre que se ha seleccionado
+  parentType: string = '2';
 
   onSelectedFilter: OutputEmitterRef<string[]> = output<string[]>();
-  onSortDirectionChange: OutputEmitterRef<boolean> = output<boolean>();
+  onSortDirectionChange: OutputEmitterRef<void> = output<void>();
   
   constructor() {
 
@@ -40,13 +44,8 @@ export class TableSortingComponent implements OnInit {
       // Si el nodo seleccionado tiene de tipo el número 1, signfica que es un nodo de ordenación alfabética
       // Si el nodo seleccionado tiene de tipo el número 2, signfica que es un nodo de ordenación por fecha
       // Si el nodo seleccionado tiene de tipo el número 3, signfica que es un nodo de ordenación por una magnitud numérica
-      const parentType = this.selectedNode.parent.type;
-      
-      if(parentType == '1') {
-        this.sortDirectionIcon = this.ascendingSort ? 'fas fa-arrow-down-a-z fa-xl' : 'fas fa-arrow-up-a-z fa-xl';        
-      }
-      else if(parentType == '3') {
-        this.sortDirectionIcon = this.ascendingSort ? 'fas fa-arrow-down-1-9 fa-xl' : 'fas fa-arrow-up-1-9 fa-xl';
+      if (this.selectedNode.parent.type) {
+          this.parentType = this.selectedNode.parent.type;
       }
     }
   }
@@ -68,30 +67,19 @@ export class TableSortingComponent implements OnInit {
 
     this.iconSelection();
 
-    if (selectNode.data) {
-      const indexes: string[] = selectNode.data.split('.');
+    if (selectNode.key) {
+      const indexes: string[] = selectNode.key.split('-');
   
       if (indexes.length > 0) {
         this.onSelectedFilter.emit(indexes);
       }
       else {
-        this.onSelectedFilter.emit([selectNode.data]);
+        this.onSelectedFilter.emit([selectNode.key]);
       }
     }
   }
 
   toggleSortDirection(): void {
-    let animationDuration: number = 200;
-    this.changingDirection = true;
-
-    setTimeout(() => {
-      this.changingDirection = false;
-    }, animationDuration);
-
-    setTimeout(() => {
-      this.ascendingSort = !this.ascendingSort;
-      this.iconSelection();
-      this.onSortDirectionChange.emit(this.ascendingSort);
-    }, animationDuration / 2.0);
+    this.onSortDirectionChange.emit();
   }
 }

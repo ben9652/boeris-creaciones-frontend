@@ -18,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 })
 export class SearchFilterComponent implements OnInit {
   filters: InputSignal<SearchObject[]> = input.required<SearchObject[]>();
+  initialKey: InputSignal<string> = input.required<string>();
   vertical: InputSignal<boolean> = input<boolean>(true);
   gap: InputSignal<string> = input<string>('0px');
   
@@ -28,7 +29,9 @@ export class SearchFilterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.selectedFilter = this.filters()[0].key;
+    if (this.filters().length > 0) {
+      this.selectedFilter = this.filters()[0].key;
+    }
   }
 
   onFilterChange(event: RadioButtonClickEvent): void {

@@ -1,6 +1,6 @@
 import { TreeNode } from "primeng/api";
 
 export interface SortingTreeObject {
-    tree: TreeNode[];
+    tree: TreeNode<string>[];
     initialIndex: string;
 }
