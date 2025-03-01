@@ -4,11 +4,13 @@
     <app-purchases-header
     (onFilterChanges)="onFilterChangesHandler($event)"
     (onSearchChanges)="onSearchInputHandler($event)"
+    (onSortChanges)="onSortHandler($event)"
+    (onSortDirectionChange)="onSortDirectionHandler($event)"
     ></app-purchases-header>
 </div>
 
 <p-button
-label="Nueva compra"
+[label]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.TITLE')"
 (onClick)="goToNewPurchase()"
 ></p-button>
 <div class="table-container">

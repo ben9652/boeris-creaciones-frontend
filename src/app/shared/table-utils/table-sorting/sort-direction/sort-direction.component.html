@@ -1,0 +1,20 @@
+<div class="sort-direction" (click)="toggleSortDirection()">
+    @if (dataType() !== '2') {
+        <div class="animated" [ngClass]="{'disappear': changingDirection}">
+            <i [class]="sortDirectionIcon"></i>
+        </div>
+    }
+    @else {
+        <div class="flex">
+            <i class="fas fa-calendar"></i>
+            <div class="animated" [ngClass]="{'disappear': changingDirection}">
+                @if (ascendingSort()()) {
+                    <i class="fas fa-arrow-up-long"></i>
+                }
+                @else {
+                    <i class="fas fa-arrow-down-long"></i>
+                }
+            </div>
+        </div>
+    }
+</div>

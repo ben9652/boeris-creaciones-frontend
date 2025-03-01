@@ -1,0 +1,52 @@
+i {
+    color: var(--p-primary-color);
+}
+
+@keyframes disappear-to-background {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes vanish {
+    0% {
+        opacity: 1;
+        // transform: rotateX(90deg);
+    }
+    25% {
+        opacity: 0.5;
+        // transform: rotateX(90deg);
+    }
+    50% {
+        opacity: 0;
+        // transform: rotateX(0deg);
+    }
+    75% {
+        opacity: 0.5;
+        // transform: rotateX(90deg);
+    }
+    100% {
+        opacity: 1;
+        // transform: rotateX(90deg);
+    }
+}
+
+.animated {
+    &.disappear {
+        animation-name: disappear-to-background;
+        animation-duration: 0.2s;
+        animation-timing-function: ease-in;
+    }
+
+    &.vanish {
+        animation-name: vanish;
+        animation-duration: 0.5s;
+        animation-timing-function: ease-in;
+    }
+}

@@ -35,15 +35,15 @@
 @else {
     <div class="flex gap-1 align-items-end">
         <p-skeleton width="5rem" styleClass="mb-2" />
-    </div>|
+    </div>
 }
 
 @if (possibleFilters.length > 0) {
     <app-table-sorting
     initialFilter="1-0"
     [possibleFilters]="possibleFilters"
+    [ascendingSort]="ascendingSort"
     (onSelectedFilter)="onSortChangesHandler($event)"
-    (onSortDirectionChange)="onSortDirectionChangeHandler($event)"
     ></app-table-sorting>
 }
 @else {

@@ -45,6 +45,6 @@ Thumbs.db
 .env
 src/environments
 
-
-.nx/cache
-.nx/workspace-data
+tags
+*.un~
+*.sh

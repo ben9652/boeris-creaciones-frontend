@@ -80,20 +80,19 @@ export class PurchasesService {
     return this.http.post<string>(apiUrl, formData, httpOptionsToCreateFile);
   }
 
-  filterPurchases(filters: string[]): Purchase[] {
-    const purchases: Purchase[] = this.purchases();
+  filterPurchases(filters: string[], inputPurchases?: Purchase[]): Purchase[] {
+    const purchases: Purchase[] = inputPurchases === undefined ? this.purchases() : inputPurchases;
     if(filters.length === 0) {
       return purchases;
     }
     
     return purchases.filter((purchase: Purchase) => {
-      console.log(purchase);
       return filters.includes(purchase.state);
     });
   }
 
-  searchPurchases(search: SearchObject): Purchase[] {
-    const purchases: Purchase[] = this.purchases();
+  searchPurchases(search: SearchObject, inputPurchases?: Purchase[]): Purchase[] {
+    const purchases: Purchase[] = inputPurchases === undefined ? this.purchases() : inputPurchases;
     if(search.name === '') {
       return purchases;
     }
@@ -134,8 +133,8 @@ export class PurchasesService {
     return filteredPurchases;
   }
 
-  sortPurchases(sort: string[], ascendingSort: boolean): Purchase[] {
-    const purchases: Purchase[] = this.purchases();
+  sortPurchases(sort: string[], ascendingSort: boolean, inputPurchases?: Purchase[]): Purchase[] {
+    const purchases: Purchase[] = inputPurchases === undefined ? this.purchases() : inputPurchases;
     if(sort.length === 0) {
       return purchases;
     }
@@ -158,7 +157,8 @@ export class PurchasesService {
         }
         else if (secondIndex === 1) {
           if (ascendingSort) {
-            return a.requester_partner.firstName.localeCompare(b.requester_partner.firstName);
+            const comparison: number = a.requester_partner.firstName.localeCompare(b.requester_partner.firstName);
+            return comparison;
           }
           else {
             return b.requester_partner.firstName.localeCompare(a.requester_partner.firstName);
@@ -179,19 +179,27 @@ export class PurchasesService {
       else if (firstIndex === 1) {
         if (secondIndex === 0) {
           if (ascendingSort) {
-            return a.order_date.getTime() - b.order_date.getTime();
+            const firstDate: Date = new Date(a.order_date);
+            const secondDate: Date = new Date(b.order_date);
+            return firstDate.getTime() - secondDate.getTime();
           }
           else {
-            return b.order_date.getTime() - a.order_date.getTime();
+            const firstDate: Date = new Date(b.order_date);
+            const secondDate: Date = new Date(a.order_date);
+            return firstDate.getTime() - secondDate.getTime();
           }
         }
         else if (secondIndex === 1) {
           if (a.reception_date && b.reception_date) {
             if (ascendingSort) {
-              return a.reception_date.getTime() - b.reception_date.getTime();
+              const firstDate: Date = new Date(a.reception_date);
+              const secondDate: Date = new Date(b.reception_date);
+              return firstDate.getTime() - secondDate.getTime();
             }
             else {
-              return b.reception_date.getTime() - a.reception_date.getTime();
+              const firstDate: Date = new Date(b.reception_date);
+              const secondDate: Date = new Date(a.reception_date);
+              return firstDate.getTime() - secondDate.getTime();
             }
           }
           return 0;
@@ -199,10 +207,14 @@ export class PurchasesService {
         else if (secondIndex === 2) {
           if (a.cancel_date && b.cancel_date) {
             if (ascendingSort) {
-              return a.cancel_date.getTime() - b.cancel_date.getTime();
+              const firstDate: Date = new Date(a.cancel_date);
+              const secondDate: Date = new Date(b.cancel_date);
+              return firstDate.getTime() - secondDate.getTime();
             }
             else {
-              return b.cancel_date.getTime() - a.cancel_date.getTime();
+              const firstDate: Date = new Date(b.cancel_date);
+              const secondDate: Date = new Date(a.cancel_date);
+              return firstDate.getTime() - secondDate.getTime();
             }
           }
           return 0;
@@ -254,6 +266,7 @@ export class PurchasesService {
       return 0;
     });
 
+    this.purchases.set(sortedPurchases);
     return sortedPurchases;
   }
 }

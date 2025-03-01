@@ -27,11 +27,19 @@ import { SearchObject } from '../../../../core/models/searchObj.entities';
 export class PurchasesComponent {
     visiblePurchases: Purchase[] | undefined;
     user: User;
+
+    filters: string[] = [];
+    search: SearchObject = {
+        key: "id",
+        name: ""
+    };
+    sort: string[] = [];
+    ascendingSort: boolean = false;
     
     constructor(
         private purchasesService: PurchasesService,
         private messageService: MessageService,
-        private translateService: TranslateService,
+        public translateService: TranslateService,
         private router: Router
     ) {
         this.user = purchasesService.getUser();
@@ -39,9 +47,15 @@ export class PurchasesComponent {
             next: (purchases: Purchase[]) => {
                 this.visiblePurchases = purchases;
                 purchasesService.purchases.set(purchases);
+                this.onSortHandler(['1', '0']);
+                this.onSearchInputHandler(this.search);
             },
             error: (error: any) => {
-                console.error(error);
+                this.messageService.add({
+                    severity: 'error',
+                    summary: this.translateService.instant('SHARED.MESSAGES.SUMMARY.FAILED'),
+                    detail: error.error.message
+                });
             }
         })
     }
@@ -85,15 +99,40 @@ export class PurchasesComponent {
 
     onFilterChangesHandler(filters: string[]): void {
         this.visiblePurchases = this.purchasesService.filterPurchases(filters);
+        this.filters = filters;
+
+        if (this.search.name !== "") {
+            this.visiblePurchases = this.purchasesService.searchPurchases(this.search, this.visiblePurchases);
+        }
     }
 
-    onSearchInputHandler(search: SearchObject): void {
+    private searchAction(search: SearchObject): void {
         const purchases: Purchase[] = this.purchasesService.searchPurchases(search);
-        
+        this.search = search;
         this.visiblePurchases = purchases;
     }
 
-    onSortHandler(sort: string[], ascendingSort: boolean): void {
-        
+    onSearchInputHandler(search: SearchObject): void {
+        this.searchAction(search);
+
+        if (this.filters.length > 0) {
+            this.visiblePurchases = this.purchasesService.filterPurchases(this.filters, this.visiblePurchases);
+        }
+    }
+
+    onSortHandler(sort: string[]): void {
+        this.sort = sort;
+
+        this.visiblePurchases = this.purchasesService.sortPurchases(sort, this.ascendingSort);
+
+        this.searchAction(this.search);
+    }
+
+    onSortDirectionHandler(ascendingSort: boolean): void {
+        this.ascendingSort = ascendingSort;
+
+        this.visiblePurchases = this.purchasesService.sortPurchases(this.sort, ascendingSort);
+
+        this.searchAction(this.search);
     }
 }
