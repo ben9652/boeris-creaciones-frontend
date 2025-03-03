@@ -853,5 +853,25 @@ export const BoerisCreaciones = definePreset(Aura, {
         },
       },
     },
+    togglebutton: {
+        color: '{secondary.500} !important',
+        background: '{primary.500} !important',
+        borderColor: '{primary.500} !important',
+        hover: {
+            color: '{secondary.500} !important',
+            background: '{primary.600} !important',
+            borderColor: '{primary.600} !important',
+        },
+        checked: {
+            color: '{primary.700} !important',
+            background: '{primary.500} !important',
+            borderColor: '{primary.500} !important',
+        },
+        content: {
+            checked: {
+                background: '{primary.400} !important',
+            }
+        }
+    },
   },
 });

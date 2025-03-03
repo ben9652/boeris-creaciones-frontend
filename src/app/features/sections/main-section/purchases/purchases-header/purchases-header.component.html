@@ -1,53 +1,109 @@
 @let isMobile = deviceTypeService.isMobile();
-@if (!filtersLoading) {
-    <app-table-filter
-    [filters]="filters"
-    [vertical]="isMobile"
-    gap="10px"
-    (onFilterChanges)="onFilterChangesHandler($event)"
-    ></app-table-filter>
-}
-@else {
-    <div class="flex gap-2">
-        <div class="flex gap-1 align-items-end">
-            <p-skeleton size="2rem" styleClass="mr-2" />
-            <p-skeleton width="5rem" styleClass="mb-2" />
-        </div>
-        <div class="flex gap-1 align-items-end">
-            <p-skeleton size="2rem" styleClass="mr-2" />
-            <p-skeleton width="5rem" styleClass="mb-2" />
-        </div>
-        <div class="flex gap-1 align-items-end">
-            <p-skeleton size="2rem" styleClass="mr-2" />
-            <p-skeleton width="5rem" styleClass="mb-2" />
-        </div>
-    </div>
-}
 
-@if (searchFilters.length > 0) {
-    <app-table-search-bar
-    [filters]="searchFilters"
-    [initialFilter]="searchFilters[0].key"
-    (onKeyDown)="onSearchInputHandler($event)"
-    (onFilterSelect)="onSearchFilterChangeHandler($event)"
-    ></app-table-search-bar>
-}
-@else {
-    <div class="flex gap-1 align-items-end">
-        <p-skeleton width="5rem" styleClass="mb-2" />
-    </div>
-}
+@if (!isMobile) {
+    @if (!filtersLoading) {
+        <app-table-filter
+        [filters]="filters"
+        gap="10px"
+        (onFilterChanges)="onFilterChangesHandler($event)"
+        ></app-table-filter>
+    }
+    @else {
+        <div class="flex gap-2">
+            <div class="flex gap-1 align-items-end">
+                <p-skeleton size="2rem" styleClass="mr-2" />
+                <p-skeleton width="5rem" styleClass="mb-2" />
+            </div>
+            <div class="flex gap-1 align-items-end">
+                <p-skeleton size="2rem" styleClass="mr-2" />
+                <p-skeleton width="5rem" styleClass="mb-2" />
+            </div>
+            <div class="flex gap-1 align-items-end">
+                <p-skeleton size="2rem" styleClass="mr-2" />
+                <p-skeleton width="5rem" styleClass="mb-2" />
+            </div>
+        </div>
+    }
 
-@if (possibleFilters.length > 0) {
-    <app-table-sorting
-    initialFilter="1-0"
-    [possibleFilters]="possibleFilters"
-    [ascendingSort]="ascendingSort"
-    (onSelectedFilter)="onSortChangesHandler($event)"
-    ></app-table-sorting>
+    @if (searchFilters.length > 0) {
+        <app-table-search-bar
+        [filters]="searchFilters"
+        [initialFilter]="searchFilters[0].key"
+        (onKeyDown)="onSearchInputHandler($event)"
+        (onFilterSelect)="onSearchFilterChangeHandler($event)"
+        ></app-table-search-bar>
+    }
+    @else {
+        <div class="flex gap-1 align-items-end">
+            <p-skeleton width="5rem" styleClass="mb-2" />
+        </div>
+    }
+
+    @if (possibleFilters.length > 0) {
+        <app-table-sorting
+        initialFilter="1-0"
+        [possibleFilters]="possibleFilters"
+        [ascendingSort]="ascendingSort"
+        (onSelectedFilter)="onSortChangesHandler($event)"
+        ></app-table-sorting>
+    }
+    @else {
+        <div class="flex gap-1 align-items-end">
+            <p-skeleton width="5rem" styleClass="mb-2" />
+        </div>
+    }
 }
 @else {
-    <div class="flex gap-1 align-items-end">
-        <p-skeleton width="5rem" styleClass="mb-2" />
+    <div class="header-tab">
+        @if (selectedTab === 0) {
+            @if (!filtersLoading) {
+                <app-table-filter
+                [filters]="filters"
+                gap="10px"
+                (onFilterChanges)="onFilterChangesHandler($event)"
+                ></app-table-filter>
+            }
+            @else {
+                <div class="flex gap-1 align-items-end">
+                    <p-skeleton width="5rem" styleClass="mb-2" />
+                </div>
+            }
+        }
+        @else if (selectedTab === 1) {
+            @if (searchFilters.length > 0) {
+                <app-table-search-bar
+                [filters]="searchFilters"
+                [initialFilter]="searchFilters[0].key"
+                (onKeyDown)="onSearchInputHandler($event)"
+                (onFilterSelect)="onSearchFilterChangeHandler($event)"
+                ></app-table-search-bar>
+            }
+            @else {
+                <div class="flex gap-1 align-items-end">
+                    <p-skeleton width="5rem" styleClass="mb-2" />
+                </div>
+            }
+        }
+        @else if (selectedTab === 2) {
+            @if (possibleFilters.length > 0) {
+                <app-table-sorting
+                initialFilter="1-0"
+                [possibleFilters]="possibleFilters"
+                [ascendingSort]="ascendingSort"
+                (onSelectedFilter)="onSortChangesHandler($event)"
+                ></app-table-sorting>
+            }
+            @else {
+                <div class="flex gap-1 align-items-end">
+                    <p-skeleton width="5rem" styleClass="mb-2" />
+                </div>
+            }
+            
+        }
+        @else {
+            <div class="flex gap-1 align-items-end">
+                <p>Selecciona una opción</p>
+            </div>
+        }
     </div>
 }

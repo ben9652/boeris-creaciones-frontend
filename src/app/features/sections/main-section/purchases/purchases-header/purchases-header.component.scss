@@ -5,3 +5,28 @@
     width: 100%;
     padding: 0 20px;
 }
+
+.header-tab {
+    display: flex;
+    align-items: center;
+    height: 5vh;
+    width: 100%;
+}
+
+.header-tab app-table-filter {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.header-tab app-table-search-bar {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.header-tab app-table-sorting {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}

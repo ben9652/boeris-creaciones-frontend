@@ -70,6 +70,34 @@
     width: 100%;
 }
 
+.list-filters {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    .p-selectbutton {
+        align-items: center;
+        height: 50%;
+    }
+}
+
+:host ::ng-deep p-togglebutton {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+:host ::ng-deep button.p-togglebutton {
+    height: 100%;
+}
+
 // El popover tiene dos flechas (una encima de la otra). Elimino una de ellas y coloreo la otra.
 :host ::ng-deep .p-popover {
     top: 10vh;

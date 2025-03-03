@@ -11,6 +11,7 @@ import { ButtonModule } from 'primeng/button';
 import { Router } from '@angular/router';
 import { PurchasesHeaderComponent } from './purchases-header/purchases-header.component';
 import { SearchObject } from '../../../../core/models/searchObj.entities';
+import { DeviceTypeService } from '../../../../core/services/device-type/device-type.service';
 
 @Component({
     selector: 'app-purchases',
@@ -40,7 +41,8 @@ export class PurchasesComponent {
         private purchasesService: PurchasesService,
         private messageService: MessageService,
         public translateService: TranslateService,
-        private router: Router
+        private router: Router,
+        public deviceTypeService: DeviceTypeService
     ) {
         this.user = purchasesService.getUser();
         purchasesService.getPurchases(this.user.id_user).subscribe({

@@ -1,10 +1,14 @@
 <div class="main-container">
     <div class="upper-section">
+        @let hasMainBanner = !deviceTypeService.isMobile() || (router.url !== '/sections/purchases');
         <app-main-banner
         [(menuVisible)]="menuOpened"
+        [isListBanner]="!hasMainBanner"
         ></app-main-banner>
     </div>
-    <div class="bottom-section">
+    <div
+    class="bottom-section with-main-banner"
+    >
         <app-menu-sidebar
         [(menuOpened)]="menuOpened"
         ></app-menu-sidebar>
