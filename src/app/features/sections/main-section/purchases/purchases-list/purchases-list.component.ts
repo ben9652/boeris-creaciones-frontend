@@ -33,11 +33,11 @@ export class PurchasesListComponent {
   onError: OutputEmitterRef<HttpErrorResponse> = output<HttpErrorResponse>();
 
   constructor(
-    private deviceTypeService: DeviceTypeService
+    public deviceTypeService: DeviceTypeService
   ) {
     const isMobile: boolean = deviceTypeService.isMobile();
     if (isMobile) {
-      this.skeletonsHeight = '257px';
+      this.skeletonsHeight = '200px';
       this.cardHeight = 300;
     }
   }

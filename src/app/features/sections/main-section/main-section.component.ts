@@ -25,6 +25,7 @@ import { CommonModule } from '@angular/common';
 import { StorageService } from '../../../core/services/storage/storage.service';
 import { DataAccessService } from '../../../core/services/data-access/data-access.service';
 import { User } from '../../../core/models/user.entities';
+import { DeviceTypeService } from '../../../core/services/device-type/device-type.service';
 
 export enum ActiveSection {
   HOME,
@@ -44,6 +45,7 @@ export enum ActiveSection {
 @Component({
     selector: 'app-main-section',
     imports: [
+        CommonModule,
         MainBannerComponent,
         MenuSidebarComponent,
         RouterModule
@@ -61,7 +63,8 @@ export class MainSectionComponent {
     private translateService: TranslateService,
     public router: Router,
     private activatedRoute: ActivatedRoute,
-    private activeRouteService: ActiveRouteService
+    private activeRouteService: ActiveRouteService,
+    public deviceTypeService: DeviceTypeService
   ) {
     
   }

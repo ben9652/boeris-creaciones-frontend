@@ -1,29 +1,32 @@
-import { AfterViewInit, Component, input, InputSignal, output, OutputEmitterRef, ViewChild } from '@angular/core';
+import { Component, input, InputSignal, output, OutputEmitterRef, ViewChild } from '@angular/core';
 import { SearchObject } from '../../../core/models/searchObj.entities';
 import { RadioButton } from 'primeng/radiobutton';
-import { FloatLabelModule } from 'primeng/floatlabel';
 import { Popover, PopoverModule } from 'primeng/popover';
 import { InputTextModule } from 'primeng/inputtext';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { SearchFilterComponent } from './search-filter/search-filter.component';
+import { FormsModule } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
+import { DeviceTypeService } from '../../../core/services/device-type/device-type.service';
 
 @Component({
   selector: 'app-table-search-bar',
   imports: [
     ButtonModule,
     RadioButton,
-    FloatLabelModule,
     PopoverModule,
     InputTextModule,
-    TranslateModule,
-    SearchFilterComponent
+    SearchFilterComponent,
+    FormsModule
   ],
   templateUrl: './table-search-bar.component.html',
-  styleUrl: './table-search-bar.component.scss'
+  styleUrl: './table-search-bar.component.scss',
+  providers: [TranslateService]
 })
 export class TableSearchBarComponent {
   filters: InputSignal<SearchObject[]> = input.required<SearchObject[]>();
+  initialInput: InputSignal<string> = input<string>('');
   initialFilter: InputSignal<string> = input.required<string>();
 
   onKeyDown: OutputEmitterRef<string> = output<string>();
@@ -31,7 +34,10 @@ export class TableSearchBarComponent {
 
   @ViewChild('op') op!: Popover;
   
-  constructor() {
+  constructor(
+    public translateService: TranslateService,
+    public deviceTypeService: DeviceTypeService
+    ) {
 
   }
 

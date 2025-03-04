@@ -9,7 +9,27 @@
             }
         </div>
     </div>
-    <div class="header-text">{{ title() }}</div>
+    @if (isListBanner()) {
+        <div class="list-filters">
+            <p-button icon="fas fa-plus fa-lg" [rounded]="true" [text]="true" [raised]="true" (onClick)="notifyNewElement()" />
+            <div class="filter-buttons">
+                <p-selectbutton
+                [(ngModel)]="selectedFilter"
+                [options]="filterOptions"
+                (onOptionClick)="notifyFilterSelected($event)"
+                [unselectable]="false"
+                [allowEmpty]="false"
+                >
+                    <ng-template #item let-item>
+                        <i [class]="item"></i>
+                    </ng-template>
+                </p-selectbutton>
+            </div>
+        </div>
+    }
+    @else {
+        <div class="header-text">{{ title() }}</div>
+    }
     @if (user_edition()) {
         <div class="user-button">
             <div class="user-icon" (click)="op.toggle($event)">

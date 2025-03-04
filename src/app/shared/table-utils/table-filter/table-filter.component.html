@@ -10,6 +10,7 @@ style="display: flex;"
             [key]="filter.key"
             [name]="filter.name"
             [color]="filter.color"
+            [initialValue]="initialFilters().includes(filter.key)"
             (onCheckboxChange)="onCheckboxChanges($event)"
             ></app-checkbox-template>
         }
@@ -17,6 +18,7 @@ style="display: flex;"
             <app-checkbox-template
             [key]="filter.key"
             [color]="filter.color"
+            [initialValue]="initialFilters().includes(filter.key)"
             (onCheckboxChange)="onCheckboxChanges($event)"
             ></app-checkbox-template>
         }

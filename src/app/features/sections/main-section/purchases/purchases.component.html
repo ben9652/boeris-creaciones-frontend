@@ -6,13 +6,16 @@
     (onSearchChanges)="onSearchInputHandler($event)"
     (onSortChanges)="onSortHandler($event)"
     (onSortDirectionChange)="onSortDirectionHandler($event)"
+    (onNewElement)="goToNewPurchase()"
     ></app-purchases-header>
 </div>
 
-<p-button
-[label]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.TITLE')"
-(onClick)="goToNewPurchase()"
-></p-button>
+@if (!deviceTypeService.isMobile()) {
+    <p-button
+    [label]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.TITLE')"
+    (onClick)="goToNewPurchase()"
+    ></p-button>
+}
 <div class="table-container">
     <app-purchases-list
     [purchases]="visiblePurchases"

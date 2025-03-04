@@ -1,4 +1,4 @@
-import { Component, input, InputSignal, model, ModelSignal, output, OutputEmitterRef, OnInit } from '@angular/core';
+import { Component, input, InputSignal, model, ModelSignal, output, OutputEmitterRef, effect, OnInit } from '@angular/core';
 import { TableFilterComponent } from '../../../../../shared/table-utils/table-filter/table-filter.component';
 import { TableSearchBarComponent } from '../../../../../shared/table-utils/table-search-bar/table-search-bar.component';
 import { TableSortingComponent } from '../../../../../shared/table-utils/table-sorting/table-sorting.component';
@@ -9,6 +9,7 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { SearchObject } from '../../../../../core/models/searchObj.entities';
 import { TreeNode } from 'primeng/api';
 import { SortingTreeObject } from '../../../../../core/models/sortingTreeObject';
+import { HeaderInterfaceService } from '../../../../../core/services/header-interface/header-interface.service';
 
 @Component({
     selector: 'app-purchases-header',
@@ -16,7 +17,7 @@ import { SortingTreeObject } from '../../../../../core/models/sortingTreeObject'
         TableFilterComponent,
         TableSearchBarComponent,
         TableSortingComponent,
-        SkeletonModule
+        SkeletonModule,
     ],
     templateUrl: './purchases-header.component.html',
     styleUrl: './purchases-header.component.scss'
@@ -37,10 +38,34 @@ export class PurchasesHeaderComponent implements OnInit {
     onSortChanges: OutputEmitterRef<string[]> = output<string[]>();
     onSortDirectionChange: OutputEmitterRef<boolean> = output<boolean>();
 
+    // Para la versión móvil
+    selectedTab: number = 0;
+    onNewElement: OutputEmitterRef<void> = output<void>();
+    firstRun: boolean = true;
+
+    currentFilters: string[] = [];
+
+    currentSort: string = '1-0';
+    currentDirection: boolean = false;
+    ////////////////////////
+
     constructor(
         public deviceTypeService: DeviceTypeService,
-        private purchasesHeaderService: PurchasesHeaderService
+        private purchasesHeaderService: PurchasesHeaderService,
+        public headerInterfaceService: HeaderInterfaceService
     ) {
+        effect(() => {
+            this.selectedTab = this.headerInterfaceService.selectedFilter();
+        });
+
+        effect(() => {
+            this.headerInterfaceService.newElement();
+            if (!this.firstRun) {
+                this.onNewElement.emit();
+            }
+            this.firstRun = false;
+        });
+
         purchasesHeaderService.getFilters().subscribe((filters: any[]) => {
             filters.forEach((filter: any) => {
                 this.filters.push(new FilterObject(filter.key, filter.name, filter.color));
@@ -66,11 +91,13 @@ export class PurchasesHeaderComponent implements OnInit {
     ngOnInit(): void {
         // Por cada vez que cambie el valor de la variable 'ascendingSort' en el componente 'SortDirectionComponent', se ejecutará la función de callback de este subscribe
         this.ascendingSort.subscribe((ascendingSort: boolean) => {
+            this.currentDirection = ascendingSort;
             this.onSortDirectionChange.emit(ascendingSort);
         });
     }
 
     onFilterChangesHandler(selectedFilters: string[]): void {
+        this.currentFilters = selectedFilters;
         this.onFilterChanges.emit(selectedFilters);
     }
 
@@ -91,6 +118,7 @@ export class PurchasesHeaderComponent implements OnInit {
     }
 
     onSortChangesHandler(sort: string[]): void {
+        this.currentSort = sort[0] + '-' + sort[1];
         this.onSortChanges.emit(sort);
     }
 }
