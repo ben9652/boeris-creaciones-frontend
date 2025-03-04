@@ -1,7 +1,7 @@
 @if (name() !== undefined) {
-    <p-checkbox [binary]="true" [inputId]="name()" (onChange)="onCheckboxClick($event)"></p-checkbox>
+    <p-checkbox [ngModel]="initialValue()" [binary]="true" [inputId]="name()" (onChange)="onCheckboxClick($event)"></p-checkbox>
     <label [htmlFor]="name()" class="ml-2">{{ name() }}</label>
 }
 @else {
-    <p-checkbox [binary]="true" [inputId]="name()" (onChange)="onCheckboxClick($event)"></p-checkbox>
+    <p-checkbox [ngModel]="initialValue()" [binary]="true" [inputId]="name()" (onChange)="onCheckboxClick($event)"></p-checkbox>
 }

@@ -1,4 +1,4 @@
-import { Component, input, InputSignal, output, OutputEmitterRef } from '@angular/core';
+import { OnInit, Component, input, InputSignal, output, OutputEmitterRef } from '@angular/core';
 import { CheckboxValue, FilterObject } from '../../../core/models/filterObj.entities';
 import { NgStyle } from '@angular/common';
 import { CheckboxTemplateComponent } from './checkbox-template/checkbox-template.component';
@@ -12,22 +12,27 @@ import { CheckboxTemplateComponent } from './checkbox-template/checkbox-template
   templateUrl: './table-filter.component.html',
   styleUrl: './table-filter.component.scss'
 })
-export class TableFilterComponent {
-  filters: InputSignal<FilterObject[]> = input.required<FilterObject[]>();
-  vertical: InputSignal<boolean> = input<boolean>(false);
-  gap: InputSignal<string> = input<string>('0px');
-  onFilterChanges: OutputEmitterRef<string[]> = output<string[]>();
+export class TableFilterComponent implements OnInit {
+    filters: InputSignal<FilterObject[]> = input.required<FilterObject[]>();
+    initialFilters: InputSignal<string[]> = input<string[]>([]);
+    vertical: InputSignal<boolean> = input<boolean>(false);
+    gap: InputSignal<string> = input<string>('0px');
+    onFilterChanges: OutputEmitterRef<string[]> = output<string[]>();
 
-  selectedFilters: string[] = [];
-  
-  constructor() {}
+    selectedFilters: string[] = [];
 
-  onCheckboxChanges(event: CheckboxValue): void {
-    if (event.value) {
-      this.selectedFilters.push(event.key);
-    } else {
-      this.selectedFilters = this.selectedFilters.filter(filter => filter !== event.key);
+    constructor() {}
+
+    ngOnInit(): void {
+        this.selectedFilters = this.initialFilters();
     }
-    this.onFilterChanges.emit(this.selectedFilters);
-  }
+
+    onCheckboxChanges(event: CheckboxValue): void {
+        if (event.value) {
+            this.selectedFilters.push(event.key);
+        } else {
+            this.selectedFilters = this.selectedFilters.filter(filter => filter !== event.key);
+        }
+        this.onFilterChanges.emit(this.selectedFilters);
+    }
 }

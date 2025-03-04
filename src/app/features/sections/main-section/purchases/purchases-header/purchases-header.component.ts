@@ -43,6 +43,12 @@ export class PurchasesHeaderComponent implements OnInit {
     onNewElement: OutputEmitterRef<void> = output<void>();
     firstRun: boolean = true;
 
+    currentFilters: string[] = [];
+
+    currentSort: string = '1-0';
+    currentDirection: boolean = false;
+    ////////////////////////
+
     constructor(
         public deviceTypeService: DeviceTypeService,
         private purchasesHeaderService: PurchasesHeaderService,
@@ -85,18 +91,19 @@ export class PurchasesHeaderComponent implements OnInit {
     ngOnInit(): void {
         // Por cada vez que cambie el valor de la variable 'ascendingSort' en el componente 'SortDirectionComponent', se ejecutará la función de callback de este subscribe
         this.ascendingSort.subscribe((ascendingSort: boolean) => {
+            this.currentDirection = ascendingSort;
             this.onSortDirectionChange.emit(ascendingSort);
         });
     }
 
     onFilterChangesHandler(selectedFilters: string[]): void {
+        this.currentFilters = selectedFilters;
         this.onFilterChanges.emit(selectedFilters);
     }
 
     onSearchInputHandler(searchInput: string) {
         if (searchInput === 'Backspace') {
             this.searchInput = this.searchInput.slice(0, -1);
-            console.log(this.searchInput);
             this.onSearchChanges.emit(new SearchObject(this.searchSelectedFilter, this.searchInput));
         }
         else {
@@ -111,6 +118,7 @@ export class PurchasesHeaderComponent implements OnInit {
     }
 
     onSortChangesHandler(sort: string[]): void {
+        this.currentSort = sort[0] + '-' + sort[1];
         this.onSortChanges.emit(sort);
     }
 }

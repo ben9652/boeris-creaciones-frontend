@@ -10,7 +10,7 @@
     ></app-purchases-header>
 </div>
 
-@if (!deviceTypeService.isMobile) {
+@if (!deviceTypeService.isMobile()) {
     <p-button
     [label]="translateService.instant('SECTIONS.PROVISIONS.PURCHASES.NEW_PURCHASE.TITLE')"
     (onClick)="goToNewPurchase()"

@@ -28,7 +28,8 @@
     @if (searchFilters.length > 0) {
         <app-table-search-bar
         [filters]="searchFilters"
-        [initialFilter]="searchFilters[0].key"
+        [initialInput]="searchInput"
+        [initialFilter]="searchSelectedFilter"
         (onKeyDown)="onSearchInputHandler($event)"
         (onFilterSelect)="onSearchFilterChangeHandler($event)"
         ></app-table-search-bar>
@@ -59,6 +60,7 @@
             @if (!filtersLoading) {
                 <app-table-filter
                 [filters]="filters"
+                [initialFilters]="currentFilters"
                 gap="10px"
                 (onFilterChanges)="onFilterChangesHandler($event)"
                 ></app-table-filter>
@@ -73,7 +75,8 @@
             @if (searchFilters.length > 0) {
                 <app-table-search-bar
                 [filters]="searchFilters"
-                [initialFilter]="searchFilters[0].key"
+                [initialInput]="searchInput"
+                [initialFilter]="searchSelectedFilter"
                 (onKeyDown)="onSearchInputHandler($event)"
                 (onFilterSelect)="onSearchFilterChangeHandler($event)"
                 ></app-table-search-bar>
@@ -87,7 +90,7 @@
         @else if (selectedTab === 2) {
             @if (possibleFilters.length > 0) {
                 <app-table-sorting
-                initialFilter="1-0"
+                [initialFilter]="currentSort"
                 [possibleFilters]="possibleFilters"
                 [ascendingSort]="ascendingSort"
                 (onSelectedFilter)="onSortChangesHandler($event)"

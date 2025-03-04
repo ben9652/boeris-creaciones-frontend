@@ -2,3 +2,22 @@
     display: flex;
     gap: 2px;
 }
+
+.filter {
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 500px) {
+    :host ::ng-deep .p-popover {
+        z-index: 1000;
+        right: 24vw;
+
+        &:before {
+            content: none !important;
+        }
+        &:after {
+            content: none !important;
+        }
+    }
+}

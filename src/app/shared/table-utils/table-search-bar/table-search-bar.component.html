@@ -1,21 +1,20 @@
-<p-floatlabel>
-    <input id="field" pInputText [autocomplete]="false" (keydown)="onWrite($event)" />
-    <label for="field">{{ 'SHARED.TABLE.SEARCH' | translate }}</label>
-</p-floatlabel>
+<input id="field" [placeholder]="translateService.instant('SHARED.TABLE.SEARCH')" pInputText [ngModel]="initialInput()" [autocomplete]="false" (keydown)="onWrite($event)" />
 
-<p-button
-severity="secondary"
-icon="fas fa-filter"
-[rounded]="true"
-[text]="true"
-(onClick)="op.toggle($event)"
-></p-button>
+<div class="filter">
+    <p-button
+    severity="secondary"
+    icon="fas fa-filter"
+    [rounded]="true"
+    [text]="true"
+    (onClick)="op.toggle($event)"
+    ></p-button>
 
-<p-popover #op>
-    <app-search-filter
-    [filters]="filters()"
-    [initialKey]="initialFilter()"
-    (onFilterSelect)="onFilterChange($event)"
-    gap="5px"
-    ></app-search-filter>
-</p-popover>
+    <p-popover #op [appendTo]="deviceTypeService.isMobile() ? 'target' : 'body'">
+        <app-search-filter
+        [filters]="filters()"
+        [initialKey]="initialFilter()"
+        (onFilterSelect)="onFilterChange($event)"
+        gap="5px"
+        ></app-search-filter>
+    </p-popover>
+</div>
